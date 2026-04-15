@@ -584,7 +584,7 @@ export class SolarForecastCardEditor extends LitElement {
         display: flex;
         align-items: center;
         gap: 4px;
-        margin: -6px 0 4px;
+        margin: 4px 0 8px;
         padding: 0 4px;
         font-size: 0.75rem;
         color: var(--secondary-text-color);
