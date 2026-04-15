@@ -124,7 +124,11 @@ export class SolarForecastCard extends LitElement {
         entityId,
         forecastKwh: isFinite(kwhVal) ? kwhVal : null,
         actualKwh: i === 0 ? todayActualKwh : null,
-        rawHoursAttr: s?.attributes?.hours,
+        rawHoursAttr: cfg.integration_type === "solcast"
+          ? s?.attributes?.detailedForecast
+          : cfg.integration_type === "volcast"
+            ? s?.attributes?.hours
+            : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
       };
     });
 
@@ -147,14 +151,21 @@ export class SolarForecastCard extends LitElement {
   }
 
   /**
-   * Parse the raw "hours" attribute into trimmed [{hour, kwh}] points.
+   * Parse the raw hourly attribute into trimmed [{hour, kwh}] points.
    *
-   * Handles three formats:
-   *   1. Array of numbers          – index is the hour
-   *   2. Array of objects          – looks for common value-key names
-   *   3. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
+   * @param hint  integration_type from config — skips format detection when known.
+   *
+   * Handles four formats:
+   *   1. Solcast detailedForecast  – [{period_start: ISO, pv_estimate: kW}, …]
+   *                                  30-min periods, aggregated into hourly kWh
+   *   2. Array of numbers          – index is the hour
+   *   3. Array of objects          – looks for common value-key names
+   *   4. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
    */
-  private _parseHours(raw: unknown): HourPoint[] {
+  private _parseHours(
+    raw: unknown,
+    hint?: "volcast" | "solcast" | "manual"
+  ): HourPoint[] {
     // ── Always log the raw value so callers can verify the format ────────────
     console.debug(
       "[solar-forecast-card] hours attr →",
@@ -170,13 +181,26 @@ export class SolarForecastCard extends LitElement {
     try {
       let points: HourPoint[];
 
-      // ── Format 1 & 2: array ─────────────────────────────────────────────
       if (Array.isArray(raw)) {
         if (raw.length === 0) {
           console.debug("[solar-forecast-card] hours: empty array");
           return [];
         }
 
+        // ── Format 1: Solcast detailedForecast ────────────────────────────
+        // When hint is "solcast", skip detection and parse directly.
+        // Otherwise detect by inspecting the first element.
+        const isSolcast = hint === "solcast" ||
+          (hint !== "volcast" &&
+            typeof (raw[0] as Record<string, unknown>)?.period_start === "string" &&
+            "pv_estimate" in (raw[0] as Record<string, unknown>));
+
+        if (isSolcast) {
+          console.debug("[solar-forecast-card] hours: Solcast detailedForecast format");
+          points = this._parseSolcastPeriods(raw as Array<Record<string, unknown>>);
+        } else {
+
+        // ── Format 2 & 3: generic array ───────────────────────────────────
         points = raw.map((v, i): HourPoint => {
           // 1 — bare number, index = hour
           if (typeof v === "number") {
@@ -210,6 +234,7 @@ export class SolarForecastCard extends LitElement {
 
           return { hour: i, kwh: 0 };
         });
+        } // close else (non-Solcast array)
 
       // ── Format 3: plain object keyed by hour ────────────────────────────
       } else if (typeof raw === "object") {
@@ -262,6 +287,23 @@ export class SolarForecastCard extends LitElement {
     }
   }
 
+  private _parseSolcastPeriods(entries: Array<Record<string, unknown>>): HourPoint[] {
+    const buckets = new Map<number, number>();
+    for (const entry of entries) {
+      const periodStart = entry.period_start;
+      if (typeof periodStart !== "string") continue;
+      const d = new Date(periodStart);
+      if (isNaN(d.getTime())) continue;
+      const hour     = d.getHours();
+      const estimate = typeof entry.pv_estimate === "number" ? entry.pv_estimate : 0;
+      const kwh      = estimate * 0.5; // 30-min period in kW → kWh
+      buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+    }
+    return Array.from(buckets.entries())
+      .map(([hour, kwh]) => ({ hour, kwh }))
+      .sort((a, b) => a.hour - b.hour);
+  }
+
   // ── Colour tier ──────────────────────────────────────────────────────────
 
   private _tier(kwh: number | null): "low" | "average" | "high" {
@@ -280,7 +322,12 @@ export class SolarForecastCard extends LitElement {
 
     // Re-read the entity state fresh at click time so we always get the latest hours
     const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
-    const freshHours = freshState?.attributes?.hours;
+    const intType = this._config?.integration_type;
+    const freshHours = intType === "solcast"
+      ? freshState?.attributes?.detailedForecast
+      : intType === "volcast"
+        ? freshState?.attributes?.hours
+        : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
 
     // Log which entity is being used and what the hours attribute looks like
     const hoursType = freshHours === undefined ? "missing"
@@ -1103,7 +1150,7 @@ export class SolarForecastCard extends LitElement {
     if (!this._popup) return nothing;
 
     const row = this._popup;
-    const points = this._parseHours(row.rawHoursAttr);
+    const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
     const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
 
     // Determine the reference ceiling for bar scaling

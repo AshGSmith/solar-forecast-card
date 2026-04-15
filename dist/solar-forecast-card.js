@@ -157,6 +157,7 @@ function normalizeConfig(raw) {
         icon: raw.icon,
         show_header: raw.show_header !== false,
         device_id: raw.device_id,
+        integration_type: raw.integration_type ?? "manual",
         forecast_entities: incoming,
         live_power_entity: raw.live_power_entity,
         today_actual_entity: raw.today_actual_entity,
@@ -204,6 +205,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             icon: data.icon || undefined,
             show_header: data.show_header,
             device_id: data.device_id || undefined,
+            integration_type: this._config?.integration_type ?? "manual",
             forecast_entities: [
                 data.forecast_entity_0,
                 data.forecast_entity_1,
@@ -234,6 +236,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     }
     _autoDetect(deviceId) {
         const sensors = this._deviceSensors(deviceId);
+        // Route to integration-specific detection when platform is identifiable
+        const isSolcast = sensors.some((e) => e.platform === "solcast_solar");
+        if (isSolcast)
+            return this._autoDetectSolcast(sensors);
         // ── Split into forecast sensors (have "hours") and actual candidates ──────
         const forecastSensors = sensors.filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours));
         const actualEntry = sensors.find((e) => {
@@ -299,6 +305,55 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         return {
             forecast_entities: slots,
             today_actual_entity: actualEntry?.entity_id,
+            integration_type: "volcast",
+        };
+    }
+    /**
+     * Solcast-specific auto-detection.
+     *
+     * Solcast entities don't carry an `hours` array attribute so the generic
+     * detector won't find them. Instead we match against the well-known keywords
+     * the integration embeds in every entity_id:
+     *
+     *   forecast_today → slot 0  (today)
+     *   forecast_tomorrow → slot 1  (tomorrow)
+     *   forecast_day_3 … forecast_day_7 → slots 2–6
+     *
+     * Only kWh sensors are considered to avoid picking up power/API sensors.
+     * today_actual_entity is left undefined — Solcast doesn't expose actual
+     * generation; that sensor typically comes from the inverter integration.
+     */
+    _autoDetectSolcast(sensors) {
+        const slots = ["", "", "", "", "", "", ""];
+        const DAY_KEYWORDS = [
+            ["forecast_today", 0],
+            ["forecast_tomorrow", 1],
+            ["forecast_day_3", 2],
+            ["forecast_day_4", 3],
+            ["forecast_day_5", 4],
+            ["forecast_day_6", 5],
+            ["forecast_day_7", 6],
+        ];
+        for (const sensor of sensors) {
+            const state = this.hass.states[sensor.entity_id];
+            const unit = state?.attributes?.unit_of_measurement;
+            if (unit !== "kWh")
+                continue;
+            for (const [keyword, slot] of DAY_KEYWORDS) {
+                if (sensor.entity_id.includes(keyword)) {
+                    slots[slot] = sensor.entity_id;
+                    break;
+                }
+            }
+        }
+        console.debug("[solar-forecast-card] Solcast auto-detect mapping:", slots.map((id, i) => ({
+            slot: `Day ${i} (${["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"][i]})`,
+            entity: id ? id.replace(/^sensor\./, "") : "(empty)",
+        })));
+        return {
+            forecast_entities: slots,
+            today_actual_entity: undefined,
+            integration_type: "solcast",
         };
     }
     /**
@@ -375,7 +430,12 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
                 ...newConfig,
                 forecast_entities: slots,
                 today_actual_entity: newConfig.today_actual_entity || detected.today_actual_entity,
+                integration_type: detected.integration_type,
             };
+        }
+        else if (!newConfig.device_id && this._config.device_id) {
+            // Device was cleared — revert to manual mode
+            newConfig = { ...newConfig, integration_type: "manual" };
         }
         this._config = newConfig;
         // composed: true is required so the event crosses the shadow DOM boundary
@@ -568,7 +628,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
                 entityId,
                 forecastKwh: isFinite(kwhVal) ? kwhVal : null,
                 actualKwh: i === 0 ? todayActualKwh : null,
-                rawHoursAttr: s?.attributes?.hours,
+                rawHoursAttr: cfg.integration_type === "solcast"
+                    ? s?.attributes?.detailedForecast
+                    : cfg.integration_type === "volcast"
+                        ? s?.attributes?.hours
+                        : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
             };
         });
         const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
@@ -587,14 +651,18 @@ let SolarForecastCard = class SolarForecastCard extends i {
         });
     }
     /**
-     * Parse the raw "hours" attribute into trimmed [{hour, kwh}] points.
+     * Parse the raw hourly attribute into trimmed [{hour, kwh}] points.
      *
-     * Handles three formats:
-     *   1. Array of numbers          – index is the hour
-     *   2. Array of objects          – looks for common value-key names
-     *   3. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
+     * @param hint  integration_type from config — skips format detection when known.
+     *
+     * Handles four formats:
+     *   1. Solcast detailedForecast  – [{period_start: ISO, pv_estimate: kW}, …]
+     *                                  30-min periods, aggregated into hourly kWh
+     *   2. Array of numbers          – index is the hour
+     *   3. Array of objects          – looks for common value-key names
+     *   4. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
      */
-    _parseHours(raw) {
+    _parseHours(raw, hint) {
         // ── Always log the raw value so callers can verify the format ────────────
         console.debug("[solar-forecast-card] hours attr →", raw === undefined ? "undefined" :
             raw === null ? "null" :
@@ -605,39 +673,52 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return [];
         try {
             let points;
-            // ── Format 1 & 2: array ─────────────────────────────────────────────
             if (Array.isArray(raw)) {
                 if (raw.length === 0) {
                     console.debug("[solar-forecast-card] hours: empty array");
                     return [];
                 }
-                points = raw.map((v, i) => {
-                    // 1 — bare number, index = hour
-                    if (typeof v === "number") {
-                        return { hour: i, kwh: isFinite(v) ? v : 0 };
-                    }
-                    // 2 — object with hour + value fields
-                    if (typeof v === "object" && v !== null) {
-                        const obj = v;
-                        // Resolve hour index — try "hour", "time", "h" keys
-                        const rawH = obj.hour ?? obj.time ?? obj.h;
-                        const hour = typeof rawH === "number" ? rawH
-                            : typeof rawH === "string" ? parseInt(rawH, 10)
-                                : i;
-                        // Resolve value — try all known key names in priority order
-                        const rawV = obj.value ?? obj.energy ?? obj.kwh ??
-                            obj.wh ?? obj.power_kw ?? obj.pv_estimate ??
-                            obj.forecast ?? obj.solar ?? 0;
-                        const kwh = typeof rawV === "number" ? rawV
-                            : typeof rawV === "string" ? parseFloat(rawV)
-                                : 0;
-                        return {
-                            hour: isFinite(hour) ? hour : i,
-                            kwh: isFinite(kwh) ? kwh : 0,
-                        };
-                    }
-                    return { hour: i, kwh: 0 };
-                });
+                // ── Format 1: Solcast detailedForecast ────────────────────────────
+                // When hint is "solcast", skip detection and parse directly.
+                // Otherwise detect by inspecting the first element.
+                const isSolcast = hint === "solcast" ||
+                    (hint !== "volcast" &&
+                        typeof raw[0]?.period_start === "string" &&
+                        "pv_estimate" in raw[0]);
+                if (isSolcast) {
+                    console.debug("[solar-forecast-card] hours: Solcast detailedForecast format");
+                    points = this._parseSolcastPeriods(raw);
+                }
+                else {
+                    // ── Format 2 & 3: generic array ───────────────────────────────────
+                    points = raw.map((v, i) => {
+                        // 1 — bare number, index = hour
+                        if (typeof v === "number") {
+                            return { hour: i, kwh: isFinite(v) ? v : 0 };
+                        }
+                        // 2 — object with hour + value fields
+                        if (typeof v === "object" && v !== null) {
+                            const obj = v;
+                            // Resolve hour index — try "hour", "time", "h" keys
+                            const rawH = obj.hour ?? obj.time ?? obj.h;
+                            const hour = typeof rawH === "number" ? rawH
+                                : typeof rawH === "string" ? parseInt(rawH, 10)
+                                    : i;
+                            // Resolve value — try all known key names in priority order
+                            const rawV = obj.value ?? obj.energy ?? obj.kwh ??
+                                obj.wh ?? obj.power_kw ?? obj.pv_estimate ??
+                                obj.forecast ?? obj.solar ?? 0;
+                            const kwh = typeof rawV === "number" ? rawV
+                                : typeof rawV === "string" ? parseFloat(rawV)
+                                    : 0;
+                            return {
+                                hour: isFinite(hour) ? hour : i,
+                                kwh: isFinite(kwh) ? kwh : 0,
+                            };
+                        }
+                        return { hour: i, kwh: 0 };
+                    });
+                } // close else (non-Solcast array)
                 // ── Format 3: plain object keyed by hour ────────────────────────────
             }
             else if (typeof raw === "object") {
@@ -685,6 +766,24 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return [];
         }
     }
+    _parseSolcastPeriods(entries) {
+        const buckets = new Map();
+        for (const entry of entries) {
+            const periodStart = entry.period_start;
+            if (typeof periodStart !== "string")
+                continue;
+            const d = new Date(periodStart);
+            if (isNaN(d.getTime()))
+                continue;
+            const hour = d.getHours();
+            const estimate = typeof entry.pv_estimate === "number" ? entry.pv_estimate : 0;
+            const kwh = estimate * 0.5; // 30-min period in kW → kWh
+            buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+        }
+        return Array.from(buckets.entries())
+            .map(([hour, kwh]) => ({ hour, kwh }))
+            .sort((a, b) => a.hour - b.hour);
+    }
     // ── Colour tier ──────────────────────────────────────────────────────────
     _tier(kwh) {
         if (kwh === null)
@@ -702,7 +801,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
         clearTimeout(this._closeTimer);
         // Re-read the entity state fresh at click time so we always get the latest hours
         const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
-        const freshHours = freshState?.attributes?.hours;
+        const intType = this._config?.integration_type;
+        const freshHours = intType === "solcast"
+            ? freshState?.attributes?.detailedForecast
+            : intType === "volcast"
+                ? freshState?.attributes?.hours
+                : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
         // Log which entity is being used and what the hours attribute looks like
         const hoursType = freshHours === undefined ? "missing"
             : freshHours === null ? "null"
@@ -1495,7 +1599,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (!this._popup)
             return A;
         const row = this._popup;
-        const points = this._parseHours(row.rawHoursAttr);
+        const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
         const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
         // Determine the reference ceiling for bar scaling
         const { inverter_max_kw, solar_max_kwp } = this._config;

@@ -146,6 +146,7 @@ export function normalizeConfig(
     icon:               raw.icon,
     show_header:         raw.show_header !== false,
     device_id:          raw.device_id,
+    integration_type:   raw.integration_type ?? "manual",
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
     live_power_entity:   raw.live_power_entity,
     today_actual_entity: raw.today_actual_entity,
@@ -197,11 +198,12 @@ export class SolarForecastCardEditor extends LitElement {
 
   private _fromFormData(data: FormData): SolarForecastCardConfig {
     return {
-      type:       this._config?.type ?? "custom:solar-forecast-card",
-      title:      data.title || undefined,
-      icon:       data.icon  || undefined,
-      show_header: data.show_header,
-      device_id:  data.device_id || undefined,
+      type:             this._config?.type ?? "custom:solar-forecast-card",
+      title:            data.title || undefined,
+      icon:             data.icon  || undefined,
+      show_header:      data.show_header,
+      device_id:        data.device_id || undefined,
+      integration_type: this._config?.integration_type ?? "manual",
       forecast_entities: [
         data.forecast_entity_0,
         data.forecast_entity_1,
@@ -237,9 +239,13 @@ export class SolarForecastCardEditor extends LitElement {
 
   private _autoDetect(deviceId: string): Pick<
     SolarForecastCardConfig,
-    "forecast_entities" | "today_actual_entity"
+    "forecast_entities" | "today_actual_entity" | "integration_type"
   > {
     const sensors = this._deviceSensors(deviceId);
+
+    // Route to integration-specific detection when platform is identifiable
+    const isSolcast = sensors.some((e) => e.platform === "solcast_solar");
+    if (isSolcast) return this._autoDetectSolcast(sensors);
 
     // ── Split into forecast sensors (have "hours") and actual candidates ──────
 
@@ -321,8 +327,67 @@ export class SolarForecastCardEditor extends LitElement {
     );
 
     return {
-      forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
+      forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
       today_actual_entity: actualEntry?.entity_id,
+      integration_type:    "volcast",
+    };
+  }
+
+  /**
+   * Solcast-specific auto-detection.
+   *
+   * Solcast entities don't carry an `hours` array attribute so the generic
+   * detector won't find them. Instead we match against the well-known keywords
+   * the integration embeds in every entity_id:
+   *
+   *   forecast_today → slot 0  (today)
+   *   forecast_tomorrow → slot 1  (tomorrow)
+   *   forecast_day_3 … forecast_day_7 → slots 2–6
+   *
+   * Only kWh sensors are considered to avoid picking up power/API sensors.
+   * today_actual_entity is left undefined — Solcast doesn't expose actual
+   * generation; that sensor typically comes from the inverter integration.
+   */
+  private _autoDetectSolcast(
+    sensors: EntityRegistryEntry[]
+  ): Pick<SolarForecastCardConfig, "forecast_entities" | "today_actual_entity" | "integration_type"> {
+    const slots: string[] = ["", "", "", "", "", "", ""];
+
+    const DAY_KEYWORDS: Array<[string, number]> = [
+      ["forecast_today",    0],
+      ["forecast_tomorrow", 1],
+      ["forecast_day_3",    2],
+      ["forecast_day_4",    3],
+      ["forecast_day_5",    4],
+      ["forecast_day_6",    5],
+      ["forecast_day_7",    6],
+    ];
+
+    for (const sensor of sensors) {
+      const state = this.hass!.states[sensor.entity_id];
+      const unit  = state?.attributes?.unit_of_measurement as string | undefined;
+      if (unit !== "kWh") continue;
+
+      for (const [keyword, slot] of DAY_KEYWORDS) {
+        if (sensor.entity_id.includes(keyword)) {
+          slots[slot] = sensor.entity_id;
+          break;
+        }
+      }
+    }
+
+    console.debug(
+      "[solar-forecast-card] Solcast auto-detect mapping:",
+      slots.map((id, i) => ({
+        slot: `Day ${i} (${["Today","Tomorrow","Day 3","Day 4","Day 5","Day 6","Day 7"][i]})`,
+        entity: id ? id.replace(/^sensor\./, "") : "(empty)",
+      }))
+    );
+
+    return {
+      forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
+      today_actual_entity: undefined,
+      integration_type:    "solcast",
     };
   }
 
@@ -405,10 +470,13 @@ export class SolarForecastCardEditor extends LitElement {
       });
       newConfig = {
         ...newConfig,
-        forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
-        today_actual_entity:
-          newConfig.today_actual_entity || detected.today_actual_entity,
+        forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
+        today_actual_entity: newConfig.today_actual_entity || detected.today_actual_entity,
+        integration_type:    detected.integration_type,
       };
+    } else if (!newConfig.device_id && this._config.device_id) {
+      // Device was cleared — revert to manual mode
+      newConfig = { ...newConfig, integration_type: "manual" };
     }
 
     this._config = newConfig;
