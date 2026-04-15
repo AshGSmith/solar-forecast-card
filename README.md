@@ -37,19 +37,22 @@ Add the card to a dashboard using the card picker, or add it manually in YAML:
 
 ```yaml
 type: custom:solar-forecast-card
-title: Volcast Forecast      # optional, defaults to "Solar Forecast"
-show_header: true
-device_id: 520b8e8a057fa9e963562e31923056a5
+title: Solar Forecast          # optional — defaults to "Solar Forecast"
+icon: mdi:solar-power          # optional — defaults to mdi:solar-power
+show_header: true              # optional — defaults to true
+device_id: <your_device_id>    # optional — auto-detects forecast entities
 forecast_entities:
-  - sensor.volcast_solar_forecast_energy_forecast_today
-  - sensor.volcast_solar_forecast_energy_forecast_tomorrow
-  - sensor.volcast_solar_forecast_energy_forecast_day_3
-  - sensor.volcast_solar_forecast_energy_forecast_day_4
-  - sensor.volcast_solar_forecast_energy_forecast_day_5
-  - sensor.volcast_solar_forecast_energy_forecast_day_6
-  - sensor.volcast_solar_forecast_energy_forecast_day_7
-live_power_entity: sensor.solar_power_generation
-today_actual_entity: sensor.solar_generated_today
+  - sensor.forecast_today
+  - sensor.forecast_tomorrow
+  - sensor.forecast_day_3
+  - sensor.forecast_day_4
+  - sensor.forecast_day_5
+  - sensor.forecast_day_6
+  - sensor.forecast_day_7
+live_power_entity: sensor.solar_power_now
+today_actual_entity: sensor.solar_energy_today
+inverter_max_kw: 5.0
+solar_max_kwp: 4.2
 date_format: DD/MM
 time_format: 24h
 low_threshold: 10
@@ -58,11 +61,51 @@ high_threshold: 30
 
 ### Options
 
-| Option   | Type   | Required | Description                         |
-|----------|--------|----------|-------------------------------------|
-| `type`   | string | yes      | `custom:solar-forecast-card`        |
-| `title`  | string | no       | Card title (default: Solar Forecast)|
-| `entity` | string | no       | HA entity ID to display             |
+#### Card
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `type` | string | yes | — | Must be `custom:solar-forecast-card` |
+| `title` | string | no | `Solar Forecast` | Text displayed in the card header |
+| `icon` | string | no | `mdi:solar-power` | MDI icon shown to the left of the title (e.g. `mdi:solar-power-variant`) |
+| `show_header` | boolean | no | `true` | Show or hide the card header, including the title and live data badge |
+
+#### Device & Entities
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `device_id` | string | no | — | Home Assistant device ID. When set, forecast entities and the actual generation sensor are auto-detected from the device. Manual entity selections override auto-detected values |
+| `forecast_entities` | list | yes | — | Exactly 7 sensor entity IDs representing Day 1 (today) through Day 7. Each sensor must expose a numeric state (kWh) and, for hourly popup support, an `hours` attribute |
+
+#### Live Data
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `live_power_entity` | string | no | — | Sensor reporting current solar output. Accepts W or kW (detected via `unit_of_measurement`). Displayed in the header as `LIVE: X W` or `X.X kW` |
+| `today_actual_entity` | string | no | — | Sensor reporting total energy generated today (kWh). Shown in the header alongside live power, and used to render the actual generation bar on today's column |
+
+#### System
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `inverter_max_kw` | number | no | — | Inverter maximum continuous output in kW. Used as the ceiling for hourly popup bar scaling when the solar array is at or above this value |
+| `solar_max_kwp` | number | no | — | Solar array peak capacity in kWp. Used as the hourly graph ceiling when smaller than `inverter_max_kw`. If neither system value is set, bars scale relative to the day's peak hour |
+
+#### Display
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `date_format` | string | no | `DD/MM` | Date format for day column labels. `DD/MM` (e.g. 15/04) or `MM/DD` (e.g. 04/15) |
+| `time_format` | string | no | `24h` | Time format used in the hourly forecast popup. `24h` (e.g. `17:00`) or `12h` (e.g. `5pm`) |
+
+#### Colour Thresholds
+
+Bar colours change based on each day's forecast total. When neither threshold is set all bars use the default amber colour.
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `low_threshold` | number | no | — | Days forecast below this value (kWh) are shown in a soft red/coral colour |
+| `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
 
 ## License
 
