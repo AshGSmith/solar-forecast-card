@@ -467,13 +467,6 @@ export class SolarForecastCardEditor extends LitElement {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
-        <ha-form
-          .hass=${this.hass}
-          .data=${data}
-          .schema=${SCHEMA_TODAY_ACTUAL}
-          .computeLabel=${label}
-          @value-changed=${onChange}
-        ></ha-form>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="Live Data" outlined leftChevron>
@@ -481,6 +474,13 @@ export class SolarForecastCardEditor extends LitElement {
           .hass=${this.hass}
           .data=${data}
           .schema=${SCHEMA_LIVE_POWER}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_TODAY_ACTUAL}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>

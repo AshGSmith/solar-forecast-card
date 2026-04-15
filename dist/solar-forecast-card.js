@@ -425,13 +425,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
-        <ha-form
-          .hass=${this.hass}
-          .data=${data}
-          .schema=${SCHEMA_TODAY_ACTUAL}
-          .computeLabel=${label}
-          @value-changed=${onChange}
-        ></ha-form>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="Live Data" outlined leftChevron>
@@ -439,6 +432,13 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           .hass=${this.hass}
           .data=${data}
           .schema=${SCHEMA_LIVE_POWER}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_TODAY_ACTUAL}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
