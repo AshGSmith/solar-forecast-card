@@ -1,0 +1,28 @@
+{
+  "name": "solar-forecast-card",
+  "version": "0.1.0",
+  "description": "A Home Assistant Lovelace custom card for solar forecast",
+  "main": "dist/solar-forecast-card.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs",
+    "dev": "rollup -c rollup.config.mjs --watch"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "custom-card",
+    "solar",
+    "forecast"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^4.0.0",
+    "tslib": "^2.6.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "lit": "^3.0.0"
+  }
+}

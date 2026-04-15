@@ -1,0 +1,1173 @@
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol, Iterator */
+
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$2=globalThis,e$2=t$2.ShadowRoot&&(void 0===t$2.ShadyCSS||t$2.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$2=Symbol(),o$4=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$2&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$4.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$4.set(s,t));}return t}toString(){return this.cssText}};const r$4=t=>new n$3("string"==typeof t?t:t+"",void 0,s$2),i$3=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$2)},S$1=(s,o)=>{if(e$2)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$2.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$2=e$2?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$4(e)})(t):t;
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */const{is:i$2,defineProperty:e$1,getOwnPropertyDescriptor:h$1,getOwnPropertyNames:r$3,getOwnPropertySymbols:o$3,getPrototypeOf:n$2}=Object,a$1=globalThis,c$1=a$1.trustedTypes,l$1=c$1?c$1.emptyScript:"",p$1=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$1={toAttribute(t,s){switch(s){case Boolean:t=t?l$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$2(t,s),b$1={attribute:true,type:String,converter:u$1,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$1(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$1(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$3(t),...o$3(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$2(s));}else void 0!==s&&i.push(c$2(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$1).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$1;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$1?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$1=globalThis,i$1=t=>t,s$1=t$1.trustedTypes,e=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$2=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$2,r$2=`<${n$1}>`,l=document,c=()=>l.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m=/>/g,p=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l.createTreeWalker(l,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e?e.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p):void 0!==u[3]&&(c=p):c===p?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p:'"'===u[3]?$:g):c===$||c===g?c=p:c===_||c===m?c=v:(c=p,n=void 0);const x=c===p&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$2:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$2+x):s+o$2+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$2),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$2)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$2),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$2,t+1));)d.push({type:7,index:l}),t+=o$2.length-1;}l++;}}static createElement(t,i){const s=l.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$1(t).nextSibling;i$1(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$1.litHtmlPolyfillSupport;B?.(S,k),(t$1.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */const s=globalThis;class i extends y$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const r=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=D(r,this.renderRoot,this.renderOptions);}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(true);}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(false);}render(){return E}}i._$litElement$=true,i["finalized"]=true,s.litElementHydrateSupport?.({LitElement:i});const o$1=s.litElementPolyfillSupport;o$1?.({LitElement:i});(s.litElementVersions??=[]).push("4.2.2");
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);}):customElements.define(t,e);};
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */const o={attribute:true,type:String,converter:u$1,reflect:false,hasChanged:f$1},r$1=(t=o,e,r)=>{const{kind:n,metadata:i}=r;let s=globalThis.litPropertyMetadata.get(i);if(void 0===s&&globalThis.litPropertyMetadata.set(i,s=new Map),"setter"===n&&((t=Object.create(t)).wrapped=true),s.set(r.name,t),"accessor"===n){const{name:o}=r;return {set(r){const n=e.get.call(this);e.set.call(this,r),this.requestUpdate(o,n,t,true,r);},init(e){return void 0!==e&&this.C(o,void 0,t,e),e}}}if("setter"===n){const{name:o}=r;return function(r){const n=this[o];e.call(this,r),this.requestUpdate(o,n,t,true,r);}}throw Error("Unsupported decorator location: "+n)};function n(t){return (e,o)=>"object"==typeof o?r$1(t,e,o):((t,e,o)=>{const r=e.hasOwnProperty(o);return e.constructor.createProperty(o,t),r?Object.getOwnPropertyDescriptor(e,o):void 0})(t,e,o)}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function r(r){return n({...r,state:true,attribute:false})}
+
+const EMPTY_FORECAST = [
+    "", "", "", "", "", "", "",
+];
+const DAY_LABELS = [
+    "Day 1 — Today",
+    "Day 2 — Tomorrow",
+    "Day 3",
+    "Day 4",
+    "Day 5",
+    "Day 6",
+    "Day 7",
+];
+/** Normalise a raw/partial config into a fully-populated one. */
+function normalizeConfig(raw) {
+    const incoming = Array.isArray(raw.forecast_entities)
+        ? raw.forecast_entities.slice(0, 7)
+        : [];
+    while (incoming.length < 7)
+        incoming.push("");
+    return {
+        type: raw.type ?? "custom:solar-forecast-card",
+        title: raw.title,
+        device_id: raw.device_id,
+        forecast_entities: incoming,
+        today_actual_entity: raw.today_actual_entity,
+        date_format: raw.date_format ?? "DD/MM",
+    };
+}
+let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
+    setConfig(config) {
+        this._config = normalizeConfig(config);
+    }
+    // ── Entity discovery ────────────────────────────────────────────────────────
+    /** Sensor entities that belong to `deviceId` and are not disabled/hidden. */
+    _deviceSensors(deviceId) {
+        if (!this.hass?.entities)
+            return [];
+        return Object.values(this.hass.entities).filter((e) => e.device_id === deviceId &&
+            !e.disabled_by &&
+            !e.hidden_by &&
+            e.entity_id.startsWith("sensor."));
+    }
+    /**
+     * Inspect live state to determine which entities are Volcast daily-forecast
+     * sensors (they carry an `hours` array attribute) and which is the actual
+     * generation sensor (kWh unit, no `hours`).
+     */
+    _autoDetect(deviceId) {
+        const sensors = this._deviceSensors(deviceId);
+        const forecastIds = sensors
+            .filter((e) => {
+            const s = this.hass.states[e.entity_id];
+            return Array.isArray(s?.attributes?.hours);
+        })
+            .sort((a, b) => a.entity_id.localeCompare(b.entity_id))
+            .map((e) => e.entity_id);
+        const padded = [...forecastIds];
+        while (padded.length < 7)
+            padded.push("");
+        const actualEntry = sensors.find((e) => {
+            const s = this.hass.states[e.entity_id];
+            if (!s)
+                return false;
+            const unit = s.attributes.unit_of_measurement;
+            return (!Array.isArray(s.attributes.hours) &&
+                (unit === "kWh" || unit === "Wh"));
+        });
+        return {
+            forecast_entities: padded.slice(0, 7),
+            today_actual_entity: actualEntry?.entity_id,
+        };
+    }
+    // ── Event handlers ──────────────────────────────────────────────────────────
+    _titleChanged(ev) {
+        if (!this._config)
+            return;
+        const value = ev.target.value;
+        this._fire({ ...this._config, title: value || undefined });
+    }
+    _deviceChanged(ev) {
+        if (!this._config)
+            return;
+        const deviceId = ev.detail.value || undefined;
+        const detected = deviceId ? this._autoDetect(deviceId) : {};
+        this._fire({ ...this._config, device_id: deviceId, ...detected });
+    }
+    _redetect() {
+        if (!this._config?.device_id)
+            return;
+        this._fire({ ...this._config, ...this._autoDetect(this._config.device_id) });
+    }
+    _forecastEntityChanged(ev, index) {
+        if (!this._config)
+            return;
+        const entities = [
+            ...this._config.forecast_entities,
+        ];
+        entities[index] = ev.detail.value ?? "";
+        this._fire({ ...this._config, forecast_entities: entities });
+    }
+    _actualEntityChanged(ev) {
+        if (!this._config)
+            return;
+        this._fire({
+            ...this._config,
+            today_actual_entity: ev.detail.value || undefined,
+        });
+    }
+    _dateFormatChanged(ev) {
+        if (!this._config)
+            return;
+        const value = ev.detail.value || "";
+        if (!value)
+            return;
+        this._fire({
+            ...this._config,
+            date_format: value,
+        });
+    }
+    _fire(config) {
+        this._config = config;
+        this.dispatchEvent(new CustomEvent("config-changed", { detail: { config }, bubbles: true }));
+    }
+    // ── Styles ──────────────────────────────────────────────────────────────────
+    static get styles() {
+        return i$3 `
+      :host {
+        display: block;
+      }
+
+      .section-title {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--secondary-text-color);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 20px 0 8px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--divider-color, #e0e0e0);
+      }
+
+      .section-title:first-of-type {
+        margin-top: 8px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .row > * {
+        flex: 1;
+      }
+
+      ha-entity-picker,
+      ha-device-picker,
+      ha-select,
+      ha-textfield {
+        display: block;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .redetect-btn {
+        flex: 0 0 auto;
+        margin-bottom: 8px;
+      }
+
+      .helper-text {
+        font-size: 0.8rem;
+        color: var(--secondary-text-color);
+        margin: -4px 0 8px;
+      }
+
+      .detected-badge {
+        font-size: 0.75rem;
+        color: var(--success-color, #4caf50);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: -4px 0 8px;
+      }
+    `;
+    }
+    // ── Render ──────────────────────────────────────────────────────────────────
+    render() {
+        if (!this._config)
+            return A;
+        const cfg = this._config;
+        const forecastEntities = cfg.forecast_entities ?? EMPTY_FORECAST;
+        const detectedCount = forecastEntities.filter(Boolean).length;
+        return b `
+      <!-- Title -->
+      <p class="section-title">Card</p>
+      <ha-textfield
+        .value=${cfg.title ?? ""}
+        label="Title (optional)"
+        placeholder="Solar Forecast"
+        @change=${this._titleChanged}
+      ></ha-textfield>
+
+      <!-- Device -->
+      <p class="section-title">Device</p>
+
+      <div class="row">
+        <ha-device-picker
+          .hass=${this.hass}
+          .value=${cfg.device_id ?? ""}
+          label="Source device (optional)"
+          @value-changed=${this._deviceChanged}
+        ></ha-device-picker>
+
+        ${cfg.device_id
+            ? b `
+              <mwc-icon-button
+                class="redetect-btn"
+                title="Re-detect entities from device"
+                @click=${this._redetect}
+              >
+                <ha-icon icon="mdi:refresh"></ha-icon>
+              </mwc-icon-button>
+            `
+            : A}
+      </div>
+
+      ${cfg.device_id && detectedCount > 0
+            ? b `
+            <p class="detected-badge">
+              <ha-icon icon="mdi:check-circle"></ha-icon>
+              ${detectedCount} of 7 forecast entities auto-detected
+            </p>
+          `
+            : b `
+            <p class="helper-text">
+              Select a device to auto-detect Volcast forecast entities, or set
+              them manually below.
+            </p>
+          `}
+
+      <!-- Daily forecast entities -->
+      <p class="section-title">Daily Forecast Entities</p>
+
+      ${DAY_LABELS.map((label, i) => b `
+          <ha-entity-picker
+            .hass=${this.hass}
+            .value=${forecastEntities[i] ?? ""}
+            .label=${label}
+            .includeDomains=${["sensor"]}
+            allow-custom-entity
+            @value-changed=${(ev) => this._forecastEntityChanged(ev, i)}
+          ></ha-entity-picker>
+        `)}
+
+      <!-- Actual generation -->
+      <p class="section-title">Today's Actual Generation</p>
+      <ha-entity-picker
+        .hass=${this.hass}
+        .value=${cfg.today_actual_entity ?? ""}
+        label="Actual generation entity (optional)"
+        .includeDomains=${["sensor"]}
+        allow-custom-entity
+        @value-changed=${this._actualEntityChanged}
+      ></ha-entity-picker>
+      <p class="helper-text">
+        A sensor tracking how much energy the panels have actually produced
+        today. Will be overlaid on the forecast bar.
+      </p>
+
+      <!-- Display options -->
+      <p class="section-title">Display</p>
+      <ha-select
+        .value=${cfg.date_format ?? "DD/MM"}
+        label="Date format"
+        naturalMenuWidth
+        fixedMenuPosition
+        @value-changed=${this._dateFormatChanged}
+      >
+        <mwc-list-item value="DD/MM">DD/MM &nbsp;(e.g. 15/04)</mwc-list-item>
+        <mwc-list-item value="MM/DD">MM/DD &nbsp;(e.g. 04/15)</mwc-list-item>
+      </ha-select>
+    `;
+    }
+};
+__decorate([
+    n({ attribute: false })
+], SolarForecastCardEditor.prototype, "hass", void 0);
+__decorate([
+    r()
+], SolarForecastCardEditor.prototype, "_config", void 0);
+SolarForecastCardEditor = __decorate([
+    t("solar-forecast-card-editor")
+], SolarForecastCardEditor);
+
+const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const COMPLETE_THRESHOLD = 0.9;
+const POPUP_CLOSE_MS = 260;
+let SolarForecastCard = class SolarForecastCard extends i {
+    constructor() {
+        super(...arguments);
+        /** Currently open popup row (null = closed). */
+        this._popup = null;
+        /** True once the popup is in-DOM and should animate in. */
+        this._popupVisible = false;
+        this._onDocKey = (e) => {
+            if (e.key === "Escape" && this._popup)
+                this._closePopup();
+        };
+    }
+    // ── Lovelace lifecycle ────────────────────────────────────────────────────
+    static getConfigElement() {
+        return document.createElement("solar-forecast-card-editor");
+    }
+    static getStubConfig() {
+        return { forecast_entities: ["", "", "", "", "", "", ""], date_format: "DD/MM" };
+    }
+    setConfig(config) {
+        if (!config)
+            throw new Error("Invalid configuration");
+        this._config = normalizeConfig(config);
+    }
+    getCardSize() {
+        return 4;
+    }
+    connectedCallback() {
+        super.connectedCallback();
+        document.addEventListener("keydown", this._onDocKey);
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        document.removeEventListener("keydown", this._onDocKey);
+        clearTimeout(this._closeTimer);
+    }
+    // ── Update optimisation ───────────────────────────────────────────────────
+    shouldUpdate(changedProps) {
+        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible"))
+            return true;
+        if (!this._config || !this.hass)
+            return false;
+        const oldHass = changedProps.get("hass");
+        if (!oldHass)
+            return true;
+        const watchIds = [
+            ...this._config.forecast_entities,
+            this._config.today_actual_entity,
+        ].filter(Boolean);
+        return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
+    }
+    // ── Data ─────────────────────────────────────────────────────────────────
+    _buildRows() {
+        if (!this._config || !this.hass)
+            return [];
+        const cfg = this._config;
+        const today = new Date();
+        let todayActualKwh = null;
+        if (cfg.today_actual_entity) {
+            const v = parseFloat(this.hass.states[cfg.today_actual_entity]?.state ?? "");
+            if (isFinite(v))
+                todayActualKwh = v;
+        }
+        const raw = cfg.forecast_entities.map((entityId, i) => {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            const s = entityId ? this.hass.states[entityId] : undefined;
+            const kwhVal = parseFloat(s?.state ?? "");
+            return {
+                date,
+                isToday: i === 0,
+                entityId,
+                forecastKwh: isFinite(kwhVal) ? kwhVal : null,
+                actualKwh: i === 0 ? todayActualKwh : null,
+                rawHoursAttr: s?.attributes?.hours,
+            };
+        });
+        const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
+        return raw.map((r) => {
+            const forecastPct = r.forecastKwh !== null
+                ? Math.round((r.forecastKwh / maxKwh) * 100) : 0;
+            const rawActualPct = r.actualKwh !== null
+                ? Math.round((r.actualKwh / maxKwh) * 100) : 0;
+            const actualPct = Math.min(rawActualPct, forecastPct);
+            const dottedPct = forecastPct - actualPct;
+            const isComplete = r.isToday
+                && r.forecastKwh !== null && r.forecastKwh > 0
+                && r.actualKwh !== null
+                && r.actualKwh / r.forecastKwh >= COMPLETE_THRESHOLD;
+            return { ...r, forecastPct, actualPct, dottedPct, isComplete };
+        });
+    }
+    /** Parse the raw "hours" attribute into trimmed {hour, kwh} points. */
+    _parseHours(raw) {
+        if (!Array.isArray(raw) || raw.length === 0)
+            return [];
+        const all = raw.map((v, i) => {
+            let kwh = 0;
+            if (typeof v === "number") {
+                kwh = isFinite(v) ? v : 0;
+            }
+            else if (typeof v === "object" && v !== null) {
+                const obj = v;
+                kwh = typeof obj.energy === "number" ? obj.energy
+                    : typeof obj.kwh === "number" ? obj.kwh : 0;
+                const h = typeof obj.hour === "number" ? obj.hour : i;
+                return { hour: h, kwh: isFinite(kwh) ? kwh : 0 };
+            }
+            return { hour: i, kwh };
+        });
+        // Trim to first–last non-zero range
+        let first = -1, last = -1;
+        for (let i = 0; i < all.length; i++) {
+            if (all[i].kwh > 0) {
+                if (first === -1)
+                    first = i;
+                last = i;
+            }
+        }
+        return first === -1 ? [] : all.slice(first, last + 1);
+    }
+    // ── Popup ─────────────────────────────────────────────────────────────────
+    _openPopup(row) {
+        clearTimeout(this._closeTimer);
+        // Re-read hours fresh at click time
+        const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
+        this._popup = { ...row, rawHoursAttr: freshState?.attributes?.hours ?? row.rawHoursAttr };
+        this._popupVisible = false;
+        // Single rAF gives Lit time to stamp the overlay into DOM before we add .visible
+        requestAnimationFrame(() => { this._popupVisible = true; });
+    }
+    _closePopup() {
+        this._popupVisible = false;
+        this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
+    }
+    // ── Formatting ────────────────────────────────────────────────────────────
+    _dayLabel(date, isToday) {
+        return isToday ? "Today" : DAY_NAMES[date.getDay()];
+    }
+    _dateLabel(date) {
+        const d = String(date.getDate()).padStart(2, "0");
+        const m = String(date.getMonth() + 1).padStart(2, "0");
+        return this._config.date_format === "MM/DD" ? `${m}/${d}` : `${d}/${m}`;
+    }
+    _fullDateLabel(date, isToday) {
+        const weekday = isToday ? "Today" : date.toLocaleDateString(undefined, { weekday: "long" });
+        const dt = date.toLocaleDateString(undefined, { day: "numeric", month: "long" });
+        return `${weekday} · ${dt}`;
+    }
+    _hourLabel(hour) {
+        return String(hour).padStart(2, "0");
+    }
+    // ── Styles ────────────────────────────────────────────────────────────────
+    static get styles() {
+        return i$3 `
+      :host {
+        display: block;
+      }
+
+      ha-card {
+        padding: 16px 12px 14px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      /* ── Header ──────────────────────────────────────────── */
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin-bottom: 18px;
+        padding: 0 4px;
+        color: var(--primary-text-color);
+      }
+
+      .card-header ha-icon {
+        color: var(--state-active-color, #fbbf24);
+        flex-shrink: 0;
+      }
+
+      /* ── Placeholder ─────────────────────────────────────── */
+
+      .placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 28px 0;
+        gap: 10px;
+        color: var(--secondary-text-color);
+        text-align: center;
+      }
+
+      .placeholder ha-icon {
+        --mdc-icon-size: 40px;
+        color: var(--state-active-color, #fbbf24);
+        opacity: 0.65;
+      }
+
+      .placeholder p {
+        margin: 0;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      /* ── 7-column grid ───────────────────────────────────── */
+
+      .forecast-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        min-width: 0;
+      }
+
+      /* ── Column ──────────────────────────────────────────── */
+
+      .col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 3px 5px;
+        border-radius: 12px;
+        gap: 3px;
+        min-width: 0;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.2s ease, transform 0.1s ease;
+        outline: none;
+      }
+
+      .col:hover {
+        background: rgba(251, 191, 36, 0.08);
+      }
+
+      .col:active {
+        transform: scale(0.94);
+      }
+
+      .col.today {
+        background: rgba(251, 191, 36, 0.10);
+      }
+
+      .col.today:hover {
+        background: rgba(251, 191, 36, 0.16);
+      }
+
+      /* ── Value label ─────────────────────────────────────── */
+
+      .col-value {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: 30px;
+        width: 100%;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .value-num {
+        font-size: 0.75rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--primary-text-color);
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .value-unit {
+        font-size: 0.60rem;
+        color: var(--secondary-text-color);
+        line-height: 1.2;
+      }
+
+      .value-empty {
+        font-size: 0.78rem;
+        color: var(--secondary-text-color);
+        opacity: 0.4;
+        line-height: 30px;
+      }
+
+      /* ── Bar area ────────────────────────────────────────── */
+
+      .col-bar-wrap {
+        position: relative;
+        width: 100%;
+        height: clamp(100px, 20vw, 160px);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        pointer-events: none;
+      }
+
+      .bar-bg {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        translate: -50% 0;
+        width: min(24px, 72%);
+        height: 100%;
+        border-radius: 8px;
+        background: var(--secondary-background-color, rgba(128, 128, 128, 0.07));
+      }
+
+      .bar-forecast,
+      .bar-actual,
+      .bar-dotted {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        translate: -50% 0;
+        width: min(24px, 72%);
+        transition:
+          height 0.55s cubic-bezier(0.34, 1.15, 0.64, 1),
+          bottom 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
+      }
+
+      .bar-forecast {
+        border-radius: 6px 6px 3px 3px;
+        background: linear-gradient(
+          to top,
+          rgba(245, 158, 11, 0.92),
+          rgba(254, 215, 86, 0.78)
+        );
+        box-shadow:
+          0 0 0 1px rgba(251, 191, 36, 0.15),
+          0 2px 10px 0 rgba(245, 158, 11, 0.28),
+          0 0 16px 2px rgba(251, 191, 36, 0.18);
+      }
+
+      .bar-forecast.complete {
+        background: linear-gradient(
+          to top,
+          rgba(245, 158, 11, 0.98),
+          rgba(254, 215, 86, 0.88)
+        );
+        box-shadow:
+          0 0 0 1px rgba(251, 191, 36, 0.25),
+          0 2px 12px 0 rgba(245, 158, 11, 0.42),
+          0 0 22px 4px rgba(251, 191, 36, 0.28);
+      }
+
+      .bar-actual {
+        border-radius: 6px 6px 3px 3px;
+        background: linear-gradient(
+          to top,
+          rgba(22, 163, 74, 0.92),
+          rgba(74, 222, 128, 0.78)
+        );
+        box-shadow:
+          0 0 0 1px rgba(34, 197, 94, 0.15),
+          0 2px 10px 0 rgba(22, 163, 74, 0.28),
+          0 0 16px 2px rgba(34, 197, 94, 0.18);
+      }
+
+      .bar-actual.below-dotted {
+        border-radius: 0 0 3px 3px;
+      }
+
+      .bar-dotted {
+        border: 2px dashed rgba(245, 158, 11, 0.65);
+        background: rgba(251, 191, 36, 0.07);
+        box-sizing: border-box;
+      }
+
+      .bar-dotted.full   { border-radius: 6px; }
+      .bar-dotted.partial { border-bottom: none; border-radius: 6px 6px 0 0; }
+
+      /* ── Day label ───────────────────────────────────────── */
+
+      .col-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+        text-align: center;
+        width: 100%;
+        min-width: 0;
+        pointer-events: none;
+      }
+
+      .day-name {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--primary-text-color);
+        line-height: 1.25;
+        white-space: nowrap;
+      }
+
+      .col.today .day-name {
+        font-weight: 700;
+        color: var(--warning-color, #f59e0b);
+      }
+
+      .day-date {
+        font-size: 0.65rem;
+        color: var(--secondary-text-color);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.25;
+        white-space: nowrap;
+      }
+
+      /* ════════════════════════════════════════════════════════
+         POPUP
+         ════════════════════════════════════════════════════════ */
+
+      .popup-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        box-sizing: border-box;
+        /* enter / exit */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity ${POPUP_CLOSE_MS}ms ease;
+      }
+
+      .popup-overlay.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* ── Panel ───────────────────────────────────────────── */
+
+      .popup-panel {
+        position: relative;
+        background: var(--ha-card-background, var(--card-background-color, #1c1c1e));
+        border-radius: 20px;
+        width: 100%;
+        max-width: 400px;
+        max-height: min(520px, calc(100dvh - 32px));
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow:
+          0 32px 72px rgba(0, 0, 0, 0.32),
+          0 8px 24px rgba(0, 0, 0, 0.18);
+        /* enter: slide up + scale in */
+        transform: translateY(32px) scale(0.95);
+        opacity: 0;
+        transition:
+          transform ${POPUP_CLOSE_MS + 40}ms cubic-bezier(0.34, 1.28, 0.64, 1),
+          opacity ${POPUP_CLOSE_MS}ms ease;
+        will-change: transform, opacity;
+      }
+
+      .popup-overlay.visible .popup-panel {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      /* ── Header ──────────────────────────────────────────── */
+
+      .popup-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 18px 16px 14px 20px;
+        gap: 8px;
+        border-bottom: 1px solid var(--divider-color, rgba(128, 128, 128, 0.15));
+        flex-shrink: 0;
+      }
+
+      .popup-title {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+      }
+
+      .popup-day-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--primary-text-color);
+        line-height: 1.2;
+      }
+
+      .popup-subtitle {
+        font-size: 0.82rem;
+        color: var(--secondary-text-color);
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+
+      .popup-total-kwh {
+        font-size: 0.95rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--warning-color, #f59e0b);
+      }
+
+      .popup-close {
+        flex-shrink: 0;
+        background: var(--secondary-background-color, rgba(128, 128, 128, 0.10));
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: var(--secondary-text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
+        margin-top: -2px;
+      }
+
+      .popup-close:hover {
+        background: var(--divider-color, rgba(128, 128, 128, 0.18));
+        color: var(--primary-text-color);
+      }
+
+      .popup-close ha-icon {
+        --mdc-icon-size: 18px;
+      }
+
+      /* ── Chart ───────────────────────────────────────────── */
+
+      .chart-scroll {
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 14px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        /* Custom scrollbar — subtle */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(128, 128, 128, 0.25) transparent;
+      }
+
+      .chart-scroll::-webkit-scrollbar { width: 4px; }
+      .chart-scroll::-webkit-scrollbar-thumb {
+        background: rgba(128, 128, 128, 0.25);
+        border-radius: 2px;
+      }
+
+      .chart-no-data {
+        text-align: center;
+        padding: 32px 0;
+        color: var(--secondary-text-color);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      /* Grid: [hour label] [bar track] [value] */
+      .chart-row {
+        display: grid;
+        grid-template-columns: 1.9rem 1fr 2.6rem;
+        align-items: center;
+        gap: 8px;
+        height: 24px;
+      }
+
+      .chart-hour {
+        font-size: 0.70rem;
+        color: var(--secondary-text-color);
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+        line-height: 1;
+        opacity: 0.75;
+      }
+
+      .chart-bar-track {
+        position: relative;
+        height: 9px;
+        border-radius: 5px;
+        background: var(--secondary-background-color, rgba(128, 128, 128, 0.08));
+        overflow: hidden;
+      }
+
+      .chart-bar-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        border-radius: 5px;
+        background: linear-gradient(
+          to right,
+          rgba(245, 158, 11, 0.88),
+          rgba(254, 215, 86, 0.76)
+        );
+        /* Bars animate in staggered via --delay set inline */
+        animation: bar-in 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+        animation-delay: var(--delay, 0ms);
+      }
+
+      .chart-bar-fill.peak {
+        background: linear-gradient(
+          to right,
+          rgba(245, 158, 11, 1.0),
+          rgba(254, 215, 86, 0.92)
+        );
+        box-shadow: 0 0 7px 1px rgba(245, 158, 11, 0.38);
+      }
+
+      @keyframes bar-in {
+        from { width: 0 !important; }
+      }
+
+      .chart-val {
+        font-size: 0.70rem;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        line-height: 1;
+        text-align: left;
+      }
+
+      .chart-val.peak {
+        color: var(--warning-color, #f59e0b);
+        font-weight: 600;
+      }
+    `;
+    }
+    // ── Render ────────────────────────────────────────────────────────────────
+    render() {
+        if (!this._config)
+            return A;
+        const title = this._config.title ?? "Solar Forecast";
+        const hasEntities = this._config.forecast_entities.some(Boolean);
+        if (!hasEntities) {
+            return b `
+        <ha-card>
+          <div class="card-header">
+            <ha-icon icon="mdi:solar-power"></ha-icon>
+            ${title}
+          </div>
+          <div class="placeholder">
+            <ha-icon icon="mdi:weather-sunny"></ha-icon>
+            <p>No forecast entities configured.<br />Open the card editor to get started.</p>
+          </div>
+        </ha-card>
+      `;
+        }
+        return b `
+      <ha-card>
+        <div class="card-header">
+          <ha-icon icon="mdi:solar-power"></ha-icon>
+          ${title}
+        </div>
+        <div class="forecast-grid">
+          ${this._buildRows().map((row) => this._renderCol(row))}
+        </div>
+      </ha-card>
+      ${this._renderPopup()}
+    `;
+    }
+    // ── Column ────────────────────────────────────────────────────────────────
+    _renderCol(row) {
+        const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
+        let bars;
+        if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
+            if (isComplete) {
+                bars = b `<div class="bar-forecast complete" style="height:${forecastPct}%"></div>`;
+            }
+            else {
+                const hasDotted = dottedPct > 1;
+                bars = b `
+          <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
+               style="height:${actualPct}%"></div>
+          ${hasDotted ? b `
+            <div class="bar-dotted ${actualPct > 0 ? "partial" : "full"}"
+                 style="height:${dottedPct}%;bottom:${actualPct}%"></div>
+          ` : A}
+        `;
+            }
+        }
+        else {
+            bars = b `<div class="bar-forecast" style="height:${forecastPct}%"></div>`;
+        }
+        const valueLabel = row.forecastKwh !== null
+            ? b `<span class="value-num">${row.forecastKwh.toFixed(1)}</span><span class="value-unit">kWh</span>`
+            : b `<span class="value-empty">—</span>`;
+        return b `
+      <div
+        class="col ${isToday ? "today" : ""}"
+        role="button"
+        tabindex="0"
+        aria-label="${this._dayLabel(row.date, isToday)} ${this._dateLabel(row.date)}"
+        @click=${() => this._openPopup(row)}
+        @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
+      >
+        <div class="col-value">${valueLabel}</div>
+        <div class="col-bar-wrap">
+          <div class="bar-bg"></div>
+          ${bars}
+        </div>
+        <div class="col-label">
+          <span class="day-name">${this._dayLabel(row.date, isToday)}</span>
+          <span class="day-date">${this._dateLabel(row.date)}</span>
+        </div>
+      </div>
+    `;
+    }
+    // ── Popup ─────────────────────────────────────────────────────────────────
+    _renderPopup() {
+        if (!this._popup)
+            return A;
+        const row = this._popup;
+        const points = this._parseHours(row.rawHoursAttr);
+        const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
+        return b `
+      <div
+        class="popup-overlay ${this._popupVisible ? "visible" : ""}"
+        @click=${this._closePopup}
+      >
+        <div class="popup-panel" @click=${(e) => e.stopPropagation()}>
+
+          <div class="popup-header">
+            <div class="popup-title">
+              <span class="popup-day-name">
+                ${this._fullDateLabel(row.date, row.isToday)}
+              </span>
+              <span class="popup-subtitle">
+                ${row.forecastKwh !== null
+            ? b `<span class="popup-total-kwh">${row.forecastKwh.toFixed(2)}</span> kWh forecast`
+            : b `No forecast data`}
+              </span>
+            </div>
+            <button
+              class="popup-close"
+              aria-label="Close"
+              @click=${this._closePopup}
+            >
+              <ha-icon icon="mdi:close"></ha-icon>
+            </button>
+          </div>
+
+          <div class="chart-scroll">
+            ${this._renderHourlyChart(points, peakKwh)}
+          </div>
+
+        </div>
+      </div>
+    `;
+    }
+    _renderHourlyChart(points, peakKwh) {
+        if (points.length === 0) {
+            return b `
+        <div class="chart-no-data">
+          <p>No hourly data available for this day.</p>
+        </div>
+      `;
+        }
+        return points.map((pt, i) => {
+            const pct = peakKwh > 0 ? (pt.kwh / peakKwh) * 100 : 0;
+            const isPeak = pt.kwh === peakKwh && peakKwh > 0;
+            // Stagger: 20ms base + 18ms per row, capped at 300ms
+            const delay = Math.min(20 + i * 18, 300);
+            return b `
+        <div class="chart-row">
+          <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
+          <div class="chart-bar-track">
+            <div
+              class="chart-bar-fill ${isPeak ? "peak" : ""}"
+              style="width:${pct.toFixed(1)}%;--delay:${delay}ms"
+            ></div>
+          </div>
+          <span class="chart-val ${isPeak ? "peak" : ""}">
+            ${pt.kwh.toFixed(2)}
+          </span>
+        </div>
+      `;
+        });
+    }
+};
+__decorate([
+    n({ attribute: false })
+], SolarForecastCard.prototype, "hass", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_config", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_popup", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_popupVisible", void 0);
+SolarForecastCard = __decorate([
+    t("solar-forecast-card")
+], SolarForecastCard);
+window.customCards = window.customCards ?? [];
+window.customCards.push({
+    type: "solar-forecast-card",
+    name: "Solar Forecast Card",
+    description: "Daily solar energy forecast with hourly breakdown support.",
+    preview: false,
+});
+
+export { SolarForecastCard };
