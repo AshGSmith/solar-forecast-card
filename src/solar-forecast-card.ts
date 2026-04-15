@@ -50,7 +50,12 @@ export class SolarForecastCard extends LitElement {
   }
 
   public static getStubConfig(): Partial<SolarForecastCardConfig> {
-    return { forecast_entities: ["", "", "", "", "", "", ""], date_format: "DD/MM" };
+    return {
+      forecast_entities: ["", "", "", "", "", "", ""],
+      date_format: "DD/MM",
+      show_title: true,
+      full_width: true,
+    };
   }
 
   public setConfig(config: Partial<SolarForecastCardConfig>): void {
@@ -71,6 +76,15 @@ export class SolarForecastCard extends LitElement {
     super.disconnectedCallback();
     document.removeEventListener("keydown", this._onDocKey);
     clearTimeout(this._closeTimer);
+  }
+
+  // ── Sync host classes from config ────────────────────────────────────────
+
+  protected override updated(changedProps: PropertyValues): void {
+    super.updated(changedProps);
+    if (changedProps.has("_config")) {
+      this.classList.toggle("not-full-width", this._config?.full_width === false);
+    }
   }
 
   // ── Update optimisation ───────────────────────────────────────────────────
@@ -257,6 +271,17 @@ export class SolarForecastCard extends LitElement {
     }
   }
 
+  // ── Colour tier ──────────────────────────────────────────────────────────
+
+  private _tier(kwh: number | null): "low" | "average" | "high" {
+    if (kwh === null) return "average";
+    const lo = this._config?.low_threshold;
+    const hi = this._config?.high_threshold;
+    if (lo !== undefined && kwh < lo) return "low";
+    if (hi !== undefined && kwh > hi) return "high";
+    return "average";
+  }
+
   // ── Popup ─────────────────────────────────────────────────────────────────
 
   private _openPopup(row: ForecastRow): void {
@@ -317,6 +342,11 @@ export class SolarForecastCard extends LitElement {
     return css`
       :host {
         display: block;
+      }
+
+      :host(.not-full-width) {
+        max-width: 600px;
+        margin-inline: auto;
       }
 
       ha-card {
@@ -480,6 +510,8 @@ export class SolarForecastCard extends LitElement {
           bottom 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
       }
 
+      /* ── Forecast bar — average (default, yellow/amber) ──────── */
+
       .bar-forecast {
         border-radius: 6px 6px 3px 3px;
         background: linear-gradient(
@@ -505,8 +537,35 @@ export class SolarForecastCard extends LitElement {
           0 0 22px 4px rgba(251, 191, 36, 0.28);
       }
 
-      .bar-actual {
-        border-radius: 6px 6px 3px 3px;
+      /* ── Forecast bar — low (soft coral/rose) ────────────────── */
+
+      .bar-forecast.low {
+        background: linear-gradient(
+          to top,
+          rgba(220, 80, 80, 0.88),
+          rgba(252, 160, 155, 0.74)
+        );
+        box-shadow:
+          0 0 0 1px rgba(239, 68, 68, 0.14),
+          0 2px 10px 0 rgba(220, 80, 80, 0.24),
+          0 0 16px 2px rgba(239, 68, 68, 0.15);
+      }
+
+      .bar-forecast.complete.low {
+        background: linear-gradient(
+          to top,
+          rgba(220, 80, 80, 0.98),
+          rgba(252, 160, 155, 0.88)
+        );
+        box-shadow:
+          0 0 0 1px rgba(239, 68, 68, 0.25),
+          0 2px 12px 0 rgba(220, 80, 80, 0.40),
+          0 0 22px 4px rgba(239, 68, 68, 0.26);
+      }
+
+      /* ── Forecast bar — high (green) ─────────────────────────── */
+
+      .bar-forecast.high {
         background: linear-gradient(
           to top,
           rgba(22, 163, 74, 0.92),
@@ -518,9 +577,38 @@ export class SolarForecastCard extends LitElement {
           0 0 16px 2px rgba(34, 197, 94, 0.18);
       }
 
+      .bar-forecast.complete.high {
+        background: linear-gradient(
+          to top,
+          rgba(22, 163, 74, 0.98),
+          rgba(74, 222, 128, 0.90)
+        );
+        box-shadow:
+          0 0 0 1px rgba(34, 197, 94, 0.25),
+          0 2px 12px 0 rgba(22, 163, 74, 0.42),
+          0 0 22px 4px rgba(34, 197, 94, 0.28);
+      }
+
+      /* ── Actual generation bar — purple ──────────────────────── */
+
+      .bar-actual {
+        border-radius: 6px 6px 3px 3px;
+        background: linear-gradient(
+          to top,
+          rgba(124, 58, 237, 0.90),
+          rgba(196, 136, 255, 0.76)
+        );
+        box-shadow:
+          0 0 0 1px rgba(139, 92, 246, 0.15),
+          0 2px 10px 0 rgba(124, 58, 237, 0.28),
+          0 0 16px 2px rgba(139, 92, 246, 0.18);
+      }
+
       .bar-actual.below-dotted {
         border-radius: 0 0 3px 3px;
       }
+
+      /* ── Dotted forecast remainder — tier-aware ──────────────── */
 
       .bar-dotted {
         border: 2px dashed rgba(245, 158, 11, 0.65);
@@ -528,7 +616,17 @@ export class SolarForecastCard extends LitElement {
         box-sizing: border-box;
       }
 
-      .bar-dotted.full   { border-radius: 6px; }
+      .bar-dotted.low {
+        border-color: rgba(239, 68, 68, 0.58);
+        background: rgba(239, 68, 68, 0.06);
+      }
+
+      .bar-dotted.high {
+        border-color: rgba(34, 197, 94, 0.58);
+        background: rgba(34, 197, 94, 0.06);
+      }
+
+      .bar-dotted.full    { border-radius: 6px; }
       .bar-dotted.partial { border-bottom: none; border-radius: 6px 6px 0 0; }
 
       /* ── Day label ───────────────────────────────────────── */
@@ -792,15 +890,21 @@ export class SolarForecastCard extends LitElement {
     if (!this._config) return nothing;
 
     const title = this._config.title ?? "Solar Forecast";
+    const icon  = this._config.icon  ?? "mdi:solar-power";
+    const showTitle = this._config.show_title;
     const hasEntities = this._config.forecast_entities.some(Boolean);
+
+    const header = showTitle ? html`
+      <div class="card-header">
+        <ha-icon icon=${icon}></ha-icon>
+        ${title}
+      </div>
+    ` : nothing;
 
     if (!hasEntities) {
       return html`
         <ha-card>
-          <div class="card-header">
-            <ha-icon icon="mdi:solar-power"></ha-icon>
-            ${title}
-          </div>
+          ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
             <p>No forecast entities configured.<br />Open the card editor to get started.</p>
@@ -811,10 +915,7 @@ export class SolarForecastCard extends LitElement {
 
     return html`
       <ha-card>
-        <div class="card-header">
-          <ha-icon icon="mdi:solar-power"></ha-icon>
-          ${title}
-        </div>
+        ${header}
         <div class="forecast-grid">
           ${this._buildRows().map((row) => this._renderCol(row))}
         </div>
@@ -827,24 +928,25 @@ export class SolarForecastCard extends LitElement {
 
   private _renderCol(row: ForecastRow) {
     const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
+    const tier = this._tier(row.forecastKwh);
 
     let bars;
     if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
       if (isComplete) {
-        bars = html`<div class="bar-forecast complete" style="height:${forecastPct}%"></div>`;
+        bars = html`<div class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
       } else {
         const hasDotted = dottedPct > 1;
         bars = html`
           <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
                style="height:${actualPct}%"></div>
           ${hasDotted ? html`
-            <div class="bar-dotted ${actualPct > 0 ? "partial" : "full"}"
+            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
                  style="height:${dottedPct}%;bottom:${actualPct}%"></div>
           ` : nothing}
         `;
       }
     } else {
-      bars = html`<div class="bar-forecast" style="height:${forecastPct}%"></div>`;
+      bars = html`<div class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
     }
 
     const valueLabel = row.forecastKwh !== null

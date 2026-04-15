@@ -1,10 +1,15 @@
 export interface SolarForecastCardConfig {
   type: string;
   title?: string;
+  icon?: string;
+  show_title: boolean;
+  full_width: boolean;
   device_id?: string;
   forecast_entities: [string, string, string, string, string, string, string];
   today_actual_entity?: string;
   date_format: "DD/MM" | "MM/DD";
+  low_threshold?: number;
+  high_threshold?: number;
 }
 
 export interface EntityRegistryEntry {

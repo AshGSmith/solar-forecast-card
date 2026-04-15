@@ -75,6 +75,9 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
 // ── Field labels ──────────────────────────────────────────────────────────────
 const LABELS = {
     title: "Title (optional)",
+    icon: "Header icon (optional, e.g. mdi:solar-power)",
+    show_title: "Show title",
+    full_width: "Full width",
     device_id: "Device (optional — auto-detects entities)",
     forecast_entity_0: "Day 1 — Today",
     forecast_entity_1: "Day 2 — Tomorrow",
@@ -85,10 +88,15 @@ const LABELS = {
     forecast_entity_6: "Day 7",
     today_actual_entity: "Today's actual generation (optional)",
     date_format: "Date format",
+    low_threshold: "Low threshold (kWh)",
+    high_threshold: "High threshold (kWh)",
 };
 // ── Schema segments (rendered with section headers between them) ──────────────
 const SCHEMA_CARD = [
     { name: "title", selector: { text: {} } },
+    { name: "icon", selector: { icon: {} } },
+    { name: "show_title", selector: { boolean: {} } },
+    { name: "full_width", selector: { boolean: {} } },
 ];
 const SCHEMA_DEVICE = [
     { name: "device_id", selector: { device: {} } },
@@ -113,6 +121,10 @@ const SCHEMA_DISPLAY = [
         },
     },
 ];
+const SCHEMA_THRESHOLDS = [
+    { name: "low_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
+    { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
+];
 // ── Config normalisation (exported — also used by the main card) ──────────────
 function normalizeConfig(raw) {
     const incoming = Array.isArray(raw.forecast_entities)
@@ -123,10 +135,15 @@ function normalizeConfig(raw) {
     return {
         type: raw.type ?? "custom:solar-forecast-card",
         title: raw.title,
+        icon: raw.icon,
+        show_title: raw.show_title !== false,
+        full_width: raw.full_width !== false,
         device_id: raw.device_id,
         forecast_entities: incoming,
         today_actual_entity: raw.today_actual_entity,
         date_format: raw.date_format ?? "DD/MM",
+        low_threshold: raw.low_threshold,
+        high_threshold: raw.high_threshold,
     };
 }
 // ── Editor element ────────────────────────────────────────────────────────────
@@ -138,9 +155,14 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     _toFormData(cfg) {
         return {
             title: cfg.title ?? "",
+            icon: cfg.icon ?? "",
+            show_title: cfg.show_title,
+            full_width: cfg.full_width,
             device_id: cfg.device_id ?? "",
             today_actual_entity: cfg.today_actual_entity ?? "",
             date_format: cfg.date_format ?? "DD/MM",
+            low_threshold: cfg.low_threshold,
+            high_threshold: cfg.high_threshold,
             forecast_entity_0: cfg.forecast_entities[0] ?? "",
             forecast_entity_1: cfg.forecast_entities[1] ?? "",
             forecast_entity_2: cfg.forecast_entities[2] ?? "",
@@ -154,6 +176,9 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         return {
             type: this._config?.type ?? "custom:solar-forecast-card",
             title: data.title || undefined,
+            icon: data.icon || undefined,
+            show_title: data.show_title,
+            full_width: data.full_width,
             device_id: data.device_id || undefined,
             forecast_entities: [
                 data.forecast_entity_0,
@@ -166,6 +191,8 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             ],
             today_actual_entity: data.today_actual_entity || undefined,
             date_format: data.date_format || "DD/MM",
+            low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
+            high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
         };
     }
     // ── Entity auto-detection ───────────────────────────────────────────────────
@@ -406,6 +433,15 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
+
+      <p class="section-title">Colour Thresholds</p>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_THRESHOLDS}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
     `;
     }
 };
@@ -439,7 +475,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return document.createElement("solar-forecast-card-editor");
     }
     static getStubConfig() {
-        return { forecast_entities: ["", "", "", "", "", "", ""], date_format: "DD/MM" };
+        return {
+            forecast_entities: ["", "", "", "", "", "", ""],
+            date_format: "DD/MM",
+            show_title: true,
+            full_width: true,
+        };
     }
     setConfig(config) {
         if (!config)
@@ -457,6 +498,13 @@ let SolarForecastCard = class SolarForecastCard extends i {
         super.disconnectedCallback();
         document.removeEventListener("keydown", this._onDocKey);
         clearTimeout(this._closeTimer);
+    }
+    // ── Sync host classes from config ────────────────────────────────────────
+    updated(changedProps) {
+        super.updated(changedProps);
+        if (changedProps.has("_config")) {
+            this.classList.toggle("not-full-width", this._config?.full_width === false);
+        }
     }
     // ── Update optimisation ───────────────────────────────────────────────────
     shouldUpdate(changedProps) {
@@ -613,6 +661,18 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return [];
         }
     }
+    // ── Colour tier ──────────────────────────────────────────────────────────
+    _tier(kwh) {
+        if (kwh === null)
+            return "average";
+        const lo = this._config?.low_threshold;
+        const hi = this._config?.high_threshold;
+        if (lo !== undefined && kwh < lo)
+            return "low";
+        if (hi !== undefined && kwh > hi)
+            return "high";
+        return "average";
+    }
     // ── Popup ─────────────────────────────────────────────────────────────────
     _openPopup(row) {
         clearTimeout(this._closeTimer);
@@ -656,6 +716,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return i$3 `
       :host {
         display: block;
+      }
+
+      :host(.not-full-width) {
+        max-width: 600px;
+        margin-inline: auto;
       }
 
       ha-card {
@@ -819,6 +884,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
           bottom 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
       }
 
+      /* ── Forecast bar — average (default, yellow/amber) ──────── */
+
       .bar-forecast {
         border-radius: 6px 6px 3px 3px;
         background: linear-gradient(
@@ -844,8 +911,35 @@ let SolarForecastCard = class SolarForecastCard extends i {
           0 0 22px 4px rgba(251, 191, 36, 0.28);
       }
 
-      .bar-actual {
-        border-radius: 6px 6px 3px 3px;
+      /* ── Forecast bar — low (soft coral/rose) ────────────────── */
+
+      .bar-forecast.low {
+        background: linear-gradient(
+          to top,
+          rgba(220, 80, 80, 0.88),
+          rgba(252, 160, 155, 0.74)
+        );
+        box-shadow:
+          0 0 0 1px rgba(239, 68, 68, 0.14),
+          0 2px 10px 0 rgba(220, 80, 80, 0.24),
+          0 0 16px 2px rgba(239, 68, 68, 0.15);
+      }
+
+      .bar-forecast.complete.low {
+        background: linear-gradient(
+          to top,
+          rgba(220, 80, 80, 0.98),
+          rgba(252, 160, 155, 0.88)
+        );
+        box-shadow:
+          0 0 0 1px rgba(239, 68, 68, 0.25),
+          0 2px 12px 0 rgba(220, 80, 80, 0.40),
+          0 0 22px 4px rgba(239, 68, 68, 0.26);
+      }
+
+      /* ── Forecast bar — high (green) ─────────────────────────── */
+
+      .bar-forecast.high {
         background: linear-gradient(
           to top,
           rgba(22, 163, 74, 0.92),
@@ -857,9 +951,38 @@ let SolarForecastCard = class SolarForecastCard extends i {
           0 0 16px 2px rgba(34, 197, 94, 0.18);
       }
 
+      .bar-forecast.complete.high {
+        background: linear-gradient(
+          to top,
+          rgba(22, 163, 74, 0.98),
+          rgba(74, 222, 128, 0.90)
+        );
+        box-shadow:
+          0 0 0 1px rgba(34, 197, 94, 0.25),
+          0 2px 12px 0 rgba(22, 163, 74, 0.42),
+          0 0 22px 4px rgba(34, 197, 94, 0.28);
+      }
+
+      /* ── Actual generation bar — purple ──────────────────────── */
+
+      .bar-actual {
+        border-radius: 6px 6px 3px 3px;
+        background: linear-gradient(
+          to top,
+          rgba(124, 58, 237, 0.90),
+          rgba(196, 136, 255, 0.76)
+        );
+        box-shadow:
+          0 0 0 1px rgba(139, 92, 246, 0.15),
+          0 2px 10px 0 rgba(124, 58, 237, 0.28),
+          0 0 16px 2px rgba(139, 92, 246, 0.18);
+      }
+
       .bar-actual.below-dotted {
         border-radius: 0 0 3px 3px;
       }
+
+      /* ── Dotted forecast remainder — tier-aware ──────────────── */
 
       .bar-dotted {
         border: 2px dashed rgba(245, 158, 11, 0.65);
@@ -867,7 +990,17 @@ let SolarForecastCard = class SolarForecastCard extends i {
         box-sizing: border-box;
       }
 
-      .bar-dotted.full   { border-radius: 6px; }
+      .bar-dotted.low {
+        border-color: rgba(239, 68, 68, 0.58);
+        background: rgba(239, 68, 68, 0.06);
+      }
+
+      .bar-dotted.high {
+        border-color: rgba(34, 197, 94, 0.58);
+        background: rgba(34, 197, 94, 0.06);
+      }
+
+      .bar-dotted.full    { border-radius: 6px; }
       .bar-dotted.partial { border-bottom: none; border-radius: 6px 6px 0 0; }
 
       /* ── Day label ───────────────────────────────────────── */
@@ -1129,14 +1262,19 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (!this._config)
             return A;
         const title = this._config.title ?? "Solar Forecast";
+        const icon = this._config.icon ?? "mdi:solar-power";
+        const showTitle = this._config.show_title;
         const hasEntities = this._config.forecast_entities.some(Boolean);
+        const header = showTitle ? b `
+      <div class="card-header">
+        <ha-icon icon=${icon}></ha-icon>
+        ${title}
+      </div>
+    ` : A;
         if (!hasEntities) {
             return b `
         <ha-card>
-          <div class="card-header">
-            <ha-icon icon="mdi:solar-power"></ha-icon>
-            ${title}
-          </div>
+          ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
             <p>No forecast entities configured.<br />Open the card editor to get started.</p>
@@ -1146,10 +1284,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         }
         return b `
       <ha-card>
-        <div class="card-header">
-          <ha-icon icon="mdi:solar-power"></ha-icon>
-          ${title}
-        </div>
+        ${header}
         <div class="forecast-grid">
           ${this._buildRows().map((row) => this._renderCol(row))}
         </div>
@@ -1160,10 +1295,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
     // ── Column ────────────────────────────────────────────────────────────────
     _renderCol(row) {
         const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
+        const tier = this._tier(row.forecastKwh);
         let bars;
         if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
             if (isComplete) {
-                bars = b `<div class="bar-forecast complete" style="height:${forecastPct}%"></div>`;
+                bars = b `<div class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
             }
             else {
                 const hasDotted = dottedPct > 1;
@@ -1171,14 +1307,14 @@ let SolarForecastCard = class SolarForecastCard extends i {
           <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
                style="height:${actualPct}%"></div>
           ${hasDotted ? b `
-            <div class="bar-dotted ${actualPct > 0 ? "partial" : "full"}"
+            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
                  style="height:${dottedPct}%;bottom:${actualPct}%"></div>
           ` : A}
         `;
             }
         }
         else {
-            bars = b `<div class="bar-forecast" style="height:${forecastPct}%"></div>`;
+            bars = b `<div class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
         }
         const valueLabel = row.forecastKwh !== null
             ? b `<span class="value-num">${row.forecastKwh.toFixed(1)}</span><span class="value-unit">kWh</span>`

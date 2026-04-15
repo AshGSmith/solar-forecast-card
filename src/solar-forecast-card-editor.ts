@@ -13,6 +13,9 @@ interface Selector {
   device?: Record<string, unknown>;
   entity?: { domain?: string | string[] };
   select?: { options: Array<{ value: string; label: string }> };
+  icon?: Record<string, unknown>;
+  boolean?: Record<string, unknown>;
+  number?: { min?: number; max?: number; step?: number; mode?: string; unit_of_measurement?: string };
 }
 
 interface HaFormSchema {
@@ -25,6 +28,9 @@ interface HaFormSchema {
 
 const LABELS: Record<string, string> = {
   title:               "Title (optional)",
+  icon:                "Header icon (optional, e.g. mdi:solar-power)",
+  show_title:          "Show title",
+  full_width:          "Full width",
   device_id:           "Device (optional — auto-detects entities)",
   forecast_entity_0:   "Day 1 — Today",
   forecast_entity_1:   "Day 2 — Tomorrow",
@@ -35,12 +41,17 @@ const LABELS: Record<string, string> = {
   forecast_entity_6:   "Day 7",
   today_actual_entity: "Today's actual generation (optional)",
   date_format:         "Date format",
+  low_threshold:       "Low threshold (kWh)",
+  high_threshold:      "High threshold (kWh)",
 };
 
 // ── Schema segments (rendered with section headers between them) ──────────────
 
 const SCHEMA_CARD: HaFormSchema[] = [
-  { name: "title", selector: { text: {} } },
+  { name: "title",      selector: { text: {} } },
+  { name: "icon",       selector: { icon: {} } },
+  { name: "show_title", selector: { boolean: {} } },
+  { name: "full_width", selector: { boolean: {} } },
 ];
 
 const SCHEMA_DEVICE: HaFormSchema[] = [
@@ -70,10 +81,18 @@ const SCHEMA_DISPLAY: HaFormSchema[] = [
   },
 ];
 
+const SCHEMA_THRESHOLDS: HaFormSchema[] = [
+  { name: "low_threshold",  selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
+  { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
+];
+
 // ── Flat form data (ha-form requires a plain object) ─────────────────────────
 
 interface FormData {
   title: string;
+  icon: string;
+  show_title: boolean;
+  full_width: boolean;
   device_id: string;
   forecast_entity_0: string;
   forecast_entity_1: string;
@@ -84,6 +103,8 @@ interface FormData {
   forecast_entity_6: string;
   today_actual_entity: string;
   date_format: string;
+  low_threshold: number | undefined;
+  high_threshold: number | undefined;
 }
 
 // ── Config normalisation (exported — also used by the main card) ──────────────
@@ -99,10 +120,15 @@ export function normalizeConfig(
   return {
     type:               raw.type ?? "custom:solar-forecast-card",
     title:              raw.title,
+    icon:               raw.icon,
+    show_title:         raw.show_title !== false,
+    full_width:         raw.full_width !== false,
     device_id:          raw.device_id,
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
     today_actual_entity: raw.today_actual_entity,
     date_format:        raw.date_format ?? "DD/MM",
+    low_threshold:      raw.low_threshold,
+    high_threshold:     raw.high_threshold,
   };
 }
 
@@ -122,9 +148,14 @@ export class SolarForecastCardEditor extends LitElement {
   private _toFormData(cfg: SolarForecastCardConfig): FormData {
     return {
       title:               cfg.title              ?? "",
+      icon:                cfg.icon               ?? "",
+      show_title:          cfg.show_title,
+      full_width:          cfg.full_width,
       device_id:           cfg.device_id          ?? "",
       today_actual_entity: cfg.today_actual_entity ?? "",
       date_format:         cfg.date_format         ?? "DD/MM",
+      low_threshold:       cfg.low_threshold,
+      high_threshold:      cfg.high_threshold,
       forecast_entity_0:   cfg.forecast_entities[0] ?? "",
       forecast_entity_1:   cfg.forecast_entities[1] ?? "",
       forecast_entity_2:   cfg.forecast_entities[2] ?? "",
@@ -137,9 +168,12 @@ export class SolarForecastCardEditor extends LitElement {
 
   private _fromFormData(data: FormData): SolarForecastCardConfig {
     return {
-      type:    this._config?.type ?? "custom:solar-forecast-card",
-      title:   data.title || undefined,
-      device_id: data.device_id || undefined,
+      type:       this._config?.type ?? "custom:solar-forecast-card",
+      title:      data.title || undefined,
+      icon:       data.icon  || undefined,
+      show_title: data.show_title,
+      full_width: data.full_width,
+      device_id:  data.device_id || undefined,
       forecast_entities: [
         data.forecast_entity_0,
         data.forecast_entity_1,
@@ -151,6 +185,8 @@ export class SolarForecastCardEditor extends LitElement {
       ] as SolarForecastCardConfig["forecast_entities"],
       today_actual_entity: data.today_actual_entity || undefined,
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
+      low_threshold:  typeof data.low_threshold  === "number" ? data.low_threshold  : undefined,
+      high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
     };
   }
 
@@ -432,6 +468,15 @@ export class SolarForecastCardEditor extends LitElement {
         .hass=${this.hass}
         .data=${data}
         .schema=${SCHEMA_DISPLAY}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
+
+      <p class="section-title">Colour Thresholds</p>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_THRESHOLDS}
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
