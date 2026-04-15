@@ -77,7 +77,7 @@ const LABELS = {
     title: "Title (optional)",
     icon: "Header icon (optional, e.g. mdi:solar-power)",
     show_header: "Show header",
-    device_id: "Forecast Device (optional — auto-detects entities)",
+    device_id: "Forecast Device",
     forecast_entity_0: "Day 1 — Today",
     forecast_entity_1: "Day 2 — Tomorrow",
     forecast_entity_2: "Day 3",
@@ -95,12 +95,15 @@ const LABELS = {
     high_threshold: "High threshold (kWh)",
 };
 // ── Schema segments (rendered with section headers between them) ──────────────
-// Top-level fields — always visible, no section header
+// Device field — rendered first as the primary entry point
+const SCHEMA_DEVICE = [
+    { name: "device_id", selector: { device: {} } },
+];
+// Remaining top-level fields — always visible
 const SCHEMA_TOP = [
     { name: "title", selector: { text: {} } },
     { name: "icon", selector: { icon: {} } },
     { name: "show_header", selector: { boolean: {} } },
-    { name: "device_id", selector: { device: {} } },
 ];
 const SCHEMA_FORECAST = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
     name: `forecast_entity_${i}`,
@@ -521,6 +524,22 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         display: block;
       }
 
+      .device-helper {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: -6px 0 4px;
+        padding: 0 4px;
+        font-size: 0.75rem;
+        color: var(--secondary-text-color);
+        opacity: 0.75;
+      }
+
+      .device-helper ha-icon {
+        --mdc-icon-size: 14px;
+        flex-shrink: 0;
+      }
+
       ha-expansion-panel {
         display: block;
         margin-top: 8px;
@@ -540,16 +559,28 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
       <ha-form
         .hass=${this.hass}
         .data=${data}
-        .schema=${SCHEMA_TOP}
+        .schema=${SCHEMA_DEVICE}
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
+      <p class="device-helper">
+        <ha-icon icon="mdi:information-outline"></ha-icon>
+        Recommended: selecting a device will auto-configure the card
+      </p>
 
       ${this._showManualWarning ? b `
         <ha-alert alert-type="warning">
           Changing device will not overwrite manually configured entities.
         </ha-alert>
       ` : A}
+
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_TOP}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
 
       <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
         <ha-form
