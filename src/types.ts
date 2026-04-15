@@ -2,12 +2,13 @@ export interface SolarForecastCardConfig {
   type: string;
   title?: string;
   icon?: string;
-  show_title: boolean;
-  full_width: boolean;
+  show_header: boolean;
   device_id?: string;
   forecast_entities: [string, string, string, string, string, string, string];
+  live_power_entity?: string;
   today_actual_entity?: string;
   date_format: "DD/MM" | "MM/DD";
+  time_format: "24h" | "12h";
   low_threshold?: number;
   high_threshold?: number;
 }

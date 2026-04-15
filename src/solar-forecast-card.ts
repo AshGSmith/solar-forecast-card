@@ -53,8 +53,7 @@ export class SolarForecastCard extends LitElement {
     return {
       forecast_entities: ["", "", "", "", "", "", ""],
       date_format: "DD/MM",
-      show_title: true,
-      full_width: true,
+      show_header: true,
     };
   }
 
@@ -78,15 +77,6 @@ export class SolarForecastCard extends LitElement {
     clearTimeout(this._closeTimer);
   }
 
-  // ── Sync host classes from config ────────────────────────────────────────
-
-  protected override updated(changedProps: PropertyValues): void {
-    super.updated(changedProps);
-    if (changedProps.has("_config")) {
-      this.classList.toggle("not-full-width", this._config?.full_width === false);
-    }
-  }
-
   // ── Update optimisation ───────────────────────────────────────────────────
 
   protected override shouldUpdate(changedProps: PropertyValues): boolean {
@@ -98,6 +88,7 @@ export class SolarForecastCard extends LitElement {
 
     const watchIds = [
       ...this._config.forecast_entities,
+      this._config.live_power_entity,
       this._config.today_actual_entity,
     ].filter(Boolean) as string[];
 
@@ -333,7 +324,12 @@ export class SolarForecastCard extends LitElement {
   }
 
   private _hourLabel(hour: number): string {
-    return String(hour).padStart(2, "0");
+    if (this._config?.time_format === "12h") {
+      const period = hour < 12 ? "am" : "pm";
+      const h = hour % 12 || 12;   // 0 → 12, 13 → 1, etc.
+      return `${h}${period}`;
+    }
+    return String(hour).padStart(2, "0") + ":00";
   }
 
   // ── Styles ────────────────────────────────────────────────────────────────
@@ -342,11 +338,6 @@ export class SolarForecastCard extends LitElement {
     return css`
       :host {
         display: block;
-      }
-
-      :host(.not-full-width) {
-        max-width: 600px;
-        margin-inline: auto;
       }
 
       ha-card {
@@ -359,18 +350,45 @@ export class SolarForecastCard extends LitElement {
 
       .card-header {
         display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding: 0 4px;
+      }
+
+      .header-title {
+        display: flex;
         align-items: center;
         gap: 8px;
         font-size: 1.05rem;
         font-weight: 500;
-        margin-bottom: 18px;
-        padding: 0 4px;
         color: var(--primary-text-color);
+        flex: 1;
+        min-width: 0;
+        flex-wrap: wrap;
       }
 
-      .card-header ha-icon {
+      .header-title ha-icon {
         color: var(--state-active-color, #fbbf24);
         flex-shrink: 0;
+      }
+
+      .header-live {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        padding-top: 3px;
+        white-space: nowrap;
+      }
+
+      .live-label {
+        font-weight: 700;
+        color: var(--state-active-color, #fbbf24);
       }
 
       /* ── Placeholder ─────────────────────────────────────── */
@@ -816,11 +834,35 @@ export class SolarForecastCard extends LitElement {
       }
 
       /* Grid: [hour label] [bar track] [value] */
+      .chart-header,
       .chart-row {
         display: grid;
-        grid-template-columns: 1.9rem 1fr 2.6rem;
-        align-items: center;
+        grid-template-columns: 2.8rem 1fr 2.6rem;
         gap: 8px;
+      }
+
+      .chart-header {
+        align-items: center;
+        padding-bottom: 6px;
+        margin-bottom: 2px;
+        border-bottom: 1px solid var(--divider-color, rgba(128, 128, 128, 0.15));
+      }
+
+      .chart-header span {
+        font-size: 0.65rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--secondary-text-color);
+        opacity: 0.7;
+      }
+
+      .chart-header .col-time  { text-align: right; }
+      .chart-header .col-power { text-align: left; padding-left: 0; }
+      .chart-header .col-kwh   { text-align: left; }
+
+      .chart-row {
+        align-items: center;
         height: 24px;
       }
 
@@ -891,13 +933,15 @@ export class SolarForecastCard extends LitElement {
 
     const title = this._config.title ?? "Solar Forecast";
     const icon  = this._config.icon  ?? "mdi:solar-power";
-    const showTitle = this._config.show_title;
     const hasEntities = this._config.forecast_entities.some(Boolean);
 
-    const header = showTitle ? html`
+    const header = this._config.show_header ? html`
       <div class="card-header">
-        <ha-icon icon=${icon}></ha-icon>
-        ${title}
+        <div class="header-title">
+          <ha-icon icon=${icon}></ha-icon>
+          ${title}
+        </div>
+        ${this._renderLive()}
       </div>
     ` : nothing;
 
@@ -921,6 +965,30 @@ export class SolarForecastCard extends LitElement {
         </div>
       </ha-card>
       ${this._renderPopup()}
+    `;
+  }
+
+  // ── Live badge ────────────────────────────────────────────────────────────
+
+  private _renderLive() {
+    const cfg = this._config!;
+    if (!cfg.live_power_entity) return nothing;
+
+    const powerRaw = parseFloat(this.hass?.states[cfg.live_power_entity]?.state ?? "");
+    const actualRaw = cfg.today_actual_entity
+      ? parseFloat(this.hass?.states[cfg.today_actual_entity]?.state ?? "")
+      : NaN;
+
+    if (!isFinite(powerRaw)) return nothing;
+
+    const powerStr  = powerRaw.toFixed(2) + " kW";
+    const actualStr = isFinite(actualRaw) ? " | " + actualRaw.toFixed(1) + " kWh" : "";
+
+    return html`
+      <div class="header-live">
+        <span class="live-label">LIVE:</span>
+        <span>${powerStr}${actualStr}</span>
+      </div>
     `;
   }
 
@@ -1029,7 +1097,15 @@ export class SolarForecastCard extends LitElement {
       `;
     }
 
-    return points.map((pt, i) => {
+    return [
+      html`
+        <div class="chart-header">
+          <span class="col-time">Time</span>
+          <span class="col-power">Power</span>
+          <span class="col-kwh">kWh</span>
+        </div>
+      `,
+      ...points.map((pt, i) => {
       const pct = peakKwh > 0 ? (pt.kwh / peakKwh) * 100 : 0;
       const isPeak = pt.kwh === peakKwh && peakKwh > 0;
       // Stagger: 20ms base + 18ms per row, capped at 300ms
@@ -1049,7 +1125,8 @@ export class SolarForecastCard extends LitElement {
           </span>
         </div>
       `;
-    });
+    }),
+    ];
   }
 }
 

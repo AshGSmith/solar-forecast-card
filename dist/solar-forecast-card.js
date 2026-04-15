@@ -76,8 +76,7 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
 const LABELS = {
     title: "Title (optional)",
     icon: "Header icon (optional, e.g. mdi:solar-power)",
-    show_title: "Show title",
-    full_width: "Full width",
+    show_header: "Show header",
     device_id: "Device (optional — auto-detects entities)",
     forecast_entity_0: "Day 1 — Today",
     forecast_entity_1: "Day 2 — Tomorrow",
@@ -86,8 +85,10 @@ const LABELS = {
     forecast_entity_4: "Day 5",
     forecast_entity_5: "Day 6",
     forecast_entity_6: "Day 7",
+    live_power_entity: "Live power (optional, kW sensor)",
     today_actual_entity: "Today's actual generation (optional)",
     date_format: "Date format",
+    time_format: "Time format (hourly popup)",
     low_threshold: "Low threshold (kWh)",
     high_threshold: "High threshold (kWh)",
 };
@@ -95,8 +96,7 @@ const LABELS = {
 const SCHEMA_CARD = [
     { name: "title", selector: { text: {} } },
     { name: "icon", selector: { icon: {} } },
-    { name: "show_title", selector: { boolean: {} } },
-    { name: "full_width", selector: { boolean: {} } },
+    { name: "show_header", selector: { boolean: {} } },
 ];
 const SCHEMA_DEVICE = [
     { name: "device_id", selector: { device: {} } },
@@ -105,7 +105,8 @@ const SCHEMA_FORECAST = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
     name: `forecast_entity_${i}`,
     selector: { entity: { domain: "sensor" } },
 }));
-const SCHEMA_ACTUAL = [
+const SCHEMA_LIVE = [
+    { name: "live_power_entity", selector: { entity: { domain: "sensor" } } },
     { name: "today_actual_entity", selector: { entity: { domain: "sensor" } } },
 ];
 const SCHEMA_DISPLAY = [
@@ -116,6 +117,17 @@ const SCHEMA_DISPLAY = [
                 options: [
                     { value: "DD/MM", label: "DD/MM  (e.g. 15/04)" },
                     { value: "MM/DD", label: "MM/DD  (e.g. 04/15)" },
+                ],
+            },
+        },
+    },
+    {
+        name: "time_format",
+        selector: {
+            select: {
+                options: [
+                    { value: "24h", label: "24h  (e.g. 17:00)" },
+                    { value: "12h", label: "12h  (e.g. 5pm)" },
                 ],
             },
         },
@@ -136,12 +148,13 @@ function normalizeConfig(raw) {
         type: raw.type ?? "custom:solar-forecast-card",
         title: raw.title,
         icon: raw.icon,
-        show_title: raw.show_title !== false,
-        full_width: raw.full_width !== false,
+        show_header: raw.show_header !== false,
         device_id: raw.device_id,
         forecast_entities: incoming,
+        live_power_entity: raw.live_power_entity,
         today_actual_entity: raw.today_actual_entity,
         date_format: raw.date_format ?? "DD/MM",
+        time_format: raw.time_format ?? "24h",
         low_threshold: raw.low_threshold,
         high_threshold: raw.high_threshold,
     };
@@ -156,11 +169,12 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         return {
             title: cfg.title ?? "",
             icon: cfg.icon ?? "",
-            show_title: cfg.show_title,
-            full_width: cfg.full_width,
+            show_header: cfg.show_header,
             device_id: cfg.device_id ?? "",
+            live_power_entity: cfg.live_power_entity ?? "",
             today_actual_entity: cfg.today_actual_entity ?? "",
             date_format: cfg.date_format ?? "DD/MM",
+            time_format: cfg.time_format ?? "24h",
             low_threshold: cfg.low_threshold,
             high_threshold: cfg.high_threshold,
             forecast_entity_0: cfg.forecast_entities[0] ?? "",
@@ -177,8 +191,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             type: this._config?.type ?? "custom:solar-forecast-card",
             title: data.title || undefined,
             icon: data.icon || undefined,
-            show_title: data.show_title,
-            full_width: data.full_width,
+            show_header: data.show_header,
             device_id: data.device_id || undefined,
             forecast_entities: [
                 data.forecast_entity_0,
@@ -189,8 +202,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
                 data.forecast_entity_5,
                 data.forecast_entity_6,
             ],
+            live_power_entity: data.live_power_entity || undefined,
             today_actual_entity: data.today_actual_entity || undefined,
             date_format: data.date_format || "DD/MM",
+            time_format: data.time_format || "24h",
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
             high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
         };
@@ -416,11 +431,11 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         @value-changed=${onChange}
       ></ha-form>
 
-      <p class="section-title">Today's Actual Generation</p>
+      <p class="section-title">Live Data</p>
       <ha-form
         .hass=${this.hass}
         .data=${data}
-        .schema=${SCHEMA_ACTUAL}
+        .schema=${SCHEMA_LIVE}
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
@@ -478,8 +493,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return {
             forecast_entities: ["", "", "", "", "", "", ""],
             date_format: "DD/MM",
-            show_title: true,
-            full_width: true,
+            show_header: true,
         };
     }
     setConfig(config) {
@@ -499,13 +513,6 @@ let SolarForecastCard = class SolarForecastCard extends i {
         document.removeEventListener("keydown", this._onDocKey);
         clearTimeout(this._closeTimer);
     }
-    // ── Sync host classes from config ────────────────────────────────────────
-    updated(changedProps) {
-        super.updated(changedProps);
-        if (changedProps.has("_config")) {
-            this.classList.toggle("not-full-width", this._config?.full_width === false);
-        }
-    }
     // ── Update optimisation ───────────────────────────────────────────────────
     shouldUpdate(changedProps) {
         if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible"))
@@ -517,6 +524,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return true;
         const watchIds = [
             ...this._config.forecast_entities,
+            this._config.live_power_entity,
             this._config.today_actual_entity,
         ].filter(Boolean);
         return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
@@ -709,18 +717,18 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return `${weekday} · ${dt}`;
     }
     _hourLabel(hour) {
-        return String(hour).padStart(2, "0");
+        if (this._config?.time_format === "12h") {
+            const period = hour < 12 ? "am" : "pm";
+            const h = hour % 12 || 12; // 0 → 12, 13 → 1, etc.
+            return `${h}${period}`;
+        }
+        return String(hour).padStart(2, "0") + ":00";
     }
     // ── Styles ────────────────────────────────────────────────────────────────
     static get styles() {
         return i$3 `
       :host {
         display: block;
-      }
-
-      :host(.not-full-width) {
-        max-width: 600px;
-        margin-inline: auto;
       }
 
       ha-card {
@@ -733,18 +741,45 @@ let SolarForecastCard = class SolarForecastCard extends i {
 
       .card-header {
         display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding: 0 4px;
+      }
+
+      .header-title {
+        display: flex;
         align-items: center;
         gap: 8px;
         font-size: 1.05rem;
         font-weight: 500;
-        margin-bottom: 18px;
-        padding: 0 4px;
         color: var(--primary-text-color);
+        flex: 1;
+        min-width: 0;
+        flex-wrap: wrap;
       }
 
-      .card-header ha-icon {
+      .header-title ha-icon {
         color: var(--state-active-color, #fbbf24);
         flex-shrink: 0;
+      }
+
+      .header-live {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        padding-top: 3px;
+        white-space: nowrap;
+      }
+
+      .live-label {
+        font-weight: 700;
+        color: var(--state-active-color, #fbbf24);
       }
 
       /* ── Placeholder ─────────────────────────────────────── */
@@ -1190,11 +1225,35 @@ let SolarForecastCard = class SolarForecastCard extends i {
       }
 
       /* Grid: [hour label] [bar track] [value] */
+      .chart-header,
       .chart-row {
         display: grid;
-        grid-template-columns: 1.9rem 1fr 2.6rem;
-        align-items: center;
+        grid-template-columns: 2.8rem 1fr 2.6rem;
         gap: 8px;
+      }
+
+      .chart-header {
+        align-items: center;
+        padding-bottom: 6px;
+        margin-bottom: 2px;
+        border-bottom: 1px solid var(--divider-color, rgba(128, 128, 128, 0.15));
+      }
+
+      .chart-header span {
+        font-size: 0.65rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--secondary-text-color);
+        opacity: 0.7;
+      }
+
+      .chart-header .col-time  { text-align: right; }
+      .chart-header .col-power { text-align: left; padding-left: 0; }
+      .chart-header .col-kwh   { text-align: left; }
+
+      .chart-row {
+        align-items: center;
         height: 24px;
       }
 
@@ -1263,12 +1322,14 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return A;
         const title = this._config.title ?? "Solar Forecast";
         const icon = this._config.icon ?? "mdi:solar-power";
-        const showTitle = this._config.show_title;
         const hasEntities = this._config.forecast_entities.some(Boolean);
-        const header = showTitle ? b `
+        const header = this._config.show_header ? b `
       <div class="card-header">
-        <ha-icon icon=${icon}></ha-icon>
-        ${title}
+        <div class="header-title">
+          <ha-icon icon=${icon}></ha-icon>
+          ${title}
+        </div>
+        ${this._renderLive()}
       </div>
     ` : A;
         if (!hasEntities) {
@@ -1290,6 +1351,26 @@ let SolarForecastCard = class SolarForecastCard extends i {
         </div>
       </ha-card>
       ${this._renderPopup()}
+    `;
+    }
+    // ── Live badge ────────────────────────────────────────────────────────────
+    _renderLive() {
+        const cfg = this._config;
+        if (!cfg.live_power_entity)
+            return A;
+        const powerRaw = parseFloat(this.hass?.states[cfg.live_power_entity]?.state ?? "");
+        const actualRaw = cfg.today_actual_entity
+            ? parseFloat(this.hass?.states[cfg.today_actual_entity]?.state ?? "")
+            : NaN;
+        if (!isFinite(powerRaw))
+            return A;
+        const powerStr = powerRaw.toFixed(2) + " kW";
+        const actualStr = isFinite(actualRaw) ? " | " + actualRaw.toFixed(1) + " kWh" : "";
+        return b `
+      <div class="header-live">
+        <span class="live-label">LIVE:</span>
+        <span>${powerStr}${actualStr}</span>
+      </div>
     `;
     }
     // ── Column ────────────────────────────────────────────────────────────────
@@ -1390,12 +1471,20 @@ let SolarForecastCard = class SolarForecastCard extends i {
         </div>
       `;
         }
-        return points.map((pt, i) => {
-            const pct = peakKwh > 0 ? (pt.kwh / peakKwh) * 100 : 0;
-            const isPeak = pt.kwh === peakKwh && peakKwh > 0;
-            // Stagger: 20ms base + 18ms per row, capped at 300ms
-            const delay = Math.min(20 + i * 18, 300);
-            return b `
+        return [
+            b `
+        <div class="chart-header">
+          <span class="col-time">Time</span>
+          <span class="col-power">Power</span>
+          <span class="col-kwh">kWh</span>
+        </div>
+      `,
+            ...points.map((pt, i) => {
+                const pct = peakKwh > 0 ? (pt.kwh / peakKwh) * 100 : 0;
+                const isPeak = pt.kwh === peakKwh && peakKwh > 0;
+                // Stagger: 20ms base + 18ms per row, capped at 300ms
+                const delay = Math.min(20 + i * 18, 300);
+                return b `
         <div class="chart-row">
           <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
           <div class="chart-bar-track">
@@ -1409,7 +1498,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
           </span>
         </div>
       `;
-        });
+            }),
+        ];
     }
 };
 __decorate([
