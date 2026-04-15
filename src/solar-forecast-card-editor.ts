@@ -260,7 +260,7 @@ export class SolarForecastCardEditor extends LitElement {
 
   private _autoDetect(deviceId: string): Pick<
     SolarForecastCardConfig,
-    "forecast_entities" | "today_actual_entity" | "integration_type"
+    "forecast_entities" | "integration_type"
   > {
     const sensors = this._deviceSensors(deviceId);
 
@@ -275,13 +275,6 @@ export class SolarForecastCardEditor extends LitElement {
     const forecastSensors = sensors.filter(
       (e) => Array.isArray(this.hass!.states[e.entity_id]?.attributes?.hours)
     );
-
-    const actualEntry = sensors.find((e) => {
-      const s = this.hass!.states[e.entity_id];
-      if (!s) return false;
-      const unit = s.attributes.unit_of_measurement as string | undefined;
-      return !Array.isArray(s.attributes.hours) && (unit === "kWh" || unit === "Wh");
-    });
 
     // ── Map each forecast sensor to a day-offset from today ───────────────────
 
@@ -350,9 +343,8 @@ export class SolarForecastCardEditor extends LitElement {
     );
 
     return {
-      forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
-      today_actual_entity: actualEntry?.entity_id,
-      integration_type:    "volcast",
+      forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
+      integration_type:  "volcast",
     };
   }
 
@@ -373,7 +365,7 @@ export class SolarForecastCardEditor extends LitElement {
    */
   private _autoDetectSolcast(
     sensors: EntityRegistryEntry[]
-  ): Pick<SolarForecastCardConfig, "forecast_entities" | "today_actual_entity" | "integration_type"> {
+  ): Pick<SolarForecastCardConfig, "forecast_entities" | "integration_type"> {
     const slots: string[] = ["", "", "", "", "", "", ""];
 
     const DAY_KEYWORDS: Array<[string, number]> = [
@@ -408,9 +400,8 @@ export class SolarForecastCardEditor extends LitElement {
     );
 
     return {
-      forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
-      today_actual_entity: undefined,
-      integration_type:    "solcast",
+      forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
+      integration_type:  "solcast",
     };
   }
 
@@ -431,7 +422,7 @@ export class SolarForecastCardEditor extends LitElement {
    */
   private _autoDetectForecastSolar(
     sensors: EntityRegistryEntry[]
-  ): Pick<SolarForecastCardConfig, "forecast_entities" | "today_actual_entity" | "integration_type"> {
+  ): Pick<SolarForecastCardConfig, "forecast_entities" | "integration_type"> {
     const slots: string[] = ["", "", "", "", "", "", ""];
 
     for (const sensor of sensors) {
@@ -456,9 +447,8 @@ export class SolarForecastCardEditor extends LitElement {
     );
 
     return {
-      forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
-      today_actual_entity: undefined,
-      integration_type:    "forecast_solar",
+      forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
+      integration_type:  "forecast_solar",
     };
   }
 
@@ -540,12 +530,13 @@ export class SolarForecastCardEditor extends LitElement {
 
       if (isFirstDevice || this._autoPopulated) {
         // First-ever device selection, or entities were previously auto-filled:
-        // replace all auto-mapped fields so no stale references remain.
+        // replace forecast_entities and integration_type. today_actual_entity
+        // is always preserved — it typically comes from the inverter, not the
+        // forecast device, so device changes must never clear it.
         newConfig = {
           ...newConfig,
-          forecast_entities:   detected.forecast_entities,
-          today_actual_entity: detected.today_actual_entity,
-          integration_type:    detected.integration_type,
+          forecast_entities: detected.forecast_entities,
+          integration_type:  detected.integration_type,
         };
         this._autoPopulated = true;
         this._showManualWarning = false;

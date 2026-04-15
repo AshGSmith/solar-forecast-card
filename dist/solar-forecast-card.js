@@ -266,13 +266,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             return this._autoDetectForecastSolar(sensors);
         // ── Split into forecast sensors (have "hours") and actual candidates ──────
         const forecastSensors = sensors.filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours));
-        const actualEntry = sensors.find((e) => {
-            const s = this.hass.states[e.entity_id];
-            if (!s)
-                return false;
-            const unit = s.attributes.unit_of_measurement;
-            return !Array.isArray(s.attributes.hours) && (unit === "kWh" || unit === "Wh");
-        });
         // ── Map each forecast sensor to a day-offset from today ───────────────────
         const todayMidnight = this._localMidnight(new Date());
         const candidates = forecastSensors.map((e) => {
@@ -328,7 +321,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         })));
         return {
             forecast_entities: slots,
-            today_actual_entity: actualEntry?.entity_id,
             integration_type: "volcast",
         };
     }
@@ -376,7 +368,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         })));
         return {
             forecast_entities: slots,
-            today_actual_entity: undefined,
             integration_type: "solcast",
         };
     }
@@ -416,7 +407,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         })));
         return {
             forecast_entities: slots,
-            today_actual_entity: undefined,
             integration_type: "forecast_solar",
         };
     }
@@ -488,11 +478,12 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             const detected = this._autoDetect(newConfig.device_id);
             if (isFirstDevice || this._autoPopulated) {
                 // First-ever device selection, or entities were previously auto-filled:
-                // replace all auto-mapped fields so no stale references remain.
+                // replace forecast_entities and integration_type. today_actual_entity
+                // is always preserved — it typically comes from the inverter, not the
+                // forecast device, so device changes must never clear it.
                 newConfig = {
                     ...newConfig,
                     forecast_entities: detected.forecast_entities,
-                    today_actual_entity: detected.today_actual_entity,
                     integration_type: detected.integration_type,
                 };
                 this._autoPopulated = true;
