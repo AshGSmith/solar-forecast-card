@@ -5,7 +5,13 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 ## Installation
 
 ### HACS (Recommended)
+#### Install via HACS
 
+Click below to add this repository to HACS:
+
+[![Add to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=AshGSmith&repository=solar-forecast-card)
+
+#### HACS Custom Repository Manual Steps
 1. Open HACS in your Home Assistant instance.
 2. Click on the **⋮** button on the top right and select **Custom repositories***
 3. Enter the below in the **Repository** field
