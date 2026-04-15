@@ -72,19 +72,48 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
  * SPDX-License-Identifier: BSD-3-Clause
  */function r(r){return n({...r,state:true,attribute:false})}
 
-const EMPTY_FORECAST = [
-    "", "", "", "", "", "", "",
+// ── Field labels ──────────────────────────────────────────────────────────────
+const LABELS = {
+    title: "Title (optional)",
+    device_id: "Device (optional — auto-detects entities)",
+    forecast_entity_0: "Day 1 — Today",
+    forecast_entity_1: "Day 2 — Tomorrow",
+    forecast_entity_2: "Day 3",
+    forecast_entity_3: "Day 4",
+    forecast_entity_4: "Day 5",
+    forecast_entity_5: "Day 6",
+    forecast_entity_6: "Day 7",
+    today_actual_entity: "Today's actual generation (optional)",
+    date_format: "Date format",
+};
+// ── Schema segments (rendered with section headers between them) ──────────────
+const SCHEMA_CARD = [
+    { name: "title", selector: { text: {} } },
 ];
-const DAY_LABELS = [
-    "Day 1 — Today",
-    "Day 2 — Tomorrow",
-    "Day 3",
-    "Day 4",
-    "Day 5",
-    "Day 6",
-    "Day 7",
+const SCHEMA_DEVICE = [
+    { name: "device_id", selector: { device: {} } },
 ];
-/** Normalise a raw/partial config into a fully-populated one. */
+const SCHEMA_FORECAST = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
+    name: `forecast_entity_${i}`,
+    selector: { entity: { domain: "sensor" } },
+}));
+const SCHEMA_ACTUAL = [
+    { name: "today_actual_entity", selector: { entity: { domain: "sensor" } } },
+];
+const SCHEMA_DISPLAY = [
+    {
+        name: "date_format",
+        selector: {
+            select: {
+                options: [
+                    { value: "DD/MM", label: "DD/MM  (e.g. 15/04)" },
+                    { value: "MM/DD", label: "MM/DD  (e.g. 04/15)" },
+                ],
+            },
+        },
+    },
+];
+// ── Config normalisation (exported — also used by the main card) ──────────────
 function normalizeConfig(raw) {
     const incoming = Array.isArray(raw.forecast_entities)
         ? raw.forecast_entities.slice(0, 7)
@@ -100,12 +129,46 @@ function normalizeConfig(raw) {
         date_format: raw.date_format ?? "DD/MM",
     };
 }
+// ── Editor element ────────────────────────────────────────────────────────────
 let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     setConfig(config) {
         this._config = normalizeConfig(config);
     }
-    // ── Entity discovery ────────────────────────────────────────────────────────
-    /** Sensor entities that belong to `deviceId` and are not disabled/hidden. */
+    // ── Config ↔ flat FormData conversion ──────────────────────────────────────
+    _toFormData(cfg) {
+        return {
+            title: cfg.title ?? "",
+            device_id: cfg.device_id ?? "",
+            today_actual_entity: cfg.today_actual_entity ?? "",
+            date_format: cfg.date_format ?? "DD/MM",
+            forecast_entity_0: cfg.forecast_entities[0] ?? "",
+            forecast_entity_1: cfg.forecast_entities[1] ?? "",
+            forecast_entity_2: cfg.forecast_entities[2] ?? "",
+            forecast_entity_3: cfg.forecast_entities[3] ?? "",
+            forecast_entity_4: cfg.forecast_entities[4] ?? "",
+            forecast_entity_5: cfg.forecast_entities[5] ?? "",
+            forecast_entity_6: cfg.forecast_entities[6] ?? "",
+        };
+    }
+    _fromFormData(data) {
+        return {
+            type: this._config?.type ?? "custom:solar-forecast-card",
+            title: data.title || undefined,
+            device_id: data.device_id || undefined,
+            forecast_entities: [
+                data.forecast_entity_0,
+                data.forecast_entity_1,
+                data.forecast_entity_2,
+                data.forecast_entity_3,
+                data.forecast_entity_4,
+                data.forecast_entity_5,
+                data.forecast_entity_6,
+            ],
+            today_actual_entity: data.today_actual_entity || undefined,
+            date_format: data.date_format || "DD/MM",
+        };
+    }
+    // ── Entity auto-detection ───────────────────────────────────────────────────
     _deviceSensors(deviceId) {
         if (!this.hass?.entities)
             return [];
@@ -114,18 +177,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             !e.hidden_by &&
             e.entity_id.startsWith("sensor."));
     }
-    /**
-     * Inspect live state to determine which entities are Volcast daily-forecast
-     * sensors (they carry an `hours` array attribute) and which is the actual
-     * generation sensor (kWh unit, no `hours`).
-     */
     _autoDetect(deviceId) {
         const sensors = this._deviceSensors(deviceId);
         const forecastIds = sensors
-            .filter((e) => {
-            const s = this.hass.states[e.entity_id];
-            return Array.isArray(s?.attributes?.hours);
-        })
+            .filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours))
             .sort((a, b) => a.entity_id.localeCompare(b.entity_id))
             .map((e) => e.entity_id);
         const padded = [...forecastIds];
@@ -136,64 +191,50 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             if (!s)
                 return false;
             const unit = s.attributes.unit_of_measurement;
-            return (!Array.isArray(s.attributes.hours) &&
-                (unit === "kWh" || unit === "Wh"));
+            return !Array.isArray(s.attributes.hours) && (unit === "kWh" || unit === "Wh");
         });
         return {
             forecast_entities: padded.slice(0, 7),
             today_actual_entity: actualEntry?.entity_id,
         };
     }
-    // ── Event handlers ──────────────────────────────────────────────────────────
-    _titleChanged(ev) {
+    // ── Event handling ──────────────────────────────────────────────────────────
+    /**
+     * Shared handler for all ha-form value-changed events.
+     * Each form instance fires only its own field subset; we merge with the
+     * current full FormData before converting back to SolarForecastCardConfig.
+     */
+    _valueChanged(ev) {
         if (!this._config)
             return;
-        const value = ev.target.value;
-        this._fire({ ...this._config, title: value || undefined });
-    }
-    _deviceChanged(ev) {
-        if (!this._config)
-            return;
-        const deviceId = ev.detail.value || undefined;
-        const detected = deviceId ? this._autoDetect(deviceId) : {};
-        this._fire({ ...this._config, device_id: deviceId, ...detected });
-    }
-    _redetect() {
-        if (!this._config?.device_id)
-            return;
-        this._fire({ ...this._config, ...this._autoDetect(this._config.device_id) });
-    }
-    _forecastEntityChanged(ev, index) {
-        if (!this._config)
-            return;
-        const entities = [
-            ...this._config.forecast_entities,
-        ];
-        entities[index] = ev.detail.value ?? "";
-        this._fire({ ...this._config, forecast_entities: entities });
-    }
-    _actualEntityChanged(ev) {
-        if (!this._config)
-            return;
-        this._fire({
-            ...this._config,
-            today_actual_entity: ev.detail.value || undefined,
-        });
-    }
-    _dateFormatChanged(ev) {
-        if (!this._config)
-            return;
-        const value = ev.detail.value || "";
-        if (!value)
-            return;
-        this._fire({
-            ...this._config,
-            date_format: value,
-        });
-    }
-    _fire(config) {
-        this._config = config;
-        this.dispatchEvent(new CustomEvent("config-changed", { detail: { config }, bubbles: true }));
+        ev.stopPropagation(); // don't let ha-form's value-changed bubble further
+        const partial = ev.detail.value;
+        const current = this._toFormData(this._config);
+        const merged = { ...current, ...partial };
+        let newConfig = this._fromFormData(merged);
+        // Auto-detect entities when device selection changes
+        if (newConfig.device_id && newConfig.device_id !== this._config.device_id) {
+            const detected = this._autoDetect(newConfig.device_id);
+            // Fill empty slots only — don't overwrite manual selections
+            const slots = [...newConfig.forecast_entities];
+            detected.forecast_entities.forEach((id, i) => {
+                if (!slots[i] && id)
+                    slots[i] = id;
+            });
+            newConfig = {
+                ...newConfig,
+                forecast_entities: slots,
+                today_actual_entity: newConfig.today_actual_entity || detected.today_actual_entity,
+            };
+        }
+        this._config = newConfig;
+        // composed: true is required so the event crosses the shadow DOM boundary
+        // back to HA's dialog and the config is actually saved.
+        this.dispatchEvent(new CustomEvent("config-changed", {
+            detail: { config: newConfig },
+            bubbles: true,
+            composed: true,
+        }));
     }
     // ── Styles ──────────────────────────────────────────────────────────────────
     static get styles() {
@@ -203,157 +244,73 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
       }
 
       .section-title {
-        font-size: 0.85rem;
+        font-size: 0.78rem;
         font-weight: 500;
         color: var(--secondary-text-color);
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin: 20px 0 8px;
+        letter-spacing: 0.06em;
+        margin: 20px 0 4px;
         padding-bottom: 4px;
-        border-bottom: 1px solid var(--divider-color, #e0e0e0);
+        border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
       }
 
-      .section-title:first-of-type {
-        margin-top: 8px;
-      }
-
-      .row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-
-      .row > * {
-        flex: 1;
-      }
-
-      ha-entity-picker,
-      ha-device-picker,
-      ha-select,
-      ha-textfield {
-        display: block;
-        width: 100%;
-        margin-bottom: 8px;
-      }
-
-      .redetect-btn {
-        flex: 0 0 auto;
-        margin-bottom: 8px;
-      }
-
-      .helper-text {
-        font-size: 0.8rem;
-        color: var(--secondary-text-color);
-        margin: -4px 0 8px;
-      }
-
-      .detected-badge {
-        font-size: 0.75rem;
-        color: var(--success-color, #4caf50);
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        margin: -4px 0 8px;
+      .section-title:first-child {
+        margin-top: 4px;
       }
     `;
     }
     // ── Render ──────────────────────────────────────────────────────────────────
     render() {
-        if (!this._config)
+        if (!this.hass || !this._config)
             return A;
-        const cfg = this._config;
-        const forecastEntities = cfg.forecast_entities ?? EMPTY_FORECAST;
-        const detectedCount = forecastEntities.filter(Boolean).length;
+        const data = this._toFormData(this._config);
+        const label = (s) => LABELS[s.name] ?? s.name;
+        const onChange = this._valueChanged.bind(this);
         return b `
-      <!-- Title -->
       <p class="section-title">Card</p>
-      <ha-textfield
-        .value=${cfg.title ?? ""}
-        label="Title (optional)"
-        placeholder="Solar Forecast"
-        @change=${this._titleChanged}
-      ></ha-textfield>
-
-      <!-- Device -->
-      <p class="section-title">Device</p>
-
-      <div class="row">
-        <ha-device-picker
-          .hass=${this.hass}
-          .value=${cfg.device_id ?? ""}
-          label="Source device (optional)"
-          @value-changed=${this._deviceChanged}
-        ></ha-device-picker>
-
-        ${cfg.device_id
-            ? b `
-              <mwc-icon-button
-                class="redetect-btn"
-                title="Re-detect entities from device"
-                @click=${this._redetect}
-              >
-                <ha-icon icon="mdi:refresh"></ha-icon>
-              </mwc-icon-button>
-            `
-            : A}
-      </div>
-
-      ${cfg.device_id && detectedCount > 0
-            ? b `
-            <p class="detected-badge">
-              <ha-icon icon="mdi:check-circle"></ha-icon>
-              ${detectedCount} of 7 forecast entities auto-detected
-            </p>
-          `
-            : b `
-            <p class="helper-text">
-              Select a device to auto-detect Volcast forecast entities, or set
-              them manually below.
-            </p>
-          `}
-
-      <!-- Daily forecast entities -->
-      <p class="section-title">Daily Forecast Entities</p>
-
-      ${DAY_LABELS.map((label, i) => b `
-          <ha-entity-picker
-            .hass=${this.hass}
-            .value=${forecastEntities[i] ?? ""}
-            .label=${label}
-            .includeDomains=${["sensor"]}
-            allow-custom-entity
-            @value-changed=${(ev) => this._forecastEntityChanged(ev, i)}
-          ></ha-entity-picker>
-        `)}
-
-      <!-- Actual generation -->
-      <p class="section-title">Today's Actual Generation</p>
-      <ha-entity-picker
+      <ha-form
         .hass=${this.hass}
-        .value=${cfg.today_actual_entity ?? ""}
-        label="Actual generation entity (optional)"
-        .includeDomains=${["sensor"]}
-        allow-custom-entity
-        @value-changed=${this._actualEntityChanged}
-      ></ha-entity-picker>
-      <p class="helper-text">
-        A sensor tracking how much energy the panels have actually produced
-        today. Will be overlaid on the forecast bar.
-      </p>
+        .data=${data}
+        .schema=${SCHEMA_CARD}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
 
-      <!-- Display options -->
+      <p class="section-title">Device</p>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_DEVICE}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
+
+      <p class="section-title">Daily Forecast Entities</p>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_FORECAST}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
+
+      <p class="section-title">Today's Actual Generation</p>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_ACTUAL}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
+
       <p class="section-title">Display</p>
-      <ha-select
-        .value=${cfg.date_format ?? "DD/MM"}
-        label="Date format"
-        naturalMenuWidth
-        fixedMenuPosition
-        @value-changed=${this._dateFormatChanged}
-      >
-        <mwc-list-item value="DD/MM">DD/MM &nbsp;(e.g. 15/04)</mwc-list-item>
-        <mwc-list-item value="MM/DD">MM/DD &nbsp;(e.g. 04/15)</mwc-list-item>
-      </ha-select>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_DISPLAY}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
     `;
     }
 };
