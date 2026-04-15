@@ -784,18 +784,36 @@ let SolarForecastCard = class SolarForecastCard extends i {
       .header-live {
         flex-shrink: 0;
         display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+        padding-top: 3px;
+        white-space: nowrap;
+      }
+
+      .live-row {
+        display: flex;
         align-items: center;
         gap: 4px;
         font-size: 0.75rem;
         font-variant-numeric: tabular-nums;
         color: var(--secondary-text-color);
-        padding-top: 3px;
-        white-space: nowrap;
       }
 
       .live-label {
         font-weight: 700;
         color: var(--state-active-color, #fbbf24);
+      }
+
+      .live-week {
+        font-size: 0.68rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        opacity: 0.72;
+      }
+
+      .week-label {
+        font-weight: 600;
       }
 
       /* ── Placeholder ─────────────────────────────────────── */
@@ -1379,12 +1397,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     _renderLive() {
         const cfg = this._config;
+        // ── Live power / actual generation ────────────────────────────────────────
         const powerState = cfg.live_power_entity
             ? this.hass?.states[cfg.live_power_entity]
             : undefined;
         const powerRaw = parseFloat(powerState?.state ?? "");
         const powerUnit = powerState?.attributes?.unit_of_measurement ?? "W";
-        // Normalise to watts regardless of source unit
         const powerW = isFinite(powerRaw)
             ? (powerUnit.toLowerCase() === "kw" ? powerRaw * 1000 : powerRaw)
             : NaN;
@@ -1393,17 +1411,34 @@ let SolarForecastCard = class SolarForecastCard extends i {
             : NaN;
         const hasPower = isFinite(powerW);
         const hasActual = isFinite(actualRaw);
-        if (!hasPower && !hasActual)
+        // ── Week total / daily average ────────────────────────────────────────────
+        const validForecasts = cfg.forecast_entities
+            .map((id) => (id ? parseFloat(this.hass?.states[id]?.state ?? "") : NaN))
+            .filter((v) => isFinite(v));
+        const weekTotal = validForecasts.reduce((s, v) => s + v, 0);
+        const avgDay = validForecasts.length > 0 ? weekTotal / validForecasts.length : NaN;
+        const hasWeek = validForecasts.length > 0;
+        if (!hasPower && !hasActual && !hasWeek)
             return A;
-        const parts = [];
+        const liveParts = [];
         if (hasPower)
-            parts.push(this._formatPower(powerW));
+            liveParts.push(this._formatPower(powerW));
         if (hasActual)
-            parts.push(actualRaw.toFixed(1) + " kWh");
+            liveParts.push(actualRaw.toFixed(1) + " kWh");
         return b `
       <div class="header-live">
-        <span class="live-label">LIVE:</span>
-        <span>${parts.join(" | ")}</span>
+        ${hasPower || hasActual ? b `
+          <div class="live-row">
+            <span class="live-label">LIVE:</span>
+            <span>${liveParts.join(" | ")}</span>
+          </div>
+        ` : A}
+        ${hasWeek ? b `
+          <div class="live-week">
+            <span class="week-label">WEEK:</span>
+            ${weekTotal.toFixed(1)} kWh | AVG: ${avgDay.toFixed(1)} kWh/day
+          </div>
+        ` : A}
       </div>
     `;
     }
