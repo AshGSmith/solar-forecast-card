@@ -179,13 +179,8 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     }
     _autoDetect(deviceId) {
         const sensors = this._deviceSensors(deviceId);
-        const forecastIds = sensors
-            .filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours))
-            .sort((a, b) => a.entity_id.localeCompare(b.entity_id))
-            .map((e) => e.entity_id);
-        const padded = [...forecastIds];
-        while (padded.length < 7)
-            padded.push("");
+        // ── Split into forecast sensors (have "hours") and actual candidates ──────
+        const forecastSensors = sensors.filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours));
         const actualEntry = sensors.find((e) => {
             const s = this.hass.states[e.entity_id];
             if (!s)
@@ -193,10 +188,110 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             const unit = s.attributes.unit_of_measurement;
             return !Array.isArray(s.attributes.hours) && (unit === "kWh" || unit === "Wh");
         });
+        // ── Map each forecast sensor to a day-offset from today ───────────────────
+        const todayMidnight = this._localMidnight(new Date());
+        const candidates = forecastSensors.map((e) => {
+            const state = this.hass.states[e.entity_id];
+            const date = this._extractForecastDate(e.entity_id, state);
+            let offset = null;
+            if (date !== null) {
+                const diff = this._localMidnight(date).getTime() - todayMidnight.getTime();
+                offset = Math.round(diff / 86400000);
+            }
+            return { entityId: e.entity_id, offset };
+        });
+        // ── Build the 7-slot array ────────────────────────────────────────────────
+        const slots = ["", "", "", "", "", "", ""];
+        const hasDates = candidates.some((c) => c.offset !== null);
+        if (hasDates) {
+            // Place entities whose offset falls within [0, 6]
+            for (const c of candidates) {
+                if (c.offset !== null && c.offset >= 0 && c.offset < 7) {
+                    slots[c.offset] = c.entityId;
+                }
+            }
+            // Any leftover entities (past, or no date info) fill the first empty slots
+            const unplaced = candidates
+                .filter((c) => c.offset === null || c.offset < 0 || c.offset >= 7)
+                .sort((a, b) => a.entityId.localeCompare(b.entityId));
+            let si = 0;
+            for (const c of unplaced) {
+                while (si < 7 && slots[si])
+                    si++;
+                if (si < 7)
+                    slots[si++] = c.entityId;
+            }
+        }
+        else {
+            // No date metadata at all — stable alphabetical fallback
+            const sorted = [...forecastSensors]
+                .sort((a, b) => a.entity_id.localeCompare(b.entity_id))
+                .map((e) => e.entity_id);
+            for (let i = 0; i < 7; i++)
+                slots[i] = sorted[i] ?? "";
+        }
+        // ── Debug log ─────────────────────────────────────────────────────────────
+        console.debug("[solar-forecast-card] auto-detect mapping:", candidates
+            .slice()
+            .sort((a, b) => (a.offset ?? 999) - (b.offset ?? 999))
+            .map((c) => ({
+            entity: c.entityId.replace(/^sensor\./, ""),
+            offset: c.offset ?? "no-date",
+            slot: c.offset !== null && c.offset >= 0 && c.offset < 7
+                ? `Day ${c.offset} (${["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"][c.offset]})`
+                : "unplaced",
+        })));
         return {
-            forecast_entities: padded.slice(0, 7),
+            forecast_entities: slots,
             today_actual_entity: actualEntry?.entity_id,
         };
+    }
+    /**
+     * Extract the forecast date from an entity, trying in priority order:
+     *   1. `datetime` state attribute  (ISO datetime string)
+     *   2. `date`     state attribute  (ISO date string  YYYY-MM-DD)
+     *   3. ISO date pattern inside the entity_id  (YYYY_MM_DD or YYYY-MM-DD)
+     *
+     * Returns null when no reliable date can be found.
+     */
+    _extractForecastDate(entityId, state) {
+        // 1. datetime attribute
+        const dtAttr = state?.attributes?.datetime;
+        if (typeof dtAttr === "string") {
+            const d = new Date(dtAttr);
+            if (!isNaN(d.getTime()))
+                return d;
+        }
+        // 2. date attribute (parse as local to avoid UTC-offset day shift)
+        const dateAttr = state?.attributes?.date;
+        if (typeof dateAttr === "string") {
+            const d = this._parseLocalDate(dateAttr);
+            if (d)
+                return d;
+        }
+        // 3. ISO date embedded in entity_id:  sensor.foo_2024_04_15_bar
+        //                                  or sensor.foo_2024-04-15_bar
+        const m = entityId.match(/(\d{4})[_-](\d{2})[_-](\d{2})/);
+        if (m) {
+            const d = new Date(+m[1], +m[2] - 1, +m[3]);
+            if (!isNaN(d.getTime()))
+                return d;
+        }
+        return null;
+    }
+    /** Parse "YYYY-MM-DD" as a local-timezone Date (avoids UTC midnight offset). */
+    _parseLocalDate(value) {
+        const m = value.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (!m)
+            return null;
+        const d = new Date(+m[1], +m[2] - 1, +m[3]);
+        return isNaN(d.getTime()) ? null : d;
+    }
+    /** Return a new Date set to local midnight of the given date. */
+    _localMidnight(d) {
+        const out = new Date(d);
+        out.setHours(0, 0, 0, 0);
+        return out;
     }
     // ── Event handling ──────────────────────────────────────────────────────────
     /**
