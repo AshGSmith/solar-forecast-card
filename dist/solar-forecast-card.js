@@ -1000,6 +1000,30 @@ let SolarForecastCard = class SolarForecastCard extends i {
         min-width: 0;
       }
 
+      /* ── 2-column grid (forecast.solar) ──────────────────── */
+
+      .forecast-grid.two-day {
+        grid-template-columns: repeat(2, minmax(0, 140px));
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .forecast-grid.two-day .bar-bg,
+      .forecast-grid.two-day .bar-forecast,
+      .forecast-grid.two-day .bar-actual,
+      .forecast-grid.two-day .bar-dotted {
+        width: min(72px, 72%);
+      }
+
+      .two-day-note {
+        text-align: center;
+        font-size: 0.65rem;
+        color: var(--secondary-text-color);
+        opacity: 0.45;
+        margin-top: 10px;
+        padding: 0 4px 2px;
+      }
+
       /* ── Column ──────────────────────────────────────────── */
 
       .col {
@@ -1528,12 +1552,17 @@ let SolarForecastCard = class SolarForecastCard extends i {
         </ha-card>
       `;
         }
+        const rows = this._buildRows();
+        const validRows = rows.filter((r) => r.entityId);
+        const isTwoDay = this._config.integration_type === "forecast_solar" && validRows.length <= 2;
+        const displayRows = isTwoDay ? validRows : rows;
         return b `
       <ha-card>
         ${header}
-        <div class="forecast-grid">
-          ${this._buildRows().map((row) => this._renderCol(row))}
+        <div class="forecast-grid ${isTwoDay ? "two-day" : ""}">
+          ${displayRows.map((row) => this._renderCol(row))}
         </div>
+        ${isTwoDay ? b `<div class="two-day-note">2-day forecast available</div>` : A}
       </ha-card>
       ${this._renderPopup()}
     `;
