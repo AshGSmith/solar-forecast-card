@@ -1,6 +1,6 @@
 # Solar Forecast Card
 
-A Home Assistant Lovelace custom card for displaying solar energy forecast data supplied by any forcasting integration, but with simple set up for use with the Volcast integration by selecting the Volcast device to allow the card to auto map entities. 
+A Home Assistant Lovelace custom card for displaying solar energy forecast data supplied by any forcasting integration, with simple setup for use with the Volcast, Solcast and Forecast.Solar integrations by selecting the relevant device in the card configuration to allow the auto-mapping of daily forecast entities. 
 
 ## Screenshots
 
@@ -13,11 +13,8 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 ### HACS (Recommended)
 #### Install via HACS
 
-Click below to add this repository to HACS:
-
 [![Add to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=AshGSmith&repository=solar-forecast-card)
 
-#### HACS Custom Repository Manual Steps
 1. Open HACS in your Home Assistant instance.
 2. Click on the **⋮** button on the top right and select **Custom repositories***
 3. Enter the below in the **Repository** field
