@@ -4,9 +4,9 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Screenshots
 
-![Solar Forecast Card — main view](docs/screenshots/v0.2.0/card-main.jpg)
+<img src="docs/screenshots/v0.2.0/card-main.jpg" alt="Solar Forecast Card — main view" width="600">
 
-![Solar Forecast Card — hourly popup](docs/screenshots/v0.2.0/card-popup.jpg)
+<img src="docs/screenshots/v0.2.0/card-popup.jpg" alt="Solar Forecast Card — hourly popup" width="360">
 
 ## Installation
 
