@@ -141,41 +141,146 @@ export class SolarForecastCard extends LitElement {
     });
   }
 
-  /** Parse the raw "hours" attribute into trimmed {hour, kwh} points. */
+  /**
+   * Parse the raw "hours" attribute into trimmed [{hour, kwh}] points.
+   *
+   * Handles three formats:
+   *   1. Array of numbers          – index is the hour
+   *   2. Array of objects          – looks for common value-key names
+   *   3. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
+   */
   private _parseHours(raw: unknown): HourPoint[] {
-    if (!Array.isArray(raw) || raw.length === 0) return [];
+    // ── Always log the raw value so callers can verify the format ────────────
+    console.debug(
+      "[solar-forecast-card] hours attr →",
+      raw === undefined ? "undefined" :
+      raw === null      ? "null" :
+      Array.isArray(raw)
+        ? `array[${(raw as unknown[]).length}] first=${JSON.stringify((raw as unknown[])[0])}`
+        : `${typeof raw} ${JSON.stringify(raw).slice(0, 120)}`
+    );
 
-    const all: HourPoint[] = raw.map((v, i) => {
-      let kwh = 0;
-      if (typeof v === "number") {
-        kwh = isFinite(v) ? v : 0;
-      } else if (typeof v === "object" && v !== null) {
-        const obj = v as Record<string, unknown>;
-        kwh = typeof obj.energy === "number" ? obj.energy
-            : typeof obj.kwh === "number" ? obj.kwh : 0;
-        const h = typeof obj.hour === "number" ? obj.hour : i;
-        return { hour: h, kwh: isFinite(kwh) ? kwh : 0 };
+    if (raw === null || raw === undefined) return [];
+
+    try {
+      let points: HourPoint[];
+
+      // ── Format 1 & 2: array ─────────────────────────────────────────────
+      if (Array.isArray(raw)) {
+        if (raw.length === 0) {
+          console.debug("[solar-forecast-card] hours: empty array");
+          return [];
+        }
+
+        points = raw.map((v, i): HourPoint => {
+          // 1 — bare number, index = hour
+          if (typeof v === "number") {
+            return { hour: i, kwh: isFinite(v) ? v : 0 };
+          }
+
+          // 2 — object with hour + value fields
+          if (typeof v === "object" && v !== null) {
+            const obj = v as Record<string, unknown>;
+
+            // Resolve hour index — try "hour", "time", "h" keys
+            const rawH = obj.hour ?? obj.time ?? obj.h;
+            const hour = typeof rawH === "number" ? rawH
+                       : typeof rawH === "string" ? parseInt(rawH, 10)
+                       : i;
+
+            // Resolve value — try all known key names in priority order
+            const rawV =
+              obj.value       ?? obj.energy   ?? obj.kwh  ??
+              obj.wh          ?? obj.power_kw  ?? obj.pv_estimate ??
+              obj.forecast    ?? obj.solar     ?? 0;
+            const kwh = typeof rawV === "number" ? rawV
+                      : typeof rawV === "string" ? parseFloat(rawV)
+                      : 0;
+
+            return {
+              hour: isFinite(hour) ? hour : i,
+              kwh:  isFinite(kwh)  ? kwh  : 0,
+            };
+          }
+
+          return { hour: i, kwh: 0 };
+        });
+
+      // ── Format 3: plain object keyed by hour ────────────────────────────
+      } else if (typeof raw === "object") {
+        const entries = Object.entries(raw as Record<string, unknown>);
+        if (entries.length === 0) {
+          console.debug("[solar-forecast-card] hours: empty object");
+          return [];
+        }
+
+        points = entries
+          .map(([k, v]): HourPoint => {
+            const hour = parseInt(k, 10);
+            const kwh  = typeof v === "number" ? v
+                       : typeof v === "string"  ? parseFloat(v)
+                       : 0;
+            return {
+              hour: isFinite(hour) ? hour : 0,
+              kwh:  isFinite(kwh)  ? kwh  : 0,
+            };
+          })
+          .sort((a, b) => a.hour - b.hour);
+
+      } else {
+        console.warn("[solar-forecast-card] hours: unrecognised type:", typeof raw);
+        return [];
       }
-      return { hour: i, kwh };
-    });
 
-    // Trim to first–last non-zero range
-    let first = -1, last = -1;
-    for (let i = 0; i < all.length; i++) {
-      if (all[i].kwh > 0) { if (first === -1) first = i; last = i; }
+      // ── Trim leading / trailing zeros ────────────────────────────────────
+      let first = -1, last = -1;
+      for (let i = 0; i < points.length; i++) {
+        if (points[i].kwh > 0) { if (first === -1) first = i; last = i; }
+      }
+
+      if (first === -1) {
+        console.debug("[solar-forecast-card] hours: attribute present but all values are zero");
+        return [];
+      }
+
+      const trimmed = points.slice(first, last + 1);
+      console.debug(
+        `[solar-forecast-card] hours: ${trimmed.length} points,`,
+        `${trimmed[0].hour}:00 → ${trimmed[trimmed.length - 1].hour}:00,`,
+        `peak ${Math.max(...trimmed.map((p) => p.kwh)).toFixed(3)} kWh`
+      );
+      return trimmed;
+
+    } catch (err) {
+      console.error("[solar-forecast-card] hours: parse failed →", err, "\nraw value:", raw);
+      return [];
     }
-    return first === -1 ? [] : all.slice(first, last + 1);
   }
 
   // ── Popup ─────────────────────────────────────────────────────────────────
 
   private _openPopup(row: ForecastRow): void {
     clearTimeout(this._closeTimer);
-    // Re-read hours fresh at click time
+
+    // Re-read the entity state fresh at click time so we always get the latest hours
     const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
-    this._popup = { ...row, rawHoursAttr: freshState?.attributes?.hours ?? row.rawHoursAttr };
+    const freshHours = freshState?.attributes?.hours;
+
+    // Log which entity is being used and what the hours attribute looks like
+    const hoursType = freshHours === undefined ? "missing"
+                    : freshHours === null       ? "null"
+                    : Array.isArray(freshHours) ? `array[${(freshHours as unknown[]).length}]`
+                    : `${typeof freshHours}`;
+    console.debug(
+      "[solar-forecast-card] popup →",
+      row.entityId || "(no entity)",
+      "| state:", freshState?.state ?? "n/a",
+      "| hours:", hoursType
+    );
+
+    this._popup = { ...row, rawHoursAttr: freshHours ?? row.rawHoursAttr };
     this._popupVisible = false;
-    // Single rAF gives Lit time to stamp the overlay into DOM before we add .visible
+    // Single rAF lets Lit stamp the overlay into the DOM before we add .visible
     requestAnimationFrame(() => { this._popupVisible = true; });
   }
 
