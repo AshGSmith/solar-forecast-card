@@ -244,8 +244,10 @@ export class SolarForecastCardEditor extends LitElement {
     const sensors = this._deviceSensors(deviceId);
 
     // Route to integration-specific detection when platform is identifiable
-    const isSolcast = sensors.some((e) => e.platform === "solcast_solar");
-    if (isSolcast) return this._autoDetectSolcast(sensors);
+    const isSolcast      = sensors.some((e) => e.platform === "solcast_solar");
+    const isForecastSolar = sensors.some((e) => e.platform === "forecast_solar");
+    if (isSolcast)       return this._autoDetectSolcast(sensors);
+    if (isForecastSolar) return this._autoDetectForecastSolar(sensors);
 
     // ── Split into forecast sensors (have "hours") and actual candidates ──────
 
@@ -388,6 +390,54 @@ export class SolarForecastCardEditor extends LitElement {
       forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
       today_actual_entity: undefined,
       integration_type:    "solcast",
+    };
+  }
+
+  /**
+   * forecast.solar-specific auto-detection.
+   *
+   * The integration exposes two daily energy sensors per device:
+   *   energy_production_today     → slot 0
+   *   energy_production_tomorrow  → slot 1
+   *
+   * Slots 2–6 are left empty; forecast.solar doesn't provide day 3+ totals.
+   * today_actual_entity is left undefined — actual generation comes from the
+   * inverter, not from this integration.
+   *
+   * The native unit is Wh but HA displays it as kWh; both are accepted.
+   * "energy_production_today_remaining" is excluded from slot 0 by requiring
+   * the keyword is not followed by "_remaining".
+   */
+  private _autoDetectForecastSolar(
+    sensors: EntityRegistryEntry[]
+  ): Pick<SolarForecastCardConfig, "forecast_entities" | "today_actual_entity" | "integration_type"> {
+    const slots: string[] = ["", "", "", "", "", "", ""];
+
+    for (const sensor of sensors) {
+      const state = this.hass!.states[sensor.entity_id];
+      const unit  = state?.attributes?.unit_of_measurement as string | undefined;
+      if (unit !== "kWh" && unit !== "Wh") continue;
+
+      const id = sensor.entity_id;
+      if (id.includes("energy_production_today") && !id.includes("remaining")) {
+        slots[0] = id;
+      } else if (id.includes("energy_production_tomorrow")) {
+        slots[1] = id;
+      }
+    }
+
+    console.debug(
+      "[solar-forecast-card] forecast.solar auto-detect mapping:",
+      slots.map((id, i) => ({
+        slot:   `Day ${i} (${["Today","Tomorrow","Day 3","Day 4","Day 5","Day 6","Day 7"][i]})`,
+        entity: id ? id.replace(/^sensor\./, "") : "(empty)",
+      }))
+    );
+
+    return {
+      forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
+      today_actual_entity: undefined,
+      integration_type:    "forecast_solar",
     };
   }
 

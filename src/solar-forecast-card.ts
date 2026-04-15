@@ -128,7 +128,9 @@ export class SolarForecastCard extends LitElement {
           ? s?.attributes?.detailedForecast
           : cfg.integration_type === "volcast"
             ? s?.attributes?.hours
-            : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
+            : cfg.integration_type === "forecast_solar"
+              ? undefined
+              : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
       };
     });
 
@@ -164,7 +166,7 @@ export class SolarForecastCard extends LitElement {
    */
   private _parseHours(
     raw: unknown,
-    hint?: "volcast" | "solcast" | "manual"
+    hint?: "volcast" | "solcast" | "forecast_solar" | "manual"
   ): HourPoint[] {
     // ── Always log the raw value so callers can verify the format ────────────
     console.debug(
@@ -327,7 +329,9 @@ export class SolarForecastCard extends LitElement {
       ? freshState?.attributes?.detailedForecast
       : intType === "volcast"
         ? freshState?.attributes?.hours
-        : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
+        : intType === "forecast_solar"
+          ? undefined
+          : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
 
     // Log which entity is being used and what the hours attribute looks like
     const hoursType = freshHours === undefined ? "missing"
@@ -1086,7 +1090,7 @@ export class SolarForecastCard extends LitElement {
         ${hasWeek ? html`
           <div class="live-week">
             <span class="week-label">WEEK:</span>
-            ${weekTotal.toFixed(1)} kWh | AVG: ${avgDay.toFixed(1)} kWh/day
+            ${weekTotal.toFixed(1)} kWh | <span class="week-label">AVG:</span> ${avgDay.toFixed(1)} kWh/day
           </div>
         ` : nothing}
       </div>
@@ -1150,21 +1154,33 @@ export class SolarForecastCard extends LitElement {
     if (!this._popup) return nothing;
 
     const row = this._popup;
-    const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
-    const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
+    const isForecastSolar = this._config?.integration_type === "forecast_solar";
 
-    // Determine the reference ceiling for bar scaling
-    const { inverter_max_kw, solar_max_kwp } = this._config!;
-    let maxRef: number;
-    if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
-      // Array can't exceed inverter limit; if array is smaller it's the ceiling
-      maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
-    } else if (inverter_max_kw !== undefined) {
-      maxRef = inverter_max_kw;
-    } else if (solar_max_kwp !== undefined) {
-      maxRef = solar_max_kwp;
+    let chartContent;
+    if (isForecastSolar) {
+      chartContent = html`
+        <div class="chart-no-data">
+          <p>The selected forecast entities do not provide hourly forecast data.</p>
+        </div>
+      `;
     } else {
-      maxRef = peakKwh; // no system config — fall back to relative scaling
+      const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
+      const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
+
+      // Determine the reference ceiling for bar scaling
+      const { inverter_max_kw, solar_max_kwp } = this._config!;
+      let maxRef: number;
+      if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
+        maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
+      } else if (inverter_max_kw !== undefined) {
+        maxRef = inverter_max_kw;
+      } else if (solar_max_kwp !== undefined) {
+        maxRef = solar_max_kwp;
+      } else {
+        maxRef = peakKwh;
+      }
+
+      chartContent = this._renderHourlyChart(points, peakKwh, maxRef);
     }
 
     return html`
@@ -1195,7 +1211,7 @@ export class SolarForecastCard extends LitElement {
           </div>
 
           <div class="chart-scroll">
-            ${this._renderHourlyChart(points, peakKwh, maxRef)}
+            ${chartContent}
           </div>
 
         </div>

@@ -238,8 +238,11 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         const sensors = this._deviceSensors(deviceId);
         // Route to integration-specific detection when platform is identifiable
         const isSolcast = sensors.some((e) => e.platform === "solcast_solar");
+        const isForecastSolar = sensors.some((e) => e.platform === "forecast_solar");
         if (isSolcast)
             return this._autoDetectSolcast(sensors);
+        if (isForecastSolar)
+            return this._autoDetectForecastSolar(sensors);
         // ── Split into forecast sensors (have "hours") and actual candidates ──────
         const forecastSensors = sensors.filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours));
         const actualEntry = sensors.find((e) => {
@@ -354,6 +357,46 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             forecast_entities: slots,
             today_actual_entity: undefined,
             integration_type: "solcast",
+        };
+    }
+    /**
+     * forecast.solar-specific auto-detection.
+     *
+     * The integration exposes two daily energy sensors per device:
+     *   energy_production_today     → slot 0
+     *   energy_production_tomorrow  → slot 1
+     *
+     * Slots 2–6 are left empty; forecast.solar doesn't provide day 3+ totals.
+     * today_actual_entity is left undefined — actual generation comes from the
+     * inverter, not from this integration.
+     *
+     * The native unit is Wh but HA displays it as kWh; both are accepted.
+     * "energy_production_today_remaining" is excluded from slot 0 by requiring
+     * the keyword is not followed by "_remaining".
+     */
+    _autoDetectForecastSolar(sensors) {
+        const slots = ["", "", "", "", "", "", ""];
+        for (const sensor of sensors) {
+            const state = this.hass.states[sensor.entity_id];
+            const unit = state?.attributes?.unit_of_measurement;
+            if (unit !== "kWh" && unit !== "Wh")
+                continue;
+            const id = sensor.entity_id;
+            if (id.includes("energy_production_today") && !id.includes("remaining")) {
+                slots[0] = id;
+            }
+            else if (id.includes("energy_production_tomorrow")) {
+                slots[1] = id;
+            }
+        }
+        console.debug("[solar-forecast-card] forecast.solar auto-detect mapping:", slots.map((id, i) => ({
+            slot: `Day ${i} (${["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"][i]})`,
+            entity: id ? id.replace(/^sensor\./, "") : "(empty)",
+        })));
+        return {
+            forecast_entities: slots,
+            today_actual_entity: undefined,
+            integration_type: "forecast_solar",
         };
     }
     /**
@@ -632,7 +675,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
                     ? s?.attributes?.detailedForecast
                     : cfg.integration_type === "volcast"
                         ? s?.attributes?.hours
-                        : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
+                        : cfg.integration_type === "forecast_solar"
+                            ? undefined
+                            : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
             };
         });
         const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
@@ -806,7 +851,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
             ? freshState?.attributes?.detailedForecast
             : intType === "volcast"
                 ? freshState?.attributes?.hours
-                : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
+                : intType === "forecast_solar"
+                    ? undefined
+                    : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
         // Log which entity is being used and what the hours attribute looks like
         const hoursType = freshHours === undefined ? "missing"
             : freshHours === null ? "null"
@@ -1540,7 +1587,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         ${hasWeek ? b `
           <div class="live-week">
             <span class="week-label">WEEK:</span>
-            ${weekTotal.toFixed(1)} kWh | AVG: ${avgDay.toFixed(1)} kWh/day
+            ${weekTotal.toFixed(1)} kWh | <span class="week-label">AVG:</span> ${avgDay.toFixed(1)} kWh/day
           </div>
         ` : A}
       </div>
@@ -1599,23 +1646,34 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (!this._popup)
             return A;
         const row = this._popup;
-        const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
-        const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
-        // Determine the reference ceiling for bar scaling
-        const { inverter_max_kw, solar_max_kwp } = this._config;
-        let maxRef;
-        if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
-            // Array can't exceed inverter limit; if array is smaller it's the ceiling
-            maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
-        }
-        else if (inverter_max_kw !== undefined) {
-            maxRef = inverter_max_kw;
-        }
-        else if (solar_max_kwp !== undefined) {
-            maxRef = solar_max_kwp;
+        const isForecastSolar = this._config?.integration_type === "forecast_solar";
+        let chartContent;
+        if (isForecastSolar) {
+            chartContent = b `
+        <div class="chart-no-data">
+          <p>The selected forecast entities do not provide hourly forecast data.</p>
+        </div>
+      `;
         }
         else {
-            maxRef = peakKwh; // no system config — fall back to relative scaling
+            const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
+            const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
+            // Determine the reference ceiling for bar scaling
+            const { inverter_max_kw, solar_max_kwp } = this._config;
+            let maxRef;
+            if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
+                maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
+            }
+            else if (inverter_max_kw !== undefined) {
+                maxRef = inverter_max_kw;
+            }
+            else if (solar_max_kwp !== undefined) {
+                maxRef = solar_max_kwp;
+            }
+            else {
+                maxRef = peakKwh;
+            }
+            chartContent = this._renderHourlyChart(points, peakKwh, maxRef);
         }
         return b `
       <div
@@ -1645,7 +1703,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
           </div>
 
           <div class="chart-scroll">
-            ${this._renderHourlyChart(points, peakKwh, maxRef)}
+            ${chartContent}
           </div>
 
         </div>
