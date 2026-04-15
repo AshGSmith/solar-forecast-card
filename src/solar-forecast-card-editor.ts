@@ -161,10 +161,31 @@ export function normalizeConfig(
 
 // ── Editor element ────────────────────────────────────────────────────────────
 
+/** Entity FormData keys that count as "manually edited" when changed by the user. */
+const ENTITY_FIELDS: string[] = [
+  "forecast_entity_0", "forecast_entity_1", "forecast_entity_2",
+  "forecast_entity_3", "forecast_entity_4", "forecast_entity_5",
+  "forecast_entity_6", "today_actual_entity", "live_power_entity",
+];
+
 @customElement("solar-forecast-card-editor")
 export class SolarForecastCardEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: SolarForecastCardConfig;
+
+  /**
+   * True when the current entity values were populated by auto-detection.
+   * Set to true after any auto-detect run; reset to false if the user
+   * manually edits any entity field. Used to decide whether a device switch
+   * should overwrite all mapped entities or leave them alone.
+   */
+  @state() private _autoPopulated = false;
+
+  /**
+   * True when the user changed the device while entities were manually
+   * configured. Cleared once auto-population takes over or device is removed.
+   */
+  @state() private _showManualWarning = false;
 
   public setConfig(config: Partial<SolarForecastCardConfig>): void {
     this._config = normalizeConfig(config);
@@ -510,23 +531,37 @@ export class SolarForecastCardEditor extends LitElement {
 
     let newConfig = this._fromFormData(merged);
 
-    // Auto-detect entities when device selection changes
-    if (newConfig.device_id && newConfig.device_id !== this._config.device_id) {
-      const detected = this._autoDetect(newConfig.device_id);
-      // Fill empty slots only — don't overwrite manual selections
-      const slots = [...newConfig.forecast_entities] as string[];
-      detected.forecast_entities.forEach((id, i) => {
-        if (!slots[i] && id) slots[i] = id;
-      });
-      newConfig = {
-        ...newConfig,
-        forecast_entities:   slots as SolarForecastCardConfig["forecast_entities"],
-        today_actual_entity: newConfig.today_actual_entity || detected.today_actual_entity,
-        integration_type:    detected.integration_type,
-      };
-    } else if (!newConfig.device_id && this._config.device_id) {
-      // Device was cleared — revert to manual mode
+    const deviceChanged = !!(newConfig.device_id && newConfig.device_id !== this._config.device_id);
+    const deviceCleared = !newConfig.device_id && !!this._config.device_id;
+    const isFirstDevice  = deviceChanged && !this._config.device_id;
+
+    if (deviceChanged) {
+      const detected = this._autoDetect(newConfig.device_id!);
+
+      if (isFirstDevice || this._autoPopulated) {
+        // First-ever device selection, or entities were previously auto-filled:
+        // replace all auto-mapped fields so no stale references remain.
+        newConfig = {
+          ...newConfig,
+          forecast_entities:   detected.forecast_entities,
+          today_actual_entity: detected.today_actual_entity,
+          integration_type:    detected.integration_type,
+        };
+        this._autoPopulated = true;
+        this._showManualWarning = false;
+      } else {
+        // User has manually edited entities — leave them alone, but still
+        // update integration_type so parsing logic stays correct.
+        newConfig = { ...newConfig, integration_type: detected.integration_type };
+        this._showManualWarning = true;
+      }
+    } else if (deviceCleared) {
       newConfig = { ...newConfig, integration_type: "manual" };
+      this._autoPopulated = false;
+      this._showManualWarning = false;
+    } else if (ENTITY_FIELDS.some((f) => f in partial)) {
+      // User manually edited an entity field — mark as no longer auto-populated.
+      this._autoPopulated = false;
     }
 
     this._config = newConfig;
@@ -576,6 +611,12 @@ export class SolarForecastCardEditor extends LitElement {
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
+
+      ${this._showManualWarning ? html`
+        <ha-alert alert-type="warning">
+          Changing device will not overwrite manually configured entities.
+        </ha-alert>
+      ` : nothing}
 
       <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
         <ha-form
