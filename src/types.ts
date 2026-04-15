@@ -9,6 +9,8 @@ export interface SolarForecastCardConfig {
   today_actual_entity?: string;
   date_format: "DD/MM" | "MM/DD";
   time_format: "24h" | "12h";
+  inverter_max_kw?: number;
+  solar_max_kwp?: number;
   low_threshold?: number;
   high_threshold?: number;
 }

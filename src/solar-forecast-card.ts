@@ -970,24 +970,42 @@ export class SolarForecastCard extends LitElement {
 
   // ── Live badge ────────────────────────────────────────────────────────────
 
+  private _formatPower(watts: number): string {
+    if (watts < 10)   return "0 W";
+    if (watts < 1000) return `${Math.round(watts)} W`;
+    return `${(watts / 1000).toFixed(1)} kW`;
+  }
+
   private _renderLive() {
     const cfg = this._config!;
-    if (!cfg.live_power_entity) return nothing;
 
-    const powerRaw = parseFloat(this.hass?.states[cfg.live_power_entity]?.state ?? "");
+    const powerState = cfg.live_power_entity
+      ? this.hass?.states[cfg.live_power_entity]
+      : undefined;
+    const powerRaw  = parseFloat(powerState?.state ?? "");
+    const powerUnit = (powerState?.attributes?.unit_of_measurement as string | undefined) ?? "W";
+    // Normalise to watts regardless of source unit
+    const powerW    = isFinite(powerRaw)
+      ? (powerUnit.toLowerCase() === "kw" ? powerRaw * 1000 : powerRaw)
+      : NaN;
+
     const actualRaw = cfg.today_actual_entity
       ? parseFloat(this.hass?.states[cfg.today_actual_entity]?.state ?? "")
       : NaN;
 
-    if (!isFinite(powerRaw)) return nothing;
+    const hasPower  = isFinite(powerW);
+    const hasActual = isFinite(actualRaw);
 
-    const powerStr  = powerRaw.toFixed(2) + " kW";
-    const actualStr = isFinite(actualRaw) ? " | " + actualRaw.toFixed(1) + " kWh" : "";
+    if (!hasPower && !hasActual) return nothing;
+
+    const parts: string[] = [];
+    if (hasPower)  parts.push(this._formatPower(powerW));
+    if (hasActual) parts.push(actualRaw.toFixed(1) + " kWh");
 
     return html`
       <div class="header-live">
         <span class="live-label">LIVE:</span>
-        <span>${powerStr}${actualStr}</span>
+        <span>${parts.join(" | ")}</span>
       </div>
     `;
   }
@@ -1052,6 +1070,20 @@ export class SolarForecastCard extends LitElement {
     const points = this._parseHours(row.rawHoursAttr);
     const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
 
+    // Determine the reference ceiling for bar scaling
+    const { inverter_max_kw, solar_max_kwp } = this._config!;
+    let maxRef: number;
+    if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
+      // Array can't exceed inverter limit; if array is smaller it's the ceiling
+      maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
+    } else if (inverter_max_kw !== undefined) {
+      maxRef = inverter_max_kw;
+    } else if (solar_max_kwp !== undefined) {
+      maxRef = solar_max_kwp;
+    } else {
+      maxRef = peakKwh; // no system config — fall back to relative scaling
+    }
+
     return html`
       <div
         class="popup-overlay ${this._popupVisible ? "visible" : ""}"
@@ -1080,7 +1112,7 @@ export class SolarForecastCard extends LitElement {
           </div>
 
           <div class="chart-scroll">
-            ${this._renderHourlyChart(points, peakKwh)}
+            ${this._renderHourlyChart(points, peakKwh, maxRef)}
           </div>
 
         </div>
@@ -1088,7 +1120,7 @@ export class SolarForecastCard extends LitElement {
     `;
   }
 
-  private _renderHourlyChart(points: HourPoint[], peakKwh: number) {
+  private _renderHourlyChart(points: HourPoint[], peakKwh: number, maxRef: number) {
     if (points.length === 0) {
       return html`
         <div class="chart-no-data">
@@ -1106,7 +1138,7 @@ export class SolarForecastCard extends LitElement {
         </div>
       `,
       ...points.map((pt, i) => {
-      const pct = peakKwh > 0 ? (pt.kwh / peakKwh) * 100 : 0;
+      const pct = maxRef > 0 ? Math.min((pt.kwh / maxRef) * 100, 100) : 0;
       const isPeak = pt.kwh === peakKwh && peakKwh > 0;
       // Stagger: 20ms base + 18ms per row, capped at 300ms
       const delay = Math.min(20 + i * 18, 300);

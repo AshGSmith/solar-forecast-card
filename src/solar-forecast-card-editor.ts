@@ -42,6 +42,8 @@ const LABELS: Record<string, string> = {
   today_actual_entity: "Today's actual generation (optional)",
   date_format:         "Date format",
   time_format:         "Time format (hourly popup)",
+  inverter_max_kw:     "Inverter max output (kW)",
+  solar_max_kwp:       "Solar array size (kWp)",
   low_threshold:       "Low threshold (kWh)",
   high_threshold:      "High threshold (kWh)",
 };
@@ -93,6 +95,11 @@ const SCHEMA_DISPLAY: HaFormSchema[] = [
   },
 ];
 
+const SCHEMA_SYSTEM: HaFormSchema[] = [
+  { name: "inverter_max_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW"  } } },
+  { name: "solar_max_kwp",   selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWp" } } },
+];
+
 const SCHEMA_THRESHOLDS: HaFormSchema[] = [
   { name: "low_threshold",  selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
   { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
@@ -116,6 +123,8 @@ interface FormData {
   today_actual_entity: string;
   date_format: string;
   time_format: string;
+  inverter_max_kw: number | undefined;
+  solar_max_kwp: number | undefined;
   low_threshold: number | undefined;
   high_threshold: number | undefined;
 }
@@ -141,6 +150,8 @@ export function normalizeConfig(
     today_actual_entity: raw.today_actual_entity,
     date_format:        raw.date_format ?? "DD/MM",
     time_format:        raw.time_format ?? "24h",
+    inverter_max_kw:    raw.inverter_max_kw,
+    solar_max_kwp:      raw.solar_max_kwp,
     low_threshold:      raw.low_threshold,
     high_threshold:     raw.high_threshold,
   };
@@ -169,6 +180,8 @@ export class SolarForecastCardEditor extends LitElement {
       today_actual_entity: cfg.today_actual_entity ?? "",
       date_format:         cfg.date_format         ?? "DD/MM",
       time_format:         cfg.time_format         ?? "24h",
+      inverter_max_kw:     cfg.inverter_max_kw,
+      solar_max_kwp:       cfg.solar_max_kwp,
       low_threshold:       cfg.low_threshold,
       high_threshold:      cfg.high_threshold,
       forecast_entity_0:   cfg.forecast_entities[0] ?? "",
@@ -201,8 +214,10 @@ export class SolarForecastCardEditor extends LitElement {
       today_actual_entity: data.today_actual_entity || undefined,
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
       time_format: (data.time_format as "24h" | "12h") || "24h",
-      low_threshold:  typeof data.low_threshold  === "number" ? data.low_threshold  : undefined,
-      high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
+      inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
+      solar_max_kwp:   typeof data.solar_max_kwp   === "number" ? data.solar_max_kwp   : undefined,
+      low_threshold:   typeof data.low_threshold   === "number" ? data.low_threshold   : undefined,
+      high_threshold:  typeof data.high_threshold  === "number" ? data.high_threshold  : undefined,
     };
   }
 
@@ -484,6 +499,15 @@ export class SolarForecastCardEditor extends LitElement {
         .hass=${this.hass}
         .data=${data}
         .schema=${SCHEMA_DISPLAY}
+        .computeLabel=${label}
+        @value-changed=${onChange}
+      ></ha-form>
+
+      <p class="section-title">System</p>
+      <ha-form
+        .hass=${this.hass}
+        .data=${data}
+        .schema=${SCHEMA_SYSTEM}
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
