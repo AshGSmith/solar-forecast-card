@@ -30,7 +30,7 @@ const LABELS: Record<string, string> = {
   title:               "Title (optional)",
   icon:                "Header icon (optional, e.g. mdi:solar-power)",
   show_header:          "Show header",
-  device_id:           "Device (optional — auto-detects entities)",
+  device_id:           "Forecast Device (optional — auto-detects entities)",
   forecast_entity_0:   "Day 1 — Today",
   forecast_entity_1:   "Day 2 — Tomorrow",
   forecast_entity_2:   "Day 3",
@@ -50,14 +50,12 @@ const LABELS: Record<string, string> = {
 
 // ── Schema segments (rendered with section headers between them) ──────────────
 
-const SCHEMA_CARD: HaFormSchema[] = [
-  { name: "title",      selector: { text: {} } },
-  { name: "icon",       selector: { icon: {} } },
+// Top-level fields — always visible, no section header
+const SCHEMA_TOP: HaFormSchema[] = [
+  { name: "title",       selector: { text: {} } },
+  { name: "icon",        selector: { icon: {} } },
   { name: "show_header", selector: { boolean: {} } },
-];
-
-const SCHEMA_DEVICE: HaFormSchema[] = [
-  { name: "device_id", selector: { device: {} } },
+  { name: "device_id",   selector: { device: {} } },
 ];
 
 const SCHEMA_FORECAST: HaFormSchema[] = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
@@ -65,9 +63,12 @@ const SCHEMA_FORECAST: HaFormSchema[] = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
   selector: { entity: { domain: "sensor" } },
 }));
 
-const SCHEMA_LIVE: HaFormSchema[] = [
-  { name: "live_power_entity",   selector: { entity: { domain: "sensor" } } },
+const SCHEMA_TODAY_ACTUAL: HaFormSchema[] = [
   { name: "today_actual_entity", selector: { entity: { domain: "sensor" } } },
+];
+
+const SCHEMA_LIVE_POWER: HaFormSchema[] = [
+  { name: "live_power_entity", selector: { entity: { domain: "sensor" } } },
 ];
 
 const SCHEMA_DISPLAY: HaFormSchema[] = [
@@ -431,19 +432,11 @@ export class SolarForecastCardEditor extends LitElement {
         display: block;
       }
 
-      .section-title {
-        font-size: 0.78rem;
-        font-weight: 500;
-        color: var(--secondary-text-color);
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin: 20px 0 4px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.12));
-      }
-
-      .section-title:first-child {
-        margin-top: 4px;
+      ha-expansion-panel {
+        display: block;
+        margin-top: 8px;
+        --expansion-panel-summary-padding: 0 8px;
+        --expansion-panel-content-padding: 0 8px 8px;
       }
     `;
   }
@@ -458,68 +451,70 @@ export class SolarForecastCardEditor extends LitElement {
     const onChange = this._valueChanged.bind(this);
 
     return html`
-      <p class="section-title">Card</p>
       <ha-form
         .hass=${this.hass}
         .data=${data}
-        .schema=${SCHEMA_CARD}
+        .schema=${SCHEMA_TOP}
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
 
-      <p class="section-title">Device</p>
-      <ha-form
-        .hass=${this.hass}
-        .data=${data}
-        .schema=${SCHEMA_DEVICE}
-        .computeLabel=${label}
-        @value-changed=${onChange}
-      ></ha-form>
+      <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_FORECAST}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_TODAY_ACTUAL}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
 
-      <p class="section-title">Daily Forecast Entities</p>
-      <ha-form
-        .hass=${this.hass}
-        .data=${data}
-        .schema=${SCHEMA_FORECAST}
-        .computeLabel=${label}
-        @value-changed=${onChange}
-      ></ha-form>
+      <ha-expansion-panel header="Live Data" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_LIVE_POWER}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
 
-      <p class="section-title">Live Data</p>
-      <ha-form
-        .hass=${this.hass}
-        .data=${data}
-        .schema=${SCHEMA_LIVE}
-        .computeLabel=${label}
-        @value-changed=${onChange}
-      ></ha-form>
+      <ha-expansion-panel header="System Parameters" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_SYSTEM}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
 
-      <p class="section-title">Display</p>
-      <ha-form
-        .hass=${this.hass}
-        .data=${data}
-        .schema=${SCHEMA_DISPLAY}
-        .computeLabel=${label}
-        @value-changed=${onChange}
-      ></ha-form>
+      <ha-expansion-panel header="Colour Thresholds" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_THRESHOLDS}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
 
-      <p class="section-title">System</p>
-      <ha-form
-        .hass=${this.hass}
-        .data=${data}
-        .schema=${SCHEMA_SYSTEM}
-        .computeLabel=${label}
-        @value-changed=${onChange}
-      ></ha-form>
-
-      <p class="section-title">Colour Thresholds</p>
-      <ha-form
-        .hass=${this.hass}
-        .data=${data}
-        .schema=${SCHEMA_THRESHOLDS}
-        .computeLabel=${label}
-        @value-changed=${onChange}
-      ></ha-form>
+      <ha-expansion-panel header="Date/Time Formats" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_DISPLAY}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
     `;
   }
 }
