@@ -2,6 +2,12 @@
 
 A Home Assistant Lovelace custom card for displaying solar energy forecast data supplied by any forcasting integration, but with simple set up for use with the Volcast integration by selecting the Volcast device to allow the card to auto map entities. 
 
+## Screenshots
+
+![Solar Forecast Card — main view](docs/screenshots/v0.2.0/card-main.jpg)
+
+![Solar Forecast Card — hourly popup](docs/screenshots/v0.2.0/card-popup.jpg)
+
 ## Installation
 
 ### HACS (Recommended)
