@@ -1,5 +1,7 @@
 {
   "name": "Solar Forecast Card",
+  "filename": "solar-forecast-card.js",
   "render_readme": true,
-  "country": "all"
+  "homeassistant": "2023.4.0"
 }
+
