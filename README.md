@@ -13,8 +13,6 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 ### HACS (Recommended)
 #### Install via HACS
 
-[![Add to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=AshGSmith&repository=solar-forecast-card)
-
 1. Open HACS in your Home Assistant instance.
 2. Click on the **⋮** button on the top right and select **Custom repositories***
 3. Enter the below in the **Repository** field
@@ -109,6 +107,11 @@ Bar colours change based on each day's forecast total. When neither threshold is
 |--------|------|----------|---------|-------------|
 | `low_threshold` | number | no | — | Days forecast below this value (kWh) are shown in a soft red/coral colour |
 | `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
+
+## Support
+This card is provided completely free of charge, but if you want to support me or just say thanks by buying me a coffee, that would mean so much!
+
+<a href="https://www.buymeacoffee.com/AshGSmith" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## License
 
