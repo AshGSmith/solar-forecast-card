@@ -732,7 +732,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
             const s = entityId ? this.hass.states[entityId] : undefined;
-            const kwhVal = parseFloat(s?.state ?? "");
+            const rawVal = parseFloat(s?.state ?? "");
+            const unit = s?.attributes?.unit_of_measurement?.toLowerCase();
+            const kwhVal = isFinite(rawVal)
+                ? (unit === "wh" ? rawVal / 1000 : rawVal)
+                : NaN;
             return {
                 date,
                 isToday: i === 0,
