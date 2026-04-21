@@ -105,7 +105,10 @@ export class SolarForecastCard extends LitElement {
 
     let todayActualKwh: number | null = null;
     if (cfg.today_actual_entity) {
-      const v = parseFloat(this.hass.states[cfg.today_actual_entity]?.state ?? "");
+      const actualState = this.hass.states[cfg.today_actual_entity];
+      const actualRaw  = parseFloat(actualState?.state ?? "");
+      const actualUnit = (actualState?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+      const v = isFinite(actualRaw) ? (actualUnit === "wh" ? actualRaw / 1000 : actualRaw) : NaN;
       if (isFinite(v)) todayActualKwh = v;
     }
 
@@ -115,12 +118,8 @@ export class SolarForecastCard extends LitElement {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
 
-      const s = entityId ? this.hass!.states[entityId] : undefined;
-      const rawVal = parseFloat(s?.state ?? "");
-      const unit   = (s?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
-      const kwhVal = isFinite(rawVal)
-        ? (unit === "wh" ? rawVal / 1000 : rawVal)
-        : NaN;
+      const s      = entityId ? this.hass!.states[entityId] : undefined;
+      const kwhVal = parseFloat(s?.state ?? "");
 
       return {
         date,
@@ -1092,12 +1091,17 @@ export class SolarForecastCard extends LitElement {
       ? (powerUnit.toLowerCase() === "kw" ? powerRaw * 1000 : powerRaw)
       : NaN;
 
-    const actualRaw = cfg.today_actual_entity
-      ? parseFloat(this.hass?.states[cfg.today_actual_entity]?.state ?? "")
+    const actualState = cfg.today_actual_entity
+      ? this.hass?.states[cfg.today_actual_entity]
+      : undefined;
+    const actualRawVal  = parseFloat(actualState?.state ?? "");
+    const actualRawUnit = (actualState?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+    const actualKwh     = isFinite(actualRawVal)
+      ? (actualRawUnit === "wh" ? actualRawVal / 1000 : actualRawVal)
       : NaN;
 
     const hasPower  = isFinite(powerW);
-    const hasActual = isFinite(actualRaw);
+    const hasActual = isFinite(actualKwh);
 
     // ── Week total / daily average ────────────────────────────────────────────
     const validForecasts = cfg.forecast_entities
@@ -1111,7 +1115,7 @@ export class SolarForecastCard extends LitElement {
 
     const liveParts: string[] = [];
     if (hasPower)  liveParts.push(this._formatPower(powerW));
-    if (hasActual) liveParts.push(actualRaw.toFixed(1) + " kWh");
+    if (hasActual) liveParts.push(actualKwh.toFixed(1) + " kWh");
 
     return html`
       <div class="header-live">
