@@ -724,7 +724,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const today = new Date();
         let todayActualKwh = null;
         if (cfg.today_actual_entity) {
-            const v = parseFloat(this.hass.states[cfg.today_actual_entity]?.state ?? "");
+            const actualState = this.hass.states[cfg.today_actual_entity];
+            const actualRaw = parseFloat(actualState?.state ?? "");
+            const actualUnit = actualState?.attributes?.unit_of_measurement?.toLowerCase();
+            const v = isFinite(actualRaw) ? (actualUnit === "wh" ? actualRaw / 1000 : actualRaw) : NaN;
             if (isFinite(v))
                 todayActualKwh = v;
         }
@@ -732,11 +735,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
             const s = entityId ? this.hass.states[entityId] : undefined;
-            const rawVal = parseFloat(s?.state ?? "");
-            const unit = s?.attributes?.unit_of_measurement?.toLowerCase();
-            const kwhVal = isFinite(rawVal)
-                ? (unit === "wh" ? rawVal / 1000 : rawVal)
-                : NaN;
+            const kwhVal = parseFloat(s?.state ?? "");
             return {
                 date,
                 isToday: i === 0,
@@ -1658,11 +1657,16 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const powerW = isFinite(powerRaw)
             ? (powerUnit.toLowerCase() === "kw" ? powerRaw * 1000 : powerRaw)
             : NaN;
-        const actualRaw = cfg.today_actual_entity
-            ? parseFloat(this.hass?.states[cfg.today_actual_entity]?.state ?? "")
+        const actualState = cfg.today_actual_entity
+            ? this.hass?.states[cfg.today_actual_entity]
+            : undefined;
+        const actualRawVal = parseFloat(actualState?.state ?? "");
+        const actualRawUnit = actualState?.attributes?.unit_of_measurement?.toLowerCase();
+        const actualKwh = isFinite(actualRawVal)
+            ? (actualRawUnit === "wh" ? actualRawVal / 1000 : actualRawVal)
             : NaN;
         const hasPower = isFinite(powerW);
-        const hasActual = isFinite(actualRaw);
+        const hasActual = isFinite(actualKwh);
         // ── Week total / daily average ────────────────────────────────────────────
         const validForecasts = cfg.forecast_entities
             .map((id) => (id ? parseFloat(this.hass?.states[id]?.state ?? "") : NaN))
@@ -1676,7 +1680,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (hasPower)
             liveParts.push(this._formatPower(powerW));
         if (hasActual)
-            liveParts.push(actualRaw.toFixed(1) + " kWh");
+            liveParts.push(actualKwh.toFixed(1) + " kWh");
         return b `
       <div class="header-live">
         ${hasPower || hasActual ? b `
