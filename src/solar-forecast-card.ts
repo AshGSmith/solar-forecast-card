@@ -206,10 +206,11 @@ export class SolarForecastCard extends LitElement {
    */
   private _parseHours(
     raw: unknown,
-    hint?: "volcast" | "solcast" | "forecast_solar" | "open_meteo_solar_forecast" | "manual"
+    hint?: "volcast" | "solcast" | "forecast_solar" | "open_meteo_solar_forecast" | "manual",
+    silent = false
   ): HourPoint[] {
     // ── Always log the raw value so callers can verify the format ────────────
-    console.debug(
+    if (!silent) console.debug(
       "[solar-forecast-card] hours attr →",
       raw === undefined ? "undefined" :
       raw === null      ? "null" :
@@ -223,10 +224,10 @@ export class SolarForecastCard extends LitElement {
     // ── Open-Meteo: dispatch before generic format detection ─────────────────
     if (hint === "open_meteo_solar_forecast") {
       if (typeof raw !== "object" || Array.isArray(raw)) {
-        console.debug("[solar-forecast-card] hours: Open-Meteo wh_period is not a plain object");
+        if (!silent) console.debug("[solar-forecast-card] hours: Open-Meteo wh_period is not a plain object");
         return [];
       }
-      console.debug("[solar-forecast-card] hours: Open-Meteo wh_period format");
+      if (!silent) console.debug("[solar-forecast-card] hours: Open-Meteo wh_period format");
       return this._parseOpenMeteoWhPeriod(raw as Record<string, unknown>);
     }
 
@@ -235,7 +236,7 @@ export class SolarForecastCard extends LitElement {
 
       if (Array.isArray(raw)) {
         if (raw.length === 0) {
-          console.debug("[solar-forecast-card] hours: empty array");
+          if (!silent) console.debug("[solar-forecast-card] hours: empty array");
           return [];
         }
 
@@ -248,7 +249,7 @@ export class SolarForecastCard extends LitElement {
             "pv_estimate" in (raw[0] as Record<string, unknown>));
 
         if (isSolcast) {
-          console.debug("[solar-forecast-card] hours: Solcast detailedForecast format");
+          if (!silent) console.debug("[solar-forecast-card] hours: Solcast detailedForecast format");
           points = this._parseSolcastPeriods(raw as Array<Record<string, unknown>>);
         } else {
 
@@ -292,7 +293,7 @@ export class SolarForecastCard extends LitElement {
       } else if (typeof raw === "object") {
         const entries = Object.entries(raw as Record<string, unknown>);
         if (entries.length === 0) {
-          console.debug("[solar-forecast-card] hours: empty object");
+          if (!silent) console.debug("[solar-forecast-card] hours: empty object");
           return [];
         }
 
@@ -310,7 +311,7 @@ export class SolarForecastCard extends LitElement {
           .sort((a, b) => a.hour - b.hour);
 
       } else {
-        console.warn("[solar-forecast-card] hours: unrecognised type:", typeof raw);
+        if (!silent) console.warn("[solar-forecast-card] hours: unrecognised type:", typeof raw);
         return [];
       }
 
@@ -321,12 +322,12 @@ export class SolarForecastCard extends LitElement {
       }
 
       if (first === -1) {
-        console.debug("[solar-forecast-card] hours: attribute present but all values are zero");
+        if (!silent) console.debug("[solar-forecast-card] hours: attribute present but all values are zero");
         return [];
       }
 
       const trimmed = points.slice(first, last + 1);
-      console.debug(
+      if (!silent) console.debug(
         `[solar-forecast-card] hours: ${trimmed.length} points,`,
         `${trimmed[0].hour}:00 → ${trimmed[trimmed.length - 1].hour}:00,`,
         `peak ${Math.max(...trimmed.map((p) => p.kwh)).toFixed(3)} kWh`
@@ -334,7 +335,7 @@ export class SolarForecastCard extends LitElement {
       return trimmed;
 
     } catch (err) {
-      console.error("[solar-forecast-card] hours: parse failed →", err, "\nraw value:", raw);
+      if (!silent) console.error("[solar-forecast-card] hours: parse failed →", err, "\nraw value:", raw);
       return [];
     }
   }
@@ -532,6 +533,11 @@ export class SolarForecastCard extends LitElement {
       .live-label {
         font-weight: 700;
         color: var(--state-active-color, #fbbf24);
+      }
+
+      .forecast-label {
+        font-weight: 700;
+        color: #60a5fa;
       }
 
       .live-week {
@@ -1253,6 +1259,16 @@ export class SolarForecastCard extends LitElement {
     return `${(watts / 1000).toFixed(1)} kW`;
   }
 
+  /**
+   * Format an energy value compactly: 2 dp below 1 kWh, 1 dp above.
+   * Guards against non-finite input — should never occur in normal use, but
+   * prevents "NaN kWh" / "Infinity kWh" from appearing in the header.
+   */
+  private _formatKwh(kwh: number): string {
+    if (!isFinite(kwh) || kwh < 0) return "0.00 kWh";
+    return `${kwh < 1 ? kwh.toFixed(2) : kwh.toFixed(1)} kWh`;
+  }
+
   private _renderLive() {
     const cfg = this._config!;
 
@@ -1298,7 +1314,86 @@ export class SolarForecastCard extends LitElement {
     const avgDay    = validForecasts.length > 0 ? weekTotal / validForecasts.length : NaN;
     const hasWeek   = validForecasts.length > 0;
 
-    if (!hasPower && !hasActual && !hasWeek) return nothing;
+    // ── Forecast summary: +1HR and LEFT ──────────────────────────────────────
+    // Both values are derived purely from the integration's own hourly forecast
+    // data — they are independent of actual generation sensors.
+    //
+    // +1HR — forecast kWh for the next full hour (currentHour + 1).
+    // LEFT — sum of all forecast kWh for every hour still remaining today
+    //        (i.e. all hours > currentHour, which includes +1HR itself).
+    //
+    // The gate is data-driven, not integration-name-driven: rawHours resolves
+    // to undefined for any integration that carries no hourly attribute
+    // (forecast.solar being the current example), and the inner block is
+    // skipped cleanly — both values stay null and the line is not rendered.
+    //
+    // Attribute resolution mirrors _openPopup exactly so all four integrations
+    // are handled by the same _parseHours normalisation path:
+    //   Volcast        → hours            (array of numbers/objects)
+    //   Solcast        → detailedForecast  (30-min period objects → aggregated hourly)
+    //   Open-Meteo     → wh_period         (ISO datetime→Wh dict  → hourly kWh)
+    //   forecast.solar → undefined         (no hourly data; values not shown)
+    //   manual         → hours ?? detailedForecast (best-effort fallback)
+    let nextHourKwh: number | null = null;
+    let forecastLeftKwh: number | null = null;
+
+    const todayEntityId = cfg.forecast_entities[0];
+    const todayFcState  = todayEntityId ? this.hass?.states[todayEntityId] : undefined;
+
+    if (todayEntityId && todayFcState) {
+      const intType = cfg.integration_type;
+      // Mirrors the attribute resolution in _openPopup — keep in sync if that changes.
+      const rawHours =
+        intType === "solcast"                   ? todayFcState.attributes?.detailedForecast :
+        intType === "volcast"                   ? todayFcState.attributes?.hours            :
+        intType === "forecast_solar"            ? undefined                                 :
+        intType === "open_meteo_solar_forecast" ? todayFcState.attributes?.wh_period        :
+        // manual / unknown — try both common attribute names
+        (todayFcState.attributes?.hours ?? todayFcState.attributes?.detailedForecast);
+
+      if (rawHours !== undefined) {
+        try {
+          // nextForecastHour is the next FULL hour slot after whatever the clock
+          // currently shows.  At 13:15 → 14; at 13:00 → 14; at 23:50 → 24.
+          // Hour 24 won't match any slot so both values stay null after midnight.
+          const currentHour      = new Date().getHours(); // 0–23, browser/local time
+          const nextForecastHour = currentHour + 1;
+
+          // Parse silently — runs on every render, console noise not wanted here
+          const points = this._parseHours(rawHours, intType, true);
+
+          // +1HR — the single forecast bucket for the next upcoming full hour.
+          // Example: 13:15 → slot 14, 13:59 → slot 14.
+          // isFinite guard: _parseHours already ensures finite values, but we
+          // defend here too so a bad attribute can never produce "NaN kWh".
+          const nextHourPt = points.find((p) => p.hour === nextForecastHour);
+          if (nextHourPt && isFinite(nextHourPt.kwh)) {
+            nextHourKwh = nextHourPt.kwh;
+          }
+
+          // LEFT — sum of all forecast buckets from the next full hour onward.
+          // Example: 13:15 → slots 14 + 15 + 16 … through end of today.
+          // Tomorrow is automatically excluded: _parseHours only processes
+          // today's entity and its trimming removes trailing zero slots, so
+          // no tomorrow data can be present in points[].
+          const futurePoints = points.filter((p) => p.hour >= nextForecastHour);
+          if (futurePoints.length > 0) {
+            const sum = futurePoints.reduce((s, p) => s + p.kwh, 0);
+            if (isFinite(sum)) forecastLeftKwh = sum;
+          }
+        } catch {
+          // If parsing or calculation fails for any reason, leave both values
+          // as null so the summary line is simply not rendered rather than
+          // showing broken or misleading data.
+          nextHourKwh    = null;
+          forecastLeftKwh = null;
+        }
+      }
+    }
+
+    const hasForecastSummary = nextHourKwh !== null || forecastLeftKwh !== null;
+
+    if (!hasPower && !hasActual && !hasWeek && !hasForecastSummary) return nothing;
 
     const liveParts: string[] = [];
     if (hasPower)  liveParts.push(this._formatPower(powerW));
@@ -1310,6 +1405,21 @@ export class SolarForecastCard extends LitElement {
           <div class="live-row">
             <span class="live-label">LIVE:</span>
             <span>${liveParts.join(" | ")}</span>
+          </div>
+        ` : nothing}
+        ${hasForecastSummary ? html`
+          <div class="live-row">
+            ${nextHourKwh !== null ? html`
+              <span class="forecast-label">+1HR:</span>
+              <span>${this._formatKwh(nextHourKwh)}</span>
+            ` : nothing}
+            ${nextHourKwh !== null && forecastLeftKwh !== null ? html`
+              <span style="opacity:0.35">|</span>
+            ` : nothing}
+            ${forecastLeftKwh !== null ? html`
+              <span class="forecast-label">LEFT:</span>
+              <span>${this._formatKwh(forecastLeftKwh)}</span>
+            ` : nothing}
           </div>
         ` : nothing}
         ${hasWeek ? html`
