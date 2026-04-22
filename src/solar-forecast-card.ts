@@ -124,8 +124,9 @@ export class SolarForecastCard extends LitElement {
     //     config, etc.), todayActualKwh is left unchanged so it retains the
     //     today_actual_entity value already read above — graceful fallback.
     //
-    // The header (_renderLive) always reads today_actual_entity independently
-    // and is never affected by this block.
+    // The header (_renderLive) applies the same precedence: arrays sum when
+    // configured, today_actual_entity otherwise. It reads entities directly
+    // so it stays in sync without depending on this _buildRows output.
     let todayArrayEntries: Array<{ label: string; kwh: number }> | null = null;
     if ((cfg.actual_arrays?.length ?? 0) > 0) {
       todayArrayEntries = cfg.actual_arrays!.map((a) => {
@@ -1265,14 +1266,26 @@ export class SolarForecastCard extends LitElement {
       ? (powerUnit.toLowerCase() === "kw" ? powerRaw * 1000 : powerRaw)
       : NaN;
 
-    const actualState = cfg.today_actual_entity
-      ? this.hass?.states[cfg.today_actual_entity]
-      : undefined;
-    const actualRawVal  = parseFloat(actualState?.state ?? "");
-    const actualRawUnit = (actualState?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
-    const actualKwh     = isFinite(actualRawVal)
-      ? (actualRawUnit === "wh" ? actualRawVal / 1000 : actualRawVal)
-      : NaN;
+    // ── Actual generation total — arrays take precedence over single entity ──
+    // When actual_arrays are configured their sum is the canonical header total.
+    // Only fall back to today_actual_entity when no arrays are configured.
+    let actualKwh: number = NaN;
+    const hasArrays = (cfg.actual_arrays?.length ?? 0) > 0;
+    if (hasArrays) {
+      actualKwh = cfg.actual_arrays!.reduce((s, a) => {
+        const st   = a.entity ? this.hass?.states[a.entity] : undefined;
+        const raw  = parseFloat(st?.state ?? "");
+        const unit = (st?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+        return s + (isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : 0);
+      }, 0);
+    } else if (cfg.today_actual_entity) {
+      const actualState   = this.hass?.states[cfg.today_actual_entity];
+      const actualRawVal  = parseFloat(actualState?.state ?? "");
+      const actualRawUnit = (actualState?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+      actualKwh = isFinite(actualRawVal)
+        ? (actualRawUnit === "wh" ? actualRawVal / 1000 : actualRawVal)
+        : NaN;
+    }
 
     const hasPower  = isFinite(powerW);
     const hasActual = isFinite(actualKwh);
