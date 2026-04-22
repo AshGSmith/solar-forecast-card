@@ -263,10 +263,13 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         // Route to integration-specific detection when platform is identifiable
         const isSolcast = sensors.some((e) => e.platform === "solcast_solar");
         const isForecastSolar = sensors.some((e) => e.platform === "forecast_solar");
+        const isOpenMeteo = sensors.some((e) => e.platform === "open_meteo_solar_forecast");
         if (isSolcast)
             return this._autoDetectSolcast(sensors);
         if (isForecastSolar)
             return this._autoDetectForecastSolar(sensors);
+        if (isOpenMeteo)
+            return this._autoDetectOpenMeteo(sensors);
         // ── Split into forecast sensors (have "hours") and actual candidates ──────
         const forecastSensors = sensors.filter((e) => Array.isArray(this.hass.states[e.entity_id]?.attributes?.hours));
         // ── Map each forecast sensor to a day-offset from today ───────────────────
@@ -411,6 +414,70 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         return {
             forecast_entities: slots,
             integration_type: "forecast_solar",
+        };
+    }
+    /**
+     * Open-Meteo Solar Forecast auto-detection.
+     *
+     * The integration (platform: "open_meteo_solar_forecast") exposes daily
+     * energy sensors whose entity_id follows the pattern:
+     *   sensor.{service_slug}_{key}
+     *
+     * Keys mapped to card slots:
+     *   energy_production_today     → slot 0  (today)
+     *   energy_production_tomorrow  → slot 1  (tomorrow)
+     *   energy_production_d2        → slot 2
+     *   energy_production_d3        → slot 3
+     *   energy_production_d4        → slot 4
+     *   energy_production_d5        → slot 5
+     *   energy_production_d6        → slot 6
+     *   energy_production_d7        → skipped (card only has 7 slots, 0–6)
+     *
+     * "energy_production_today_remaining" is excluded.
+     * Native unit is Wh; HA auto-converts to kWh via suggested_unit_of_measurement.
+     * Both "kWh" and "Wh" are accepted to be safe.
+     *
+     * Each daily sensor carries a `wh_period` attribute (ISO datetime → Wh)
+     * that the card uses for the hourly popup chart.
+     */
+    _autoDetectOpenMeteo(sensors) {
+        const slots = ["", "", "", "", "", "", ""];
+        // Key suffix → slot index.  Order matters: "today" must be listed before
+        // any d-number so the endsWith check doesn't need extra guards.
+        const KEY_SLOTS = [
+            ["energy_production_today", 0],
+            ["energy_production_tomorrow", 1],
+            ["energy_production_d2", 2],
+            ["energy_production_d3", 3],
+            ["energy_production_d4", 4],
+            ["energy_production_d5", 5],
+            ["energy_production_d6", 6],
+            // energy_production_d7 → no slot, intentionally omitted
+        ];
+        for (const sensor of sensors) {
+            // Skip the "remaining" sensor — not a daily total
+            if (sensor.entity_id.includes("_remaining"))
+                continue;
+            const state = this.hass.states[sensor.entity_id];
+            const unit = state?.attributes?.unit_of_measurement;
+            if (unit !== "kWh" && unit !== "Wh")
+                continue;
+            const id = sensor.entity_id;
+            for (const [key, slot] of KEY_SLOTS) {
+                // entity_id format is sensor.{slug}_{key}, so the key is always the suffix
+                if (id.endsWith("_" + key)) {
+                    slots[slot] = id;
+                    break;
+                }
+            }
+        }
+        console.debug("[solar-forecast-card] Open-Meteo auto-detect mapping:", slots.map((id, i) => ({
+            slot: `Day ${i} (${["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"][i]})`,
+            entity: id ? id.replace(/^sensor\./, "") : "(empty)",
+        })));
+        return {
+            forecast_entities: slots,
+            integration_type: "open_meteo_solar_forecast",
         };
     }
     /**
@@ -748,7 +815,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
                         ? s?.attributes?.hours
                         : cfg.integration_type === "forecast_solar"
                             ? undefined
-                            : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
+                            : cfg.integration_type === "open_meteo_solar_forecast"
+                                ? s?.attributes?.wh_period
+                                : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
             };
         });
         const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
@@ -787,6 +856,15 @@ let SolarForecastCard = class SolarForecastCard extends i {
                     : `${typeof raw} ${JSON.stringify(raw).slice(0, 120)}`);
         if (raw === null || raw === undefined)
             return [];
+        // ── Open-Meteo: dispatch before generic format detection ─────────────────
+        if (hint === "open_meteo_solar_forecast") {
+            if (typeof raw !== "object" || Array.isArray(raw)) {
+                console.debug("[solar-forecast-card] hours: Open-Meteo wh_period is not a plain object");
+                return [];
+            }
+            console.debug("[solar-forecast-card] hours: Open-Meteo wh_period format");
+            return this._parseOpenMeteoWhPeriod(raw);
+        }
         try {
             let points;
             if (Array.isArray(raw)) {
@@ -900,6 +978,37 @@ let SolarForecastCard = class SolarForecastCard extends i {
             .map(([hour, kwh]) => ({ hour, kwh }))
             .sort((a, b) => a.hour - b.hour);
     }
+    /**
+     * Parse Open-Meteo's `wh_period` attribute into HourPoint[].
+     *
+     * The attribute is a plain object keyed by ISO datetime strings
+     * (e.g. "2024-04-22T06:00:00") with numeric Wh energy values for each
+     * period. Multiple sub-hourly periods with the same hour are summed.
+     * Values are converted from Wh to kWh.
+     */
+    _parseOpenMeteoWhPeriod(raw) {
+        const buckets = new Map();
+        for (const [isoKey, val] of Object.entries(raw)) {
+            // Extract the hour directly from the ISO string (the T-portion is the
+            // local hour in HA's timezone). Using new Date().getHours() would shift
+            // the hour to the browser's local timezone, which may differ from HA's.
+            const hourMatch = isoKey.match(/T(\d{2}):/);
+            if (!hourMatch)
+                continue;
+            const hour = parseInt(hourMatch[1], 10);
+            if (!isFinite(hour) || hour < 0 || hour > 23)
+                continue;
+            const wh = typeof val === "number" ? val
+                : typeof val === "string" ? parseFloat(val)
+                    : NaN;
+            if (!isFinite(wh))
+                continue;
+            buckets.set(hour, (buckets.get(hour) ?? 0) + wh / 1000); // Wh → kWh
+        }
+        return Array.from(buckets.entries())
+            .map(([hour, kwh]) => ({ hour, kwh }))
+            .sort((a, b) => a.hour - b.hour);
+    }
     // ── Colour tier ──────────────────────────────────────────────────────────
     _tier(kwh) {
         if (kwh === null)
@@ -924,7 +1033,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
                 ? freshState?.attributes?.hours
                 : intType === "forecast_solar"
                     ? undefined
-                    : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
+                    : intType === "open_meteo_solar_forecast"
+                        ? freshState?.attributes?.wh_period
+                        : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
         // Log which entity is being used and what the hours attribute looks like
         const hoursType = freshHours === undefined ? "missing"
             : freshHours === null ? "null"

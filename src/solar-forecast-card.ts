@@ -133,7 +133,9 @@ export class SolarForecastCard extends LitElement {
             ? s?.attributes?.hours
             : cfg.integration_type === "forecast_solar"
               ? undefined
-              : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
+              : cfg.integration_type === "open_meteo_solar_forecast"
+                ? s?.attributes?.wh_period
+                : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
       };
     });
 
@@ -169,7 +171,7 @@ export class SolarForecastCard extends LitElement {
    */
   private _parseHours(
     raw: unknown,
-    hint?: "volcast" | "solcast" | "forecast_solar" | "manual"
+    hint?: "volcast" | "solcast" | "forecast_solar" | "open_meteo_solar_forecast" | "manual"
   ): HourPoint[] {
     // ── Always log the raw value so callers can verify the format ────────────
     console.debug(
@@ -182,6 +184,16 @@ export class SolarForecastCard extends LitElement {
     );
 
     if (raw === null || raw === undefined) return [];
+
+    // ── Open-Meteo: dispatch before generic format detection ─────────────────
+    if (hint === "open_meteo_solar_forecast") {
+      if (typeof raw !== "object" || Array.isArray(raw)) {
+        console.debug("[solar-forecast-card] hours: Open-Meteo wh_period is not a plain object");
+        return [];
+      }
+      console.debug("[solar-forecast-card] hours: Open-Meteo wh_period format");
+      return this._parseOpenMeteoWhPeriod(raw as Record<string, unknown>);
+    }
 
     try {
       let points: HourPoint[];
@@ -309,6 +321,39 @@ export class SolarForecastCard extends LitElement {
       .sort((a, b) => a.hour - b.hour);
   }
 
+  /**
+   * Parse Open-Meteo's `wh_period` attribute into HourPoint[].
+   *
+   * The attribute is a plain object keyed by ISO datetime strings
+   * (e.g. "2024-04-22T06:00:00") with numeric Wh energy values for each
+   * period. Multiple sub-hourly periods with the same hour are summed.
+   * Values are converted from Wh to kWh.
+   */
+  private _parseOpenMeteoWhPeriod(raw: Record<string, unknown>): HourPoint[] {
+    const buckets = new Map<number, number>();
+
+    for (const [isoKey, val] of Object.entries(raw)) {
+      // Extract the hour directly from the ISO string (the T-portion is the
+      // local hour in HA's timezone). Using new Date().getHours() would shift
+      // the hour to the browser's local timezone, which may differ from HA's.
+      const hourMatch = isoKey.match(/T(\d{2}):/);
+      if (!hourMatch) continue;
+      const hour = parseInt(hourMatch[1], 10);
+      if (!isFinite(hour) || hour < 0 || hour > 23) continue;
+
+      const wh = typeof val === "number" ? val
+               : typeof val === "string"  ? parseFloat(val)
+               : NaN;
+      if (!isFinite(wh)) continue;
+
+      buckets.set(hour, (buckets.get(hour) ?? 0) + wh / 1000); // Wh → kWh
+    }
+
+    return Array.from(buckets.entries())
+      .map(([hour, kwh]) => ({ hour, kwh }))
+      .sort((a, b) => a.hour - b.hour);
+  }
+
   // ── Colour tier ──────────────────────────────────────────────────────────
 
   private _tier(kwh: number | null): "low" | "average" | "high" {
@@ -334,7 +379,9 @@ export class SolarForecastCard extends LitElement {
         ? freshState?.attributes?.hours
         : intType === "forecast_solar"
           ? undefined
-          : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
+          : intType === "open_meteo_solar_forecast"
+            ? freshState?.attributes?.wh_period
+            : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
 
     // Log which entity is being used and what the hours attribute looks like
     const hoursType = freshHours === undefined ? "missing"

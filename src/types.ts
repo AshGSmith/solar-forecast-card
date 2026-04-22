@@ -5,7 +5,7 @@ export interface SolarForecastCardConfig {
   show_header: boolean;
   device_id?: string;
   /** Set automatically when a device is selected; not exposed in UI. */
-  integration_type: "volcast" | "solcast" | "forecast_solar" | "manual";
+  integration_type: "volcast" | "solcast" | "forecast_solar" | "open_meteo_solar_forecast" | "manual";
   forecast_entities: [string, string, string, string, string, string, string];
   live_power_entity?: string;
   today_actual_entity?: string;
