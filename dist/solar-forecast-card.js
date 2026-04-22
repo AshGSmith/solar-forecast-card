@@ -655,7 +655,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
 
       .array-row {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 8px;
         padding: 4px 0;
       }
@@ -665,9 +665,41 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         min-width: 0;
       }
 
+      /* Nudge the delete button down so it sits beside the input,
+         not the label heading above it. */
+      .array-row > ha-icon-button {
+        margin-top: 20px;
+        flex-shrink: 0;
+      }
+
+      /* Wrapper: stacks the heading, input, and hint vertically */
+      .array-label-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        flex-shrink: 0;
+      }
+
+      .array-field-label {
+        font-size: 0.63rem;
+        font-weight: 500;
+        color: var(--secondary-text-color);
+        white-space: nowrap;
+        line-height: 1.2;
+      }
+
+      .array-label-hint {
+        font-size: 0.58rem;
+        color: var(--secondary-text-color);
+        opacity: 0.65;
+        white-space: nowrap;
+        text-align: center;
+        line-height: 1.2;
+      }
+
       .array-label-input {
         width: 3.2rem;
-        flex-shrink: 0;
         border: 1px solid var(--divider-color, rgba(128, 128, 128, 0.3));
         border-radius: 4px;
         padding: 6px 6px;
@@ -779,15 +811,18 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
               .label=${"Array entity"}
               @value-changed=${(e) => this._updateArrayEntity(idx, e.detail.value)}
             ></ha-selector>
-            <input
-              type="text"
-              class="array-label-input"
-              placeholder="?"
-              maxlength="1"
-              .value=${entry.label || ""}
-              title="Single character label (e.g. N, S, E)"
-              @input=${(e) => this._updateArrayLabel(idx, e.target.value)}
-            />
+            <div class="array-label-wrap">
+              <span class="array-field-label">Label (1 char)</span>
+              <input
+                type="text"
+                class="array-label-input"
+                placeholder="E"
+                maxlength="1"
+                .value=${entry.label || ""}
+                @input=${(e) => this._updateArrayLabel(idx, e.target.value)}
+              />
+              <span class="array-label-hint">bar &amp; popup</span>
+            </div>
             <ha-icon-button
               .label=${"Remove"}
               .path=${"M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"}
@@ -856,7 +891,7 @@ SolarForecastCardEditor = __decorate([
 ], SolarForecastCardEditor);
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const COMPLETE_THRESHOLD = 0.9;
+const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 let SolarForecastCard = class SolarForecastCard extends i {
     constructor() {
@@ -1611,7 +1646,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
        *
        * Base group (indices 0–3):
        *   0  purple      primary actual colour, matches existing bar-actual
-       *   1  teal        cool green-blue
+       *   1  blue        cornflower / sky-blue
        *   2  indigo      deep blue-purple
        *   3  slate-blue  muted steel blue
        *
@@ -1628,7 +1663,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
       }
       .seg-color-1 {
         background: linear-gradient(
-          to top, rgba(13, 148, 136, 0.90), rgba(45, 212, 191, 0.76)
+          to top, rgba(59, 130, 246, 0.90), rgba(147, 197, 253, 0.76)
         );
       }
       .seg-color-2 {

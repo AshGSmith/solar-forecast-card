@@ -7,7 +7,7 @@ import { normalizeConfig } from "./solar-forecast-card-editor.js";
 import "./solar-forecast-card-editor.js";
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
-const COMPLETE_THRESHOLD = 0.9;
+const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 
 interface ForecastRow {
@@ -22,7 +22,7 @@ interface ForecastRow {
   forecastPct: number;       // 0–100, relative to week max
   actualPct: number;         // 0–100, capped at forecastPct
   dottedPct: number;         // forecastPct - actualPct
-  isComplete: boolean;       // actual ≥ 90% of forecast
+  isComplete: boolean;       // actual >= forecast
 }
 
 interface HourPoint {
@@ -845,7 +845,7 @@ export class SolarForecastCard extends LitElement {
        *
        * Base group (indices 0–3):
        *   0  purple      primary actual colour, matches existing bar-actual
-       *   1  teal        cool green-blue
+       *   1  blue        cornflower / sky-blue
        *   2  indigo      deep blue-purple
        *   3  slate-blue  muted steel blue
        *
@@ -862,7 +862,7 @@ export class SolarForecastCard extends LitElement {
       }
       .seg-color-1 {
         background: linear-gradient(
-          to top, rgba(13, 148, 136, 0.90), rgba(45, 212, 191, 0.76)
+          to top, rgba(59, 130, 246, 0.90), rgba(147, 197, 253, 0.76)
         );
       }
       .seg-color-2 {

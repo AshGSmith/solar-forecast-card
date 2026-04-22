@@ -729,7 +729,7 @@ export class SolarForecastCardEditor extends LitElement {
 
       .array-row {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 8px;
         padding: 4px 0;
       }
@@ -739,9 +739,41 @@ export class SolarForecastCardEditor extends LitElement {
         min-width: 0;
       }
 
+      /* Nudge the delete button down so it sits beside the input,
+         not the label heading above it. */
+      .array-row > ha-icon-button {
+        margin-top: 20px;
+        flex-shrink: 0;
+      }
+
+      /* Wrapper: stacks the heading, input, and hint vertically */
+      .array-label-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        flex-shrink: 0;
+      }
+
+      .array-field-label {
+        font-size: 0.63rem;
+        font-weight: 500;
+        color: var(--secondary-text-color);
+        white-space: nowrap;
+        line-height: 1.2;
+      }
+
+      .array-label-hint {
+        font-size: 0.58rem;
+        color: var(--secondary-text-color);
+        opacity: 0.65;
+        white-space: nowrap;
+        text-align: center;
+        line-height: 1.2;
+      }
+
       .array-label-input {
         width: 3.2rem;
-        flex-shrink: 0;
         border: 1px solid var(--divider-color, rgba(128, 128, 128, 0.3));
         border-radius: 4px;
         padding: 6px 6px;
@@ -857,16 +889,19 @@ export class SolarForecastCardEditor extends LitElement {
               @value-changed=${(e: CustomEvent) =>
                 this._updateArrayEntity(idx, e.detail.value as string)}
             ></ha-selector>
-            <input
-              type="text"
-              class="array-label-input"
-              placeholder="?"
-              maxlength="1"
-              .value=${entry.label || ""}
-              title="Single character label (e.g. N, S, E)"
-              @input=${(e: InputEvent) =>
-                this._updateArrayLabel(idx, (e.target as HTMLInputElement).value)}
-            />
+            <div class="array-label-wrap">
+              <span class="array-field-label">Label (1 char)</span>
+              <input
+                type="text"
+                class="array-label-input"
+                placeholder="E"
+                maxlength="1"
+                .value=${entry.label || ""}
+                @input=${(e: InputEvent) =>
+                  this._updateArrayLabel(idx, (e.target as HTMLInputElement).value)}
+              />
+              <span class="array-label-hint">bar &amp; popup</span>
+            </div>
             <ha-icon-button
               .label=${"Remove"}
               .path=${"M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"}
