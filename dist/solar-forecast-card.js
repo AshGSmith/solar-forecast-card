@@ -1345,11 +1345,6 @@ let SolarForecastCard = class SolarForecastCard extends i {
         color: var(--state-active-color, #fbbf24);
       }
 
-      .forecast-label {
-        font-weight: 700;
-        color: #60a5fa;
-      }
-
       .live-week {
         font-size: 0.68rem;
         font-variant-numeric: tabular-nums;
@@ -2203,14 +2198,14 @@ let SolarForecastCard = class SolarForecastCard extends i {
         ${hasForecastSummary ? b `
           <div class="live-row">
             ${nextHourKwh !== null ? b `
-              <span class="forecast-label">+1HR:</span>
+              <span class="live-label">+1HR:</span>
               <span>${this._formatKwh(nextHourKwh)}</span>
             ` : A}
             ${nextHourKwh !== null && forecastLeftKwh !== null ? b `
               <span style="opacity:0.35">|</span>
             ` : A}
             ${forecastLeftKwh !== null ? b `
-              <span class="forecast-label">LEFT:</span>
+              <span class="live-label">LEFT:</span>
               <span>${this._formatKwh(forecastLeftKwh)}</span>
             ` : A}
           </div>

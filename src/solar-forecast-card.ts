@@ -535,11 +535,6 @@ export class SolarForecastCard extends LitElement {
         color: var(--state-active-color, #fbbf24);
       }
 
-      .forecast-label {
-        font-weight: 700;
-        color: #60a5fa;
-      }
-
       .live-week {
         font-size: 0.68rem;
         font-variant-numeric: tabular-nums;
@@ -1410,14 +1405,14 @@ export class SolarForecastCard extends LitElement {
         ${hasForecastSummary ? html`
           <div class="live-row">
             ${nextHourKwh !== null ? html`
-              <span class="forecast-label">+1HR:</span>
+              <span class="live-label">+1HR:</span>
               <span>${this._formatKwh(nextHourKwh)}</span>
             ` : nothing}
             ${nextHourKwh !== null && forecastLeftKwh !== null ? html`
               <span style="opacity:0.35">|</span>
             ` : nothing}
             ${forecastLeftKwh !== null ? html`
-              <span class="forecast-label">LEFT:</span>
+              <span class="live-label">LEFT:</span>
               <span>${this._formatKwh(forecastLeftKwh)}</span>
             ` : nothing}
           </div>

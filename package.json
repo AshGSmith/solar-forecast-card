@@ -1,6 +1,6 @@
 {
   "name": "solar-forecast-card",
-  "version": "1.3.0-beta.01",
+  "version": "1.3.0-beta.02",
   "description": "A Home Assistant Lovelace custom card for solar forecast",
   "main": "dist/solar-forecast-card.js",
   "scripts": {
