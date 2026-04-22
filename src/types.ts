@@ -1,3 +1,9 @@
+export interface ActualArrayEntry {
+  entity: string;
+  /** Single display character shown inside the stacked bar segment. */
+  label: string;
+}
+
 export interface SolarForecastCardConfig {
   type: string;
   title?: string;
@@ -9,6 +15,8 @@ export interface SolarForecastCardConfig {
   forecast_entities: [string, string, string, string, string, string, string];
   live_power_entity?: string;
   today_actual_entity?: string;
+  /** Optional per-array actual-generation sensors. When set, renders stacked bar segments on today's column. */
+  actual_arrays?: ActualArrayEntry[];
   date_format: "DD/MM" | "MM/DD";
   time_format: "24h" | "12h";
   inverter_max_kw?: number;

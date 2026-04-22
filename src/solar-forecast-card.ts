@@ -16,6 +16,8 @@ interface ForecastRow {
   entityId: string;
   forecastKwh: number | null;
   actualKwh: number | null;  // today only
+  /** Populated when actual_arrays configured; null otherwise. Heights use flex proportions. */
+  actualArrays: Array<{ label: string; kwh: number }> | null;
   rawHoursAttr: unknown;     // raw "hours" attribute — parsed lazily
   forecastPct: number;       // 0–100, relative to week max
   actualPct: number;         // 0–100, capped at forecastPct
@@ -90,6 +92,7 @@ export class SolarForecastCard extends LitElement {
       ...this._config.forecast_entities,
       this._config.live_power_entity,
       this._config.today_actual_entity,
+      ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
     ].filter(Boolean) as string[];
 
     return watchIds.some((id) => oldHass.states[id] !== this.hass!.states[id]);
@@ -112,6 +115,36 @@ export class SolarForecastCard extends LitElement {
       if (isFinite(v)) todayActualKwh = v;
     }
 
+    // ── Actual arrays (manual multi-array breakdown) ──────────────────────────
+    // Arrays are an optional visual enhancement layer. When configured:
+    //   - Each array entity is read and Wh-normalised to kWh.
+    //   - If the sum of all arrays is > 0, it becomes the canonical actualKwh
+    //     (used for bar height, dotted-remainder, and isComplete).
+    //   - If the sum is 0 (pre-sunrise, all entities unavailable, incomplete
+    //     config, etc.), todayActualKwh is left unchanged so it retains the
+    //     today_actual_entity value already read above — graceful fallback.
+    //
+    // The header (_renderLive) always reads today_actual_entity independently
+    // and is never affected by this block.
+    let todayArrayEntries: Array<{ label: string; kwh: number }> | null = null;
+    if ((cfg.actual_arrays?.length ?? 0) > 0) {
+      todayArrayEntries = cfg.actual_arrays!.map((a) => {
+        const st   = a.entity ? this.hass!.states[a.entity] : undefined;
+        const raw  = parseFloat(st?.state ?? "");
+        const unit = (st?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+        const kwh  = isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : 0;
+        return { label: a.label || "?", kwh };
+      });
+
+      const sumKwh = todayArrayEntries.reduce((s, e) => s + e.kwh, 0);
+      if (sumKwh > 0) {
+        // Arrays have live data — their sum is the canonical actual total.
+        todayActualKwh = sumKwh;
+      }
+      // sumKwh === 0: all arrays are producing nothing or unavailable.
+      // todayActualKwh is intentionally left as-is (today_actual_entity fallback).
+    }
+
     type Raw = Omit<ForecastRow, "forecastPct" | "actualPct" | "dottedPct" | "isComplete">;
 
     const raw: Raw[] = cfg.forecast_entities.map((entityId, i) => {
@@ -127,6 +160,7 @@ export class SolarForecastCard extends LitElement {
         entityId,
         forecastKwh: isFinite(kwhVal) ? kwhVal : null,
         actualKwh: i === 0 ? todayActualKwh : null,
+        actualArrays: i === 0 ? (todayArrayEntries ?? null) : null,
         rawHoursAttr: cfg.integration_type === "solcast"
           ? s?.attributes?.detailedForecast
           : cfg.integration_type === "volcast"
@@ -769,6 +803,99 @@ export class SolarForecastCard extends LitElement {
         border-radius: 0 0 3px 3px;
       }
 
+      /* ── Stacked actual-arrays bar ───────────────────────────── */
+
+      .bar-arrays-stack {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        translate: -50% 0;
+        width: min(24px, 72%);
+        display: flex;
+        flex-direction: column-reverse; /* first array sits at the bottom */
+        border-radius: 6px 6px 3px 3px;
+        overflow: hidden;
+        transition:
+          height 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
+      }
+
+      .forecast-grid.two-day .bar-arrays-stack {
+        width: min(72px, 72%);
+      }
+
+      .bar-array-segment {
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .array-label {
+        font-size: 0.5rem;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.90);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /*
+       * Segment colour palette — 8 slots, cycles every 8 arrays.
+       *
+       * Base group (indices 0–3):
+       *   0  purple      primary actual colour, matches existing bar-actual
+       *   1  teal        cool green-blue
+       *   2  indigo      deep blue-purple
+       *   3  slate-blue  muted steel blue
+       *
+       * Extended group (indices 4–7) — lighter / shifted variations:
+       *   4  violet      lighter purple
+       *   5  emerald     deeper teal
+       *   6  periwinkle  lighter indigo
+       *   7  steel       darker slate
+       */
+      .seg-color-0 {
+        background: linear-gradient(
+          to top, rgba(124, 58, 237, 0.90), rgba(196, 136, 255, 0.76)
+        );
+      }
+      .seg-color-1 {
+        background: linear-gradient(
+          to top, rgba(13, 148, 136, 0.90), rgba(45, 212, 191, 0.76)
+        );
+      }
+      .seg-color-2 {
+        background: linear-gradient(
+          to top, rgba(79, 70, 229, 0.90), rgba(129, 140, 248, 0.76)
+        );
+      }
+      .seg-color-3 {
+        background: linear-gradient(
+          to top, rgba(71, 107, 167, 0.90), rgba(119, 159, 207, 0.76)
+        );
+      }
+      .seg-color-4 {
+        background: linear-gradient(
+          to top, rgba(139, 92, 246, 0.90), rgba(196, 180, 254, 0.76)
+        );
+      }
+      .seg-color-5 {
+        background: linear-gradient(
+          to top, rgba(4, 120, 87, 0.90), rgba(52, 211, 153, 0.76)
+        );
+      }
+      .seg-color-6 {
+        background: linear-gradient(
+          to top, rgba(99, 102, 241, 0.90), rgba(165, 180, 252, 0.76)
+        );
+      }
+      .seg-color-7 {
+        background: linear-gradient(
+          to top, rgba(71, 85, 105, 0.90), rgba(100, 116, 139, 0.76)
+        );
+      }
+
       /* ── Dotted forecast remainder — tier-aware ──────────────── */
 
       .bar-dotted {
@@ -1182,17 +1309,97 @@ export class SolarForecastCard extends LitElement {
     `;
   }
 
+  // ── Popup actual-generation subtitle ────────────────────────────────────
+
+  /**
+   * Returns the actual-generation subtitle for the popup header.
+   * Only shown for today's row; format depends on whether arrays are configured.
+   *
+   * - No arrays:  "<X.XX> kWh generated"
+   * - Arrays:     "E: 4.2 kWh | W: 3.8 kWh | Total: 8.0 kWh"
+   */
+  private _renderActualSubtitle(row: ForecastRow) {
+    if (!row.isToday) return nothing;
+    const cfg = this._config!;
+    const hasArrays = (cfg.actual_arrays?.length ?? 0) > 0;
+
+    if (hasArrays && row.actualArrays && row.actualArrays.length > 0) {
+      // Per-array breakdown: label: X.X kWh for each, then total
+      const sum = row.actualArrays.reduce((s, a) => s + a.kwh, 0);
+      const arrayText = row.actualArrays
+        .map((a) => `${a.label || "?"}: ${a.kwh.toFixed(1)} kWh`)
+        .join(" | ");
+      return html`
+        <span class="popup-subtitle">
+          ${arrayText} | <span class="popup-total-kwh">Total: ${sum.toFixed(1)} kWh</span>
+        </span>
+      `;
+    }
+
+    // No arrays configured — show the single total if available
+    if (!hasArrays && row.actualKwh !== null) {
+      return html`
+        <span class="popup-subtitle">
+          <span class="popup-total-kwh">${row.actualKwh.toFixed(2)}</span> kWh generated
+        </span>
+      `;
+    }
+
+    return nothing;
+  }
+
   // ── Column ────────────────────────────────────────────────────────────────
 
   private _renderCol(row: ForecastRow) {
     const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
     const tier = this._tier(row.forecastKwh);
 
+    // Arrays that are currently producing (kwh > 0).
+    // Used to decide stacked vs single-bar path.
+    const visibleArrays = row.actualArrays?.filter((a) => a.kwh > 0) ?? [];
+
+    // Only enter stacked mode when at least 2 arrays are producing —
+    // a single active source stays on the existing single-colour bar path.
+    const useStacked = visibleArrays.length >= 2;
+
     let bars;
     if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
       if (isComplete) {
+        // Completion indicator — solid forecast bar regardless of arrays
         bars = html`<div class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
+
+      } else if (useStacked) {
+        // ── Stacked per-array segments ──────────────────────────────────────
+        // Segments use flex-grow proportional to each array's kWh so they
+        // automatically fill the container correctly without pixel maths.
+        //
+        // Label visibility: estimate the segment's pixel height from the
+        // mid-range bar height (120 px ≈ clamp(100 px, 20 vw, 160 px)).
+        // Only render the label when the estimated height is ≥ 16 px.
+        const sumKwh    = visibleArrays.reduce((s, a) => s + a.kwh, 0);
+        const stackPx   = (actualPct / 100) * 120; // estimated total stack height
+        const hasDotted = dottedPct > 1;
+
+        bars = html`
+          <div class="bar-arrays-stack" style="height:${actualPct}%">
+            ${visibleArrays.map((arr, i) => {
+              const segPx     = sumKwh > 0 ? (arr.kwh / sumKwh) * stackPx : 0;
+              const showLabel = arr.label && segPx >= 16;
+              return html`
+                <div class="bar-array-segment seg-color-${i % 8}" style="flex:${arr.kwh}">
+                  ${showLabel ? html`<span class="array-label">${arr.label}</span>` : nothing}
+                </div>
+              `;
+            })}
+          </div>
+          ${hasDotted ? html`
+            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
+                 style="height:${dottedPct}%;bottom:${actualPct}%"></div>
+          ` : nothing}
+        `;
+
       } else {
+        // ── Single-colour actual bar — default and single-source fallback ───
         const hasDotted = dottedPct > 1;
         bars = html`
           <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
@@ -1285,6 +1492,7 @@ export class SolarForecastCard extends LitElement {
                   ? html`<span class="popup-total-kwh">${row.forecastKwh.toFixed(2)}</span> kWh forecast`
                   : html`No forecast data`}
               </span>
+              ${this._renderActualSubtitle(row)}
             </div>
             <button
               class="popup-close"

@@ -2,6 +2,7 @@ import { LitElement, html, css, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import type {
   SolarForecastCardConfig,
+  ActualArrayEntry,
   HomeAssistant,
   EntityRegistryEntry,
 } from "./types.js";
@@ -154,6 +155,12 @@ export function normalizeConfig(
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
     live_power_entity:   raw.live_power_entity,
     today_actual_entity: raw.today_actual_entity,
+    actual_arrays: Array.isArray(raw.actual_arrays)
+      ? (raw.actual_arrays as ActualArrayEntry[]).filter(
+          (e): e is ActualArrayEntry =>
+            typeof e === "object" && e !== null && typeof e.entity === "string"
+        )
+      : undefined,
     date_format:        raw.date_format ?? "DD/MM",
     time_format:        raw.time_format ?? "24h",
     inverter_max_kw:    raw.inverter_max_kw,
@@ -240,6 +247,7 @@ export class SolarForecastCardEditor extends LitElement {
       ] as SolarForecastCardConfig["forecast_entities"],
       live_power_entity:   data.live_power_entity   || undefined,
       today_actual_entity: data.today_actual_entity || undefined,
+      actual_arrays:       this._config?.actual_arrays,
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
       time_format: (data.time_format as "24h" | "12h") || "24h",
       inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
@@ -247,6 +255,44 @@ export class SolarForecastCardEditor extends LitElement {
       low_threshold:   typeof data.low_threshold   === "number" ? data.low_threshold   : undefined,
       high_threshold:  typeof data.high_threshold  === "number" ? data.high_threshold  : undefined,
     };
+  }
+
+  // ── Actual-array management ─────────────────────────────────────────────────
+
+  private _addArray(): void {
+    const arrays = [...(this._config?.actual_arrays ?? []), { entity: "", label: "" }];
+    this._dispatchArrayChange(arrays);
+  }
+
+  private _removeArray(idx: number): void {
+    const arrays = (this._config?.actual_arrays ?? []).filter((_, i) => i !== idx);
+    this._dispatchArrayChange(arrays);
+  }
+
+  private _updateArrayEntity(idx: number, entity: string): void {
+    const arrays = [...(this._config?.actual_arrays ?? [])];
+    arrays[idx] = { ...arrays[idx], entity: entity ?? "" };
+    this._dispatchArrayChange(arrays);
+  }
+
+  private _updateArrayLabel(idx: number, raw: string): void {
+    const arrays = [...(this._config?.actual_arrays ?? [])];
+    arrays[idx] = { ...arrays[idx], label: raw.slice(0, 1) };
+    this._dispatchArrayChange(arrays);
+  }
+
+  private _dispatchArrayChange(arrays: ActualArrayEntry[]): void {
+    if (!this._config) return;
+    const newConfig: SolarForecastCardConfig = {
+      ...this._config,
+      actual_arrays: arrays.length > 0 ? arrays : undefined,
+    };
+    this._config = newConfig;
+    this.dispatchEvent(new CustomEvent("config-changed", {
+      detail: { config: newConfig },
+      bubbles: true,
+      composed: true,
+    }));
   }
 
   // ── Entity auto-detection ───────────────────────────────────────────────────
@@ -678,6 +724,57 @@ export class SolarForecastCardEditor extends LitElement {
         --expansion-panel-summary-padding: 0 8px;
         --expansion-panel-content-padding: 0 8px 8px;
       }
+
+      /* ── Actual-array list ─────────────────────────────────── */
+
+      .array-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 0;
+      }
+
+      .array-row ha-selector {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .array-label-input {
+        width: 3.2rem;
+        flex-shrink: 0;
+        border: 1px solid var(--divider-color, rgba(128, 128, 128, 0.3));
+        border-radius: 4px;
+        padding: 6px 6px;
+        font-size: 0.9rem;
+        text-align: center;
+        background: var(--secondary-background-color, transparent);
+        color: var(--primary-text-color);
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      .array-label-input:focus {
+        border-color: var(--primary-color);
+      }
+
+      .add-array-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 4px 2px;
+        cursor: pointer;
+        color: var(--primary-color);
+        font-size: 0.85rem;
+        font-weight: 500;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .add-array-btn:hover { opacity: 0.8; }
+
+      .add-array-btn ha-icon {
+        --mdc-icon-size: 18px;
+      }
     `;
   }
 
@@ -742,6 +839,52 @@ export class SolarForecastCardEditor extends LitElement {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+      </ha-expansion-panel>
+
+      <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>
+        <p class="device-helper" style="margin:8px 0 10px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          Optional: configure individual array sensors to display a stacked breakdown on today's bar.
+          Each label is a single character shown inside its segment (e.g. N, S, E).
+        </p>
+        ${(this._config.actual_arrays ?? []).map((entry, idx) => html`
+          <div class="array-row">
+            <ha-selector
+              .hass=${this.hass}
+              .selector=${{ entity: { domain: ["sensor"] } }}
+              .value=${entry.entity || ""}
+              .label=${"Array entity"}
+              @value-changed=${(e: CustomEvent) =>
+                this._updateArrayEntity(idx, e.detail.value as string)}
+            ></ha-selector>
+            <input
+              type="text"
+              class="array-label-input"
+              placeholder="?"
+              maxlength="1"
+              .value=${entry.label || ""}
+              title="Single character label (e.g. N, S, E)"
+              @input=${(e: InputEvent) =>
+                this._updateArrayLabel(idx, (e.target as HTMLInputElement).value)}
+            />
+            <ha-icon-button
+              .label=${"Remove"}
+              .path=${"M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"}
+              @click=${() => this._removeArray(idx)}
+            ></ha-icon-button>
+          </div>
+        `)}
+        <div
+          class="add-array-btn"
+          role="button"
+          tabindex="0"
+          @click=${this._addArray.bind(this)}
+          @keydown=${(e: KeyboardEvent) =>
+            (e.key === "Enter" || e.key === " ") && this._addArray()}
+        >
+          <ha-icon icon="mdi:plus-circle-outline"></ha-icon>
+          Add array
+        </div>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="System Parameters" outlined leftChevron>

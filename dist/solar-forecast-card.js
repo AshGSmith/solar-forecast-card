@@ -164,6 +164,9 @@ function normalizeConfig(raw) {
         forecast_entities: incoming,
         live_power_entity: raw.live_power_entity,
         today_actual_entity: raw.today_actual_entity,
+        actual_arrays: Array.isArray(raw.actual_arrays)
+            ? raw.actual_arrays.filter((e) => typeof e === "object" && e !== null && typeof e.entity === "string")
+            : undefined,
         date_format: raw.date_format ?? "DD/MM",
         time_format: raw.time_format ?? "24h",
         inverter_max_kw: raw.inverter_max_kw,
@@ -241,6 +244,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             ],
             live_power_entity: data.live_power_entity || undefined,
             today_actual_entity: data.today_actual_entity || undefined,
+            actual_arrays: this._config?.actual_arrays,
             date_format: data.date_format || "DD/MM",
             time_format: data.time_format || "24h",
             inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
@@ -248,6 +252,39 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
             high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
         };
+    }
+    // ── Actual-array management ─────────────────────────────────────────────────
+    _addArray() {
+        const arrays = [...(this._config?.actual_arrays ?? []), { entity: "", label: "" }];
+        this._dispatchArrayChange(arrays);
+    }
+    _removeArray(idx) {
+        const arrays = (this._config?.actual_arrays ?? []).filter((_, i) => i !== idx);
+        this._dispatchArrayChange(arrays);
+    }
+    _updateArrayEntity(idx, entity) {
+        const arrays = [...(this._config?.actual_arrays ?? [])];
+        arrays[idx] = { ...arrays[idx], entity: entity ?? "" };
+        this._dispatchArrayChange(arrays);
+    }
+    _updateArrayLabel(idx, raw) {
+        const arrays = [...(this._config?.actual_arrays ?? [])];
+        arrays[idx] = { ...arrays[idx], label: raw.slice(0, 1) };
+        this._dispatchArrayChange(arrays);
+    }
+    _dispatchArrayChange(arrays) {
+        if (!this._config)
+            return;
+        const newConfig = {
+            ...this._config,
+            actual_arrays: arrays.length > 0 ? arrays : undefined,
+        };
+        this._config = newConfig;
+        this.dispatchEvent(new CustomEvent("config-changed", {
+            detail: { config: newConfig },
+            bubbles: true,
+            composed: true,
+        }));
     }
     // ── Entity auto-detection ───────────────────────────────────────────────────
     _deviceSensors(deviceId) {
@@ -613,6 +650,57 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         --expansion-panel-summary-padding: 0 8px;
         --expansion-panel-content-padding: 0 8px 8px;
       }
+
+      /* ── Actual-array list ─────────────────────────────────── */
+
+      .array-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 0;
+      }
+
+      .array-row ha-selector {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .array-label-input {
+        width: 3.2rem;
+        flex-shrink: 0;
+        border: 1px solid var(--divider-color, rgba(128, 128, 128, 0.3));
+        border-radius: 4px;
+        padding: 6px 6px;
+        font-size: 0.9rem;
+        text-align: center;
+        background: var(--secondary-background-color, transparent);
+        color: var(--primary-text-color);
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      .array-label-input:focus {
+        border-color: var(--primary-color);
+      }
+
+      .add-array-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 4px 2px;
+        cursor: pointer;
+        color: var(--primary-color);
+        font-size: 0.85rem;
+        font-weight: 500;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .add-array-btn:hover { opacity: 0.8; }
+
+      .add-array-btn ha-icon {
+        --mdc-icon-size: 18px;
+      }
     `;
     }
     // ── Render ──────────────────────────────────────────────────────────────────
@@ -674,6 +762,49 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+      </ha-expansion-panel>
+
+      <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>
+        <p class="device-helper" style="margin:8px 0 10px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          Optional: configure individual array sensors to display a stacked breakdown on today's bar.
+          Each label is a single character shown inside its segment (e.g. N, S, E).
+        </p>
+        ${(this._config.actual_arrays ?? []).map((entry, idx) => b `
+          <div class="array-row">
+            <ha-selector
+              .hass=${this.hass}
+              .selector=${{ entity: { domain: ["sensor"] } }}
+              .value=${entry.entity || ""}
+              .label=${"Array entity"}
+              @value-changed=${(e) => this._updateArrayEntity(idx, e.detail.value)}
+            ></ha-selector>
+            <input
+              type="text"
+              class="array-label-input"
+              placeholder="?"
+              maxlength="1"
+              .value=${entry.label || ""}
+              title="Single character label (e.g. N, S, E)"
+              @input=${(e) => this._updateArrayLabel(idx, e.target.value)}
+            />
+            <ha-icon-button
+              .label=${"Remove"}
+              .path=${"M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"}
+              @click=${() => this._removeArray(idx)}
+            ></ha-icon-button>
+          </div>
+        `)}
+        <div
+          class="add-array-btn"
+          role="button"
+          tabindex="0"
+          @click=${this._addArray.bind(this)}
+          @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._addArray()}
+        >
+          <ha-icon icon="mdi:plus-circle-outline"></ha-icon>
+          Add array
+        </div>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="System Parameters" outlined leftChevron>
@@ -780,6 +911,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             ...this._config.forecast_entities,
             this._config.live_power_entity,
             this._config.today_actual_entity,
+            ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
         ].filter(Boolean);
         return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
     }
@@ -798,6 +930,34 @@ let SolarForecastCard = class SolarForecastCard extends i {
             if (isFinite(v))
                 todayActualKwh = v;
         }
+        // ── Actual arrays (manual multi-array breakdown) ──────────────────────────
+        // Arrays are an optional visual enhancement layer. When configured:
+        //   - Each array entity is read and Wh-normalised to kWh.
+        //   - If the sum of all arrays is > 0, it becomes the canonical actualKwh
+        //     (used for bar height, dotted-remainder, and isComplete).
+        //   - If the sum is 0 (pre-sunrise, all entities unavailable, incomplete
+        //     config, etc.), todayActualKwh is left unchanged so it retains the
+        //     today_actual_entity value already read above — graceful fallback.
+        //
+        // The header (_renderLive) always reads today_actual_entity independently
+        // and is never affected by this block.
+        let todayArrayEntries = null;
+        if ((cfg.actual_arrays?.length ?? 0) > 0) {
+            todayArrayEntries = cfg.actual_arrays.map((a) => {
+                const st = a.entity ? this.hass.states[a.entity] : undefined;
+                const raw = parseFloat(st?.state ?? "");
+                const unit = st?.attributes?.unit_of_measurement?.toLowerCase();
+                const kwh = isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : 0;
+                return { label: a.label || "?", kwh };
+            });
+            const sumKwh = todayArrayEntries.reduce((s, e) => s + e.kwh, 0);
+            if (sumKwh > 0) {
+                // Arrays have live data — their sum is the canonical actual total.
+                todayActualKwh = sumKwh;
+            }
+            // sumKwh === 0: all arrays are producing nothing or unavailable.
+            // todayActualKwh is intentionally left as-is (today_actual_entity fallback).
+        }
         const raw = cfg.forecast_entities.map((entityId, i) => {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
@@ -809,6 +969,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
                 entityId,
                 forecastKwh: isFinite(kwhVal) ? kwhVal : null,
                 actualKwh: i === 0 ? todayActualKwh : null,
+                actualArrays: i === 0 ? (todayArrayEntries ?? null) : null,
                 rawHoursAttr: cfg.integration_type === "solcast"
                     ? s?.attributes?.detailedForecast
                     : cfg.integration_type === "volcast"
@@ -1408,6 +1569,99 @@ let SolarForecastCard = class SolarForecastCard extends i {
         border-radius: 0 0 3px 3px;
       }
 
+      /* ── Stacked actual-arrays bar ───────────────────────────── */
+
+      .bar-arrays-stack {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        translate: -50% 0;
+        width: min(24px, 72%);
+        display: flex;
+        flex-direction: column-reverse; /* first array sits at the bottom */
+        border-radius: 6px 6px 3px 3px;
+        overflow: hidden;
+        transition:
+          height 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
+      }
+
+      .forecast-grid.two-day .bar-arrays-stack {
+        width: min(72px, 72%);
+      }
+
+      .bar-array-segment {
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .array-label {
+        font-size: 0.5rem;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.90);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /*
+       * Segment colour palette — 8 slots, cycles every 8 arrays.
+       *
+       * Base group (indices 0–3):
+       *   0  purple      primary actual colour, matches existing bar-actual
+       *   1  teal        cool green-blue
+       *   2  indigo      deep blue-purple
+       *   3  slate-blue  muted steel blue
+       *
+       * Extended group (indices 4–7) — lighter / shifted variations:
+       *   4  violet      lighter purple
+       *   5  emerald     deeper teal
+       *   6  periwinkle  lighter indigo
+       *   7  steel       darker slate
+       */
+      .seg-color-0 {
+        background: linear-gradient(
+          to top, rgba(124, 58, 237, 0.90), rgba(196, 136, 255, 0.76)
+        );
+      }
+      .seg-color-1 {
+        background: linear-gradient(
+          to top, rgba(13, 148, 136, 0.90), rgba(45, 212, 191, 0.76)
+        );
+      }
+      .seg-color-2 {
+        background: linear-gradient(
+          to top, rgba(79, 70, 229, 0.90), rgba(129, 140, 248, 0.76)
+        );
+      }
+      .seg-color-3 {
+        background: linear-gradient(
+          to top, rgba(71, 107, 167, 0.90), rgba(119, 159, 207, 0.76)
+        );
+      }
+      .seg-color-4 {
+        background: linear-gradient(
+          to top, rgba(139, 92, 246, 0.90), rgba(196, 180, 254, 0.76)
+        );
+      }
+      .seg-color-5 {
+        background: linear-gradient(
+          to top, rgba(4, 120, 87, 0.90), rgba(52, 211, 153, 0.76)
+        );
+      }
+      .seg-color-6 {
+        background: linear-gradient(
+          to top, rgba(99, 102, 241, 0.90), rgba(165, 180, 252, 0.76)
+        );
+      }
+      .seg-color-7 {
+        background: linear-gradient(
+          to top, rgba(71, 85, 105, 0.90), rgba(100, 116, 139, 0.76)
+        );
+      }
+
       /* ── Dotted forecast remainder — tier-aware ──────────────── */
 
       .bar-dotted {
@@ -1809,16 +2063,88 @@ let SolarForecastCard = class SolarForecastCard extends i {
       </div>
     `;
     }
+    // ── Popup actual-generation subtitle ────────────────────────────────────
+    /**
+     * Returns the actual-generation subtitle for the popup header.
+     * Only shown for today's row; format depends on whether arrays are configured.
+     *
+     * - No arrays:  "<X.XX> kWh generated"
+     * - Arrays:     "E: 4.2 kWh | W: 3.8 kWh | Total: 8.0 kWh"
+     */
+    _renderActualSubtitle(row) {
+        if (!row.isToday)
+            return A;
+        const cfg = this._config;
+        const hasArrays = (cfg.actual_arrays?.length ?? 0) > 0;
+        if (hasArrays && row.actualArrays && row.actualArrays.length > 0) {
+            // Per-array breakdown: label: X.X kWh for each, then total
+            const sum = row.actualArrays.reduce((s, a) => s + a.kwh, 0);
+            const arrayText = row.actualArrays
+                .map((a) => `${a.label || "?"}: ${a.kwh.toFixed(1)} kWh`)
+                .join(" | ");
+            return b `
+        <span class="popup-subtitle">
+          ${arrayText} | <span class="popup-total-kwh">Total: ${sum.toFixed(1)} kWh</span>
+        </span>
+      `;
+        }
+        // No arrays configured — show the single total if available
+        if (!hasArrays && row.actualKwh !== null) {
+            return b `
+        <span class="popup-subtitle">
+          <span class="popup-total-kwh">${row.actualKwh.toFixed(2)}</span> kWh generated
+        </span>
+      `;
+        }
+        return A;
+    }
     // ── Column ────────────────────────────────────────────────────────────────
     _renderCol(row) {
         const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
         const tier = this._tier(row.forecastKwh);
+        // Arrays that are currently producing (kwh > 0).
+        // Used to decide stacked vs single-bar path.
+        const visibleArrays = row.actualArrays?.filter((a) => a.kwh > 0) ?? [];
+        // Only enter stacked mode when at least 2 arrays are producing —
+        // a single active source stays on the existing single-colour bar path.
+        const useStacked = visibleArrays.length >= 2;
         let bars;
         if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
             if (isComplete) {
+                // Completion indicator — solid forecast bar regardless of arrays
                 bars = b `<div class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
             }
+            else if (useStacked) {
+                // ── Stacked per-array segments ──────────────────────────────────────
+                // Segments use flex-grow proportional to each array's kWh so they
+                // automatically fill the container correctly without pixel maths.
+                //
+                // Label visibility: estimate the segment's pixel height from the
+                // mid-range bar height (120 px ≈ clamp(100 px, 20 vw, 160 px)).
+                // Only render the label when the estimated height is ≥ 16 px.
+                const sumKwh = visibleArrays.reduce((s, a) => s + a.kwh, 0);
+                const stackPx = (actualPct / 100) * 120; // estimated total stack height
+                const hasDotted = dottedPct > 1;
+                bars = b `
+          <div class="bar-arrays-stack" style="height:${actualPct}%">
+            ${visibleArrays.map((arr, i) => {
+                    const segPx = sumKwh > 0 ? (arr.kwh / sumKwh) * stackPx : 0;
+                    const showLabel = arr.label && segPx >= 16;
+                    return b `
+                <div class="bar-array-segment seg-color-${i % 8}" style="flex:${arr.kwh}">
+                  ${showLabel ? b `<span class="array-label">${arr.label}</span>` : A}
+                </div>
+              `;
+                })}
+          </div>
+          ${hasDotted ? b `
+            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
+                 style="height:${dottedPct}%;bottom:${actualPct}%"></div>
+          ` : A}
+        `;
+            }
             else {
+                // ── Single-colour actual bar — default and single-source fallback ───
                 const hasDotted = dottedPct > 1;
                 bars = b `
           <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
@@ -1908,6 +2234,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             ? b `<span class="popup-total-kwh">${row.forecastKwh.toFixed(2)}</span> kWh forecast`
             : b `No forecast data`}
               </span>
+              ${this._renderActualSubtitle(row)}
             </div>
             <button
               class="popup-close"
