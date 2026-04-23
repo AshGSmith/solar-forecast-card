@@ -80,15 +80,13 @@ const SCHEMA_FORECAST: HaFormSchema[] = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
   selector: { entity: { domain: "sensor" } },
 }));
 
-const SCHEMA_TODAY_ACTUAL: HaFormSchema[] = [
-  { name: "today_actual_entity", selector: { entity: { domain: "sensor" } } },
-];
-
-const SCHEMA_LIVE_POWER: HaFormSchema[] = [
-  { name: "live_power_entity", selector: { entity: { domain: "sensor" } } },
-];
-
-const SCHEMA_FORECAST_SUMMARY: HaFormSchema[] = [
+// All Live Data entity pickers in one schema so a single ha-form instance
+// handles them — matching the same pattern used by SCHEMA_FORECAST (all 7
+// forecast entities in one ha-form), which is what makes them correctly
+// reflect auto-detected values in the editor.
+const SCHEMA_LIVE: HaFormSchema[] = [
+  { name: "live_power_entity",      selector: { entity: { domain: "sensor" } } },
+  { name: "today_actual_entity",    selector: { entity: { domain: "sensor" } } },
   { name: "next_hour_entity",       selector: { entity: { domain: "sensor" } } },
   { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
@@ -914,21 +912,7 @@ export class SolarForecastCardEditor extends LitElement {
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_LIVE_POWER}
-          .computeLabel=${label}
-          @value-changed=${onChange}
-        ></ha-form>
-        <ha-form
-          .hass=${this.hass}
-          .data=${data}
-          .schema=${SCHEMA_TODAY_ACTUAL}
-          .computeLabel=${label}
-          @value-changed=${onChange}
-        ></ha-form>
-        <ha-form
-          .hass=${this.hass}
-          .data=${data}
-          .schema=${SCHEMA_FORECAST_SUMMARY}
+          .schema=${SCHEMA_LIVE}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
