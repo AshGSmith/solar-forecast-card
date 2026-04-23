@@ -189,6 +189,7 @@ const ENTITY_FIELDS = [
     "forecast_entity_0", "forecast_entity_1", "forecast_entity_2",
     "forecast_entity_3", "forecast_entity_4", "forecast_entity_5",
     "forecast_entity_6", "today_actual_entity", "live_power_entity",
+    "next_hour_entity", "remaining_today_entity",
 ];
 let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     constructor() {
@@ -443,13 +444,19 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
      */
     _autoDetectForecastSolar(sensors) {
         const slots = ["", "", "", "", "", "", ""];
+        let remainingTodayEntity;
         for (const sensor of sensors) {
             const state = this.hass.states[sensor.entity_id];
             const unit = state?.attributes?.unit_of_measurement;
             if (unit !== "kWh" && unit !== "Wh")
                 continue;
             const id = sensor.entity_id;
-            if (id.includes("energy_production_today") && !id.includes("remaining")) {
+            if (id.includes("energy_production_today_remaining")) {
+                // Capture as remaining_today_entity — provides the LEFT header value
+                // directly for forecast.solar (which has no hourly attribute data).
+                remainingTodayEntity = id;
+            }
+            else if (id.includes("energy_production_today")) {
                 slots[0] = id;
             }
             else if (id.includes("energy_production_tomorrow")) {
@@ -459,10 +466,11 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         console.debug("[solar-forecast-card] forecast.solar auto-detect mapping:", slots.map((id, i) => ({
             slot: `Day ${i} (${["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"][i]})`,
             entity: id ? id.replace(/^sensor\./, "") : "(empty)",
-        })));
+        })), "remaining_today_entity:", remainingTodayEntity ?? "(none)");
         return {
             forecast_entities: slots,
             integration_type: "forecast_solar",
+            remaining_today_entity: remainingTodayEntity,
         };
     }
     /**
@@ -491,6 +499,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
      */
     _autoDetectOpenMeteo(sensors) {
         const slots = ["", "", "", "", "", "", ""];
+        let remainingTodayEntity;
         // Key suffix → slot index.  Order matters: "today" must be listed before
         // any d-number so the endsWith check doesn't need extra guards.
         const KEY_SLOTS = [
@@ -504,14 +513,22 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             // energy_production_d7 → no slot, intentionally omitted
         ];
         for (const sensor of sensors) {
-            // Skip the "remaining" sensor — not a daily total
-            if (sensor.entity_id.includes("_remaining"))
+            const id = sensor.entity_id;
+            // "remaining" sensors are not daily totals and must not go into a forecast slot,
+            // but energy_production_today_remaining maps to remaining_today_entity.
+            if (id.includes("_remaining")) {
+                if (id.includes("energy_production_today_remaining")) {
+                    const state = this.hass.states[id];
+                    const unit = state?.attributes?.unit_of_measurement;
+                    if (unit === "kWh" || unit === "Wh")
+                        remainingTodayEntity = id;
+                }
                 continue;
-            const state = this.hass.states[sensor.entity_id];
+            }
+            const state = this.hass.states[id];
             const unit = state?.attributes?.unit_of_measurement;
             if (unit !== "kWh" && unit !== "Wh")
                 continue;
-            const id = sensor.entity_id;
             for (const [key, slot] of KEY_SLOTS) {
                 // entity_id format is sensor.{slug}_{key}, so the key is always the suffix
                 if (id.endsWith("_" + key)) {
@@ -523,10 +540,11 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         console.debug("[solar-forecast-card] Open-Meteo auto-detect mapping:", slots.map((id, i) => ({
             slot: `Day ${i} (${["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"][i]})`,
             entity: id ? id.replace(/^sensor\./, "") : "(empty)",
-        })));
+        })), "remaining_today_entity:", remainingTodayEntity ?? "(none)");
         return {
             forecast_entities: slots,
             integration_type: "open_meteo_solar_forecast",
+            remaining_today_entity: remainingTodayEntity,
         };
     }
     /**
@@ -597,13 +615,20 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             const detected = this._autoDetect(newConfig.device_id);
             if (isFirstDevice || this._autoPopulated) {
                 // First-ever device selection, or entities were previously auto-filled:
-                // replace forecast_entities and integration_type. today_actual_entity
-                // is always preserved — it typically comes from the inverter, not the
-                // forecast device, so device changes must never clear it.
+                // replace forecast_entities, integration_type, and any detected
+                // summary entities. today_actual_entity is always preserved — it
+                // typically comes from the inverter, not the forecast device, so
+                // device changes must never clear it.
+                //
+                // remaining_today_entity and next_hour_entity are set to the detected
+                // value (may be undefined = clear) so that switching between integrations
+                // never leaves stale auto-populated values from a previous device.
                 newConfig = {
                     ...newConfig,
                     forecast_entities: detected.forecast_entities,
                     integration_type: detected.integration_type,
+                    remaining_today_entity: detected.remaining_today_entity,
+                    next_hour_entity: detected.next_hour_entity,
                 };
                 this._autoPopulated = true;
                 this._showManualWarning = false;
@@ -616,7 +641,12 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             }
         }
         else if (deviceCleared) {
-            newConfig = { ...newConfig, integration_type: "manual" };
+            newConfig = {
+                ...newConfig,
+                integration_type: "manual",
+                remaining_today_entity: undefined,
+                next_hour_entity: undefined,
+            };
             this._autoPopulated = false;
             this._showManualWarning = false;
         }
@@ -813,6 +843,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+        <p class="device-helper" style="margin:4px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          +1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.
+        </p>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>

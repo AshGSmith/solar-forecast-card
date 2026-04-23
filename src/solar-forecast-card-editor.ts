@@ -25,6 +25,16 @@ interface HaFormSchema {
   selector: Selector;
 }
 
+/** Return type for all _autoDetect* methods. */
+interface AutoDetectResult {
+  forecast_entities: SolarForecastCardConfig["forecast_entities"];
+  integration_type: SolarForecastCardConfig["integration_type"];
+  /** Populated when the device exposes a discrete "remaining today" sensor. */
+  remaining_today_entity?: string;
+  /** Populated when the device exposes a discrete "next hour forecast" sensor. */
+  next_hour_entity?: string;
+}
+
 // ── Field labels ──────────────────────────────────────────────────────────────
 
 const LABELS: Record<string, string> = {
@@ -188,6 +198,7 @@ const ENTITY_FIELDS: string[] = [
   "forecast_entity_0", "forecast_entity_1", "forecast_entity_2",
   "forecast_entity_3", "forecast_entity_4", "forecast_entity_5",
   "forecast_entity_6", "today_actual_entity", "live_power_entity",
+  "next_hour_entity", "remaining_today_entity",
 ];
 
 @customElement("solar-forecast-card-editor")
@@ -323,10 +334,7 @@ export class SolarForecastCardEditor extends LitElement {
     );
   }
 
-  private _autoDetect(deviceId: string): Pick<
-    SolarForecastCardConfig,
-    "forecast_entities" | "integration_type"
-  > {
+  private _autoDetect(deviceId: string): AutoDetectResult {
     const sensors = this._deviceSensors(deviceId);
 
     // Route to integration-specific detection when platform is identifiable
@@ -432,7 +440,7 @@ export class SolarForecastCardEditor extends LitElement {
    */
   private _autoDetectSolcast(
     sensors: EntityRegistryEntry[]
-  ): Pick<SolarForecastCardConfig, "forecast_entities" | "integration_type"> {
+  ): AutoDetectResult {
     const slots: string[] = ["", "", "", "", "", "", ""];
 
     const DAY_KEYWORDS: Array<[string, number]> = [
@@ -489,8 +497,9 @@ export class SolarForecastCardEditor extends LitElement {
    */
   private _autoDetectForecastSolar(
     sensors: EntityRegistryEntry[]
-  ): Pick<SolarForecastCardConfig, "forecast_entities" | "integration_type"> {
+  ): AutoDetectResult {
     const slots: string[] = ["", "", "", "", "", "", ""];
+    let remainingTodayEntity: string | undefined;
 
     for (const sensor of sensors) {
       const state = this.hass!.states[sensor.entity_id];
@@ -498,7 +507,11 @@ export class SolarForecastCardEditor extends LitElement {
       if (unit !== "kWh" && unit !== "Wh") continue;
 
       const id = sensor.entity_id;
-      if (id.includes("energy_production_today") && !id.includes("remaining")) {
+      if (id.includes("energy_production_today_remaining")) {
+        // Capture as remaining_today_entity — provides the LEFT header value
+        // directly for forecast.solar (which has no hourly attribute data).
+        remainingTodayEntity = id;
+      } else if (id.includes("energy_production_today")) {
         slots[0] = id;
       } else if (id.includes("energy_production_tomorrow")) {
         slots[1] = id;
@@ -510,12 +523,14 @@ export class SolarForecastCardEditor extends LitElement {
       slots.map((id, i) => ({
         slot:   `Day ${i} (${["Today","Tomorrow","Day 3","Day 4","Day 5","Day 6","Day 7"][i]})`,
         entity: id ? id.replace(/^sensor\./, "") : "(empty)",
-      }))
+      })),
+      "remaining_today_entity:", remainingTodayEntity ?? "(none)"
     );
 
     return {
-      forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
-      integration_type:  "forecast_solar",
+      forecast_entities:      slots as SolarForecastCardConfig["forecast_entities"],
+      integration_type:       "forecast_solar",
+      remaining_today_entity: remainingTodayEntity,
     };
   }
 
@@ -545,8 +560,9 @@ export class SolarForecastCardEditor extends LitElement {
    */
   private _autoDetectOpenMeteo(
     sensors: EntityRegistryEntry[]
-  ): Pick<SolarForecastCardConfig, "forecast_entities" | "integration_type"> {
+  ): AutoDetectResult {
     const slots: string[] = ["", "", "", "", "", "", ""];
+    let remainingTodayEntity: string | undefined;
 
     // Key suffix → slot index.  Order matters: "today" must be listed before
     // any d-number so the endsWith check doesn't need extra guards.
@@ -562,14 +578,23 @@ export class SolarForecastCardEditor extends LitElement {
     ];
 
     for (const sensor of sensors) {
-      // Skip the "remaining" sensor — not a daily total
-      if (sensor.entity_id.includes("_remaining")) continue;
+      const id = sensor.entity_id;
 
-      const state = this.hass!.states[sensor.entity_id];
+      // "remaining" sensors are not daily totals and must not go into a forecast slot,
+      // but energy_production_today_remaining maps to remaining_today_entity.
+      if (id.includes("_remaining")) {
+        if (id.includes("energy_production_today_remaining")) {
+          const state = this.hass!.states[id];
+          const unit  = state?.attributes?.unit_of_measurement as string | undefined;
+          if (unit === "kWh" || unit === "Wh") remainingTodayEntity = id;
+        }
+        continue;
+      }
+
+      const state = this.hass!.states[id];
       const unit  = state?.attributes?.unit_of_measurement as string | undefined;
       if (unit !== "kWh" && unit !== "Wh") continue;
 
-      const id = sensor.entity_id;
       for (const [key, slot] of KEY_SLOTS) {
         // entity_id format is sensor.{slug}_{key}, so the key is always the suffix
         if (id.endsWith("_" + key)) {
@@ -584,12 +609,14 @@ export class SolarForecastCardEditor extends LitElement {
       slots.map((id, i) => ({
         slot:   `Day ${i} (${["Today","Tomorrow","Day 3","Day 4","Day 5","Day 6","Day 7"][i]})`,
         entity: id ? id.replace(/^sensor\./, "") : "(empty)",
-      }))
+      })),
+      "remaining_today_entity:", remainingTodayEntity ?? "(none)"
     );
 
     return {
-      forecast_entities: slots as SolarForecastCardConfig["forecast_entities"],
-      integration_type:  "open_meteo_solar_forecast",
+      forecast_entities:      slots as SolarForecastCardConfig["forecast_entities"],
+      integration_type:       "open_meteo_solar_forecast",
+      remaining_today_entity: remainingTodayEntity,
     };
   }
 
@@ -671,13 +698,20 @@ export class SolarForecastCardEditor extends LitElement {
 
       if (isFirstDevice || this._autoPopulated) {
         // First-ever device selection, or entities were previously auto-filled:
-        // replace forecast_entities and integration_type. today_actual_entity
-        // is always preserved — it typically comes from the inverter, not the
-        // forecast device, so device changes must never clear it.
+        // replace forecast_entities, integration_type, and any detected
+        // summary entities. today_actual_entity is always preserved — it
+        // typically comes from the inverter, not the forecast device, so
+        // device changes must never clear it.
+        //
+        // remaining_today_entity and next_hour_entity are set to the detected
+        // value (may be undefined = clear) so that switching between integrations
+        // never leaves stale auto-populated values from a previous device.
         newConfig = {
           ...newConfig,
-          forecast_entities: detected.forecast_entities,
-          integration_type:  detected.integration_type,
+          forecast_entities:      detected.forecast_entities,
+          integration_type:       detected.integration_type,
+          remaining_today_entity: detected.remaining_today_entity,
+          next_hour_entity:       detected.next_hour_entity,
         };
         this._autoPopulated = true;
         this._showManualWarning = false;
@@ -688,7 +722,12 @@ export class SolarForecastCardEditor extends LitElement {
         this._showManualWarning = true;
       }
     } else if (deviceCleared) {
-      newConfig = { ...newConfig, integration_type: "manual" };
+      newConfig = {
+        ...newConfig,
+        integration_type:       "manual",
+        remaining_today_entity: undefined,
+        next_hour_entity:       undefined,
+      };
       this._autoPopulated = false;
       this._showManualWarning = false;
     } else if (ENTITY_FIELDS.some((f) => f in partial)) {
@@ -893,6 +932,10 @@ export class SolarForecastCardEditor extends LitElement {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+        <p class="device-helper" style="margin:4px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          +1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.
+        </p>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>
