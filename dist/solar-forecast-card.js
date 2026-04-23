@@ -87,6 +87,8 @@ const LABELS = {
     forecast_entity_6: "Day 7",
     live_power_entity: "Live power (optional, kW sensor)",
     today_actual_entity: "Today's actual generation (optional)",
+    next_hour_entity: "+1HR forecast (optional, overrides auto-derived value)",
+    remaining_today_entity: "LEFT / remaining today (optional, overrides auto-derived value)",
     date_format: "Date format",
     time_format: "Time format (hourly popup)",
     inverter_max_kw: "Inverter max output (kW)",
@@ -114,6 +116,10 @@ const SCHEMA_TODAY_ACTUAL = [
 ];
 const SCHEMA_LIVE_POWER = [
     { name: "live_power_entity", selector: { entity: { domain: "sensor" } } },
+];
+const SCHEMA_FORECAST_SUMMARY = [
+    { name: "next_hour_entity", selector: { entity: { domain: "sensor" } } },
+    { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
 const SCHEMA_DISPLAY = [
     {
@@ -164,6 +170,8 @@ function normalizeConfig(raw) {
         forecast_entities: incoming,
         live_power_entity: raw.live_power_entity,
         today_actual_entity: raw.today_actual_entity,
+        next_hour_entity: raw.next_hour_entity,
+        remaining_today_entity: raw.remaining_today_entity,
         actual_arrays: Array.isArray(raw.actual_arrays)
             ? raw.actual_arrays.filter((e) => typeof e === "object" && e !== null && typeof e.entity === "string")
             : undefined,
@@ -210,6 +218,8 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             device_id: cfg.device_id ?? "",
             live_power_entity: cfg.live_power_entity ?? "",
             today_actual_entity: cfg.today_actual_entity ?? "",
+            next_hour_entity: cfg.next_hour_entity ?? "",
+            remaining_today_entity: cfg.remaining_today_entity ?? "",
             date_format: cfg.date_format ?? "DD/MM",
             time_format: cfg.time_format ?? "24h",
             inverter_max_kw: cfg.inverter_max_kw,
@@ -244,6 +254,8 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             ],
             live_power_entity: data.live_power_entity || undefined,
             today_actual_entity: data.today_actual_entity || undefined,
+            next_hour_entity: data.next_hour_entity || undefined,
+            remaining_today_entity: data.remaining_today_entity || undefined,
             actual_arrays: this._config?.actual_arrays,
             date_format: data.date_format || "DD/MM",
             time_format: data.time_format || "24h",
@@ -794,6 +806,13 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_FORECAST_SUMMARY}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
       </ha-expansion-panel>
 
       <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>
@@ -946,6 +965,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
             ...this._config.forecast_entities,
             this._config.live_power_entity,
             this._config.today_actual_entity,
+            this._config.next_hour_entity,
+            this._config.remaining_today_entity,
             ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
         ].filter(Boolean);
         return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
@@ -2178,6 +2199,28 @@ let SolarForecastCard = class SolarForecastCard extends i {
                     forecastLeftKwh = null;
                 }
             }
+        }
+        // ── Manual entity overrides ────────────────────────────────────────────────
+        // When next_hour_entity / remaining_today_entity are configured in the card
+        // config, their state values take precedence over the auto-derived results
+        // computed above. This lets users point to any sensor (e.g. a helper or a
+        // custom integration attribute) regardless of integration type.
+        // Both Wh and kWh units are normalised to kWh for consistency.
+        if (cfg.next_hour_entity) {
+            const st = this.hass?.states[cfg.next_hour_entity];
+            const raw = parseFloat(st?.state ?? "");
+            const unit = st?.attributes?.unit_of_measurement?.toLowerCase();
+            const kwh = isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : NaN;
+            if (isFinite(kwh))
+                nextHourKwh = kwh;
+        }
+        if (cfg.remaining_today_entity) {
+            const st = this.hass?.states[cfg.remaining_today_entity];
+            const raw = parseFloat(st?.state ?? "");
+            const unit = st?.attributes?.unit_of_measurement?.toLowerCase();
+            const kwh = isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : NaN;
+            if (isFinite(kwh))
+                forecastLeftKwh = kwh;
         }
         const hasForecastSummary = nextHourKwh !== null || forecastLeftKwh !== null;
         if (!hasPower && !hasActual && !hasWeek && !hasForecastSummary)

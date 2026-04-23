@@ -92,6 +92,8 @@ export class SolarForecastCard extends LitElement {
       ...this._config.forecast_entities,
       this._config.live_power_entity,
       this._config.today_actual_entity,
+      this._config.next_hour_entity,
+      this._config.remaining_today_entity,
       ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
     ].filter(Boolean) as string[];
 
@@ -1384,6 +1386,27 @@ export class SolarForecastCard extends LitElement {
           forecastLeftKwh = null;
         }
       }
+    }
+
+    // ── Manual entity overrides ────────────────────────────────────────────────
+    // When next_hour_entity / remaining_today_entity are configured in the card
+    // config, their state values take precedence over the auto-derived results
+    // computed above. This lets users point to any sensor (e.g. a helper or a
+    // custom integration attribute) regardless of integration type.
+    // Both Wh and kWh units are normalised to kWh for consistency.
+    if (cfg.next_hour_entity) {
+      const st   = this.hass?.states[cfg.next_hour_entity];
+      const raw  = parseFloat(st?.state ?? "");
+      const unit = (st?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+      const kwh  = isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : NaN;
+      if (isFinite(kwh)) nextHourKwh = kwh;
+    }
+    if (cfg.remaining_today_entity) {
+      const st   = this.hass?.states[cfg.remaining_today_entity];
+      const raw  = parseFloat(st?.state ?? "");
+      const unit = (st?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+      const kwh  = isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : NaN;
+      if (isFinite(kwh)) forecastLeftKwh = kwh;
     }
 
     const hasForecastSummary = nextHourKwh !== null || forecastLeftKwh !== null;

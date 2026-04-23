@@ -15,6 +15,10 @@ export interface SolarForecastCardConfig {
   forecast_entities: [string, string, string, string, string, string, string];
   live_power_entity?: string;
   today_actual_entity?: string;
+  /** Manual override for the +1HR header value. When set, reads state directly instead of deriving from hourly forecast data. */
+  next_hour_entity?: string;
+  /** Manual override for the LEFT header value. When set, reads state directly instead of deriving from hourly forecast data. */
+  remaining_today_entity?: string;
   /** Optional per-array actual-generation sensors. When set, renders stacked bar segments on today's column. */
   actual_arrays?: ActualArrayEntry[];
   date_format: "DD/MM" | "MM/DD";

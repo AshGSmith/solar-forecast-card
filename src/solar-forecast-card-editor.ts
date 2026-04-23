@@ -39,8 +39,10 @@ const LABELS: Record<string, string> = {
   forecast_entity_4:   "Day 5",
   forecast_entity_5:   "Day 6",
   forecast_entity_6:   "Day 7",
-  live_power_entity:   "Live power (optional, kW sensor)",
-  today_actual_entity: "Today's actual generation (optional)",
+  live_power_entity:        "Live power (optional, kW sensor)",
+  today_actual_entity:      "Today's actual generation (optional)",
+  next_hour_entity:         "+1HR forecast (optional, overrides auto-derived value)",
+  remaining_today_entity:   "LEFT / remaining today (optional, overrides auto-derived value)",
   date_format:         "Date format",
   time_format:         "Time format (hourly popup)",
   inverter_max_kw:     "Inverter max output (kW)",
@@ -74,6 +76,11 @@ const SCHEMA_TODAY_ACTUAL: HaFormSchema[] = [
 
 const SCHEMA_LIVE_POWER: HaFormSchema[] = [
   { name: "live_power_entity", selector: { entity: { domain: "sensor" } } },
+];
+
+const SCHEMA_FORECAST_SUMMARY: HaFormSchema[] = [
+  { name: "next_hour_entity",       selector: { entity: { domain: "sensor" } } },
+  { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
 
 const SCHEMA_DISPLAY: HaFormSchema[] = [
@@ -127,6 +134,8 @@ interface FormData {
   forecast_entity_6: string;
   live_power_entity: string;
   today_actual_entity: string;
+  next_hour_entity: string;
+  remaining_today_entity: string;
   date_format: string;
   time_format: string;
   inverter_max_kw: number | undefined;
@@ -153,8 +162,10 @@ export function normalizeConfig(
     device_id:          raw.device_id,
     integration_type:   raw.integration_type ?? "manual",
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
-    live_power_entity:   raw.live_power_entity,
-    today_actual_entity: raw.today_actual_entity,
+    live_power_entity:      raw.live_power_entity,
+    today_actual_entity:    raw.today_actual_entity,
+    next_hour_entity:       raw.next_hour_entity,
+    remaining_today_entity: raw.remaining_today_entity,
     actual_arrays: Array.isArray(raw.actual_arrays)
       ? (raw.actual_arrays as ActualArrayEntry[]).filter(
           (e): e is ActualArrayEntry =>
@@ -210,8 +221,10 @@ export class SolarForecastCardEditor extends LitElement {
       icon:                cfg.icon               ?? "",
       show_header:          cfg.show_header,
       device_id:           cfg.device_id          ?? "",
-      live_power_entity:   cfg.live_power_entity   ?? "",
-      today_actual_entity: cfg.today_actual_entity ?? "",
+      live_power_entity:      cfg.live_power_entity      ?? "",
+      today_actual_entity:    cfg.today_actual_entity    ?? "",
+      next_hour_entity:       cfg.next_hour_entity       ?? "",
+      remaining_today_entity: cfg.remaining_today_entity ?? "",
       date_format:         cfg.date_format         ?? "DD/MM",
       time_format:         cfg.time_format         ?? "24h",
       inverter_max_kw:     cfg.inverter_max_kw,
@@ -245,9 +258,11 @@ export class SolarForecastCardEditor extends LitElement {
         data.forecast_entity_5,
         data.forecast_entity_6,
       ] as SolarForecastCardConfig["forecast_entities"],
-      live_power_entity:   data.live_power_entity   || undefined,
-      today_actual_entity: data.today_actual_entity || undefined,
-      actual_arrays:       this._config?.actual_arrays,
+      live_power_entity:      data.live_power_entity      || undefined,
+      today_actual_entity:    data.today_actual_entity    || undefined,
+      next_hour_entity:       data.next_hour_entity       || undefined,
+      remaining_today_entity: data.remaining_today_entity || undefined,
+      actual_arrays:          this._config?.actual_arrays,
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
       time_format: (data.time_format as "24h" | "12h") || "24h",
       inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
@@ -868,6 +883,13 @@ export class SolarForecastCardEditor extends LitElement {
           .hass=${this.hass}
           .data=${data}
           .schema=${SCHEMA_TODAY_ACTUAL}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_FORECAST_SUMMARY}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
