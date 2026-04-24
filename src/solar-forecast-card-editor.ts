@@ -40,7 +40,8 @@ interface AutoDetectResult {
 const LABELS: Record<string, string> = {
   title:               "Title (optional)",
   icon:                "Header icon (optional, e.g. mdi:solar-power)",
-  show_header:          "Show header",
+  show_header:           "Show header",
+  display_estimate10:    "Display Estimate10 Forecast Values",
   device_id:           "Forecast Device",
   forecast_entity_0:   "Day 1 — Today",
   forecast_entity_1:   "Day 2 — Tomorrow",
@@ -71,9 +72,10 @@ const SCHEMA_DEVICE: HaFormSchema[] = [
 
 // Remaining top-level fields — always visible
 const SCHEMA_TOP: HaFormSchema[] = [
-  { name: "title",       selector: { text: {} } },
-  { name: "icon",        selector: { icon: {} } },
-  { name: "show_header", selector: { boolean: {} } },
+  { name: "title",              selector: { text: {} } },
+  { name: "icon",               selector: { icon: {} } },
+  { name: "show_header",        selector: { boolean: {} } },
+  { name: "display_estimate10", selector: { boolean: {} } },
 ];
 
 const SCHEMA_FORECAST: HaFormSchema[] = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
@@ -137,6 +139,7 @@ interface FormData {
   title: string;
   icon: string;
   show_header: boolean;
+  display_estimate10: boolean;
   device_id: string;
   forecast_entity_0: string;
   forecast_entity_1: string;
@@ -172,7 +175,8 @@ export function normalizeConfig(
     type:               raw.type ?? "custom:solar-forecast-card",
     title:              raw.title,
     icon:               raw.icon,
-    show_header:         raw.show_header !== false,
+    show_header:          raw.show_header !== false,
+    display_estimate10:   raw.display_estimate10 ?? false,
     device_id:          raw.device_id,
     integration_type:   raw.integration_type ?? "manual",
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
@@ -236,7 +240,8 @@ export class SolarForecastCardEditor extends LitElement {
       title:               cfg.title              ?? "",
       icon:                cfg.icon               ?? "",
       show_header:          cfg.show_header,
-      device_id:           cfg.device_id          ?? "",
+      display_estimate10:   cfg.display_estimate10 ?? false,
+      device_id:            cfg.device_id          ?? "",
       export_rate_entity:     cfg.export_rate_entity     ?? "",
       live_power_entity:      cfg.live_power_entity      ?? "",
       today_actual_entity:    cfg.today_actual_entity    ?? "",
@@ -263,8 +268,9 @@ export class SolarForecastCardEditor extends LitElement {
       type:             this._config?.type ?? "custom:solar-forecast-card",
       title:            data.title || undefined,
       icon:             data.icon  || undefined,
-      show_header:      data.show_header,
-      device_id:        data.device_id || undefined,
+      show_header:        data.show_header,
+      display_estimate10: data.display_estimate10,
+      device_id:          data.device_id || undefined,
       integration_type: this._config?.integration_type ?? "manual",
       forecast_entities: [
         data.forecast_entity_0,
@@ -906,6 +912,10 @@ export class SolarForecastCardEditor extends LitElement {
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
+      <p class="device-helper" style="margin:0 0 4px">
+        <ha-icon icon="mdi:information-outline"></ha-icon>
+        Estimate10 option only available when using the Solcast integration
+      </p>
 
       <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
         <ha-form

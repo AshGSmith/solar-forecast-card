@@ -77,6 +77,7 @@ const LABELS = {
     title: "Title (optional)",
     icon: "Header icon (optional, e.g. mdi:solar-power)",
     show_header: "Show header",
+    display_estimate10: "Display Estimate10 Forecast Values",
     device_id: "Forecast Device",
     forecast_entity_0: "Day 1 — Today",
     forecast_entity_1: "Day 2 — Tomorrow",
@@ -107,6 +108,7 @@ const SCHEMA_TOP = [
     { name: "title", selector: { text: {} } },
     { name: "icon", selector: { icon: {} } },
     { name: "show_header", selector: { boolean: {} } },
+    { name: "display_estimate10", selector: { boolean: {} } },
 ];
 const SCHEMA_FORECAST = [0, 1, 2, 3, 4, 5, 6].map((i) => ({
     name: `forecast_entity_${i}`,
@@ -169,6 +171,7 @@ function normalizeConfig(raw) {
         title: raw.title,
         icon: raw.icon,
         show_header: raw.show_header !== false,
+        display_estimate10: raw.display_estimate10 ?? false,
         device_id: raw.device_id,
         integration_type: raw.integration_type ?? "manual",
         forecast_entities: incoming,
@@ -221,6 +224,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             title: cfg.title ?? "",
             icon: cfg.icon ?? "",
             show_header: cfg.show_header,
+            display_estimate10: cfg.display_estimate10 ?? false,
             device_id: cfg.device_id ?? "",
             export_rate_entity: cfg.export_rate_entity ?? "",
             live_power_entity: cfg.live_power_entity ?? "",
@@ -248,6 +252,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             title: data.title || undefined,
             icon: data.icon || undefined,
             show_header: data.show_header,
+            display_estimate10: data.display_estimate10,
             device_id: data.device_id || undefined,
             integration_type: this._config?.integration_type ?? "manual",
             forecast_entities: [
@@ -817,6 +822,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         .computeLabel=${label}
         @value-changed=${onChange}
       ></ha-form>
+      <p class="device-helper" style="margin:0 0 4px">
+        <ha-icon icon="mdi:information-outline"></ha-icon>
+        Estimate10 option only available when using the Solcast integration
+      </p>
 
       <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
         <ha-form
@@ -1053,6 +1062,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             // sumKwh === 0: all arrays are producing nothing or unavailable.
             // todayActualKwh is intentionally left as-is (today_actual_entity fallback).
         }
+        const showEstimate10 = cfg.integration_type === "solcast" && cfg.display_estimate10;
         const raw = cfg.forecast_entities.map((entityId, i) => {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
@@ -1065,6 +1075,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
                 forecastKwh: isFinite(kwhVal) ? kwhVal : null,
                 actualKwh: i === 0 ? todayActualKwh : null,
                 actualArrays: i === 0 ? (todayArrayEntries ?? null) : null,
+                estimate10Kwh: showEstimate10
+                    ? this._sumEstimate10(s?.attributes?.detailedForecast)
+                    : null,
                 rawHoursAttr: cfg.integration_type === "solcast"
                     ? s?.attributes?.detailedForecast
                     : cfg.integration_type === "volcast"
@@ -1279,6 +1292,34 @@ let SolarForecastCard = class SolarForecastCard extends i {
             .filter(([, kwh]) => kwh > 0)
             .map(([hour, kwh]) => ({ hour, kwh }))
             .sort((a, b) => a.hour - b.hour);
+    }
+    // ── Estimate10 ───────────────────────────────────────────────────────────
+    /**
+     * Sum the pv_estimate10 values from a Solcast detailedForecast attribute.
+     *
+     * detailedForecast is an array of 30-min period objects:
+     *   { period_start: ISO, pv_estimate: kW, pv_estimate10: kW, pv_estimate90: kW }
+     *
+     * pv_estimate10 is the 10th-percentile kW output for each 30-min slot.
+     * Multiplying by 0.5 converts the half-hourly kW figure to kWh.
+     *
+     * Returns null when the attribute is absent, not an array, or every entry
+     * lacks a finite pv_estimate10 value — so the caller can cleanly skip
+     * rendering rather than showing 0.00 kWh.
+     */
+    _sumEstimate10(raw) {
+        if (!Array.isArray(raw) || raw.length === 0)
+            return null;
+        let total = 0;
+        let hasAny = false;
+        for (const entry of raw) {
+            const val = entry.pv_estimate10;
+            if (typeof val === "number" && isFinite(val)) {
+                total += val * 0.5; // 30-min period kW → kWh
+                hasAny = true;
+            }
+        }
+        return hasAny ? total : null;
     }
     // ── Colour tier ──────────────────────────────────────────────────────────
     _tier(kwh) {
@@ -1554,6 +1595,15 @@ let SolarForecastCard = class SolarForecastCard extends i {
         font-size: 0.60rem;
         color: var(--secondary-text-color);
         line-height: 1.2;
+      }
+
+      .value-estimate10 {
+        font-size: 0.58rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        opacity: 0.60;
+        line-height: 1.3;
+        white-space: nowrap;
       }
 
       .value-empty {
@@ -2445,6 +2495,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const valueLabel = row.forecastKwh !== null
             ? b `<span class="value-num">${row.forecastKwh.toFixed(1)}</span><span class="value-unit">kWh</span>`
             : b `<span class="value-empty">—</span>`;
+        const estimate10Label = row.estimate10Kwh !== null
+            ? b `<span class="value-estimate10">P10 ${row.estimate10Kwh.toFixed(1)}</span>`
+            : A;
         return b `
       <div
         class="col ${isToday ? "today" : ""}"
@@ -2454,7 +2507,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         @click=${() => this._openPopup(row)}
         @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
-        <div class="col-value">${valueLabel}</div>
+        <div class="col-value">${valueLabel}${estimate10Label}</div>
         <div class="col-bar-wrap">
           <div class="bar-bg"></div>
           ${bars}

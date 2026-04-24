@@ -9,6 +9,8 @@ export interface SolarForecastCardConfig {
   title?: string;
   icon?: string;
   show_header: boolean;
+  /** When true and integration is Solcast, show summed pv_estimate10 as a secondary value below each daily forecast. */
+  display_estimate10: boolean;
   device_id?: string;
   /** Set automatically when a device is selected; not exposed in UI. */
   integration_type: "volcast" | "solcast" | "forecast_solar" | "open_meteo_solar_forecast" | "manual";

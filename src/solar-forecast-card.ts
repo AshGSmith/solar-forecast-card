@@ -19,6 +19,8 @@ interface ForecastRow {
   /** Populated when actual_arrays configured; null otherwise. Heights use flex proportions. */
   actualArrays: Array<{ label: string; kwh: number }> | null;
   rawHoursAttr: unknown;     // raw "hours" attribute — parsed lazily
+  /** Summed pv_estimate10 for the day (kWh). Null when not applicable or unavailable. */
+  estimate10Kwh: number | null;
   forecastPct: number;       // 0–100, relative to week max
   actualPct: number;         // 0–100, capped at forecastPct
   dottedPct: number;         // forecastPct - actualPct
@@ -151,6 +153,9 @@ export class SolarForecastCard extends LitElement {
 
     type Raw = Omit<ForecastRow, "forecastPct" | "actualPct" | "dottedPct" | "isComplete">;
 
+    const showEstimate10 =
+      cfg.integration_type === "solcast" && cfg.display_estimate10;
+
     const raw: Raw[] = cfg.forecast_entities.map((entityId, i) => {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
@@ -165,6 +170,9 @@ export class SolarForecastCard extends LitElement {
         forecastKwh: isFinite(kwhVal) ? kwhVal : null,
         actualKwh: i === 0 ? todayActualKwh : null,
         actualArrays: i === 0 ? (todayArrayEntries ?? null) : null,
+        estimate10Kwh: showEstimate10
+          ? this._sumEstimate10(s?.attributes?.detailedForecast)
+          : null,
         rawHoursAttr: cfg.integration_type === "solcast"
           ? s?.attributes?.detailedForecast
           : cfg.integration_type === "volcast"
@@ -396,6 +404,35 @@ export class SolarForecastCard extends LitElement {
       .filter(([, kwh]) => kwh > 0)
       .map(([hour, kwh]) => ({ hour, kwh }))
       .sort((a, b) => a.hour - b.hour);
+  }
+
+  // ── Estimate10 ───────────────────────────────────────────────────────────
+
+  /**
+   * Sum the pv_estimate10 values from a Solcast detailedForecast attribute.
+   *
+   * detailedForecast is an array of 30-min period objects:
+   *   { period_start: ISO, pv_estimate: kW, pv_estimate10: kW, pv_estimate90: kW }
+   *
+   * pv_estimate10 is the 10th-percentile kW output for each 30-min slot.
+   * Multiplying by 0.5 converts the half-hourly kW figure to kWh.
+   *
+   * Returns null when the attribute is absent, not an array, or every entry
+   * lacks a finite pv_estimate10 value — so the caller can cleanly skip
+   * rendering rather than showing 0.00 kWh.
+   */
+  private _sumEstimate10(raw: unknown): number | null {
+    if (!Array.isArray(raw) || raw.length === 0) return null;
+    let total  = 0;
+    let hasAny = false;
+    for (const entry of raw as Array<Record<string, unknown>>) {
+      const val = entry.pv_estimate10;
+      if (typeof val === "number" && isFinite(val)) {
+        total  += val * 0.5; // 30-min period kW → kWh
+        hasAny  = true;
+      }
+    }
+    return hasAny ? total : null;
   }
 
   // ── Colour tier ──────────────────────────────────────────────────────────
@@ -688,6 +725,15 @@ export class SolarForecastCard extends LitElement {
         font-size: 0.60rem;
         color: var(--secondary-text-color);
         line-height: 1.2;
+      }
+
+      .value-estimate10 {
+        font-size: 0.58rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        opacity: 0.60;
+        line-height: 1.3;
+        white-space: nowrap;
       }
 
       .value-empty {
@@ -1609,6 +1655,10 @@ export class SolarForecastCard extends LitElement {
       ? html`<span class="value-num">${row.forecastKwh.toFixed(1)}</span><span class="value-unit">kWh</span>`
       : html`<span class="value-empty">—</span>`;
 
+    const estimate10Label = row.estimate10Kwh !== null
+      ? html`<span class="value-estimate10">P10 ${row.estimate10Kwh.toFixed(1)}</span>`
+      : nothing;
+
     return html`
       <div
         class="col ${isToday ? "today" : ""}"
@@ -1618,7 +1668,7 @@ export class SolarForecastCard extends LitElement {
         @click=${() => this._openPopup(row)}
         @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
-        <div class="col-value">${valueLabel}</div>
+        <div class="col-value">${valueLabel}${estimate10Label}</div>
         <div class="col-bar-wrap">
           <div class="bar-bg"></div>
           ${bars}
