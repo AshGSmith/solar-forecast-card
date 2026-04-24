@@ -1271,7 +1271,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
                 continue;
             buckets.set(hour, (buckets.get(hour) ?? 0) + wh / 1000); // Wh → kWh
         }
+        // Filter out hours with zero generation — Open-Meteo includes all 24 hours
+        // in wh_period (including night/cloudy hours with 0 Wh). The generic path
+        // used by Volcast/Solcast trims only leading/trailing zeros; for Open-Meteo
+        // we remove ALL zero-value hours so the popup shows only generating periods.
         return Array.from(buckets.entries())
+            .filter(([, kwh]) => kwh > 0)
             .map(([hour, kwh]) => ({ hour, kwh }))
             .sort((a, b) => a.hour - b.hour);
     }
