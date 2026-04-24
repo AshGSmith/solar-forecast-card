@@ -4,9 +4,9 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Screenshots
 
-<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.0.0/card-main.jpg" alt="Solar Forecast Card — main view" width="600">
+<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.3.0/card-main.jpg" alt="Solar Forecast Card — main view" width="600">
 
-<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.0.0/card-popup.jpg" alt="Solar Forecast Card — hourly popup" width="360">
+<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.3.0/card-popup.jpg" alt="Solar Forecast Card — hourly popup" width="360">
 
 ## Installation
 
@@ -41,6 +41,7 @@ type: custom:solar-forecast-card
 title: Solar Forecast          # optional — defaults to "Solar Forecast"
 icon: mdi:solar-power          # optional — defaults to mdi:solar-power
 show_header: true              # optional — defaults to true
+display_estimate10: false      # optional — Solcast only, shows P10 forecast values
 device_id: <your_device_id>    # optional — auto-detects forecast entities
 forecast_entities:
   - sensor.forecast_today
@@ -52,6 +53,9 @@ forecast_entities:
   - sensor.forecast_day_7
 live_power_entity: sensor.solar_power_now
 today_actual_entity: sensor.solar_energy_today
+export_rate_entity: sensor.current_export_rate
+next_hour_entity: sensor.solar_forecast_next_hour
+remaining_today_entity: sensor.solar_forecast_remaining_today
 actual_arrays:
   - entity: sensor.solar_east_array_energy_today
     label: E
@@ -75,6 +79,7 @@ high_threshold: 30
 | `title` | string | no | `Solar Forecast` | Text displayed in the card header |
 | `icon` | string | no | `mdi:solar-power` | MDI icon shown to the left of the title (e.g. `mdi:solar-power-variant`) |
 | `show_header` | boolean | no | `true` | Show or hide the card header, including the title and live data badge |
+| `display_estimate10` | boolean | no | `false` | When enabled with the Solcast integration, shows a secondary P10 (10th-percentile) forecast value below each day's main forecast total |
 
 #### Device & Entities
 
@@ -89,6 +94,9 @@ high_threshold: 30
 |--------|------|----------|---------|-------------|
 | `live_power_entity` | string | no | — | Sensor reporting current solar output. Accepts W or kW (detected via `unit_of_measurement`). Displayed in the header as `LIVE: X W` or `X.X kW` |
 | `today_actual_entity` | string | no | — | Sensor reporting total energy generated today (kWh or Wh). Used as the actual generation source when no `actual_arrays` are configured. Shown in the header and used to render the actual generation bar on today's column |
+| `next_hour_entity` | string | no | — | Sensor reporting forecast generation for the next full hour (kWh or Wh). When set, overrides the auto-derived `+1HR` header value. Auto-populated from the Solcast and Open-Meteo integrations where available |
+| `remaining_today_entity` | string | no | — | Sensor reporting remaining forecast generation for today (kWh or Wh). When set, overrides the auto-derived `LEFT` header value. Auto-populated from the forecast.solar and Open-Meteo integrations |
+| `export_rate_entity` | string | no | — | Sensor reporting the current energy export rate. When set, displays `EXPORT RATE: X unit` in the card header below the title |
 
 #### Actual Generation Arrays
 
