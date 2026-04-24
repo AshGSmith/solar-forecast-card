@@ -15,6 +15,8 @@ export interface SolarForecastCardConfig {
   forecast_entities: [string, string, string, string, string, string, string];
   live_power_entity?: string;
   today_actual_entity?: string;
+  /** Current export rate sensor. When set, displays "EXPORT RATE: X unit" in the header under the title. */
+  export_rate_entity?: string;
   /** Manual override for the +1HR header value. When set, reads state directly instead of deriving from hourly forecast data. */
   next_hour_entity?: string;
   /** Manual override for the LEFT header value. When set, reads state directly instead of deriving from hourly forecast data. */

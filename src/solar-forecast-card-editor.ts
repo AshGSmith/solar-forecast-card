@@ -49,6 +49,7 @@ const LABELS: Record<string, string> = {
   forecast_entity_4:   "Day 5",
   forecast_entity_5:   "Day 6",
   forecast_entity_6:   "Day 7",
+  export_rate_entity:       "Current Export Rate Entity",
   live_power_entity:        "Live power (optional, kW sensor)",
   today_actual_entity:      "Today's actual generation (optional)",
   next_hour_entity:         "+1HR forecast (optional, overrides auto-derived value)",
@@ -116,6 +117,10 @@ const SCHEMA_DISPLAY: HaFormSchema[] = [
   },
 ];
 
+const SCHEMA_ENERGY_PROVIDER: HaFormSchema[] = [
+  { name: "export_rate_entity", selector: { entity: {} } },
+];
+
 const SCHEMA_SYSTEM: HaFormSchema[] = [
   { name: "inverter_max_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW"  } } },
   { name: "solar_max_kwp",   selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWp" } } },
@@ -140,6 +145,7 @@ interface FormData {
   forecast_entity_4: string;
   forecast_entity_5: string;
   forecast_entity_6: string;
+  export_rate_entity: string;
   live_power_entity: string;
   today_actual_entity: string;
   next_hour_entity: string;
@@ -170,6 +176,7 @@ export function normalizeConfig(
     device_id:          raw.device_id,
     integration_type:   raw.integration_type ?? "manual",
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
+    export_rate_entity:     raw.export_rate_entity,
     live_power_entity:      raw.live_power_entity,
     today_actual_entity:    raw.today_actual_entity,
     next_hour_entity:       raw.next_hour_entity,
@@ -230,6 +237,7 @@ export class SolarForecastCardEditor extends LitElement {
       icon:                cfg.icon               ?? "",
       show_header:          cfg.show_header,
       device_id:           cfg.device_id          ?? "",
+      export_rate_entity:     cfg.export_rate_entity     ?? "",
       live_power_entity:      cfg.live_power_entity      ?? "",
       today_actual_entity:    cfg.today_actual_entity    ?? "",
       next_hour_entity:       cfg.next_hour_entity       ?? "",
@@ -267,6 +275,7 @@ export class SolarForecastCardEditor extends LitElement {
         data.forecast_entity_5,
         data.forecast_entity_6,
       ] as SolarForecastCardConfig["forecast_entities"],
+      export_rate_entity:     data.export_rate_entity     || undefined,
       live_power_entity:      data.live_power_entity      || undefined,
       today_actual_entity:    data.today_actual_entity    || undefined,
       next_hour_entity:       data.next_hour_entity       || undefined,
@@ -976,6 +985,16 @@ export class SolarForecastCardEditor extends LitElement {
           .hass=${this.hass}
           .data=${data}
           .schema=${SCHEMA_SYSTEM}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
+
+      <ha-expansion-panel header="Energy Provider" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_ENERGY_PROVIDER}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>

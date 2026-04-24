@@ -85,6 +85,7 @@ const LABELS = {
     forecast_entity_4: "Day 5",
     forecast_entity_5: "Day 6",
     forecast_entity_6: "Day 7",
+    export_rate_entity: "Current Export Rate Entity",
     live_power_entity: "Live power (optional, kW sensor)",
     today_actual_entity: "Today's actual generation (optional)",
     next_hour_entity: "+1HR forecast (optional, overrides auto-derived value)",
@@ -145,6 +146,9 @@ const SCHEMA_DISPLAY = [
         },
     },
 ];
+const SCHEMA_ENERGY_PROVIDER = [
+    { name: "export_rate_entity", selector: { entity: {} } },
+];
 const SCHEMA_SYSTEM = [
     { name: "inverter_max_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW" } } },
     { name: "solar_max_kwp", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWp" } } },
@@ -168,6 +172,7 @@ function normalizeConfig(raw) {
         device_id: raw.device_id,
         integration_type: raw.integration_type ?? "manual",
         forecast_entities: incoming,
+        export_rate_entity: raw.export_rate_entity,
         live_power_entity: raw.live_power_entity,
         today_actual_entity: raw.today_actual_entity,
         next_hour_entity: raw.next_hour_entity,
@@ -217,6 +222,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             icon: cfg.icon ?? "",
             show_header: cfg.show_header,
             device_id: cfg.device_id ?? "",
+            export_rate_entity: cfg.export_rate_entity ?? "",
             live_power_entity: cfg.live_power_entity ?? "",
             today_actual_entity: cfg.today_actual_entity ?? "",
             next_hour_entity: cfg.next_hour_entity ?? "",
@@ -253,6 +259,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
                 data.forecast_entity_5,
                 data.forecast_entity_6,
             ],
+            export_rate_entity: data.export_rate_entity || undefined,
             live_power_entity: data.live_power_entity || undefined,
             today_actual_entity: data.today_actual_entity || undefined,
             next_hour_entity: data.next_hour_entity || undefined,
@@ -891,6 +898,16 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
       </ha-expansion-panel>
 
+      <ha-expansion-panel header="Energy Provider" outlined leftChevron>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_ENERGY_PROVIDER}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+      </ha-expansion-panel>
+
       <ha-expansion-panel header="Colour Thresholds" outlined leftChevron>
         <ha-form
           .hass=${this.hass}
@@ -987,6 +1004,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             this._config.today_actual_entity,
             this._config.next_hour_entity,
             this._config.remaining_today_entity,
+            this._config.export_rate_entity,
             ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
         ].filter(Boolean);
         return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
@@ -1345,6 +1363,16 @@ let SolarForecastCard = class SolarForecastCard extends i {
         padding: 0 4px;
       }
 
+      /* Left column: stacks title + export rate row vertically */
+      .header-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        flex: 1;
+        min-width: 0;
+      }
+
       .header-title {
         display: flex;
         align-items: center;
@@ -1352,14 +1380,22 @@ let SolarForecastCard = class SolarForecastCard extends i {
         font-size: 1.05rem;
         font-weight: 500;
         color: var(--primary-text-color);
-        flex: 1;
-        min-width: 0;
         flex-wrap: wrap;
       }
 
       .header-title ha-icon {
         color: var(--state-active-color, #fbbf24);
         flex-shrink: 0;
+      }
+
+      .export-rate-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        white-space: nowrap;
       }
 
       .header-live {
@@ -2057,9 +2093,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const hasEntities = this._config.forecast_entities.some(Boolean);
         const header = this._config.show_header ? b `
       <div class="card-header">
-        <div class="header-title">
-          <ha-icon icon=${icon}></ha-icon>
-          ${title}
+        <div class="header-left">
+          <div class="header-title">
+            <ha-icon icon=${icon}></ha-icon>
+            ${title}
+          </div>
+          ${this._renderExportRate()}
         </div>
         ${this._renderLive()}
       </div>
@@ -2088,6 +2127,26 @@ let SolarForecastCard = class SolarForecastCard extends i {
         ${isTwoDay ? b `<div class="two-day-note">2-day forecast available</div>` : A}
       </ha-card>
       ${this._renderPopup()}
+    `;
+    }
+    // ── Export rate ───────────────────────────────────────────────────────────
+    _renderExportRate() {
+        const cfg = this._config;
+        if (!cfg.export_rate_entity)
+            return A;
+        const st = this.hass?.states[cfg.export_rate_entity];
+        if (!st)
+            return A;
+        // Treat unavailable / unknown / non-numeric states as absent — hide cleanly
+        const num = parseFloat(st.state);
+        if (!isFinite(num))
+            return A;
+        const unit = st.attributes?.unit_of_measurement ?? "";
+        return b `
+      <div class="export-rate-row">
+        <span class="live-label">EXPORT RATE:</span>
+        <span>${st.state}${unit ? ` ${unit}` : ""}</span>
+      </div>
     `;
     }
     // ── Live badge ────────────────────────────────────────────────────────────

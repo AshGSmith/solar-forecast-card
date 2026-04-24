@@ -94,6 +94,7 @@ export class SolarForecastCard extends LitElement {
       this._config.today_actual_entity,
       this._config.next_hour_entity,
       this._config.remaining_today_entity,
+      this._config.export_rate_entity,
       ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
     ].filter(Boolean) as string[];
 
@@ -496,6 +497,16 @@ export class SolarForecastCard extends LitElement {
         padding: 0 4px;
       }
 
+      /* Left column: stacks title + export rate row vertically */
+      .header-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        flex: 1;
+        min-width: 0;
+      }
+
       .header-title {
         display: flex;
         align-items: center;
@@ -503,14 +514,22 @@ export class SolarForecastCard extends LitElement {
         font-size: 1.05rem;
         font-weight: 500;
         color: var(--primary-text-color);
-        flex: 1;
-        min-width: 0;
         flex-wrap: wrap;
       }
 
       .header-title ha-icon {
         color: var(--state-active-color, #fbbf24);
         flex-shrink: 0;
+      }
+
+      .export-rate-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--secondary-text-color);
+        white-space: nowrap;
       }
 
       .header-live {
@@ -1211,9 +1230,12 @@ export class SolarForecastCard extends LitElement {
 
     const header = this._config.show_header ? html`
       <div class="card-header">
-        <div class="header-title">
-          <ha-icon icon=${icon}></ha-icon>
-          ${title}
+        <div class="header-left">
+          <div class="header-title">
+            <ha-icon icon=${icon}></ha-icon>
+            ${title}
+          </div>
+          ${this._renderExportRate()}
         </div>
         ${this._renderLive()}
       </div>
@@ -1245,6 +1267,29 @@ export class SolarForecastCard extends LitElement {
         ${isTwoDay ? html`<div class="two-day-note">2-day forecast available</div>` : nothing}
       </ha-card>
       ${this._renderPopup()}
+    `;
+  }
+
+  // ── Export rate ───────────────────────────────────────────────────────────
+
+  private _renderExportRate() {
+    const cfg = this._config!;
+    if (!cfg.export_rate_entity) return nothing;
+
+    const st  = this.hass?.states[cfg.export_rate_entity];
+    if (!st) return nothing;
+
+    // Treat unavailable / unknown / non-numeric states as absent — hide cleanly
+    const num = parseFloat(st.state);
+    if (!isFinite(num)) return nothing;
+
+    const unit = (st.attributes?.unit_of_measurement as string | undefined) ?? "";
+
+    return html`
+      <div class="export-rate-row">
+        <span class="live-label">EXPORT RATE:</span>
+        <span>${st.state}${unit ? ` ${unit}` : ""}</span>
+      </div>
     `;
   }
 
