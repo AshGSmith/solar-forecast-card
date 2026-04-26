@@ -208,12 +208,17 @@ export class SolarForecastCard extends LitElement {
    *
    * @param hint  integration_type from config — skips format detection when known.
    *
-   * Handles four formats:
+   * Handles five formats:
    *   1. Solcast detailedForecast  – [{period_start: ISO, pv_estimate: kW}, …]
    *                                  30-min periods, aggregated into hourly kWh
-   *   2. Array of numbers          – index is the hour
-   *   3. Array of objects          – looks for common value-key names
-   *   4. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
+   *   2. Volcast hours             – array of numbers (index = clock hour for
+   *                                  24-element arrays) OR array of objects with
+   *                                  explicit hour/datetime fields; dispatched to
+   *                                  _parseVolcastHours so clock hours are always
+   *                                  resolved correctly regardless of array length
+   *   3. Open-Meteo wh_period      – plain object keyed by ISO datetime → Wh
+   *   4. Array of numbers          – index is the hour (generic fallback)
+   *   5. Plain object keyed by hour – {"6": 0.5, "7": 1.2, …}
    */
   private _parseHours(
     raw: unknown,
@@ -231,6 +236,29 @@ export class SolarForecastCard extends LitElement {
     );
 
     if (raw === null || raw === undefined) return [];
+
+    // ── Volcast: dispatch before generic format detection ────────────────────
+    // The generic array path maps array index → clock hour, which is only
+    // correct for 24-element midnight-indexed arrays. Volcast may provide a
+    // shorter array (trimmed past hours removed as the day progresses) or an
+    // array of objects whose time is encoded in period_start/datetime fields
+    // rather than an explicit "hour" key. _parseVolcastHours handles all cases
+    // by extracting the clock hour from ISO datetime fields when available,
+    // falling back to array index only for bare-number 24-element arrays.
+    if (hint === "volcast") {
+      if (!Array.isArray(raw)) {
+        if (!silent) console.debug("[solar-forecast-card] hours: Volcast hours is not an array");
+        return [];
+      }
+      if (!silent) console.debug("[solar-forecast-card] hours: Volcast hours format");
+      const pts = this._parseVolcastHours(raw as unknown[]);
+      if (!silent && pts.length > 0) console.debug(
+        `[solar-forecast-card] hours: ${pts.length} Volcast points,`,
+        `${pts[0].hour}:00 → ${pts[pts.length - 1].hour}:00,`,
+        `peak ${Math.max(...pts.map((p) => p.kwh)).toFixed(3)} kWh`
+      );
+      return pts;
+    }
 
     // ── Open-Meteo: dispatch before generic format detection ─────────────────
     if (hint === "open_meteo_solar_forecast") {
@@ -254,9 +282,9 @@ export class SolarForecastCard extends LitElement {
         // ── Format 1: Solcast detailedForecast ────────────────────────────
         // When hint is "solcast", skip detection and parse directly.
         // Otherwise detect by inspecting the first element.
+        // Volcast is dispatched above so hint can never be "volcast" here.
         const isSolcast = hint === "solcast" ||
-          (hint !== "volcast" &&
-            typeof (raw[0] as Record<string, unknown>)?.period_start === "string" &&
+          (typeof (raw[0] as Record<string, unknown>)?.period_start === "string" &&
             "pv_estimate" in (raw[0] as Record<string, unknown>));
 
         if (isSolcast) {
@@ -366,6 +394,97 @@ export class SolarForecastCard extends LitElement {
     return Array.from(buckets.entries())
       .map(([hour, kwh]) => ({ hour, kwh }))
       .sort((a, b) => a.hour - b.hour);
+  }
+
+  /**
+   * Parse Volcast's `hours` attribute into HourPoint[].
+   *
+   * The attribute can take two forms:
+   *
+   *   a) Array of numbers — treated as a midnight-indexed 24-element array
+   *      where index = clock hour. This is the standard Volcast format for
+   *      full-day forecasts. If Volcast returns a shorter array (past hours
+   *      removed during the day), left-over indices still map to clock hours
+   *      0-N; the resulting LEFT filter in _renderLive will then apply the
+   *      same clock-hour comparison, so hours are still excluded correctly.
+   *
+   *   b) Array of objects — clock hour is resolved in priority order:
+   *        1. Numeric "hour", "time", or "h" field
+   *        2. ISO datetime string in "period_start", "datetime", or "start"
+   *           — the T-component is extracted directly (avoids UTC offset shift)
+   *        3. Array index (last resort)
+   *      Multiple sub-hourly periods for the same clock hour are summed.
+   *
+   * Output is sorted ascending by clock hour with leading/trailing zeros
+   * trimmed, consistent with all other integration parsers.
+   */
+  private _parseVolcastHours(raw: unknown[]): HourPoint[] {
+    if (raw.length === 0) return [];
+
+    const buckets = new Map<number, number>();
+
+    for (let i = 0; i < raw.length; i++) {
+      const v = raw[i];
+      let hour: number;
+      let kwh: number;
+
+      if (typeof v === "number") {
+        // Bare number: index = clock hour (standard 24-element midnight array)
+        hour = i;
+        kwh  = isFinite(v) ? v : 0;
+
+      } else if (typeof v === "object" && v !== null) {
+        const obj = v as Record<string, unknown>;
+
+        // ── Resolve clock hour ────────────────────────────────────────────
+        const rawH = obj.hour ?? obj.time ?? obj.h;
+
+        if (typeof rawH === "number" && isFinite(rawH)) {
+          hour = rawH;
+        } else if (typeof rawH === "string") {
+          const parsed = parseInt(rawH, 10);
+          hour = isFinite(parsed) ? parsed : i;
+        } else {
+          // Fallback: ISO datetime field — extract T-component as local hour.
+          // Matches "2024-04-26T14:00:00" → 14.  Avoids new Date() UTC shift.
+          const dtField = obj.period_start ?? obj.datetime ?? obj.start;
+          if (typeof dtField === "string") {
+            const m = dtField.match(/T(\d{2}):/);
+            hour = m ? parseInt(m[1], 10) : i;
+          } else {
+            hour = i;
+          }
+        }
+
+        // ── Resolve energy value ──────────────────────────────────────────
+        const rawV =
+          obj.value    ?? obj.energy    ?? obj.kwh   ??
+          obj.wh       ?? obj.power_kw  ?? obj.pv_estimate ??
+          obj.forecast ?? obj.solar     ?? 0;
+        kwh = typeof rawV === "number" ? rawV
+            : typeof rawV === "string" ? parseFloat(rawV)
+            : 0;
+        if (!isFinite(kwh)) kwh = 0;
+
+      } else {
+        continue; // skip null / unexpected types
+      }
+
+      if (!isFinite(hour) || hour < 0 || hour > 23) continue;
+      buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+    }
+
+    const points = Array.from(buckets.entries())
+      .map(([hour, kwh]) => ({ hour, kwh }))
+      .sort((a, b) => a.hour - b.hour);
+
+    // Trim leading / trailing zeros — consistent with all other parsers
+    let first = -1, last = -1;
+    for (let i = 0; i < points.length; i++) {
+      if (points[i].kwh > 0) { if (first === -1) first = i; last = i; }
+    }
+    if (first === -1) return [];
+    return points.slice(first, last + 1);
   }
 
   /**
