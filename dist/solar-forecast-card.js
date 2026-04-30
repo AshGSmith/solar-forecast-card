@@ -72,35 +72,239 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
  * SPDX-License-Identifier: BSD-3-Clause
  */function r(r){return n({...r,state:true,attribute:false})}
 
-// ── Field labels ──────────────────────────────────────────────────────────────
-const LABELS = {
-    title: "Title (optional)",
-    icon: "Header icon (optional, e.g. mdi:solar-power)",
-    show_header: "Show header",
-    display_estimate10: "Display Estimate10 Forecast Values",
-    device_id: "Forecast Device",
-    integration_type: "Integration Type",
-    forecast_entity_0: "Day 1 — Today",
-    forecast_entity_1: "Day 2 — Tomorrow",
-    forecast_entity_2: "Day 3",
-    forecast_entity_3: "Day 4",
-    forecast_entity_4: "Day 5",
-    forecast_entity_5: "Day 6",
-    forecast_entity_6: "Day 7",
-    export_rate_entity: "Current Export Rate Entity",
-    live_power_entity: "Live power (optional, kW sensor)",
-    today_actual_entity: "Today's actual generation (optional)",
-    next_hour_entity: "+1HR forecast (optional, overrides auto-derived value)",
-    remaining_today_entity: "LEFT / remaining today (optional, overrides auto-derived value)",
-    date_format: "Date format",
-    time_format: "Time format (hourly popup)",
-    show_hourly_as_main: "Show Hourly Forecast as Main Card",
-    inverter_max_kw: "Inverter max output (kW)",
-    solar_max_kwp: "Solar array size (kWp)",
-    low_threshold: "Low threshold (kWh)",
-    high_threshold: "High threshold (kWh)",
-    desktop_text_scale: "Desktop Text Scale",
-};
+var en = {
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var fr = {
+  "card": {
+    "defaultTitle": "Prévision solaire",
+    "labels": {
+      "live": "DIRECT :",
+      "exportRate": "TARIF EXPORT :",
+      "nextHour": "+1 H :",
+      "left": "RESTE :",
+      "week": "SEMAINE :",
+      "avg": "MOY :",
+      "total": "Total",
+      "forecast": "prévu",
+      "generated": "produit"
+    },
+    "days": {
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain"
+    },
+    "popup": {
+      "close": "Fermer",
+      "noHourlyData": "Aucune donnée horaire disponible pour ce jour.",
+      "integrationNoHourlyData": "Les entités de prévision sélectionnées ne fournissent pas de données horaires.",
+      "chart": {
+        "time": "Heure",
+        "power": "Puissance",
+        "forecastShort": "Prév.",
+        "actualShort": "Réel"
+      }
+    }
+  },
+  "editor": {
+    "labels": {
+      "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
+      "language_override": "Langue forcée"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "Anglais",
+      "french": "Français",
+      "dateDdMm": "JJ/MM  (ex. 15/04)",
+      "dateMmDd": "MM/JJ  (ex. 04/15)",
+      "time24h": "24 h  (ex. 17:00)",
+      "time12h": "12 h  (ex. 5pm)"
+    },
+    "helpers": {
+      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto utilise la langue de Home Assistant."
+    }
+  }
+}
+;
+
+const LOCALES = { en, fr };
+const LANGUAGE_OPTIONS = ["en", "fr"];
+function normaliseLanguage(value) {
+    if (typeof value !== "string" || value.trim() === "")
+        return "en";
+    const base = value.toLowerCase().replace("_", "-").split("-")[0];
+    return base in LOCALES ? base : "en";
+}
+function resolveLanguage(hass, config) {
+    if (config?.language_override && config.language_override !== "auto") {
+        return normaliseLanguage(config.language_override);
+    }
+    const localeLanguage = hass?.locale && typeof hass.locale === "object" && "language" in hass.locale
+        ? hass.locale.language
+        : undefined;
+    return normaliseLanguage(localeLanguage ?? hass?.language);
+}
+function readPath(tree, key) {
+    return key.split(".").reduce((node, part) => {
+        if (node && typeof node === "object" && part in node) {
+            return node[part];
+        }
+        return undefined;
+    }, tree);
+}
+function localize(language, key, vars) {
+    const translated = readPath(LOCALES[language] ?? en, key);
+    const fallback = readPath(en, key);
+    const raw = typeof translated === "string"
+        ? translated
+        : typeof fallback === "string"
+            ? fallback
+            : key;
+    return vars
+        ? raw.replace(/\{(\w+)\}/g, (_, name) => String(vars[name] ?? `{${name}}`))
+        : raw;
+}
+
 // ── Schema segments (rendered with section headers between them) ──────────────
 // Device field — rendered first as the primary entry point
 const SCHEMA_DEVICE = [
@@ -108,22 +312,6 @@ const SCHEMA_DEVICE = [
 ];
 // Integration type — auto-set by device detection; exposed here as a manual
 // override for users who configure forecast_entities without a device.
-const SCHEMA_INTEGRATION = [
-    {
-        name: "integration_type",
-        selector: {
-            select: {
-                options: [
-                    { value: "manual", label: "Auto-detect" },
-                    { value: "solcast", label: "Solcast" },
-                    { value: "volcast", label: "Volcast" },
-                    { value: "forecast_solar", label: "Forecast.Solar" },
-                    { value: "open_meteo_solar_forecast", label: "Open-Meteo Solar Forecast" },
-                ],
-            },
-        },
-    },
-];
 // Remaining top-level fields — always visible
 const SCHEMA_TOP = [
     { name: "title", selector: { text: {} } },
@@ -145,29 +333,7 @@ const SCHEMA_LIVE = [
     { name: "next_hour_entity", selector: { entity: { domain: "sensor" } } },
     { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
-const SCHEMA_DISPLAY = [
-    {
-        name: "date_format",
-        selector: {
-            select: {
-                options: [
-                    { value: "DD/MM", label: "DD/MM  (e.g. 15/04)" },
-                    { value: "MM/DD", label: "MM/DD  (e.g. 04/15)" },
-                ],
-            },
-        },
-    },
-    {
-        name: "time_format",
-        selector: {
-            select: {
-                options: [
-                    { value: "24h", label: "24h  (e.g. 17:00)" },
-                    { value: "12h", label: "12h  (e.g. 5pm)" },
-                ],
-            },
-        },
-    },
+const SCHEMA_DISPLAY_BASE = [
     {
         name: "desktop_text_scale",
         selector: {
@@ -214,6 +380,7 @@ function normalizeConfig(raw) {
         date_format: raw.date_format ?? "DD/MM",
         time_format: raw.time_format ?? "24h",
         show_hourly_as_main: raw.show_hourly_as_main ?? false,
+        language_override: raw.language_override ?? "auto",
         inverter_max_kw: raw.inverter_max_kw,
         solar_max_kwp: raw.solar_max_kwp,
         low_threshold: raw.low_threshold,
@@ -248,6 +415,74 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     setConfig(config) {
         this._config = normalizeConfig(config);
     }
+    _language() {
+        return resolveLanguage(this.hass, this._config);
+    }
+    _t(key, vars) {
+        return localize(this._language(), key, vars);
+    }
+    _integrationSchema() {
+        return [
+            {
+                name: "integration_type",
+                selector: {
+                    select: {
+                        options: [
+                            { value: "manual", label: this._t("editor.options.autoDetect") },
+                            { value: "solcast", label: this._t("editor.options.solcast") },
+                            { value: "volcast", label: this._t("editor.options.volcast") },
+                            { value: "forecast_solar", label: this._t("editor.options.forecastSolar") },
+                            { value: "open_meteo_solar_forecast", label: this._t("editor.options.openMeteo") },
+                        ],
+                    },
+                },
+            },
+        ];
+    }
+    _displaySchema() {
+        return [
+            {
+                name: "date_format",
+                selector: {
+                    select: {
+                        options: [
+                            { value: "DD/MM", label: this._t("editor.options.dateDdMm") },
+                            { value: "MM/DD", label: this._t("editor.options.dateMmDd") },
+                        ],
+                    },
+                },
+            },
+            {
+                name: "time_format",
+                selector: {
+                    select: {
+                        options: [
+                            { value: "24h", label: this._t("editor.options.time24h") },
+                            { value: "12h", label: this._t("editor.options.time12h") },
+                        ],
+                    },
+                },
+            },
+            ...SCHEMA_DISPLAY_BASE,
+            {
+                // TEMP TESTING ONLY - remove before release.
+                name: "language_override",
+                selector: {
+                    select: {
+                        options: [
+                            { value: "auto", label: this._t("editor.options.auto") },
+                            ...LANGUAGE_OPTIONS.map((lang) => ({
+                                value: lang,
+                                label: lang === "fr"
+                                    ? this._t("editor.options.french")
+                                    : this._t("editor.options.english"),
+                            })),
+                        ],
+                    },
+                },
+            },
+        ];
+    }
     // ── Config ↔ flat FormData conversion ──────────────────────────────────────
     _toFormData(cfg) {
         return {
@@ -265,6 +500,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             date_format: cfg.date_format ?? "DD/MM",
             time_format: cfg.time_format ?? "24h",
             show_hourly_as_main: cfg.show_hourly_as_main ?? false,
+            language_override: cfg.language_override ?? "auto",
             inverter_max_kw: cfg.inverter_max_kw,
             solar_max_kwp: cfg.solar_max_kwp,
             low_threshold: cfg.low_threshold,
@@ -306,6 +542,8 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             date_format: data.date_format || "DD/MM",
             time_format: data.time_format || "24h",
             show_hourly_as_main: data.show_hourly_as_main,
+            // TEMP TESTING ONLY - remove before release.
+            language_override: data.language_override || "auto",
             inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
             solar_max_kwp: typeof data.solar_max_kwp === "number" ? data.solar_max_kwp : undefined,
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
@@ -832,7 +1070,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         if (!this.hass || !this._config)
             return A;
         const data = this._toFormData(this._config);
-        const label = (s) => LABELS[s.name] ?? s.name;
+        const label = (s) => this._t(`editor.labels.${s.name}`);
         const onChange = this._valueChanged.bind(this);
         return b `
       <ha-form
@@ -844,12 +1082,12 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
       ></ha-form>
       <p class="device-helper">
         <ha-icon icon="mdi:information-outline"></ha-icon>
-        Recommended: selecting a device will auto-configure the card
+        ${this._t("editor.helpers.device")}
       </p>
 
       ${this._showManualWarning ? b `
         <ha-alert alert-type="warning">
-          Changing device will not overwrite manually configured entities.
+          ${this._t("editor.warnings.manualEntities")}
         </ha-alert>
       ` : A}
 
@@ -862,25 +1100,24 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
       ></ha-form>
       <p class="device-helper" style="margin:0 0 4px">
         <ha-icon icon="mdi:information-outline"></ha-icon>
-        Display Estimate10 is only applicable when the integration type is Solcast
+        ${this._t("editor.helpers.estimate10")}
       </p>
 
-      <ha-expansion-panel header="Integration Type" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.integrationType")} outlined leftChevron>
         <p class="device-helper" style="margin:8px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Automatically set when a forecast device is selected above. Override here only
-          when configuring forecast entities manually without a device.
+          ${this._t("editor.helpers.integrationType")}
         </p>
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_INTEGRATION}
+          .schema=${this._integrationSchema()}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.dailyForecastEntities")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -890,7 +1127,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Live Data" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.liveData")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -900,15 +1137,14 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
         <p class="device-helper" style="margin:4px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          +1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.
+          ${this._t("editor.helpers.liveData")}
         </p>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.actualGenerationArrays")} outlined leftChevron>
         <p class="device-helper" style="margin:8px 0 10px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Optional: configure individual array sensors to display a stacked breakdown on today's bar.
-          Each label is a single character shown inside its segment (e.g. N, S, E).
+          ${this._t("editor.helpers.actualArrays")}
         </p>
         ${(this._config.actual_arrays ?? []).map((entry, idx) => b `
           <div class="array-row">
@@ -916,23 +1152,23 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
               .hass=${this.hass}
               .selector=${{ entity: { domain: ["sensor"] } }}
               .value=${entry.entity || ""}
-              .label=${"Array entity"}
+              .label=${this._t("editor.arrays.entity")}
               @value-changed=${(e) => this._updateArrayEntity(idx, e.detail.value)}
             ></ha-selector>
             <div class="array-label-wrap">
-              <span class="array-field-label">Label (1 char)</span>
+              <span class="array-field-label">${this._t("editor.arrays.label")}</span>
               <input
                 type="text"
                 class="array-label-input"
-                placeholder="E"
+                placeholder=${this._t("editor.arrays.placeholder")}
                 maxlength="1"
                 .value=${entry.label || ""}
                 @input=${(e) => this._updateArrayLabel(idx, e.target.value)}
               />
-              <span class="array-label-hint">bar &amp; popup</span>
+              <span class="array-label-hint">${this._t("editor.arrays.hint")}</span>
             </div>
             <ha-icon-button
-              .label=${"Remove"}
+              .label=${this._t("editor.arrays.remove")}
               .path=${"M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"}
               @click=${() => this._removeArray(idx)}
             ></ha-icon-button>
@@ -946,11 +1182,11 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._addArray()}
         >
           <ha-icon icon="mdi:plus-circle-outline"></ha-icon>
-          Add array
+          ${this._t("editor.arrays.add")}
         </div>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="System Parameters" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.systemParameters")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -960,7 +1196,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Energy Provider" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.energyProvider")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -970,7 +1206,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Colour Thresholds" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.colourThresholds")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -980,21 +1216,25 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Date/Time &amp; Display" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.dateTimeDisplay")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_DISPLAY}
+          .schema=${this._displaySchema()}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.
+          ${this._t("editor.helpers.desktopTextScale")}
         </p>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Displays the hourly forecast view directly on the card instead of the daily forecast bars.
+          ${this._t("editor.helpers.hourlyAsMain")}
+        </p>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          ${this._t("editor.helpers.languageOverride")}
         </p>
       </ha-expansion-panel>
     `;
@@ -1016,7 +1256,7 @@ SolarForecastCardEditor = __decorate([
     t("solar-forecast-card-editor")
 ], SolarForecastCardEditor);
 
-const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 let SolarForecastCard = class SolarForecastCard extends i {
@@ -1057,7 +1297,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     setConfig(config) {
         if (!config)
-            throw new Error("Invalid configuration");
+            throw new Error(localize("en", "card.errors.invalidConfig"));
         this._config = normalizeConfig(config);
         this._mainActualFetchKey = undefined;
         this._mainActualHourly = null;
@@ -1069,6 +1309,15 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     getCardSize() {
         return 4;
+    }
+    _language() {
+        return resolveLanguage(this.hass, this._config);
+    }
+    _t(key, vars) {
+        return localize(this._language(), key, vars);
+    }
+    _localeCode() {
+        return this._language();
     }
     connectedCallback() {
         super.connectedCallback();
@@ -1087,6 +1336,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return false;
         const oldHass = changedProps.get("hass");
         if (!oldHass)
+            return true;
+        if (resolveLanguage(oldHass, this._config) !== this._language())
             return true;
         const watchIds = [
             ...this._config.forecast_entities,
@@ -1672,7 +1923,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     // ── Formatting ────────────────────────────────────────────────────────────
     _dayLabel(date, isToday) {
-        return isToday ? "Today" : DAY_NAMES[date.getDay()];
+        return isToday ? this._t("card.days.today") : this._t(`card.days.${DAY_KEYS[date.getDay()]}`);
     }
     _dateLabel(date) {
         const d = String(date.getDate()).padStart(2, "0");
@@ -1680,8 +1931,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return this._config.date_format === "MM/DD" ? `${m}/${d}` : `${d}/${m}`;
     }
     _fullDateLabel(date, isToday) {
-        const weekday = isToday ? "Today" : date.toLocaleDateString(undefined, { weekday: "long" });
-        const dt = date.toLocaleDateString(undefined, { day: "numeric", month: "long" });
+        const weekday = isToday ? this._t("card.days.today") : date.toLocaleDateString(this._localeCode(), { weekday: "long" });
+        const dt = date.toLocaleDateString(this._localeCode(), { day: "numeric", month: "long" });
         return `${weekday} · ${dt}`;
     }
     _hourLabel(hour) {
@@ -1691,6 +1942,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return `${h}${period}`;
         }
         return String(hour).padStart(2, "0") + ":00";
+    }
+    _formatNumber(value, minimumFractionDigits, maximumFractionDigits = minimumFractionDigits) {
+        return new Intl.NumberFormat(this._localeCode(), {
+            minimumFractionDigits,
+            maximumFractionDigits,
+        }).format(value);
     }
     // ── Styles ────────────────────────────────────────────────────────────────
     static get styles() {
@@ -2643,7 +2900,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
     render() {
         if (!this._config)
             return A;
-        const title = this._config.title ?? "Solar Forecast";
+        const title = this._config.title ?? this._t("card.defaultTitle");
         const icon = this._config.icon ?? "mdi:solar-power";
         const hasEntities = this._config.forecast_entities.some(Boolean);
         const header = this._config.show_header ? b `
@@ -2673,7 +2930,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
-            <p>No forecast entities configured.<br />Open the card editor to get started.</p>
+            <p>${this._t("card.placeholder")}<br />${this._t("card.placeholderAction")}</p>
           </div>
         </ha-card>
       `;
@@ -2687,7 +2944,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         <div class="forecast-grid ${isTwoDay ? "two-day" : ""}">
           ${displayRows.map((row) => this._renderCol(row))}
         </div>
-        ${isTwoDay ? b `<div class="two-day-note">2-day forecast available</div>` : A}
+        ${isTwoDay ? b `<div class="two-day-note">${this._t("card.twoDayNote")}</div>` : A}
       </ha-card>
       ${this._renderPopup()}
     `;
@@ -2707,7 +2964,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const unit = st.attributes?.unit_of_measurement ?? "";
         return b `
       <div class="export-rate-row">
-        <span class="live-label">EXPORT RATE:</span>
+        <span class="live-label">${this._t("card.labels.exportRate")}</span>
         <span>${st.state}${unit ? ` ${unit}` : ""}</span>
       </div>
     `;
@@ -2715,10 +2972,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
     // ── Live badge ────────────────────────────────────────────────────────────
     _formatPower(watts) {
         if (watts < 10)
-            return "0 W";
+            return `0 ${this._t("card.units.watts")}`;
         if (watts < 1000)
-            return `${Math.round(watts)} W`;
-        return `${(watts / 1000).toFixed(1)} kW`;
+            return `${Math.round(watts)} ${this._t("card.units.watts")}`;
+        return `${this._formatNumber(watts / 1000, 1)} ${this._t("card.units.kilowatts")}`;
     }
     /**
      * Format an energy value compactly: 2 dp below 1 kWh, 1 dp above.
@@ -2727,8 +2984,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
      */
     _formatKwh(kwh) {
         if (!isFinite(kwh) || kwh < 0)
-            return "0.00 kWh";
-        return `${kwh < 1 ? kwh.toFixed(2) : kwh.toFixed(1)} kWh`;
+            return `0.00 ${this._t("card.units.kilowattHours")}`;
+        return `${kwh < 1 ? this._formatNumber(kwh, 2) : this._formatNumber(kwh, 1)} ${this._t("card.units.kilowattHours")}`;
     }
     _renderLive() {
         const cfg = this._config;
@@ -2891,34 +3148,34 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (hasPower)
             liveParts.push(this._formatPower(powerW));
         if (hasActual)
-            liveParts.push(actualKwh.toFixed(1) + " kWh");
+            liveParts.push(`${this._formatNumber(actualKwh, 1)} ${this._t("card.units.kilowattHours")}`);
         return b `
       <div class="header-live">
         ${hasPower || hasActual ? b `
           <div class="live-row">
-            <span class="live-label">LIVE:</span>
+            <span class="live-label">${this._t("card.labels.live")}</span>
             <span>${liveParts.join(" | ")}</span>
           </div>
         ` : A}
         ${hasForecastSummary ? b `
           <div class="live-row">
             ${nextHourKwh !== null ? b `
-              <span class="live-label">+1HR:</span>
+              <span class="live-label">${this._t("card.labels.nextHour")}</span>
               <span>${this._formatKwh(nextHourKwh)}</span>
             ` : A}
             ${nextHourKwh !== null && forecastLeftKwh !== null ? b `
               <span style="opacity:0.35">|</span>
             ` : A}
             ${forecastLeftKwh !== null ? b `
-              <span class="live-label">LEFT:</span>
+              <span class="live-label">${this._t("card.labels.left")}</span>
               <span>${this._formatKwh(forecastLeftKwh)}</span>
             ` : A}
           </div>
         ` : A}
         ${hasWeek ? b `
           <div class="live-week">
-            <span class="week-label">WEEK:</span>
-            ${weekTotal.toFixed(1)} kWh | <span class="week-label">AVG:</span> ${avgDay.toFixed(1)} kWh/day
+            <span class="week-label">${this._t("card.labels.week")}</span>
+            ${this._formatNumber(weekTotal, 1)} ${this._t("card.units.kilowattHours")} | <span class="week-label">${this._t("card.labels.avg")}</span> ${this._formatNumber(avgDay, 1)} ${this._t("card.units.kilowattHoursPerDay")}
           </div>
         ` : A}
       </div>
@@ -2942,11 +3199,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
             if (sum > 0) {
                 // Arrays are producing — show per-array breakdown with total.
                 const arrayText = row.actualArrays
-                    .map((a) => `${a.label || "?"}: ${a.kwh.toFixed(1)} kWh`)
+                    .map((a) => `${a.label || "?"}: ${this._formatNumber(a.kwh, 1)} ${this._t("card.units.kilowattHours")}`)
                     .join(" | ");
                 return b `
           <span class="popup-subtitle">
-            ${arrayText} | <span class="popup-total-kwh">Total: ${sum.toFixed(1)} kWh</span>
+            ${arrayText} | <span class="popup-total-kwh">${this._t("card.labels.total")}: ${this._formatNumber(sum, 1)} ${this._t("card.units.kilowattHours")}</span>
           </span>
         `;
             }
@@ -2961,7 +3218,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (row.actualKwh !== null) {
             return b `
         <span class="popup-subtitle">
-          <span class="popup-total-kwh">${row.actualKwh.toFixed(2)}</span> kWh generated
+          <span class="popup-total-kwh">${this._formatNumber(row.actualKwh, 2)}</span> ${this._t("card.units.kilowattHours")} ${this._t("card.labels.generated")}
         </span>
       `;
         }
@@ -3029,17 +3286,17 @@ let SolarForecastCard = class SolarForecastCard extends i {
             bars = b `<div class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
         }
         const valueLabel = row.forecastKwh !== null
-            ? b `<span class="value-num">${row.forecastKwh.toFixed(1)}</span><span class="value-unit">kWh</span>`
+            ? b `<span class="value-num">${this._formatNumber(row.forecastKwh, 1)}</span><span class="value-unit">${this._t("card.units.kilowattHours")}</span>`
             : b `<span class="value-empty">—</span>`;
         const estimate10Label = row.estimate10Kwh !== null
-            ? b `<span class="value-estimate10">P10 ${row.estimate10Kwh.toFixed(1)}</span>`
+            ? b `<span class="value-estimate10">${this._t("card.labels.p10")} ${this._formatNumber(row.estimate10Kwh, 1)}</span>`
             : A;
         return b `
       <div
         class="col ${isToday ? "today" : ""}"
         role="button"
         tabindex="0"
-        aria-label="${this._dayLabel(row.date, isToday)} ${this._dateLabel(row.date)}"
+        aria-label=${this._t("card.aria.dayButton", { day: this._dayLabel(row.date, isToday), date: this._dateLabel(row.date) })}
         @click=${() => this._openPopup(row)}
         @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
@@ -3061,7 +3318,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             return b `
         <div class="main-hourly">
           <div class="chart-no-data">
-            <p>No hourly data available for this day.</p>
+            <p>${this._t("card.popup.noHourlyData")}</p>
           </div>
         </div>
       `;
@@ -3072,7 +3329,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
         <div class="main-hourly-summary">
           <span class="main-hourly-day">${this._fullDateLabel(row.date, row.isToday)}</span>
           <span class="main-hourly-total">
-            ${row.forecastKwh !== null ? `${row.forecastKwh.toFixed(2)} kWh forecast` : "No forecast data"}
+            ${row.forecastKwh !== null
+            ? `${this._formatNumber(row.forecastKwh, 2)} ${this._t("card.units.kilowattHours")} ${this._t("card.labels.forecast")}`
+            : this._t("card.popup.noForecastData")}
           </span>
         </div>
         <div class="chart-scroll main-hourly-chart">
@@ -3106,7 +3365,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (this._config?.integration_type === "forecast_solar") {
             return b `
         <div class="chart-no-data">
-          <p>The selected forecast entities do not provide hourly forecast data.</p>
+          <p>${this._t("card.popup.integrationNoHourlyData")}</p>
         </div>
       `;
         }
@@ -3148,14 +3407,14 @@ let SolarForecastCard = class SolarForecastCard extends i {
               </span>
               <span class="popup-subtitle">
                 ${row.forecastKwh !== null
-            ? b `<span class="popup-total-kwh">${row.forecastKwh.toFixed(2)}</span> kWh forecast`
-            : b `No forecast data`}
+            ? b `<span class="popup-total-kwh">${this._formatNumber(row.forecastKwh, 2)}</span> ${this._t("card.units.kilowattHours")} ${this._t("card.labels.forecast")}`
+            : b `${this._t("card.popup.noForecastData")}`}
               </span>
               ${this._renderActualSubtitle(row)}
             </div>
             <button
               class="popup-close"
-              aria-label="Close"
+              aria-label=${this._t("card.popup.close")}
               @click=${this._closePopup}
             >
               <ha-icon icon="mdi:close"></ha-icon>
@@ -3187,7 +3446,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (points.length === 0) {
             return b `
         <div class="chart-no-data">
-          <p>No hourly data available for this day.</p>
+          <p>${this._t("card.popup.noHourlyData")}</p>
         </div>
       `;
         }
@@ -3199,10 +3458,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return [
             b `
         <div class="chart-header ${showActualCol ? "with-actuals" : ""}">
-          <span class="col-time">Time</span>
-          <span class="col-power">Power</span>
-          <span class="col-kwh">${showActualCol ? "Fcst" : "kWh"}</span>
-          ${showActualCol ? b `<span class="col-actual">Act.</span>` : A}
+          <span class="col-time">${this._t("card.popup.chart.time")}</span>
+          <span class="col-power">${this._t("card.popup.chart.power")}</span>
+          <span class="col-kwh">${showActualCol ? this._t("card.popup.chart.forecastShort") : this._t("card.popup.chart.kwh")}</span>
+          ${showActualCol ? b `<span class="col-actual">${this._t("card.popup.chart.actualShort")}</span>` : A}
         </div>
       `,
             ...points.map((pt, i) => {
@@ -3245,11 +3504,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
               ` : A}
             </div>
             <span class="chart-val ${isPeak ? "peak" : ""}">
-              ${pt.kwh.toFixed(2)}
+              ${this._formatNumber(pt.kwh, 2)}
             </span>
             ${showActualCol ? b `
               <span class="chart-val-actual ${actualKwh !== null ? compareClass : "empty"}">
-                ${actualKwh !== null ? actualKwh.toFixed(2) : "—"}
+                ${actualKwh !== null ? this._formatNumber(actualKwh, 2) : "—"}
               </span>
             ` : A}
           </div>
@@ -3282,8 +3541,8 @@ SolarForecastCard = __decorate([
 window.customCards = window.customCards ?? [];
 window.customCards.push({
     type: "solar-forecast-card",
-    name: "Solar Forecast Card",
-    description: "Daily solar energy forecast with hourly breakdown support.",
+    name: localize("en", "customCard.name"),
+    description: localize("en", "customCard.description"),
     preview: false,
 });
 

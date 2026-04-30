@@ -10,6 +10,11 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Changelog
 
+### v1.4.0-beta.04
+- **Translation framework:** Added locale-based translation support with English fallback and Home Assistant language detection.
+- **Temporary language override:** Added a visual editor language override for testing localisation before release.
+- **String audit:** Moved remaining visible card and editor copy into locale keys.
+
 ### v1.4.0-beta.03
 - **Optional hourly main-card view:** Added `show_hourly_as_main`, allowing today's hourly forecast chart to replace the daily forecast bars directly on the main card.
 - **Reuses popup hourly features:** The inline hourly view uses the existing hourly parsing, actual-vs-forecast display, current-hour highlight, and 12h/24h time formatting.

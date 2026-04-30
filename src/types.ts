@@ -29,6 +29,8 @@ export interface SolarForecastCardConfig {
   time_format: "24h" | "12h";
   /** When true, today's hourly forecast chart replaces the daily bar grid on the main card. */
   show_hourly_as_main: boolean;
+  /** TEMP TESTING ONLY - remove before release. Overrides Home Assistant language detection. */
+  language_override?: "auto" | "en" | "fr";
   inverter_max_kw?: number;
   solar_max_kwp?: number;
   low_threshold?: number;
@@ -60,6 +62,12 @@ export interface HomeAssistant {
   entities: Record<string, EntityRegistryEntry>;
   devices: Record<string, DeviceRegistryEntry>;
   language: string;
+  locale?: {
+    language?: string;
+    number_format?: string;
+    time_format?: string;
+    [key: string]: unknown;
+  };
 }
 
 export interface HassEntity {

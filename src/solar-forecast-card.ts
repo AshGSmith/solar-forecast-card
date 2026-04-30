@@ -2,11 +2,12 @@ import { LitElement, html, css, PropertyValues, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import type { SolarForecastCardConfig, HomeAssistant } from "./types.js";
 import { normalizeConfig } from "./solar-forecast-card-editor.js";
+import { localize, resolveLanguage } from "./localize.js";
 
 // Side-effect import: registers <solar-forecast-card-editor>
 import "./solar-forecast-card-editor.js";
 
-const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
+const DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] as const;
 const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 
@@ -78,7 +79,7 @@ export class SolarForecastCard extends LitElement {
   }
 
   public setConfig(config: Partial<SolarForecastCardConfig>): void {
-    if (!config) throw new Error("Invalid configuration");
+    if (!config) throw new Error(localize("en", "card.errors.invalidConfig"));
     this._config = normalizeConfig(config);
     this._mainActualFetchKey = undefined;
     this._mainActualHourly = null;
@@ -91,6 +92,18 @@ export class SolarForecastCard extends LitElement {
 
   public getCardSize(): number {
     return 4;
+  }
+
+  private _language() {
+    return resolveLanguage(this.hass, this._config);
+  }
+
+  private _t(key: string, vars?: Record<string, string | number>): string {
+    return localize(this._language(), key, vars);
+  }
+
+  private _localeCode(): string {
+    return this._language();
   }
 
   override connectedCallback(): void {
@@ -112,6 +125,7 @@ export class SolarForecastCard extends LitElement {
 
     const oldHass = changedProps.get("hass") as HomeAssistant | undefined;
     if (!oldHass) return true;
+    if (resolveLanguage(oldHass, this._config) !== this._language()) return true;
 
     const watchIds = [
       ...this._config.forecast_entities,
@@ -759,7 +773,7 @@ export class SolarForecastCard extends LitElement {
   // ── Formatting ────────────────────────────────────────────────────────────
 
   private _dayLabel(date: Date, isToday: boolean): string {
-    return isToday ? "Today" : DAY_NAMES[date.getDay()];
+    return isToday ? this._t("card.days.today") : this._t(`card.days.${DAY_KEYS[date.getDay()]}`);
   }
 
   private _dateLabel(date: Date): string {
@@ -769,8 +783,8 @@ export class SolarForecastCard extends LitElement {
   }
 
   private _fullDateLabel(date: Date, isToday: boolean): string {
-    const weekday = isToday ? "Today" : date.toLocaleDateString(undefined, { weekday: "long" });
-    const dt = date.toLocaleDateString(undefined, { day: "numeric", month: "long" });
+    const weekday = isToday ? this._t("card.days.today") : date.toLocaleDateString(this._localeCode(), { weekday: "long" });
+    const dt = date.toLocaleDateString(this._localeCode(), { day: "numeric", month: "long" });
     return `${weekday} · ${dt}`;
   }
 
@@ -781,6 +795,13 @@ export class SolarForecastCard extends LitElement {
       return `${h}${period}`;
     }
     return String(hour).padStart(2, "0") + ":00";
+  }
+
+  private _formatNumber(value: number, minimumFractionDigits: number, maximumFractionDigits = minimumFractionDigits): string {
+    return new Intl.NumberFormat(this._localeCode(), {
+      minimumFractionDigits,
+      maximumFractionDigits,
+    }).format(value);
   }
 
   // ── Styles ────────────────────────────────────────────────────────────────
@@ -1737,7 +1758,7 @@ export class SolarForecastCard extends LitElement {
   protected override render() {
     if (!this._config) return nothing;
 
-    const title = this._config.title ?? "Solar Forecast";
+    const title = this._config.title ?? this._t("card.defaultTitle");
     const icon  = this._config.icon  ?? "mdi:solar-power";
     const hasEntities = this._config.forecast_entities.some(Boolean);
 
@@ -1771,7 +1792,7 @@ export class SolarForecastCard extends LitElement {
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
-            <p>No forecast entities configured.<br />Open the card editor to get started.</p>
+            <p>${this._t("card.placeholder")}<br />${this._t("card.placeholderAction")}</p>
           </div>
         </ha-card>
       `;
@@ -1787,7 +1808,7 @@ export class SolarForecastCard extends LitElement {
         <div class="forecast-grid ${isTwoDay ? "two-day" : ""}">
           ${displayRows.map((row) => this._renderCol(row))}
         </div>
-        ${isTwoDay ? html`<div class="two-day-note">2-day forecast available</div>` : nothing}
+        ${isTwoDay ? html`<div class="two-day-note">${this._t("card.twoDayNote")}</div>` : nothing}
       </ha-card>
       ${this._renderPopup()}
     `;
@@ -1810,7 +1831,7 @@ export class SolarForecastCard extends LitElement {
 
     return html`
       <div class="export-rate-row">
-        <span class="live-label">EXPORT RATE:</span>
+        <span class="live-label">${this._t("card.labels.exportRate")}</span>
         <span>${st.state}${unit ? ` ${unit}` : ""}</span>
       </div>
     `;
@@ -1819,9 +1840,9 @@ export class SolarForecastCard extends LitElement {
   // ── Live badge ────────────────────────────────────────────────────────────
 
   private _formatPower(watts: number): string {
-    if (watts < 10)   return "0 W";
-    if (watts < 1000) return `${Math.round(watts)} W`;
-    return `${(watts / 1000).toFixed(1)} kW`;
+    if (watts < 10)   return `0 ${this._t("card.units.watts")}`;
+    if (watts < 1000) return `${Math.round(watts)} ${this._t("card.units.watts")}`;
+    return `${this._formatNumber(watts / 1000, 1)} ${this._t("card.units.kilowatts")}`;
   }
 
   /**
@@ -1830,8 +1851,8 @@ export class SolarForecastCard extends LitElement {
    * prevents "NaN kWh" / "Infinity kWh" from appearing in the header.
    */
   private _formatKwh(kwh: number): string {
-    if (!isFinite(kwh) || kwh < 0) return "0.00 kWh";
-    return `${kwh < 1 ? kwh.toFixed(2) : kwh.toFixed(1)} kWh`;
+    if (!isFinite(kwh) || kwh < 0) return `0.00 ${this._t("card.units.kilowattHours")}`;
+    return `${kwh < 1 ? this._formatNumber(kwh, 2) : this._formatNumber(kwh, 1)} ${this._t("card.units.kilowattHours")}`;
   }
 
   private _renderLive() {
@@ -2000,35 +2021,35 @@ export class SolarForecastCard extends LitElement {
 
     const liveParts: string[] = [];
     if (hasPower)  liveParts.push(this._formatPower(powerW));
-    if (hasActual) liveParts.push(actualKwh.toFixed(1) + " kWh");
+    if (hasActual) liveParts.push(`${this._formatNumber(actualKwh, 1)} ${this._t("card.units.kilowattHours")}`);
 
     return html`
       <div class="header-live">
         ${hasPower || hasActual ? html`
           <div class="live-row">
-            <span class="live-label">LIVE:</span>
+            <span class="live-label">${this._t("card.labels.live")}</span>
             <span>${liveParts.join(" | ")}</span>
           </div>
         ` : nothing}
         ${hasForecastSummary ? html`
           <div class="live-row">
             ${nextHourKwh !== null ? html`
-              <span class="live-label">+1HR:</span>
+              <span class="live-label">${this._t("card.labels.nextHour")}</span>
               <span>${this._formatKwh(nextHourKwh)}</span>
             ` : nothing}
             ${nextHourKwh !== null && forecastLeftKwh !== null ? html`
               <span style="opacity:0.35">|</span>
             ` : nothing}
             ${forecastLeftKwh !== null ? html`
-              <span class="live-label">LEFT:</span>
+              <span class="live-label">${this._t("card.labels.left")}</span>
               <span>${this._formatKwh(forecastLeftKwh)}</span>
             ` : nothing}
           </div>
         ` : nothing}
         ${hasWeek ? html`
           <div class="live-week">
-            <span class="week-label">WEEK:</span>
-            ${weekTotal.toFixed(1)} kWh | <span class="week-label">AVG:</span> ${avgDay.toFixed(1)} kWh/day
+            <span class="week-label">${this._t("card.labels.week")}</span>
+            ${this._formatNumber(weekTotal, 1)} ${this._t("card.units.kilowattHours")} | <span class="week-label">${this._t("card.labels.avg")}</span> ${this._formatNumber(avgDay, 1)} ${this._t("card.units.kilowattHoursPerDay")}
           </div>
         ` : nothing}
       </div>
@@ -2054,11 +2075,11 @@ export class SolarForecastCard extends LitElement {
       if (sum > 0) {
         // Arrays are producing — show per-array breakdown with total.
         const arrayText = row.actualArrays
-          .map((a) => `${a.label || "?"}: ${a.kwh.toFixed(1)} kWh`)
+          .map((a) => `${a.label || "?"}: ${this._formatNumber(a.kwh, 1)} ${this._t("card.units.kilowattHours")}`)
           .join(" | ");
         return html`
           <span class="popup-subtitle">
-            ${arrayText} | <span class="popup-total-kwh">Total: ${sum.toFixed(1)} kWh</span>
+            ${arrayText} | <span class="popup-total-kwh">${this._t("card.labels.total")}: ${this._formatNumber(sum, 1)} ${this._t("card.units.kilowattHours")}</span>
           </span>
         `;
       }
@@ -2074,7 +2095,7 @@ export class SolarForecastCard extends LitElement {
     if (row.actualKwh !== null) {
       return html`
         <span class="popup-subtitle">
-          <span class="popup-total-kwh">${row.actualKwh.toFixed(2)}</span> kWh generated
+          <span class="popup-total-kwh">${this._formatNumber(row.actualKwh, 2)}</span> ${this._t("card.units.kilowattHours")} ${this._t("card.labels.generated")}
         </span>
       `;
     }
@@ -2149,11 +2170,11 @@ export class SolarForecastCard extends LitElement {
     }
 
     const valueLabel = row.forecastKwh !== null
-      ? html`<span class="value-num">${row.forecastKwh.toFixed(1)}</span><span class="value-unit">kWh</span>`
+      ? html`<span class="value-num">${this._formatNumber(row.forecastKwh, 1)}</span><span class="value-unit">${this._t("card.units.kilowattHours")}</span>`
       : html`<span class="value-empty">—</span>`;
 
     const estimate10Label = row.estimate10Kwh !== null
-      ? html`<span class="value-estimate10">P10 ${row.estimate10Kwh.toFixed(1)}</span>`
+      ? html`<span class="value-estimate10">${this._t("card.labels.p10")} ${this._formatNumber(row.estimate10Kwh, 1)}</span>`
       : nothing;
 
     return html`
@@ -2161,7 +2182,7 @@ export class SolarForecastCard extends LitElement {
         class="col ${isToday ? "today" : ""}"
         role="button"
         tabindex="0"
-        aria-label="${this._dayLabel(row.date, isToday)} ${this._dateLabel(row.date)}"
+        aria-label=${this._t("card.aria.dayButton", { day: this._dayLabel(row.date, isToday), date: this._dateLabel(row.date) })}
         @click=${() => this._openPopup(row)}
         @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
@@ -2185,7 +2206,7 @@ export class SolarForecastCard extends LitElement {
       return html`
         <div class="main-hourly">
           <div class="chart-no-data">
-            <p>No hourly data available for this day.</p>
+            <p>${this._t("card.popup.noHourlyData")}</p>
           </div>
         </div>
       `;
@@ -2198,7 +2219,9 @@ export class SolarForecastCard extends LitElement {
         <div class="main-hourly-summary">
           <span class="main-hourly-day">${this._fullDateLabel(row.date, row.isToday)}</span>
           <span class="main-hourly-total">
-            ${row.forecastKwh !== null ? `${row.forecastKwh.toFixed(2)} kWh forecast` : "No forecast data"}
+            ${row.forecastKwh !== null
+              ? `${this._formatNumber(row.forecastKwh, 2)} ${this._t("card.units.kilowattHours")} ${this._t("card.labels.forecast")}`
+              : this._t("card.popup.noForecastData")}
           </span>
         </div>
         <div class="chart-scroll main-hourly-chart">
@@ -2237,7 +2260,7 @@ export class SolarForecastCard extends LitElement {
     if (this._config?.integration_type === "forecast_solar") {
       return html`
         <div class="chart-no-data">
-          <p>The selected forecast entities do not provide hourly forecast data.</p>
+          <p>${this._t("card.popup.integrationNoHourlyData")}</p>
         </div>
       `;
     }
@@ -2289,14 +2312,14 @@ export class SolarForecastCard extends LitElement {
               </span>
               <span class="popup-subtitle">
                 ${row.forecastKwh !== null
-                  ? html`<span class="popup-total-kwh">${row.forecastKwh.toFixed(2)}</span> kWh forecast`
-                  : html`No forecast data`}
+                  ? html`<span class="popup-total-kwh">${this._formatNumber(row.forecastKwh, 2)}</span> ${this._t("card.units.kilowattHours")} ${this._t("card.labels.forecast")}`
+                  : html`${this._t("card.popup.noForecastData")}`}
               </span>
               ${this._renderActualSubtitle(row)}
             </div>
             <button
               class="popup-close"
-              aria-label="Close"
+              aria-label=${this._t("card.popup.close")}
               @click=${this._closePopup}
             >
               <ha-icon icon="mdi:close"></ha-icon>
@@ -2335,7 +2358,7 @@ export class SolarForecastCard extends LitElement {
     if (points.length === 0) {
       return html`
         <div class="chart-no-data">
-          <p>No hourly data available for this day.</p>
+          <p>${this._t("card.popup.noHourlyData")}</p>
         </div>
       `;
     }
@@ -2350,10 +2373,10 @@ export class SolarForecastCard extends LitElement {
     return [
       html`
         <div class="chart-header ${showActualCol ? "with-actuals" : ""}">
-          <span class="col-time">Time</span>
-          <span class="col-power">Power</span>
-          <span class="col-kwh">${showActualCol ? "Fcst" : "kWh"}</span>
-          ${showActualCol ? html`<span class="col-actual">Act.</span>` : nothing}
+          <span class="col-time">${this._t("card.popup.chart.time")}</span>
+          <span class="col-power">${this._t("card.popup.chart.power")}</span>
+          <span class="col-kwh">${showActualCol ? this._t("card.popup.chart.forecastShort") : this._t("card.popup.chart.kwh")}</span>
+          ${showActualCol ? html`<span class="col-actual">${this._t("card.popup.chart.actualShort")}</span>` : nothing}
         </div>
       `,
       ...points.map((pt, i) => {
@@ -2398,11 +2421,11 @@ export class SolarForecastCard extends LitElement {
               ` : nothing}
             </div>
             <span class="chart-val ${isPeak ? "peak" : ""}">
-              ${pt.kwh.toFixed(2)}
+              ${this._formatNumber(pt.kwh, 2)}
             </span>
             ${showActualCol ? html`
               <span class="chart-val-actual ${actualKwh !== null ? compareClass : "empty"}">
-                ${actualKwh !== null ? actualKwh.toFixed(2) : "—"}
+                ${actualKwh !== null ? this._formatNumber(actualKwh, 2) : "—"}
               </span>
             ` : nothing}
           </div>
@@ -2423,7 +2446,7 @@ declare global {
 window.customCards = window.customCards ?? [];
 window.customCards.push({
   type: "solar-forecast-card",
-  name: "Solar Forecast Card",
-  description: "Daily solar energy forecast with hourly breakdown support.",
+  name: localize("en", "customCard.name"),
+  description: localize("en", "customCard.description"),
   preview: false,
 });

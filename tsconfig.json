@@ -9,6 +9,7 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
+    "resolveJsonModule": true,
     "declaration": false,
     "outDir": "dist"
   },

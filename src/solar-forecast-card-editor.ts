@@ -6,6 +6,7 @@ import type {
   HomeAssistant,
   EntityRegistryEntry,
 } from "./types.js";
+import { LANGUAGE_OPTIONS, localize, resolveLanguage } from "./localize.js";
 
 // ── ha-form schema (minimal typings — HA provides the element at runtime) ────
 
@@ -35,37 +36,6 @@ interface AutoDetectResult {
   next_hour_entity?: string;
 }
 
-// ── Field labels ──────────────────────────────────────────────────────────────
-
-const LABELS: Record<string, string> = {
-  title:               "Title (optional)",
-  icon:                "Header icon (optional, e.g. mdi:solar-power)",
-  show_header:           "Show header",
-  display_estimate10:    "Display Estimate10 Forecast Values",
-  device_id:           "Forecast Device",
-  integration_type:    "Integration Type",
-  forecast_entity_0:   "Day 1 — Today",
-  forecast_entity_1:   "Day 2 — Tomorrow",
-  forecast_entity_2:   "Day 3",
-  forecast_entity_3:   "Day 4",
-  forecast_entity_4:   "Day 5",
-  forecast_entity_5:   "Day 6",
-  forecast_entity_6:   "Day 7",
-  export_rate_entity:       "Current Export Rate Entity",
-  live_power_entity:        "Live power (optional, kW sensor)",
-  today_actual_entity:      "Today's actual generation (optional)",
-  next_hour_entity:         "+1HR forecast (optional, overrides auto-derived value)",
-  remaining_today_entity:   "LEFT / remaining today (optional, overrides auto-derived value)",
-  date_format:         "Date format",
-  time_format:         "Time format (hourly popup)",
-  show_hourly_as_main: "Show Hourly Forecast as Main Card",
-  inverter_max_kw:     "Inverter max output (kW)",
-  solar_max_kwp:       "Solar array size (kWp)",
-  low_threshold:         "Low threshold (kWh)",
-  high_threshold:        "High threshold (kWh)",
-  desktop_text_scale:    "Desktop Text Scale",
-};
-
 // ── Schema segments (rendered with section headers between them) ──────────────
 
 // Device field — rendered first as the primary entry point
@@ -75,23 +45,6 @@ const SCHEMA_DEVICE: HaFormSchema[] = [
 
 // Integration type — auto-set by device detection; exposed here as a manual
 // override for users who configure forecast_entities without a device.
-const SCHEMA_INTEGRATION: HaFormSchema[] = [
-  {
-    name: "integration_type",
-    selector: {
-      select: {
-        options: [
-          { value: "manual",                    label: "Auto-detect" },
-          { value: "solcast",                   label: "Solcast" },
-          { value: "volcast",                   label: "Volcast" },
-          { value: "forecast_solar",            label: "Forecast.Solar" },
-          { value: "open_meteo_solar_forecast", label: "Open-Meteo Solar Forecast" },
-        ],
-      },
-    },
-  },
-];
-
 // Remaining top-level fields — always visible
 const SCHEMA_TOP: HaFormSchema[] = [
   { name: "title",              selector: { text: {} } },
@@ -116,29 +69,7 @@ const SCHEMA_LIVE: HaFormSchema[] = [
   { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
 
-const SCHEMA_DISPLAY: HaFormSchema[] = [
-  {
-    name: "date_format",
-    selector: {
-      select: {
-        options: [
-          { value: "DD/MM", label: "DD/MM  (e.g. 15/04)" },
-          { value: "MM/DD", label: "MM/DD  (e.g. 04/15)" },
-        ],
-      },
-    },
-  },
-  {
-    name: "time_format",
-    selector: {
-      select: {
-        options: [
-          { value: "24h", label: "24h  (e.g. 17:00)" },
-          { value: "12h", label: "12h  (e.g. 5pm)" },
-        ],
-      },
-    },
-  },
+const SCHEMA_DISPLAY_BASE: HaFormSchema[] = [
   {
     name: "desktop_text_scale",
     selector: {
@@ -186,6 +117,7 @@ interface FormData {
   date_format: string;
   time_format: string;
   show_hourly_as_main: boolean;
+  language_override: string;
   inverter_max_kw: number | undefined;
   solar_max_kwp: number | undefined;
   low_threshold: number | undefined;
@@ -226,6 +158,7 @@ export function normalizeConfig(
     date_format:          raw.date_format ?? "DD/MM",
     time_format:          raw.time_format ?? "24h",
     show_hourly_as_main:  raw.show_hourly_as_main ?? false,
+    language_override:    raw.language_override ?? "auto",
     inverter_max_kw:      raw.inverter_max_kw,
     solar_max_kwp:        raw.solar_max_kwp,
     low_threshold:        raw.low_threshold,
@@ -267,6 +200,78 @@ export class SolarForecastCardEditor extends LitElement {
     this._config = normalizeConfig(config);
   }
 
+  private _language() {
+    return resolveLanguage(this.hass, this._config);
+  }
+
+  private _t(key: string, vars?: Record<string, string | number>): string {
+    return localize(this._language(), key, vars);
+  }
+
+  private _integrationSchema(): HaFormSchema[] {
+    return [
+      {
+        name: "integration_type",
+        selector: {
+          select: {
+            options: [
+              { value: "manual",                    label: this._t("editor.options.autoDetect") },
+              { value: "solcast",                   label: this._t("editor.options.solcast") },
+              { value: "volcast",                   label: this._t("editor.options.volcast") },
+              { value: "forecast_solar",            label: this._t("editor.options.forecastSolar") },
+              { value: "open_meteo_solar_forecast", label: this._t("editor.options.openMeteo") },
+            ],
+          },
+        },
+      },
+    ];
+  }
+
+  private _displaySchema(): HaFormSchema[] {
+    return [
+      {
+        name: "date_format",
+        selector: {
+          select: {
+            options: [
+              { value: "DD/MM", label: this._t("editor.options.dateDdMm") },
+              { value: "MM/DD", label: this._t("editor.options.dateMmDd") },
+            ],
+          },
+        },
+      },
+      {
+        name: "time_format",
+        selector: {
+          select: {
+            options: [
+              { value: "24h", label: this._t("editor.options.time24h") },
+              { value: "12h", label: this._t("editor.options.time12h") },
+            ],
+          },
+        },
+      },
+      ...SCHEMA_DISPLAY_BASE,
+      {
+        // TEMP TESTING ONLY - remove before release.
+        name: "language_override",
+        selector: {
+          select: {
+            options: [
+              { value: "auto", label: this._t("editor.options.auto") },
+              ...LANGUAGE_OPTIONS.map((lang) => ({
+                value: lang,
+                label: lang === "fr"
+                  ? this._t("editor.options.french")
+                  : this._t("editor.options.english"),
+              })),
+            ],
+          },
+        },
+      },
+    ];
+  }
+
   // ── Config ↔ flat FormData conversion ──────────────────────────────────────
 
   private _toFormData(cfg: SolarForecastCardConfig): FormData {
@@ -285,6 +290,7 @@ export class SolarForecastCardEditor extends LitElement {
       date_format:         cfg.date_format         ?? "DD/MM",
       time_format:         cfg.time_format         ?? "24h",
       show_hourly_as_main: cfg.show_hourly_as_main ?? false,
+      language_override:   cfg.language_override   ?? "auto",
       inverter_max_kw:     cfg.inverter_max_kw,
       solar_max_kwp:       cfg.solar_max_kwp,
       low_threshold:       cfg.low_threshold,
@@ -327,6 +333,8 @@ export class SolarForecastCardEditor extends LitElement {
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
       time_format: (data.time_format as "24h" | "12h") || "24h",
       show_hourly_as_main: data.show_hourly_as_main,
+      // TEMP TESTING ONLY - remove before release.
+      language_override: (data.language_override as SolarForecastCardConfig["language_override"]) || "auto",
       inverter_max_kw:    typeof data.inverter_max_kw    === "number" ? data.inverter_max_kw    : undefined,
       solar_max_kwp:      typeof data.solar_max_kwp      === "number" ? data.solar_max_kwp      : undefined,
       low_threshold:      typeof data.low_threshold      === "number" ? data.low_threshold      : undefined,
@@ -925,7 +933,7 @@ export class SolarForecastCardEditor extends LitElement {
     if (!this.hass || !this._config) return nothing;
 
     const data = this._toFormData(this._config);
-    const label = (s: HaFormSchema) => LABELS[s.name] ?? s.name;
+    const label = (s: HaFormSchema) => this._t(`editor.labels.${s.name}`);
     const onChange = this._valueChanged.bind(this);
 
     return html`
@@ -938,12 +946,12 @@ export class SolarForecastCardEditor extends LitElement {
       ></ha-form>
       <p class="device-helper">
         <ha-icon icon="mdi:information-outline"></ha-icon>
-        Recommended: selecting a device will auto-configure the card
+        ${this._t("editor.helpers.device")}
       </p>
 
       ${this._showManualWarning ? html`
         <ha-alert alert-type="warning">
-          Changing device will not overwrite manually configured entities.
+          ${this._t("editor.warnings.manualEntities")}
         </ha-alert>
       ` : nothing}
 
@@ -956,25 +964,24 @@ export class SolarForecastCardEditor extends LitElement {
       ></ha-form>
       <p class="device-helper" style="margin:0 0 4px">
         <ha-icon icon="mdi:information-outline"></ha-icon>
-        Display Estimate10 is only applicable when the integration type is Solcast
+        ${this._t("editor.helpers.estimate10")}
       </p>
 
-      <ha-expansion-panel header="Integration Type" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.integrationType")} outlined leftChevron>
         <p class="device-helper" style="margin:8px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Automatically set when a forecast device is selected above. Override here only
-          when configuring forecast entities manually without a device.
+          ${this._t("editor.helpers.integrationType")}
         </p>
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_INTEGRATION}
+          .schema=${this._integrationSchema()}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Daily Forecast Entities" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.dailyForecastEntities")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -984,7 +991,7 @@ export class SolarForecastCardEditor extends LitElement {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Live Data" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.liveData")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -994,15 +1001,14 @@ export class SolarForecastCardEditor extends LitElement {
         ></ha-form>
         <p class="device-helper" style="margin:4px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          +1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.
+          ${this._t("editor.helpers.liveData")}
         </p>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Actual Generation Arrays" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.actualGenerationArrays")} outlined leftChevron>
         <p class="device-helper" style="margin:8px 0 10px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Optional: configure individual array sensors to display a stacked breakdown on today's bar.
-          Each label is a single character shown inside its segment (e.g. N, S, E).
+          ${this._t("editor.helpers.actualArrays")}
         </p>
         ${(this._config.actual_arrays ?? []).map((entry, idx) => html`
           <div class="array-row">
@@ -1010,25 +1016,25 @@ export class SolarForecastCardEditor extends LitElement {
               .hass=${this.hass}
               .selector=${{ entity: { domain: ["sensor"] } }}
               .value=${entry.entity || ""}
-              .label=${"Array entity"}
+              .label=${this._t("editor.arrays.entity")}
               @value-changed=${(e: CustomEvent) =>
                 this._updateArrayEntity(idx, e.detail.value as string)}
             ></ha-selector>
             <div class="array-label-wrap">
-              <span class="array-field-label">Label (1 char)</span>
+              <span class="array-field-label">${this._t("editor.arrays.label")}</span>
               <input
                 type="text"
                 class="array-label-input"
-                placeholder="E"
+                placeholder=${this._t("editor.arrays.placeholder")}
                 maxlength="1"
                 .value=${entry.label || ""}
                 @input=${(e: InputEvent) =>
                   this._updateArrayLabel(idx, (e.target as HTMLInputElement).value)}
               />
-              <span class="array-label-hint">bar &amp; popup</span>
+              <span class="array-label-hint">${this._t("editor.arrays.hint")}</span>
             </div>
             <ha-icon-button
-              .label=${"Remove"}
+              .label=${this._t("editor.arrays.remove")}
               .path=${"M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"}
               @click=${() => this._removeArray(idx)}
             ></ha-icon-button>
@@ -1043,11 +1049,11 @@ export class SolarForecastCardEditor extends LitElement {
             (e.key === "Enter" || e.key === " ") && this._addArray()}
         >
           <ha-icon icon="mdi:plus-circle-outline"></ha-icon>
-          Add array
+          ${this._t("editor.arrays.add")}
         </div>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="System Parameters" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.systemParameters")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -1057,7 +1063,7 @@ export class SolarForecastCardEditor extends LitElement {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Energy Provider" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.energyProvider")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -1067,7 +1073,7 @@ export class SolarForecastCardEditor extends LitElement {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Colour Thresholds" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.colourThresholds")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -1077,21 +1083,25 @@ export class SolarForecastCardEditor extends LitElement {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Date/Time &amp; Display" outlined leftChevron>
+      <ha-expansion-panel header=${this._t("editor.sections.dateTimeDisplay")} outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_DISPLAY}
+          .schema=${this._displaySchema()}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.
+          ${this._t("editor.helpers.desktopTextScale")}
         </p>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          Displays the hourly forecast view directly on the card instead of the daily forecast bars.
+          ${this._t("editor.helpers.hourlyAsMain")}
+        </p>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          ${this._t("editor.helpers.languageOverride")}
         </p>
       </ha-expansion-panel>
     `;

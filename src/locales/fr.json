@@ -1,0 +1,50 @@
+{
+  "card": {
+    "defaultTitle": "Prévision solaire",
+    "labels": {
+      "live": "DIRECT :",
+      "exportRate": "TARIF EXPORT :",
+      "nextHour": "+1 H :",
+      "left": "RESTE :",
+      "week": "SEMAINE :",
+      "avg": "MOY :",
+      "total": "Total",
+      "forecast": "prévu",
+      "generated": "produit"
+    },
+    "days": {
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain"
+    },
+    "popup": {
+      "close": "Fermer",
+      "noHourlyData": "Aucune donnée horaire disponible pour ce jour.",
+      "integrationNoHourlyData": "Les entités de prévision sélectionnées ne fournissent pas de données horaires.",
+      "chart": {
+        "time": "Heure",
+        "power": "Puissance",
+        "forecastShort": "Prév.",
+        "actualShort": "Réel"
+      }
+    }
+  },
+  "editor": {
+    "labels": {
+      "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
+      "language_override": "Langue forcée"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "Anglais",
+      "french": "Français",
+      "dateDdMm": "JJ/MM  (ex. 15/04)",
+      "dateMmDd": "MM/JJ  (ex. 04/15)",
+      "time24h": "24 h  (ex. 17:00)",
+      "time12h": "12 h  (ex. 5pm)"
+    },
+    "helpers": {
+      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto utilise la langue de Home Assistant."
+    }
+  }
+}
