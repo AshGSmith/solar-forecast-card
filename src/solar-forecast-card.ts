@@ -42,6 +42,14 @@ export class SolarForecastCard extends LitElement {
   /** True once the popup is in-DOM and should animate in. */
   @state() private _popupVisible = false;
 
+  /**
+   * Hourly actual-generation data (local hour → kWh) fetched asynchronously
+   * from the HA history API when today's popup opens.
+   * null  = not yet fetched or not applicable (not today / no entity).
+   * Map   = fetch completed; map may be empty if no generating hours found.
+   */
+  @state() private _popupActualHourly: Map<number, number> | null = null;
+
   private _closeTimer?: ReturnType<typeof setTimeout>;
   private readonly _onDocKey = (e: KeyboardEvent) => {
     if (e.key === "Escape" && this._popup) this._closePopup();
@@ -89,7 +97,7 @@ export class SolarForecastCard extends LitElement {
   // ── Update optimisation ───────────────────────────────────────────────────
 
   protected override shouldUpdate(changedProps: PropertyValues): boolean {
-    if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible")) return true;
+    if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly")) return true;
     if (!this._config || !this.hass) return false;
 
     const oldHass = changedProps.get("hass") as HomeAssistant | undefined;
@@ -605,13 +613,137 @@ export class SolarForecastCard extends LitElement {
 
     this._popup = { ...row, rawHoursAttr: freshHours ?? row.rawHoursAttr };
     this._popupVisible = false;
+
+    // Fetch per-hour actual-generation history for today's popup.
+    // Reset to null first so the popup renders forecast-only until the fetch
+    // completes, then re-renders cleanly when the Map arrives.
+    this._popupActualHourly = null;
+    if (row.isToday && this._config?.today_actual_entity) {
+      const entityId = this._config.today_actual_entity;
+      this._fetchActualHourly(entityId).then((map) => {
+        // Only apply if the popup is still open (user may have closed it while fetching)
+        if (this._popup) this._popupActualHourly = map;
+      });
+    }
+
     // Single rAF lets Lit stamp the overlay into the DOM before we add .visible
     requestAnimationFrame(() => { this._popupVisible = true; });
   }
 
   private _closePopup(): void {
     this._popupVisible = false;
+    this._popupActualHourly = null;
     this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
+  }
+
+  // ── Actual-generation history ─────────────────────────────────────────────
+
+  /**
+   * Fetch hourly actual-generation values for today from the HA history API.
+   *
+   * today_actual_entity is a cumulative energy sensor (kWh or Wh) whose value
+   * rises monotonically through the day. Per-hour generation is the difference
+   * between the sensor's value at the end and start of each hour boundary.
+   *
+   * Returns a Map<localHour (0–23), kWh> containing only hours with positive
+   * generation (> 0).  Pre-sunrise and future hours are not included so the
+   * popup table stays clean — a missing key means "no data / future", not zero.
+   *
+   * Returns an empty Map (never rejects) if the history API is unavailable,
+   * the entity has no recorded history for today, or any other error occurs.
+   */
+  private async _fetchActualHourly(entityId: string): Promise<Map<number, number>> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const hass = this.hass as any;
+    if (!hass?.callApi) return new Map();
+
+    const now = new Date();
+    const startOfDay = new Date(now);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    // Detect Wh vs kWh from the live entity state so history values are
+    // normalised to kWh consistently with the rest of the card.
+    const unit = (
+      this.hass?.states[entityId]?.attributes?.unit_of_measurement as string | undefined
+    )?.toLowerCase();
+    const isWh = unit === "wh";
+
+    try {
+      // Build the history/period REST path.
+      // significant_changes_only=false: return every recorded state change,
+      // not just those that cross a threshold — essential for cumulative sensors.
+      const path =
+        `history/period/${startOfDay.toISOString()}` +
+        `?filter_entity_id=${encodeURIComponent(entityId)}` +
+        `&end_time=${encodeURIComponent(now.toISOString())}` +
+        `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
+
+      // HA history API returns: Array<Array<{state, last_changed}>>
+      // Outer array is per-entity; inner array is chronological state entries.
+      interface HistEntry { state: string; last_changed: string; }
+      const result = await hass.callApi("GET", path) as HistEntry[][];
+
+      if (!Array.isArray(result) || result.length === 0 || !Array.isArray(result[0])) {
+        return new Map();
+      }
+
+      // Normalise: keep only entries with finite numeric state, sorted ascending.
+      const entries: HistEntry[] = result[0]
+        .filter((e) => e && typeof e.last_changed === "string" && isFinite(parseFloat(e.state)))
+        .sort((a, b) => (a.last_changed < b.last_changed ? -1 : a.last_changed > b.last_changed ? 1 : 0));
+
+      if (entries.length === 0) return new Map();
+
+      /**
+       * Returns the most-recent finite numeric state value recorded at or
+       * before the given UTC ISO timestamp.  Entries are sorted ascending so
+       * iteration stops as soon as we pass the target timestamp.
+       */
+      const valueAt = (isoTs: string): number | null => {
+        let val: number | null = null;
+        for (const e of entries) {
+          if (e.last_changed <= isoTs) {
+            const v = parseFloat(e.state);
+            if (isFinite(v)) val = v;
+          } else {
+            break;
+          }
+        }
+        return val;
+      };
+
+      const map = new Map<number, number>();
+      const currentHour = now.getHours();
+
+      for (let h = 0; h <= currentHour; h++) {
+        const hourStart = new Date(now);
+        hourStart.setHours(h, 0, 0, 0);
+        const hourEnd = new Date(now);
+        hourEnd.setHours(h + 1, 0, 0, 0);
+
+        const startVal = valueAt(hourStart.toISOString());
+        const endVal   = valueAt(hourEnd.toISOString());
+
+        if (startVal === null || endVal === null) continue;
+
+        let delta = endVal - startVal;
+        if (delta < 0) continue;     // sensor reset or stale data — skip
+        if (isWh) delta /= 1000;     // Wh → kWh
+
+        // Only record hours that actually generated something.
+        // This keeps the popup table free of zero rows for pre-sunrise hours.
+        if (delta > 0) map.set(h, delta);
+      }
+
+      console.debug(
+        `[solar-forecast-card] actual history: ${map.size} generating hour(s) found for ${entityId}`
+      );
+      return map;
+
+    } catch (err) {
+      console.debug("[solar-forecast-card] actual history fetch failed:", err);
+      return new Map();
+    }
   }
 
   // ── Formatting ────────────────────────────────────────────────────────────
@@ -1396,6 +1528,55 @@ export class SolarForecastCard extends LitElement {
         font-weight: 600;
       }
 
+      /* ── Popup chart — 4-column layout (today + actual) ────── */
+
+      /* Extend the grid when actual history data is available */
+      .chart-header.with-actuals,
+      .chart-row.with-actuals {
+        grid-template-columns: 2.8rem 1fr 2.6rem 2.8rem;
+      }
+
+      /* Align the "Fcst" header label left (matches bar-value column) */
+      /* Align the "Act." header label right (matches actual-value column) */
+      .chart-header.with-actuals .col-actual {
+        text-align: right;
+      }
+
+      /* Actual-generation value cell */
+      .chart-val-actual {
+        font-size: 0.70rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--success-color, #4caf50);
+        font-weight: 500;
+        line-height: 1;
+        text-align: right;
+      }
+
+      /* Placeholder dash for hours with no actual data (future / pre-sunrise) */
+      .chart-val-actual.empty {
+        color: var(--secondary-text-color);
+        opacity: 0.35;
+        font-weight: 400;
+      }
+
+      /* ── Current-hour highlight (today only) ─────────────────── */
+
+      /* Subtle amber-tinted row with a 2 px left accent line.
+         Inset box-shadow is used for the accent so it doesn't affect layout.
+         The amber values match the forecast bar / today column palette so the
+         highlight feels at home in both light and dark HA themes. */
+      .chart-row.current-hour {
+        background: rgba(251, 191, 36, 0.07);
+        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.50);
+        border-radius: 4px;
+      }
+
+      /* Amber time label so the current hour is easy to find at a glance */
+      .chart-row.current-hour .chart-hour {
+        color: var(--warning-color, #f59e0b);
+        opacity: 1;
+      }
+
       /* ══════════════════════════════════════════════════════════
          DESKTOP TEXT SCALING
          ══════════════════════════════════════════════════════════
@@ -1908,7 +2089,16 @@ export class SolarForecastCard extends LitElement {
         maxRef = peakKwh;
       }
 
-      chartContent = this._renderHourlyChart(points, peakKwh, maxRef);
+      // Pass actual hourly data only for today — future days are forecast-only.
+      // _popupActualHourly is null while fetching (shows forecast-only gracefully)
+      // and becomes a Map once the history fetch resolves.
+      // row.isToday is also forwarded so _renderHourlyChart can highlight the
+      // current-hour row; future days receive false and are never highlighted.
+      chartContent = this._renderHourlyChart(
+        points, peakKwh, maxRef,
+        row.isToday ? this._popupActualHourly : undefined,
+        row.isToday
+      );
     }
 
     return html`
@@ -1948,7 +2138,26 @@ export class SolarForecastCard extends LitElement {
     `;
   }
 
-  private _renderHourlyChart(points: HourPoint[], peakKwh: number, maxRef: number) {
+  /**
+   * Render the hourly forecast chart rows.
+   *
+   * @param points       Parsed hourly forecast points (trimmed, sorted by hour).
+   * @param peakKwh      Highest forecast kWh value — used to highlight peak row.
+   * @param maxRef       Bar-scale ceiling (inverter / array / day peak).
+   * @param actualHourly Optional: Map<localHour, kWh> from HA history.
+   *   undefined  → not today; render forecast-only (3-column, unchanged layout).
+   *   null       → today but fetch still in progress; render forecast-only until ready.
+   *   Map        → today, fetch complete; render 4-column with Forecast + Actual.
+   * @param isToday      True when the popup is showing today's forecast. Used to
+   *   enable current-hour row highlighting; false/undefined = no highlight.
+   */
+  private _renderHourlyChart(
+    points: HourPoint[],
+    peakKwh: number,
+    maxRef: number,
+    actualHourly?: Map<number, number> | null,
+    isToday?: boolean
+  ) {
     if (points.length === 0) {
       return html`
         <div class="chart-no-data">
@@ -1957,35 +2166,58 @@ export class SolarForecastCard extends LitElement {
       `;
     }
 
+    // Only show the Actual column when the fetch has completed (Map, not null/undefined)
+    const showActualCol = actualHourly instanceof Map;
+
+    // Current local hour — used to highlight the matching row.
+    // Set to -1 for future days so no row ever matches.
+    const currentHour = isToday ? new Date().getHours() : -1;
+
     return [
       html`
-        <div class="chart-header">
+        <div class="chart-header ${showActualCol ? "with-actuals" : ""}">
           <span class="col-time">Time</span>
           <span class="col-power">Power</span>
-          <span class="col-kwh">kWh</span>
+          <span class="col-kwh">${showActualCol ? "Fcst" : "kWh"}</span>
+          ${showActualCol ? html`<span class="col-actual">Act.</span>` : nothing}
         </div>
       `,
       ...points.map((pt, i) => {
-      const pct = maxRef > 0 ? Math.min((pt.kwh / maxRef) * 100, 100) : 0;
-      const isPeak = pt.kwh === peakKwh && peakKwh > 0;
-      // Stagger: 20ms base + 18ms per row, capped at 300ms
-      const delay = Math.min(20 + i * 18, 300);
+        const pct           = maxRef > 0 ? Math.min((pt.kwh / maxRef) * 100, 100) : 0;
+        const isPeak        = pt.kwh === peakKwh && peakKwh > 0;
+        const isCurrentHour = pt.hour === currentHour;
+        // Stagger: 20ms base + 18ms per row, capped at 300ms
+        const delay         = Math.min(20 + i * 18, 300);
 
-      return html`
-        <div class="chart-row">
-          <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
-          <div class="chart-bar-track">
-            <div
-              class="chart-bar-fill ${isPeak ? "peak" : ""}"
-              style="width:${pct.toFixed(1)}%;--delay:${delay}ms"
-            ></div>
+        // Look up actual kWh for this hour.
+        // null  = no entry in map → future hour or pre-sunrise → show dash
+        // number = real measured value (> 0 since map only stores positives)
+        const actualKwh: number | null = showActualCol
+          ? (actualHourly!.has(pt.hour) ? actualHourly!.get(pt.hour)! : null)
+          : null;
+
+        return html`
+          <div class="chart-row
+            ${showActualCol ? "with-actuals" : ""}
+            ${isCurrentHour ? "current-hour" : ""}">
+            <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
+            <div class="chart-bar-track">
+              <div
+                class="chart-bar-fill ${isPeak ? "peak" : ""}"
+                style="width:${pct.toFixed(1)}%;--delay:${delay}ms"
+              ></div>
+            </div>
+            <span class="chart-val ${isPeak ? "peak" : ""}">
+              ${pt.kwh.toFixed(2)}
+            </span>
+            ${showActualCol ? html`
+              <span class="chart-val-actual ${actualKwh !== null ? "" : "empty"}">
+                ${actualKwh !== null ? actualKwh.toFixed(2) : "—"}
+              </span>
+            ` : nothing}
           </div>
-          <span class="chart-val ${isPeak ? "peak" : ""}">
-            ${pt.kwh.toFixed(2)}
-          </span>
-        </div>
-      `;
-    }),
+        `;
+      }),
     ];
   }
 }
