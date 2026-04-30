@@ -855,6 +855,15 @@ export class SolarForecastCard extends LitElement {
         white-space: nowrap;
       }
 
+      .value-actual {
+        font-size: 0.58rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--success-color, #4caf50);
+        opacity: 0.85;
+        line-height: 1.3;
+        white-space: nowrap;
+      }
+
       .value-empty {
         font-size: 0.78rem;
         color: var(--secondary-text-color);
@@ -1495,17 +1504,33 @@ export class SolarForecastCard extends LitElement {
       : NaN;
 
     // ── Actual generation total — arrays take precedence over single entity ──
-    // When actual_arrays are configured their sum is the canonical header total.
-    // Only fall back to today_actual_entity when no arrays are configured.
+    // When actual_arrays are configured and producing (sum > 0) their sum is the
+    // canonical header total. When arrays are configured but sum to 0 (pre-sunrise,
+    // all entities unavailable, etc.) we fall back to today_actual_entity — the
+    // same precedence rule that _buildRows uses so the bar and header always agree.
     let actualKwh: number = NaN;
     const hasArrays = (cfg.actual_arrays?.length ?? 0) > 0;
     if (hasArrays) {
-      actualKwh = cfg.actual_arrays!.reduce((s, a) => {
+      const arraysSum = cfg.actual_arrays!.reduce((s, a) => {
         const st   = a.entity ? this.hass?.states[a.entity] : undefined;
         const raw  = parseFloat(st?.state ?? "");
         const unit = (st?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
         return s + (isFinite(raw) ? (unit === "wh" ? raw / 1000 : raw) : 0);
       }, 0);
+      if (arraysSum > 0) {
+        // Arrays are live — their sum is the canonical total.
+        actualKwh = arraysSum;
+      } else if (cfg.today_actual_entity) {
+        // Arrays sum to 0 (pre-sunrise / all unavailable) — fall back to the
+        // single entity so the header always matches the bar in _renderCol.
+        const actualState   = this.hass?.states[cfg.today_actual_entity];
+        const actualRawVal  = parseFloat(actualState?.state ?? "");
+        const actualRawUnit = (actualState?.attributes?.unit_of_measurement as string | undefined)?.toLowerCase();
+        const v = isFinite(actualRawVal) ? (actualRawUnit === "wh" ? actualRawVal / 1000 : actualRawVal) : NaN;
+        if (isFinite(v)) actualKwh = v;
+      }
+      // If arrays are configured but neither path produces a finite value,
+      // actualKwh stays NaN and the header omits the actual total cleanly.
     } else if (cfg.today_actual_entity) {
       const actualState   = this.hass?.states[cfg.today_actual_entity];
       const actualRawVal  = parseFloat(actualState?.state ?? "");
@@ -1680,20 +1705,28 @@ export class SolarForecastCard extends LitElement {
     const hasArrays = (cfg.actual_arrays?.length ?? 0) > 0;
 
     if (hasArrays && row.actualArrays && row.actualArrays.length > 0) {
-      // Per-array breakdown: label: X.X kWh for each, then total
       const sum = row.actualArrays.reduce((s, a) => s + a.kwh, 0);
-      const arrayText = row.actualArrays
-        .map((a) => `${a.label || "?"}: ${a.kwh.toFixed(1)} kWh`)
-        .join(" | ");
-      return html`
-        <span class="popup-subtitle">
-          ${arrayText} | <span class="popup-total-kwh">Total: ${sum.toFixed(1)} kWh</span>
-        </span>
-      `;
+      if (sum > 0) {
+        // Arrays are producing — show per-array breakdown with total.
+        const arrayText = row.actualArrays
+          .map((a) => `${a.label || "?"}: ${a.kwh.toFixed(1)} kWh`)
+          .join(" | ");
+        return html`
+          <span class="popup-subtitle">
+            ${arrayText} | <span class="popup-total-kwh">Total: ${sum.toFixed(1)} kWh</span>
+          </span>
+        `;
+      }
+      // Arrays sum to 0 (pre-sunrise / all unavailable) — fall through to
+      // single-entity display so row.actualKwh (from today_actual_entity) shows
+      // rather than an all-zeros breakdown.
     }
 
-    // No arrays configured — show the single total if available
-    if (!hasArrays && row.actualKwh !== null) {
+    // No arrays configured, or arrays configured but not yet producing.
+    // Show the single actual total when available (row.actualKwh is the
+    // today_actual_entity value, or the arrays sum when they are producing —
+    // _buildRows ensures these are consistent).
+    if (row.actualKwh !== null) {
       return html`
         <span class="popup-subtitle">
           <span class="popup-total-kwh">${row.actualKwh.toFixed(2)}</span> kWh generated
@@ -1778,6 +1811,15 @@ export class SolarForecastCard extends LitElement {
       ? html`<span class="value-estimate10">P10 ${row.estimate10Kwh.toFixed(1)}</span>`
       : nothing;
 
+    // Show actual kWh as a secondary numeric label on today's column so the
+    // value is always visible regardless of show_header, bar state (isComplete
+    // replaces the actual bar with a solid forecast bar), or bar overlay.
+    // row.actualKwh is the source-of-truth set by _buildRows: arrays sum when
+    // arrays are producing, today_actual_entity otherwise.
+    const actualLabel = isToday && row.actualKwh !== null
+      ? html`<span class="value-actual">↑${row.actualKwh.toFixed(1)}</span>`
+      : nothing;
+
     return html`
       <div
         class="col ${isToday ? "today" : ""}"
@@ -1787,7 +1829,7 @@ export class SolarForecastCard extends LitElement {
         @click=${() => this._openPopup(row)}
         @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
-        <div class="col-value">${valueLabel}${estimate10Label}</div>
+        <div class="col-value">${valueLabel}${estimate10Label}${actualLabel}</div>
         <div class="col-bar-wrap">
           <div class="bar-bg"></div>
           ${bars}
