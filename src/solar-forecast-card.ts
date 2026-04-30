@@ -863,14 +863,6 @@ export class SolarForecastCard extends LitElement {
         white-space: nowrap;
       }
 
-      .value-actual {
-        font-size: 0.58rem;
-        font-variant-numeric: tabular-nums;
-        color: var(--success-color, #4caf50);
-        opacity: 0.85;
-        line-height: 1.3;
-        white-space: nowrap;
-      }
 
       .value-empty {
         font-size: 0.78rem;
@@ -1433,7 +1425,6 @@ export class SolarForecastCard extends LitElement {
         .value-num        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
         .value-unit       { font-size: calc(0.60rem * var(--dts-factor, 1)); }
         .value-estimate10 { font-size: calc(0.58rem * var(--dts-factor, 1)); }
-        .value-actual     { font-size: calc(0.58rem * var(--dts-factor, 1)); }
         .value-empty      { font-size: calc(0.78rem * var(--dts-factor, 1)); }
 
         /* Day labels */
@@ -1863,15 +1854,6 @@ export class SolarForecastCard extends LitElement {
       ? html`<span class="value-estimate10">P10 ${row.estimate10Kwh.toFixed(1)}</span>`
       : nothing;
 
-    // Show actual kWh as a secondary numeric label on today's column so the
-    // value is always visible regardless of show_header, bar state (isComplete
-    // replaces the actual bar with a solid forecast bar), or bar overlay.
-    // row.actualKwh is the source-of-truth set by _buildRows: arrays sum when
-    // arrays are producing, today_actual_entity otherwise.
-    const actualLabel = isToday && row.actualKwh !== null
-      ? html`<span class="value-actual">↑${row.actualKwh.toFixed(1)}</span>`
-      : nothing;
-
     return html`
       <div
         class="col ${isToday ? "today" : ""}"
@@ -1881,7 +1863,7 @@ export class SolarForecastCard extends LitElement {
         @click=${() => this._openPopup(row)}
         @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
-        <div class="col-value">${valueLabel}${estimate10Label}${actualLabel}</div>
+        <div class="col-value">${valueLabel}${estimate10Label}</div>
         <div class="col-bar-wrap">
           <div class="bar-bg"></div>
           ${bars}

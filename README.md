@@ -8,6 +8,19 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 <img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.3.0/card-popup.jpg" alt="Solar Forecast Card — hourly popup" width="360">
 
+## Changelog
+
+### v1.3.2
+- **Removed debug artifact:** v1.3.1 inadvertently shipped a debugging label (a green `↑X.X kWh` value overlaid on today's forecast column) that was never intended for release. This label has been removed. No configuration changes are required.
+
+### v1.3.1
+- Added `actual_arrays` support for per-array stacked generation bars
+- Added `export_rate_entity`, `next_hour_entity`, and `remaining_today_entity` options
+- Added `desktop_text_scale` option for scaling card text on wide viewports
+- Added manual `integration_type` override in the visual editor
+- Improved Solcast hourly attribute lookup (`detailedForecast` / `hours` fallback)
+- Fixed `today_actual_entity` fallback when arrays are configured but not yet producing
+
 ## Installation
 
 ### HACS (Recommended)
