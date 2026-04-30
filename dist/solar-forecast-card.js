@@ -97,6 +97,7 @@ const LABELS = {
     solar_max_kwp: "Solar array size (kWp)",
     low_threshold: "Low threshold (kWh)",
     high_threshold: "High threshold (kWh)",
+    desktop_text_scale: "Desktop Text Scale",
 };
 // ── Schema segments (rendered with section headers between them) ──────────────
 // Device field — rendered first as the primary entry point
@@ -147,6 +148,12 @@ const SCHEMA_DISPLAY = [
             },
         },
     },
+    {
+        name: "desktop_text_scale",
+        selector: {
+            number: { min: 100, max: 150, step: 5, mode: "slider", unit_of_measurement: "%" },
+        },
+    },
 ];
 const SCHEMA_ENERGY_PROVIDER = [
     { name: "export_rate_entity", selector: { entity: {} } },
@@ -189,6 +196,7 @@ function normalizeConfig(raw) {
         solar_max_kwp: raw.solar_max_kwp,
         low_threshold: raw.low_threshold,
         high_threshold: raw.high_threshold,
+        desktop_text_scale: raw.desktop_text_scale,
     };
 }
 // ── Editor element ────────────────────────────────────────────────────────────
@@ -237,6 +245,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             solar_max_kwp: cfg.solar_max_kwp,
             low_threshold: cfg.low_threshold,
             high_threshold: cfg.high_threshold,
+            desktop_text_scale: cfg.desktop_text_scale ?? 100,
             forecast_entity_0: cfg.forecast_entities[0] ?? "",
             forecast_entity_1: cfg.forecast_entities[1] ?? "",
             forecast_entity_2: cfg.forecast_entities[2] ?? "",
@@ -276,6 +285,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             solar_max_kwp: typeof data.solar_max_kwp === "number" ? data.solar_max_kwp : undefined,
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
             high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
+            // Only persist when non-default (100) so YAML stays clean for most users.
+            desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
+                ? data.desktop_text_scale
+                : undefined,
         };
     }
     // ── Actual-array management ─────────────────────────────────────────────────
@@ -927,7 +940,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Date/Time Formats" outlined leftChevron>
+      <ha-expansion-panel header="Date/Time &amp; Display" outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -935,6 +948,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.
+        </p>
       </ha-expansion-panel>
     `;
     }
@@ -985,6 +1002,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (!config)
             throw new Error("Invalid configuration");
         this._config = normalizeConfig(config);
+        // Apply the desktop text scale as a CSS custom property on the host element.
+        // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
+        // @media (min-width: 768px) block so mobile sizing is never affected.
+        const factor = (this._config.desktop_text_scale ?? 100) / 100;
+        this.style.setProperty("--dts-factor", String(factor));
     }
     getCardSize() {
         return 4;
@@ -2262,6 +2284,49 @@ let SolarForecastCard = class SolarForecastCard extends i {
       .chart-val.peak {
         color: var(--warning-color, #f59e0b);
         font-weight: 600;
+      }
+
+      /* ══════════════════════════════════════════════════════════
+         DESKTOP TEXT SCALING
+         ══════════════════════════════════════════════════════════
+         --dts-factor is set by setConfig() from desktop_text_scale
+         (config value / 100, default 1.0).
+
+         Applied ONLY on viewports >= 768 px so mobile sizing is
+         always left untouched.  At the default factor of 1.0 the
+         calc() values are numerically identical to the base sizes,
+         so there is zero visual change for users who haven't set
+         the option.
+
+         Scope: header, daily value labels, day labels, bar segment
+         labels, and summary values in the live header.
+         Popup text is intentionally excluded — it is a modal panel
+         that already displays at comfortable reading size.
+         ══════════════════════════════════════════════════════════ */
+
+      @media (min-width: 768px) {
+        /* Header */
+        .header-title    { font-size: calc(1.05rem * var(--dts-factor, 1)); }
+        .export-rate-row { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .live-row        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .live-week       { font-size: calc(0.68rem * var(--dts-factor, 1)); }
+
+        /* Column value labels */
+        .value-num        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .value-unit       { font-size: calc(0.60rem * var(--dts-factor, 1)); }
+        .value-estimate10 { font-size: calc(0.58rem * var(--dts-factor, 1)); }
+        .value-actual     { font-size: calc(0.58rem * var(--dts-factor, 1)); }
+        .value-empty      { font-size: calc(0.78rem * var(--dts-factor, 1)); }
+
+        /* Day labels */
+        .day-name         { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .day-date         { font-size: calc(0.65rem * var(--dts-factor, 1)); }
+
+        /* Two-day footnote */
+        .two-day-note     { font-size: calc(0.65rem * var(--dts-factor, 1)); }
+
+        /* Bar segment labels */
+        .array-label      { font-size: calc(0.5rem  * var(--dts-factor, 1)); }
       }
     `;
     }

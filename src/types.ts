@@ -31,6 +31,8 @@ export interface SolarForecastCardConfig {
   solar_max_kwp?: number;
   low_threshold?: number;
   high_threshold?: number;
+  /** Scale factor for card text on desktop/wide viewports (100–150, step 5). Undefined = 100 (no change). Only applied at ≥ 768 px viewport width. */
+  desktop_text_scale?: number;
 }
 
 export interface EntityRegistryEntry {

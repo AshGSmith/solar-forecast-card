@@ -59,8 +59,9 @@ const LABELS: Record<string, string> = {
   time_format:         "Time format (hourly popup)",
   inverter_max_kw:     "Inverter max output (kW)",
   solar_max_kwp:       "Solar array size (kWp)",
-  low_threshold:       "Low threshold (kWh)",
-  high_threshold:      "High threshold (kWh)",
+  low_threshold:         "Low threshold (kWh)",
+  high_threshold:        "High threshold (kWh)",
+  desktop_text_scale:    "Desktop Text Scale",
 };
 
 // ── Schema segments (rendered with section headers between them) ──────────────
@@ -117,6 +118,12 @@ const SCHEMA_DISPLAY: HaFormSchema[] = [
       },
     },
   },
+  {
+    name: "desktop_text_scale",
+    selector: {
+      number: { min: 100, max: 150, step: 5, mode: "slider", unit_of_measurement: "%" },
+    },
+  },
 ];
 
 const SCHEMA_ENERGY_PROVIDER: HaFormSchema[] = [
@@ -159,6 +166,7 @@ interface FormData {
   solar_max_kwp: number | undefined;
   low_threshold: number | undefined;
   high_threshold: number | undefined;
+  desktop_text_scale: number;
 }
 
 // ── Config normalisation (exported — also used by the main card) ──────────────
@@ -191,12 +199,13 @@ export function normalizeConfig(
             typeof e === "object" && e !== null && typeof e.entity === "string"
         )
       : undefined,
-    date_format:        raw.date_format ?? "DD/MM",
-    time_format:        raw.time_format ?? "24h",
-    inverter_max_kw:    raw.inverter_max_kw,
-    solar_max_kwp:      raw.solar_max_kwp,
-    low_threshold:      raw.low_threshold,
-    high_threshold:     raw.high_threshold,
+    date_format:          raw.date_format ?? "DD/MM",
+    time_format:          raw.time_format ?? "24h",
+    inverter_max_kw:      raw.inverter_max_kw,
+    solar_max_kwp:        raw.solar_max_kwp,
+    low_threshold:        raw.low_threshold,
+    high_threshold:       raw.high_threshold,
+    desktop_text_scale:   raw.desktop_text_scale,
   };
 }
 
@@ -253,6 +262,7 @@ export class SolarForecastCardEditor extends LitElement {
       solar_max_kwp:       cfg.solar_max_kwp,
       low_threshold:       cfg.low_threshold,
       high_threshold:      cfg.high_threshold,
+      desktop_text_scale:  cfg.desktop_text_scale ?? 100,
       forecast_entity_0:   cfg.forecast_entities[0] ?? "",
       forecast_entity_1:   cfg.forecast_entities[1] ?? "",
       forecast_entity_2:   cfg.forecast_entities[2] ?? "",
@@ -289,10 +299,14 @@ export class SolarForecastCardEditor extends LitElement {
       actual_arrays:          this._config?.actual_arrays,
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
       time_format: (data.time_format as "24h" | "12h") || "24h",
-      inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
-      solar_max_kwp:   typeof data.solar_max_kwp   === "number" ? data.solar_max_kwp   : undefined,
-      low_threshold:   typeof data.low_threshold   === "number" ? data.low_threshold   : undefined,
-      high_threshold:  typeof data.high_threshold  === "number" ? data.high_threshold  : undefined,
+      inverter_max_kw:    typeof data.inverter_max_kw    === "number" ? data.inverter_max_kw    : undefined,
+      solar_max_kwp:      typeof data.solar_max_kwp      === "number" ? data.solar_max_kwp      : undefined,
+      low_threshold:      typeof data.low_threshold      === "number" ? data.low_threshold      : undefined,
+      high_threshold:     typeof data.high_threshold     === "number" ? data.high_threshold     : undefined,
+      // Only persist when non-default (100) so YAML stays clean for most users.
+      desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
+        ? data.desktop_text_scale
+        : undefined,
     };
   }
 
@@ -1020,7 +1034,7 @@ export class SolarForecastCardEditor extends LitElement {
         ></ha-form>
       </ha-expansion-panel>
 
-      <ha-expansion-panel header="Date/Time Formats" outlined leftChevron>
+      <ha-expansion-panel header="Date/Time &amp; Display" outlined leftChevron>
         <ha-form
           .hass=${this.hass}
           .data=${data}
@@ -1028,6 +1042,10 @@ export class SolarForecastCardEditor extends LitElement {
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.
+        </p>
       </ha-expansion-panel>
     `;
   }

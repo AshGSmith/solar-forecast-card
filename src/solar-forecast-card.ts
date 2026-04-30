@@ -64,6 +64,11 @@ export class SolarForecastCard extends LitElement {
   public setConfig(config: Partial<SolarForecastCardConfig>): void {
     if (!config) throw new Error("Invalid configuration");
     this._config = normalizeConfig(config);
+    // Apply the desktop text scale as a CSS custom property on the host element.
+    // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
+    // @media (min-width: 768px) block so mobile sizing is never affected.
+    const factor = (this._config.desktop_text_scale ?? 100) / 100;
+    this.style.setProperty("--dts-factor", String(factor));
   }
 
   public getCardSize(): number {
@@ -1394,6 +1399,49 @@ export class SolarForecastCard extends LitElement {
       .chart-val.peak {
         color: var(--warning-color, #f59e0b);
         font-weight: 600;
+      }
+
+      /* ══════════════════════════════════════════════════════════
+         DESKTOP TEXT SCALING
+         ══════════════════════════════════════════════════════════
+         --dts-factor is set by setConfig() from desktop_text_scale
+         (config value / 100, default 1.0).
+
+         Applied ONLY on viewports >= 768 px so mobile sizing is
+         always left untouched.  At the default factor of 1.0 the
+         calc() values are numerically identical to the base sizes,
+         so there is zero visual change for users who haven't set
+         the option.
+
+         Scope: header, daily value labels, day labels, bar segment
+         labels, and summary values in the live header.
+         Popup text is intentionally excluded — it is a modal panel
+         that already displays at comfortable reading size.
+         ══════════════════════════════════════════════════════════ */
+
+      @media (min-width: 768px) {
+        /* Header */
+        .header-title    { font-size: calc(1.05rem * var(--dts-factor, 1)); }
+        .export-rate-row { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .live-row        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .live-week       { font-size: calc(0.68rem * var(--dts-factor, 1)); }
+
+        /* Column value labels */
+        .value-num        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .value-unit       { font-size: calc(0.60rem * var(--dts-factor, 1)); }
+        .value-estimate10 { font-size: calc(0.58rem * var(--dts-factor, 1)); }
+        .value-actual     { font-size: calc(0.58rem * var(--dts-factor, 1)); }
+        .value-empty      { font-size: calc(0.78rem * var(--dts-factor, 1)); }
+
+        /* Day labels */
+        .day-name         { font-size: calc(0.75rem * var(--dts-factor, 1)); }
+        .day-date         { font-size: calc(0.65rem * var(--dts-factor, 1)); }
+
+        /* Two-day footnote */
+        .two-day-note     { font-size: calc(0.65rem * var(--dts-factor, 1)); }
+
+        /* Bar segment labels */
+        .array-label      { font-size: calc(0.5rem  * var(--dts-factor, 1)); }
       }
     `;
   }
