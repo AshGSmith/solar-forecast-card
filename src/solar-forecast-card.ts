@@ -1487,6 +1487,10 @@ export class SolarForecastCard extends LitElement {
         overflow: hidden;
       }
 
+      .chart-bar-track.with-actual {
+        height: 14px;
+      }
+
       .chart-bar-fill {
         position: absolute;
         inset: 0 auto 0 0;
@@ -1501,6 +1505,11 @@ export class SolarForecastCard extends LitElement {
         animation-delay: var(--delay, 0ms);
       }
 
+      .chart-bar-track.with-actual .chart-bar-fill {
+        bottom: 5px;
+        height: 8px;
+      }
+
       .chart-bar-fill.peak {
         background: linear-gradient(
           to right,
@@ -1508,6 +1517,38 @@ export class SolarForecastCard extends LitElement {
           rgba(254, 215, 86, 0.92)
         );
         box-shadow: 0 0 7px 1px rgba(245, 158, 11, 0.38);
+      }
+
+      .chart-actual-fill {
+        position: absolute;
+        left: 0;
+        bottom: 1px;
+        height: 3px;
+        border-radius: 3px;
+        background: linear-gradient(
+          to right,
+          rgba(220, 80, 80, 0.78),
+          rgba(252, 160, 155, 0.68)
+        );
+        animation: bar-in 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+        animation-delay: var(--delay, 0ms);
+      }
+
+      .chart-actual-fill.actual-match {
+        background: linear-gradient(
+          to right,
+          rgba(245, 158, 11, 0.82),
+          rgba(254, 215, 86, 0.70)
+        );
+      }
+
+      .chart-actual-fill.actual-over {
+        background: linear-gradient(
+          to right,
+          rgba(22, 163, 74, 0.82),
+          rgba(74, 222, 128, 0.70)
+        );
+        box-shadow: 0 0 6px 1px rgba(34, 197, 94, 0.24);
       }
 
       @keyframes bar-in {
@@ -1546,10 +1587,22 @@ export class SolarForecastCard extends LitElement {
       .chart-val-actual {
         font-size: 0.70rem;
         font-variant-numeric: tabular-nums;
-        color: var(--success-color, #4caf50);
+        color: var(--secondary-text-color);
         font-weight: 500;
         line-height: 1;
         text-align: right;
+      }
+
+      .chart-val-actual.actual-under {
+        color: rgba(220, 80, 80, 0.92);
+      }
+
+      .chart-val-actual.actual-match {
+        color: var(--warning-color, #f59e0b);
+      }
+
+      .chart-val-actual.actual-over {
+        color: var(--success-color, #4caf50);
       }
 
       /* Placeholder dash for hours with no actual data (future / pre-sunrise) */
@@ -1569,6 +1622,8 @@ export class SolarForecastCard extends LitElement {
         background: rgba(251, 191, 36, 0.07);
         box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.50);
         border-radius: 4px;
+        box-sizing: border-box;
+        padding-inline: 2px 8px;
       }
 
       /* Amber time label so the current hour is easy to find at a glance */
@@ -2195,23 +2250,39 @@ export class SolarForecastCard extends LitElement {
         const actualKwh: number | null = showActualCol
           ? (actualHourly!.has(pt.hour) ? actualHourly!.get(pt.hour)! : null)
           : null;
+        const actualPct = actualKwh !== null && maxRef > 0
+          ? Math.min((actualKwh / maxRef) * 100, 100)
+          : 0;
+        const compareClass = actualKwh === null
+          ? ""
+          : actualKwh > pt.kwh + 0.005
+            ? "actual-over"
+            : actualKwh < pt.kwh - 0.005
+              ? "actual-under"
+              : "actual-match";
 
         return html`
           <div class="chart-row
             ${showActualCol ? "with-actuals" : ""}
             ${isCurrentHour ? "current-hour" : ""}">
             <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
-            <div class="chart-bar-track">
+            <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
                 class="chart-bar-fill ${isPeak ? "peak" : ""}"
                 style="width:${pct.toFixed(1)}%;--delay:${delay}ms"
               ></div>
+              ${actualKwh !== null ? html`
+                <div
+                  class="chart-actual-fill ${compareClass}"
+                  style="width:${actualPct.toFixed(1)}%;--delay:${delay}ms"
+                ></div>
+              ` : nothing}
             </div>
             <span class="chart-val ${isPeak ? "peak" : ""}">
               ${pt.kwh.toFixed(2)}
             </span>
             ${showActualCol ? html`
-              <span class="chart-val-actual ${actualKwh !== null ? "" : "empty"}">
+              <span class="chart-val-actual ${actualKwh !== null ? compareClass : "empty"}">
                 ${actualKwh !== null ? actualKwh.toFixed(2) : "—"}
               </span>
             ` : nothing}

@@ -10,6 +10,11 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Changelog
 
+### v1.4.0-beta.02
+- **Hourly actual-vs-forecast comparison:** Today's hourly popup now shows actual generation as a slim comparison bar beneath the forecast bar, so measured output can be compared visually without changing forecast scaling.
+- **Actual value colouring:** Actual hourly values now use soft red, amber, or green styling when they are below, matching, or above the forecast value.
+- **Current-hour polish:** The current-hour highlight now extends slightly past the Actual column for a more balanced popup layout.
+
 ### v1.3.2
 - **Removed debug artifact:** v1.3.1 inadvertently shipped a debugging label (a green `↑X.X kWh` value overlaid on today's forecast column) that was never intended for release. This label has been removed. No configuration changes are required.
 
