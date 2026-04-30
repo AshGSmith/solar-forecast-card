@@ -179,7 +179,9 @@ export class SolarForecastCard extends LitElement {
           ? this._sumEstimate10(s?.attributes?.detailedForecast)
           : null,
         rawHoursAttr: cfg.integration_type === "solcast"
-          ? s?.attributes?.detailedForecast
+          // Prefer detailedForecast (standard Solcast attribute); fall back to
+          // hours so manually-configured cards work with alternate attribute names.
+          ? (s?.attributes?.detailedForecast ?? s?.attributes?.hours)
           : cfg.integration_type === "volcast"
             ? s?.attributes?.hours
             : cfg.integration_type === "forecast_solar"
@@ -579,7 +581,8 @@ export class SolarForecastCard extends LitElement {
     const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
     const intType = this._config?.integration_type;
     const freshHours = intType === "solcast"
-      ? freshState?.attributes?.detailedForecast
+      // Prefer detailedForecast; fall back to hours for manually-configured setups.
+      ? (freshState?.attributes?.detailedForecast ?? freshState?.attributes?.hours)
       : intType === "volcast"
         ? freshState?.attributes?.hours
         : intType === "forecast_solar"
@@ -1629,7 +1632,8 @@ export class SolarForecastCard extends LitElement {
       const intType = cfg.integration_type;
       // Mirrors the attribute resolution in _openPopup — keep in sync if that changes.
       const rawHours =
-        intType === "solcast"                   ? todayFcState.attributes?.detailedForecast :
+        // Solcast: prefer detailedForecast, fall back to hours for manual configs.
+        intType === "solcast"                   ? (todayFcState.attributes?.detailedForecast ?? todayFcState.attributes?.hours) :
         intType === "volcast"                   ? todayFcState.attributes?.hours            :
         intType === "forecast_solar"            ? undefined                                 :
         intType === "open_meteo_solar_forecast" ? todayFcState.attributes?.wh_period        :
