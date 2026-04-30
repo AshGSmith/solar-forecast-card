@@ -58,6 +58,7 @@ const LABELS: Record<string, string> = {
   remaining_today_entity:   "LEFT / remaining today (optional, overrides auto-derived value)",
   date_format:         "Date format",
   time_format:         "Time format (hourly popup)",
+  show_hourly_as_main: "Show Hourly Forecast as Main Card",
   inverter_max_kw:     "Inverter max output (kW)",
   solar_max_kwp:       "Solar array size (kWp)",
   low_threshold:         "Low threshold (kWh)",
@@ -144,6 +145,7 @@ const SCHEMA_DISPLAY: HaFormSchema[] = [
       number: { min: 100, max: 150, step: 5, mode: "slider", unit_of_measurement: "%" },
     },
   },
+  { name: "show_hourly_as_main", selector: { boolean: {} } },
 ];
 
 const SCHEMA_ENERGY_PROVIDER: HaFormSchema[] = [
@@ -183,6 +185,7 @@ interface FormData {
   integration_type: string;
   date_format: string;
   time_format: string;
+  show_hourly_as_main: boolean;
   inverter_max_kw: number | undefined;
   solar_max_kwp: number | undefined;
   low_threshold: number | undefined;
@@ -222,6 +225,7 @@ export function normalizeConfig(
       : undefined,
     date_format:          raw.date_format ?? "DD/MM",
     time_format:          raw.time_format ?? "24h",
+    show_hourly_as_main:  raw.show_hourly_as_main ?? false,
     inverter_max_kw:      raw.inverter_max_kw,
     solar_max_kwp:        raw.solar_max_kwp,
     low_threshold:        raw.low_threshold,
@@ -280,6 +284,7 @@ export class SolarForecastCardEditor extends LitElement {
       remaining_today_entity: cfg.remaining_today_entity ?? "",
       date_format:         cfg.date_format         ?? "DD/MM",
       time_format:         cfg.time_format         ?? "24h",
+      show_hourly_as_main: cfg.show_hourly_as_main ?? false,
       inverter_max_kw:     cfg.inverter_max_kw,
       solar_max_kwp:       cfg.solar_max_kwp,
       low_threshold:       cfg.low_threshold,
@@ -321,6 +326,7 @@ export class SolarForecastCardEditor extends LitElement {
       actual_arrays:          this._config?.actual_arrays,
       date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
       time_format: (data.time_format as "24h" | "12h") || "24h",
+      show_hourly_as_main: data.show_hourly_as_main,
       inverter_max_kw:    typeof data.inverter_max_kw    === "number" ? data.inverter_max_kw    : undefined,
       solar_max_kwp:      typeof data.solar_max_kwp      === "number" ? data.solar_max_kwp      : undefined,
       low_threshold:      typeof data.low_threshold      === "number" ? data.low_threshold      : undefined,
@@ -1082,6 +1088,10 @@ export class SolarForecastCardEditor extends LitElement {
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
           Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.
+        </p>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          Displays the hourly forecast view directly on the card instead of the daily forecast bars.
         </p>
       </ha-expansion-panel>
     `;

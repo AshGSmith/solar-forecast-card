@@ -10,6 +10,10 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Changelog
 
+### v1.4.0-beta.03
+- **Optional hourly main-card view:** Added `show_hourly_as_main`, allowing today's hourly forecast chart to replace the daily forecast bars directly on the main card.
+- **Reuses popup hourly features:** The inline hourly view uses the existing hourly parsing, actual-vs-forecast display, current-hour highlight, and 12h/24h time formatting.
+
 ### v1.4.0-beta.02
 - **Hourly actual-vs-forecast comparison:** Today's hourly popup now shows actual generation as a slim comparison bar beneath the forecast bar, so measured output can be compared visually without changing forecast scaling.
 - **Actual value colouring:** Actual hourly values now use soft red, amber, or green styling when they are below, matching, or above the forecast value.
@@ -60,6 +64,7 @@ title: Solar Forecast          # optional — defaults to "Solar Forecast"
 icon: mdi:solar-power          # optional — defaults to mdi:solar-power
 show_header: true              # optional — defaults to true
 display_estimate10: false      # optional — Solcast only, shows P10 forecast values
+show_hourly_as_main: false     # optional — show today's hourly forecast as the main card view
 device_id: <your_device_id>    # optional — auto-detects forecast entities
 forecast_entities:
   - sensor.forecast_today
@@ -164,6 +169,7 @@ actual_arrays:
 |--------|------|----------|---------|-------------|
 | `date_format` | string | no | `DD/MM` | Date format for day column labels. `DD/MM` (e.g. 15/04) or `MM/DD` (e.g. 04/15) |
 | `time_format` | string | no | `24h` | Time format used in the hourly forecast popup. `24h` (e.g. `17:00`) or `12h` (e.g. `5pm`) |
+| `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
 
 #### Colour Thresholds
 

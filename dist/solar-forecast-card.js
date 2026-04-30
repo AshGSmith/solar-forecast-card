@@ -94,6 +94,7 @@ const LABELS = {
     remaining_today_entity: "LEFT / remaining today (optional, overrides auto-derived value)",
     date_format: "Date format",
     time_format: "Time format (hourly popup)",
+    show_hourly_as_main: "Show Hourly Forecast as Main Card",
     inverter_max_kw: "Inverter max output (kW)",
     solar_max_kwp: "Solar array size (kWp)",
     low_threshold: "Low threshold (kWh)",
@@ -173,6 +174,7 @@ const SCHEMA_DISPLAY = [
             number: { min: 100, max: 150, step: 5, mode: "slider", unit_of_measurement: "%" },
         },
     },
+    { name: "show_hourly_as_main", selector: { boolean: {} } },
 ];
 const SCHEMA_ENERGY_PROVIDER = [
     { name: "export_rate_entity", selector: { entity: {} } },
@@ -211,6 +213,7 @@ function normalizeConfig(raw) {
             : undefined,
         date_format: raw.date_format ?? "DD/MM",
         time_format: raw.time_format ?? "24h",
+        show_hourly_as_main: raw.show_hourly_as_main ?? false,
         inverter_max_kw: raw.inverter_max_kw,
         solar_max_kwp: raw.solar_max_kwp,
         low_threshold: raw.low_threshold,
@@ -261,6 +264,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             remaining_today_entity: cfg.remaining_today_entity ?? "",
             date_format: cfg.date_format ?? "DD/MM",
             time_format: cfg.time_format ?? "24h",
+            show_hourly_as_main: cfg.show_hourly_as_main ?? false,
             inverter_max_kw: cfg.inverter_max_kw,
             solar_max_kwp: cfg.solar_max_kwp,
             low_threshold: cfg.low_threshold,
@@ -301,6 +305,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             actual_arrays: this._config?.actual_arrays,
             date_format: data.date_format || "DD/MM",
             time_format: data.time_format || "24h",
+            show_hourly_as_main: data.show_hourly_as_main,
             inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
             solar_max_kwp: typeof data.solar_max_kwp === "number" ? data.solar_max_kwp : undefined,
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
@@ -987,6 +992,10 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           <ha-icon icon="mdi:information-outline"></ha-icon>
           Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.
         </p>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          Displays the hourly forecast view directly on the card instead of the daily forecast bars.
+        </p>
       </ha-expansion-panel>
     `;
     }
@@ -1024,6 +1033,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
          * Map   = fetch completed; map may be empty if no generating hours found.
          */
         this._popupActualHourly = null;
+        /**
+         * Same actual-history data as the popup uses, but for the optional main-card
+         * hourly view. Kept separate so opening/closing the popup never resets the
+         * inline chart's Actual column.
+         */
+        this._mainActualHourly = null;
         this._onDocKey = (e) => {
             if (e.key === "Escape" && this._popup)
                 this._closePopup();
@@ -1044,6 +1059,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (!config)
             throw new Error("Invalid configuration");
         this._config = normalizeConfig(config);
+        this._mainActualFetchKey = undefined;
+        this._mainActualHourly = null;
         // Apply the desktop text scale as a CSS custom property on the host element.
         // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
         // @media (min-width: 768px) block so mobile sizing is never affected.
@@ -1064,7 +1081,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     // ── Update optimisation ───────────────────────────────────────────────────
     shouldUpdate(changedProps) {
-        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly"))
+        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly"))
             return true;
         if (!this._config || !this.hass)
             return false;
@@ -2338,6 +2355,48 @@ let SolarForecastCard = class SolarForecastCard extends i {
         line-height: 1.5;
       }
 
+      /* ── Inline hourly main-card view ─────────────────────── */
+
+      .main-hourly {
+        padding: 0 4px 2px;
+      }
+
+      .main-hourly-summary {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 4px 8px;
+        border-bottom: 1px solid var(--divider-color, rgba(128, 128, 128, 0.15));
+        color: var(--secondary-text-color);
+      }
+
+      .main-hourly-day {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--primary-text-color);
+      }
+
+      .main-hourly-total {
+        flex-shrink: 0;
+        font-size: 0.74rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--warning-color, #f59e0b);
+      }
+
+      .main-hourly-chart {
+        max-height: min(360px, 55vh);
+        padding: 10px 4px 2px;
+      }
+
+      .main-hourly .chart-no-data {
+        padding: 26px 8px 24px;
+      }
+
       /* Grid: [hour label] [bar track] [value] */
       .chart-header,
       .chart-row {
@@ -2571,6 +2630,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
         /* Two-day footnote */
         .two-day-note     { font-size: calc(0.65rem * var(--dts-factor, 1)); }
 
+        /* Inline hourly summary */
+        .main-hourly-day   { font-size: calc(0.82rem * var(--dts-factor, 1)); }
+        .main-hourly-total { font-size: calc(0.74rem * var(--dts-factor, 1)); }
+
         /* Bar segment labels */
         .array-label      { font-size: calc(0.5rem  * var(--dts-factor, 1)); }
       }
@@ -2595,6 +2658,15 @@ let SolarForecastCard = class SolarForecastCard extends i {
         ${this._renderLive()}
       </div>
     ` : A;
+        const rows = this._buildRows();
+        if (this._config.show_hourly_as_main) {
+            return b `
+        <ha-card>
+          ${header}
+          ${this._renderMainHourly(rows[0])}
+        </ha-card>
+      `;
+        }
         if (!hasEntities) {
             return b `
         <ha-card>
@@ -2606,7 +2678,6 @@ let SolarForecastCard = class SolarForecastCard extends i {
         </ha-card>
       `;
         }
-        const rows = this._buildRows();
         const validRows = rows.filter((r) => r.entityId);
         const isTwoDay = this._config.integration_type === "forecast_solar" && validRows.length <= 2;
         const displayRows = isTwoDay ? validRows : rows;
@@ -2984,45 +3055,85 @@ let SolarForecastCard = class SolarForecastCard extends i {
       </div>
     `;
     }
-    // ── Popup ─────────────────────────────────────────────────────────────────
-    _renderPopup() {
-        if (!this._popup)
-            return A;
-        const row = this._popup;
-        const isForecastSolar = this._config?.integration_type === "forecast_solar";
-        let chartContent;
-        if (isForecastSolar) {
-            chartContent = b `
+    // ── Main-card hourly view ─────────────────────────────────────────────────
+    _renderMainHourly(row) {
+        if (!row || !row.entityId) {
+            return b `
+        <div class="main-hourly">
+          <div class="chart-no-data">
+            <p>No hourly data available for this day.</p>
+          </div>
+        </div>
+      `;
+        }
+        this._ensureMainActualHourly(row);
+        return b `
+      <div class="main-hourly">
+        <div class="main-hourly-summary">
+          <span class="main-hourly-day">${this._fullDateLabel(row.date, row.isToday)}</span>
+          <span class="main-hourly-total">
+            ${row.forecastKwh !== null ? `${row.forecastKwh.toFixed(2)} kWh forecast` : "No forecast data"}
+          </span>
+        </div>
+        <div class="chart-scroll main-hourly-chart">
+          ${this._renderHourlyChartContent(row, row.isToday ? this._mainActualHourly : undefined)}
+        </div>
+      </div>
+    `;
+    }
+    _ensureMainActualHourly(row) {
+        const entityId = this._config?.today_actual_entity;
+        if (!this._config?.show_hourly_as_main || !row.isToday || !entityId) {
+            this._mainActualFetchKey = undefined;
+            if (this._mainActualHourly !== null)
+                this._mainActualHourly = null;
+            return;
+        }
+        const state = this.hass?.states[entityId];
+        const todayKey = new Date().toDateString();
+        const key = `${entityId}|${todayKey}|${new Date().getHours()}|${state?.last_updated ?? state?.state ?? ""}`;
+        if (this._mainActualFetchKey === key)
+            return;
+        this._mainActualFetchKey = key;
+        this._mainActualHourly = null;
+        this._fetchActualHourly(entityId).then((map) => {
+            if (this._mainActualFetchKey === key && this._config?.show_hourly_as_main) {
+                this._mainActualHourly = map;
+            }
+        });
+    }
+    _renderHourlyChartContent(row, actualHourly) {
+        if (this._config?.integration_type === "forecast_solar") {
+            return b `
         <div class="chart-no-data">
           <p>The selected forecast entities do not provide hourly forecast data.</p>
         </div>
       `;
         }
-        else {
-            const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
-            const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
-            // Determine the reference ceiling for bar scaling
-            const { inverter_max_kw, solar_max_kwp } = this._config;
-            let maxRef;
-            if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
-                maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
-            }
-            else if (inverter_max_kw !== undefined) {
-                maxRef = inverter_max_kw;
-            }
-            else if (solar_max_kwp !== undefined) {
-                maxRef = solar_max_kwp;
-            }
-            else {
-                maxRef = peakKwh;
-            }
-            // Pass actual hourly data only for today — future days are forecast-only.
-            // _popupActualHourly is null while fetching (shows forecast-only gracefully)
-            // and becomes a Map once the history fetch resolves.
-            // row.isToday is also forwarded so _renderHourlyChart can highlight the
-            // current-hour row; future days receive false and are never highlighted.
-            chartContent = this._renderHourlyChart(points, peakKwh, maxRef, row.isToday ? this._popupActualHourly : undefined, row.isToday);
+        const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
+        const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
+        const { inverter_max_kw, solar_max_kwp } = this._config;
+        let maxRef;
+        if (inverter_max_kw !== undefined && solar_max_kwp !== undefined) {
+            maxRef = solar_max_kwp >= inverter_max_kw ? inverter_max_kw : solar_max_kwp;
         }
+        else if (inverter_max_kw !== undefined) {
+            maxRef = inverter_max_kw;
+        }
+        else if (solar_max_kwp !== undefined) {
+            maxRef = solar_max_kwp;
+        }
+        else {
+            maxRef = peakKwh;
+        }
+        return this._renderHourlyChart(points, peakKwh, maxRef, row.isToday ? actualHourly : undefined, row.isToday);
+    }
+    // ── Popup ─────────────────────────────────────────────────────────────────
+    _renderPopup() {
+        if (!this._popup)
+            return A;
+        const row = this._popup;
+        const chartContent = this._renderHourlyChartContent(row, row.isToday ? this._popupActualHourly : undefined);
         return b `
       <div
         class="popup-overlay ${this._popupVisible ? "visible" : ""}"
@@ -3162,6 +3273,9 @@ __decorate([
 __decorate([
     r()
 ], SolarForecastCard.prototype, "_popupActualHourly", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_mainActualHourly", void 0);
 SolarForecastCard = __decorate([
     t("solar-forecast-card")
 ], SolarForecastCard);

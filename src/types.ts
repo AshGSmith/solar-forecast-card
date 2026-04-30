@@ -27,6 +27,8 @@ export interface SolarForecastCardConfig {
   actual_arrays?: ActualArrayEntry[];
   date_format: "DD/MM" | "MM/DD";
   time_format: "24h" | "12h";
+  /** When true, today's hourly forecast chart replaces the daily bar grid on the main card. */
+  show_hourly_as_main: boolean;
   inverter_max_kw?: number;
   solar_max_kwp?: number;
   low_threshold?: number;
