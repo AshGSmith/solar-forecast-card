@@ -73,6 +73,17 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
  */function r(r){return n({...r,state:true,attribute:false})}
 
 var en = {
+  "day": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "monday_short": "Mon",
+    "tuesday_short": "Tue",
+    "wednesday_short": "Wed",
+    "thursday_short": "Thu",
+    "friday_short": "Fri",
+    "saturday_short": "Sat",
+    "sunday_short": "Sun"
+  },
   "card": {
     "defaultTitle": "Solar Forecast",
     "placeholder": "No forecast entities configured.",
@@ -166,6 +177,7 @@ var en = {
       "auto": "Auto",
       "english": "English",
       "french": "French",
+      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -215,7 +227,173 @@ var en = {
 }
 ;
 
+var de = {
+  "day": {
+    "today": "Heu",
+    "tomorrow": "Mor",
+    "monday_short": "Mo",
+    "tuesday_short": "Di",
+    "wednesday_short": "Mi",
+    "thursday_short": "Do",
+    "friday_short": "Fr",
+    "saturday_short": "Sa",
+    "sunday_short": "So"
+  },
+  "card": {
+    "defaultTitle": "Solarprognose",
+    "placeholder": "Keine Prognose-Entitäten konfiguriert.",
+    "placeholderAction": "Öffne den Karteneditor, um zu beginnen.",
+    "twoDayNote": "2-Tage-Prognose verfügbar",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EINSPEISEVERGÜTUNG:",
+      "nextHour": "+1 STD:",
+      "left": "REST:",
+      "week": "WOCHE:",
+      "avg": "Ø:",
+      "total": "Gesamt",
+      "p10": "P10",
+      "forecast": "Prognose",
+      "generated": "erzeugt"
+    },
+    "days": {
+      "sun": "So",
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa",
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "day3": "Tag 3",
+      "day4": "Tag 4",
+      "day5": "Tag 5",
+      "day6": "Tag 6",
+      "day7": "Tag 7"
+    },
+    "popup": {
+      "close": "Schließen",
+      "noForecastData": "Keine Prognosedaten",
+      "noHourlyData": "Keine stündlichen Daten für diesen Tag verfügbar.",
+      "integrationNoHourlyData": "Die ausgewählten Prognose-Entitäten stellen keine stündlichen Prognosedaten bereit.",
+      "chart": {
+        "time": "Zeit",
+        "power": "Leistung",
+        "kwh": "kWh",
+        "forecastShort": "Prog.",
+        "actualShort": "Ist"
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Ungültige Konfiguration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/Tag"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Titel (optional)",
+      "icon": "Header-Symbol (optional, z. B. mdi:solar-power)",
+      "show_header": "Header anzeigen",
+      "display_estimate10": "Estimate10-Prognosewerte anzeigen",
+      "device_id": "Prognosegerät",
+      "integration_type": "Integrationstyp",
+      "forecast_entity_0": "Tag 1 - Heute",
+      "forecast_entity_1": "Tag 2 - Morgen",
+      "forecast_entity_2": "Tag 3",
+      "forecast_entity_3": "Tag 4",
+      "forecast_entity_4": "Tag 5",
+      "forecast_entity_5": "Tag 6",
+      "forecast_entity_6": "Tag 7",
+      "export_rate_entity": "Aktuelle Einspeisevergütung-Entität",
+      "live_power_entity": "Live-Leistung (optional, kW-Sensor)",
+      "today_actual_entity": "Heutige tatsächliche Erzeugung (optional)",
+      "next_hour_entity": "+1 STD Prognose (optional, überschreibt automatisch abgeleiteten Wert)",
+      "remaining_today_entity": "REST / verbleibend heute (optional, überschreibt automatisch abgeleiteten Wert)",
+      "date_format": "Datumsformat",
+      "time_format": "Zeitformat (stündliches Popup)",
+      "show_hourly_as_main": "Stündliche Prognose als Hauptkarte anzeigen",
+      "language_override": "Sprachüberschreibung",
+      "inverter_max_kw": "Max. Wechselrichterleistung (kW)",
+      "solar_max_kwp": "Größe der Solaranlage (kWp)",
+      "low_threshold": "Niedriger Schwellenwert (kWh)",
+      "high_threshold": "Hoher Schwellenwert (kWh)",
+      "desktop_text_scale": "Desktop-Textskalierung"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "Englisch",
+      "french": "Französisch",
+      "german": "Deutsch",
+      "autoDetect": "Automatisch erkennen",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "TT/MM  (z. B. 15/04)",
+      "dateMmDd": "MM/TT  (z. B. 04/15)",
+      "time24h": "24 h  (z. B. 17:00)",
+      "time12h": "12 h  (z. B. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integrationstyp",
+      "dailyForecastEntities": "Tägliche Prognose-Entitäten",
+      "liveData": "Live-Daten",
+      "actualGenerationArrays": "Tatsächliche Erzeugungs-Arrays",
+      "systemParameters": "Systemparameter",
+      "energyProvider": "Energieanbieter",
+      "colourThresholds": "Farbschwellenwerte",
+      "dateTimeDisplay": "Datum/Zeit & Anzeige"
+    },
+    "helpers": {
+      "device": "Empfohlen: Die Auswahl eines Geräts konfiguriert die Karte automatisch",
+      "estimate10": "Estimate10 anzeigen gilt nur für den Integrationstyp Solcast",
+      "integrationType": "Wird automatisch gesetzt, wenn oben ein Prognosegerät ausgewählt ist. Nur überschreiben, wenn Prognose-Entitäten manuell ohne Gerät konfiguriert werden.",
+      "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
+      "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
+      "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
+      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto verwendet die Home Assistant-Sprache."
+    },
+    "warnings": {
+      "manualEntities": "Das Ändern des Geräts überschreibt manuell konfigurierte Entitäten nicht."
+    },
+    "arrays": {
+      "entity": "Array-Entität",
+      "label": "Label (1 Zeichen)",
+      "placeholder": "O",
+      "hint": "Balken & Popup",
+      "remove": "Entfernen",
+      "add": "Array hinzufügen"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Tägliche Solarenergieprognose mit Unterstützung für stündliche Aufschlüsselung."
+  }
+}
+;
+
 var fr = {
+  "day": {
+    "today": "Auj",
+    "tomorrow": "Dem",
+    "monday_short": "Lun",
+    "tuesday_short": "Mar",
+    "wednesday_short": "Mer",
+    "thursday_short": "Jeu",
+    "friday_short": "Ven",
+    "saturday_short": "Sam",
+    "sunday_short": "Dim"
+  },
   "card": {
     "defaultTitle": "Prévision solaire",
     "labels": {
@@ -254,6 +432,7 @@ var fr = {
       "auto": "Auto",
       "english": "Anglais",
       "french": "Français",
+      "german": "Allemand",
       "dateDdMm": "JJ/MM  (ex. 15/04)",
       "dateMmDd": "MM/JJ  (ex. 04/15)",
       "time24h": "24 h  (ex. 17:00)",
@@ -267,8 +446,8 @@ var fr = {
 }
 ;
 
-const LOCALES = { en, fr };
-const LANGUAGE_OPTIONS = ["en", "fr"];
+const LOCALES = { en, fr, de };
+const LANGUAGE_OPTIONS = ["en", "fr", "de"];
 function normaliseLanguage(value) {
     if (typeof value !== "string" || value.trim() === "")
         return "en";
@@ -473,9 +652,11 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
                             { value: "auto", label: this._t("editor.options.auto") },
                             ...LANGUAGE_OPTIONS.map((lang) => ({
                                 value: lang,
-                                label: lang === "fr"
-                                    ? this._t("editor.options.french")
-                                    : this._t("editor.options.english"),
+                                label: lang === "de"
+                                    ? this._t("editor.options.german")
+                                    : lang === "fr"
+                                        ? this._t("editor.options.french")
+                                        : this._t("editor.options.english"),
                             })),
                         ],
                     },
@@ -1256,7 +1437,15 @@ SolarForecastCardEditor = __decorate([
     t("solar-forecast-card-editor")
 ], SolarForecastCardEditor);
 
-const DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+const DAY_KEYS = [
+    "sunday_short",
+    "monday_short",
+    "tuesday_short",
+    "wednesday_short",
+    "thursday_short",
+    "friday_short",
+    "saturday_short",
+];
 const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 let SolarForecastCard = class SolarForecastCard extends i {
@@ -1923,7 +2112,18 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     // ── Formatting ────────────────────────────────────────────────────────────
     _dayLabel(date, isToday) {
-        return isToday ? this._t("card.days.today") : this._t(`card.days.${DAY_KEYS[date.getDay()]}`);
+        if (isToday)
+            return this._t("day.today");
+        if (this._isTomorrow(date))
+            return this._t("day.tomorrow");
+        return this._t(`day.${DAY_KEYS[date.getDay()]}`);
+    }
+    _isTomorrow(date) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        return date.getFullYear() === tomorrow.getFullYear()
+            && date.getMonth() === tomorrow.getMonth()
+            && date.getDate() === tomorrow.getDate();
     }
     _dateLabel(date) {
         const d = String(date.getDate()).padStart(2, "0");

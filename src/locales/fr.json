@@ -1,4 +1,15 @@
 {
+  "day": {
+    "today": "Auj",
+    "tomorrow": "Dem",
+    "monday_short": "Lun",
+    "tuesday_short": "Mar",
+    "wednesday_short": "Mer",
+    "thursday_short": "Jeu",
+    "friday_short": "Ven",
+    "saturday_short": "Sam",
+    "sunday_short": "Dim"
+  },
   "card": {
     "defaultTitle": "Prévision solaire",
     "labels": {
@@ -37,6 +48,7 @@
       "auto": "Auto",
       "english": "Anglais",
       "french": "Français",
+      "german": "Allemand",
       "dateDdMm": "JJ/MM  (ex. 15/04)",
       "dateMmDd": "MM/JJ  (ex. 04/15)",
       "time24h": "24 h  (ex. 17:00)",

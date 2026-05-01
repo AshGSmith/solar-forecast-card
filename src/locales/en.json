@@ -1,4 +1,15 @@
 {
+  "day": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "monday_short": "Mon",
+    "tuesday_short": "Tue",
+    "wednesday_short": "Wed",
+    "thursday_short": "Thu",
+    "friday_short": "Fri",
+    "saturday_short": "Sat",
+    "sunday_short": "Sun"
+  },
   "card": {
     "defaultTitle": "Solar Forecast",
     "placeholder": "No forecast entities configured.",
@@ -92,6 +103,7 @@
       "auto": "Auto",
       "english": "English",
       "french": "French",
+      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",

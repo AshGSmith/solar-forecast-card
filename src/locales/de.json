@@ -1,0 +1,153 @@
+{
+  "day": {
+    "today": "Heu",
+    "tomorrow": "Mor",
+    "monday_short": "Mo",
+    "tuesday_short": "Di",
+    "wednesday_short": "Mi",
+    "thursday_short": "Do",
+    "friday_short": "Fr",
+    "saturday_short": "Sa",
+    "sunday_short": "So"
+  },
+  "card": {
+    "defaultTitle": "Solarprognose",
+    "placeholder": "Keine Prognose-Entitäten konfiguriert.",
+    "placeholderAction": "Öffne den Karteneditor, um zu beginnen.",
+    "twoDayNote": "2-Tage-Prognose verfügbar",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EINSPEISEVERGÜTUNG:",
+      "nextHour": "+1 STD:",
+      "left": "REST:",
+      "week": "WOCHE:",
+      "avg": "Ø:",
+      "total": "Gesamt",
+      "p10": "P10",
+      "forecast": "Prognose",
+      "generated": "erzeugt"
+    },
+    "days": {
+      "sun": "So",
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa",
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "day3": "Tag 3",
+      "day4": "Tag 4",
+      "day5": "Tag 5",
+      "day6": "Tag 6",
+      "day7": "Tag 7"
+    },
+    "popup": {
+      "close": "Schließen",
+      "noForecastData": "Keine Prognosedaten",
+      "noHourlyData": "Keine stündlichen Daten für diesen Tag verfügbar.",
+      "integrationNoHourlyData": "Die ausgewählten Prognose-Entitäten stellen keine stündlichen Prognosedaten bereit.",
+      "chart": {
+        "time": "Zeit",
+        "power": "Leistung",
+        "kwh": "kWh",
+        "forecastShort": "Prog.",
+        "actualShort": "Ist"
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Ungültige Konfiguration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/Tag"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Titel (optional)",
+      "icon": "Header-Symbol (optional, z. B. mdi:solar-power)",
+      "show_header": "Header anzeigen",
+      "display_estimate10": "Estimate10-Prognosewerte anzeigen",
+      "device_id": "Prognosegerät",
+      "integration_type": "Integrationstyp",
+      "forecast_entity_0": "Tag 1 - Heute",
+      "forecast_entity_1": "Tag 2 - Morgen",
+      "forecast_entity_2": "Tag 3",
+      "forecast_entity_3": "Tag 4",
+      "forecast_entity_4": "Tag 5",
+      "forecast_entity_5": "Tag 6",
+      "forecast_entity_6": "Tag 7",
+      "export_rate_entity": "Aktuelle Einspeisevergütung-Entität",
+      "live_power_entity": "Live-Leistung (optional, kW-Sensor)",
+      "today_actual_entity": "Heutige tatsächliche Erzeugung (optional)",
+      "next_hour_entity": "+1 STD Prognose (optional, überschreibt automatisch abgeleiteten Wert)",
+      "remaining_today_entity": "REST / verbleibend heute (optional, überschreibt automatisch abgeleiteten Wert)",
+      "date_format": "Datumsformat",
+      "time_format": "Zeitformat (stündliches Popup)",
+      "show_hourly_as_main": "Stündliche Prognose als Hauptkarte anzeigen",
+      "language_override": "Sprachüberschreibung",
+      "inverter_max_kw": "Max. Wechselrichterleistung (kW)",
+      "solar_max_kwp": "Größe der Solaranlage (kWp)",
+      "low_threshold": "Niedriger Schwellenwert (kWh)",
+      "high_threshold": "Hoher Schwellenwert (kWh)",
+      "desktop_text_scale": "Desktop-Textskalierung"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "Englisch",
+      "french": "Französisch",
+      "german": "Deutsch",
+      "autoDetect": "Automatisch erkennen",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "TT/MM  (z. B. 15/04)",
+      "dateMmDd": "MM/TT  (z. B. 04/15)",
+      "time24h": "24 h  (z. B. 17:00)",
+      "time12h": "12 h  (z. B. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integrationstyp",
+      "dailyForecastEntities": "Tägliche Prognose-Entitäten",
+      "liveData": "Live-Daten",
+      "actualGenerationArrays": "Tatsächliche Erzeugungs-Arrays",
+      "systemParameters": "Systemparameter",
+      "energyProvider": "Energieanbieter",
+      "colourThresholds": "Farbschwellenwerte",
+      "dateTimeDisplay": "Datum/Zeit & Anzeige"
+    },
+    "helpers": {
+      "device": "Empfohlen: Die Auswahl eines Geräts konfiguriert die Karte automatisch",
+      "estimate10": "Estimate10 anzeigen gilt nur für den Integrationstyp Solcast",
+      "integrationType": "Wird automatisch gesetzt, wenn oben ein Prognosegerät ausgewählt ist. Nur überschreiben, wenn Prognose-Entitäten manuell ohne Gerät konfiguriert werden.",
+      "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
+      "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
+      "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
+      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto verwendet die Home Assistant-Sprache."
+    },
+    "warnings": {
+      "manualEntities": "Das Ändern des Geräts überschreibt manuell konfigurierte Entitäten nicht."
+    },
+    "arrays": {
+      "entity": "Array-Entität",
+      "label": "Label (1 Zeichen)",
+      "placeholder": "O",
+      "hint": "Balken & Popup",
+      "remove": "Entfernen",
+      "add": "Array hinzufügen"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Tägliche Solarenergieprognose mit Unterstützung für stündliche Aufschlüsselung."
+  }
+}

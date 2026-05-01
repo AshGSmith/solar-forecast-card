@@ -1,12 +1,13 @@
 import en from "./locales/en.json";
+import de from "./locales/de.json";
 import fr from "./locales/fr.json";
 import type { HomeAssistant, SolarForecastCardConfig } from "./types.js";
 
-export type LocaleKey = "en" | "fr";
+export type LocaleKey = "en" | "fr" | "de";
 type LocaleTree = Record<string, unknown>;
 
-const LOCALES: Record<LocaleKey, LocaleTree> = { en, fr };
-export const LANGUAGE_OPTIONS: LocaleKey[] = ["en", "fr"];
+const LOCALES: Record<LocaleKey, LocaleTree> = { en, fr, de };
+export const LANGUAGE_OPTIONS: LocaleKey[] = ["en", "fr", "de"];
 
 function normaliseLanguage(value: unknown): LocaleKey {
   if (typeof value !== "string" || value.trim() === "") return "en";

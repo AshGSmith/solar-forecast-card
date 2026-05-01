@@ -30,7 +30,7 @@ export interface SolarForecastCardConfig {
   /** When true, today's hourly forecast chart replaces the daily bar grid on the main card. */
   show_hourly_as_main: boolean;
   /** TEMP TESTING ONLY - remove before release. Overrides Home Assistant language detection. */
-  language_override?: "auto" | "en" | "fr";
+  language_override?: "auto" | "en" | "fr" | "de";
   inverter_max_kw?: number;
   solar_max_kwp?: number;
   low_threshold?: number;

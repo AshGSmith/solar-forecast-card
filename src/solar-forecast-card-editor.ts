@@ -261,9 +261,11 @@ export class SolarForecastCardEditor extends LitElement {
               { value: "auto", label: this._t("editor.options.auto") },
               ...LANGUAGE_OPTIONS.map((lang) => ({
                 value: lang,
-                label: lang === "fr"
-                  ? this._t("editor.options.french")
-                  : this._t("editor.options.english"),
+                label: lang === "de"
+                  ? this._t("editor.options.german")
+                  : lang === "fr"
+                    ? this._t("editor.options.french")
+                    : this._t("editor.options.english"),
               })),
             ],
           },

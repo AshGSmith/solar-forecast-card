@@ -7,7 +7,15 @@ import { localize, resolveLanguage } from "./localize.js";
 // Side-effect import: registers <solar-forecast-card-editor>
 import "./solar-forecast-card-editor.js";
 
-const DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"] as const;
+const DAY_KEYS = [
+  "sunday_short",
+  "monday_short",
+  "tuesday_short",
+  "wednesday_short",
+  "thursday_short",
+  "friday_short",
+  "saturday_short",
+] as const;
 const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 
@@ -773,7 +781,17 @@ export class SolarForecastCard extends LitElement {
   // ── Formatting ────────────────────────────────────────────────────────────
 
   private _dayLabel(date: Date, isToday: boolean): string {
-    return isToday ? this._t("card.days.today") : this._t(`card.days.${DAY_KEYS[date.getDay()]}`);
+    if (isToday) return this._t("day.today");
+    if (this._isTomorrow(date)) return this._t("day.tomorrow");
+    return this._t(`day.${DAY_KEYS[date.getDay()]}`);
+  }
+
+  private _isTomorrow(date: Date): boolean {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return date.getFullYear() === tomorrow.getFullYear()
+      && date.getMonth() === tomorrow.getMonth()
+      && date.getDate() === tomorrow.getDate();
   }
 
   private _dateLabel(date: Date): string {
