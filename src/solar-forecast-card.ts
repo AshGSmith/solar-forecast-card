@@ -81,7 +81,6 @@ export class SolarForecastCard extends LitElement {
   public static getStubConfig(): Partial<SolarForecastCardConfig> {
     return {
       forecast_entities: ["", "", "", "", "", "", ""],
-      date_format: "DD/MM",
       show_header: true,
     };
   }
@@ -132,7 +131,7 @@ export class SolarForecastCard extends LitElement {
       return this.hass.language.replace("_", "-");
     }
 
-    return this._config?.date_format === "MM/DD" ? "en-US" : "en-GB";
+    return "en-GB";
   }
 
   override connectedCallback(): void {
@@ -824,7 +823,7 @@ export class SolarForecastCard extends LitElement {
     } catch {
       const d = String(date.getDate()).padStart(2, "0");
       const m = String(date.getMonth() + 1).padStart(2, "0");
-      return this._config!.date_format === "MM/DD" ? `${m}/${d}` : `${d}/${m}`;
+      return `${d}/${m}`;
     }
   }
 
@@ -835,12 +834,26 @@ export class SolarForecastCard extends LitElement {
   }
 
   private _hourLabel(hour: number): string {
-    if (this._config?.time_format === "12h") {
-      const period = hour < 12 ? "am" : "pm";
-      const h = hour % 12 || 12;   // 0 → 12, 13 → 1, etc.
-      return `${h}${period}`;
+    const date = new Date(2000, 0, 1, hour, 0, 0, 0);
+    const hour12 = this._localeHour12();
+    try {
+      return new Intl.DateTimeFormat(this._dateLocaleCode(), {
+        hour: "numeric",
+        minute: "2-digit",
+        ...(hour12 === undefined ? {} : { hour12 }),
+      }).format(date);
+    } catch {
+      return String(hour).padStart(2, "0") + ":00";
     }
-    return String(hour).padStart(2, "0") + ":00";
+  }
+
+  private _localeHour12(): boolean | undefined {
+    const timeFormat = this.hass?.locale?.time_format;
+    if (typeof timeFormat !== "string") return undefined;
+    const normalized = timeFormat.toLowerCase().replace(/[-_\s]/g, "");
+    if (normalized === "12" || normalized === "12h" || normalized === "ampm") return true;
+    if (normalized === "24" || normalized === "24h" || normalized === "twentyfour") return false;
+    return undefined;
   }
 
   private _formatNumber(value: number, minimumFractionDigits: number, maximumFractionDigits = minimumFractionDigits): string {

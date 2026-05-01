@@ -122,7 +122,7 @@
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",

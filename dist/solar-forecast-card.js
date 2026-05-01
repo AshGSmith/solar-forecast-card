@@ -196,7 +196,7 @@ var af = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -351,7 +351,7 @@ var ar = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -506,7 +506,7 @@ var bg = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -661,7 +661,7 @@ var bn = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -816,7 +816,7 @@ var bs = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -971,7 +971,7 @@ var ca = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -1126,7 +1126,7 @@ var cs = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -1281,7 +1281,7 @@ var cy = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -1436,7 +1436,7 @@ var da = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -1591,7 +1591,7 @@ var de = {
       "systemParameters": "Systemparameter",
       "energyProvider": "Energieanbieter",
       "colourThresholds": "Farbschwellenwerte",
-      "dateTimeDisplay": "Datum/Zeit & Anzeige"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Empfohlen: Die Auswahl eines Geräts konfiguriert die Karte automatisch",
@@ -1746,7 +1746,7 @@ var el = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -1901,7 +1901,7 @@ var en = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2056,7 +2056,7 @@ var en_GB = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2211,7 +2211,7 @@ var eo = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2366,7 +2366,7 @@ var es = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2521,7 +2521,7 @@ var es_419 = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2676,7 +2676,7 @@ var et = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2831,7 +2831,7 @@ var eu = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -2986,7 +2986,7 @@ var fa = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -3141,7 +3141,7 @@ var fi = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -3296,7 +3296,7 @@ var fy = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -3451,7 +3451,7 @@ var fr = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -3606,7 +3606,7 @@ var ga = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -3761,7 +3761,7 @@ var gl = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -3916,7 +3916,7 @@ var gsw = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -4071,7 +4071,7 @@ var he = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -4226,7 +4226,7 @@ var hi = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -4381,7 +4381,7 @@ var hr = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -4536,7 +4536,7 @@ var hu = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -4691,7 +4691,7 @@ var hy = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -4846,7 +4846,7 @@ var id = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5001,7 +5001,7 @@ var it = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5156,7 +5156,7 @@ var is = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5311,7 +5311,7 @@ var ja = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5466,7 +5466,7 @@ var ka = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5621,7 +5621,7 @@ var ko = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5776,7 +5776,7 @@ var lb = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -5931,7 +5931,7 @@ var lt = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -6086,7 +6086,7 @@ var lv = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -6241,7 +6241,7 @@ var mk = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -6396,7 +6396,7 @@ var ml = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -6551,7 +6551,7 @@ var nl = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -6706,7 +6706,7 @@ var nb = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -6861,7 +6861,7 @@ var nn = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7016,7 +7016,7 @@ var pl = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7171,7 +7171,7 @@ var pt = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7326,7 +7326,7 @@ var pt_BR = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7481,7 +7481,7 @@ var ro = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7636,7 +7636,7 @@ var ru = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7791,7 +7791,7 @@ var sk = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -7946,7 +7946,7 @@ var sl = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -8101,7 +8101,7 @@ var sr = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -8256,7 +8256,7 @@ var sr_Latn = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -8411,7 +8411,7 @@ var sv = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -8566,7 +8566,7 @@ var sq = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -8721,7 +8721,7 @@ var ta = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -8876,7 +8876,7 @@ var te = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9031,7 +9031,7 @@ var th = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9186,7 +9186,7 @@ var tr = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9341,7 +9341,7 @@ var uk = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9496,7 +9496,7 @@ var ur = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9651,7 +9651,7 @@ var vi = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9806,7 +9806,7 @@ var zh_Hans = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -9961,7 +9961,7 @@ var zh_Hant = {
       "systemParameters": "System Parameters",
       "energyProvider": "Energy Provider",
       "colourThresholds": "Colour Thresholds",
-      "dateTimeDisplay": "Date/Time & Display"
+      "dateTimeDisplay": "Display"
     },
     "helpers": {
       "device": "Recommended: selecting a device will auto-configure the card",
@@ -10238,8 +10238,8 @@ function normalizeConfig(raw) {
         actual_arrays: Array.isArray(raw.actual_arrays)
             ? raw.actual_arrays.filter((e) => typeof e === "object" && e !== null && typeof e.entity === "string")
             : undefined,
-        date_format: raw.date_format ?? "DD/MM",
-        time_format: raw.time_format ?? "24h",
+        date_format: raw.date_format,
+        time_format: raw.time_format,
         show_hourly_as_main: raw.show_hourly_as_main ?? false,
         language_override: raw.language_override ?? "auto",
         inverter_max_kw: raw.inverter_max_kw,
@@ -10302,28 +10302,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
     }
     _displaySchema() {
         return [
-            {
-                name: "date_format",
-                selector: {
-                    select: {
-                        options: [
-                            { value: "DD/MM", label: this._t("editor.options.dateDdMm") },
-                            { value: "MM/DD", label: this._t("editor.options.dateMmDd") },
-                        ],
-                    },
-                },
-            },
-            {
-                name: "time_format",
-                selector: {
-                    select: {
-                        options: [
-                            { value: "24h", label: this._t("editor.options.time24h") },
-                            { value: "12h", label: this._t("editor.options.time12h") },
-                        ],
-                    },
-                },
-            },
             ...SCHEMA_DISPLAY_BASE,
             {
                 // TEMP TESTING ONLY - remove before release.
@@ -10356,8 +10334,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             today_actual_entity: cfg.today_actual_entity ?? "",
             next_hour_entity: cfg.next_hour_entity ?? "",
             remaining_today_entity: cfg.remaining_today_entity ?? "",
-            date_format: cfg.date_format ?? "DD/MM",
-            time_format: cfg.time_format ?? "24h",
             show_hourly_as_main: cfg.show_hourly_as_main ?? false,
             language_override: cfg.language_override ?? "auto",
             inverter_max_kw: cfg.inverter_max_kw,
@@ -10398,8 +10374,8 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             next_hour_entity: data.next_hour_entity || undefined,
             remaining_today_entity: data.remaining_today_entity || undefined,
             actual_arrays: this._config?.actual_arrays,
-            date_format: data.date_format || "DD/MM",
-            time_format: data.time_format || "24h",
+            date_format: this._config?.date_format,
+            time_format: this._config?.time_format,
             show_hourly_as_main: data.show_hourly_as_main,
             // TEMP TESTING ONLY - remove before release.
             language_override: data.language_override || "auto",
@@ -11158,7 +11134,6 @@ let SolarForecastCard = class SolarForecastCard extends i {
     static getStubConfig() {
         return {
             forecast_entities: ["", "", "", "", "", "", ""],
-            date_format: "DD/MM",
             show_header: true,
         };
     }
@@ -11199,7 +11174,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         if (typeof this.hass?.language === "string" && this.hass.language.trim() !== "") {
             return this.hass.language.replace("_", "-");
         }
-        return this._config?.date_format === "MM/DD" ? "en-US" : "en-GB";
+        return "en-GB";
     }
     connectedCallback() {
         super.connectedCallback();
@@ -11828,7 +11803,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         catch {
             const d = String(date.getDate()).padStart(2, "0");
             const m = String(date.getMonth() + 1).padStart(2, "0");
-            return this._config.date_format === "MM/DD" ? `${m}/${d}` : `${d}/${m}`;
+            return `${d}/${m}`;
         }
     }
     _fullDateLabel(date, isToday) {
@@ -11837,12 +11812,29 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return `${weekday} · ${dt}`;
     }
     _hourLabel(hour) {
-        if (this._config?.time_format === "12h") {
-            const period = hour < 12 ? "am" : "pm";
-            const h = hour % 12 || 12; // 0 → 12, 13 → 1, etc.
-            return `${h}${period}`;
+        const date = new Date(2000, 0, 1, hour, 0, 0, 0);
+        const hour12 = this._localeHour12();
+        try {
+            return new Intl.DateTimeFormat(this._dateLocaleCode(), {
+                hour: "numeric",
+                minute: "2-digit",
+                ...(hour12 === undefined ? {} : { hour12 }),
+            }).format(date);
         }
-        return String(hour).padStart(2, "0") + ":00";
+        catch {
+            return String(hour).padStart(2, "0") + ":00";
+        }
+    }
+    _localeHour12() {
+        const timeFormat = this.hass?.locale?.time_format;
+        if (typeof timeFormat !== "string")
+            return undefined;
+        const normalized = timeFormat.toLowerCase().replace(/[-_\s]/g, "");
+        if (normalized === "12" || normalized === "12h" || normalized === "ampm")
+            return true;
+        if (normalized === "24" || normalized === "24h" || normalized === "twentyfour")
+            return false;
+        return undefined;
     }
     _formatNumber(value, minimumFractionDigits, maximumFractionDigits = minimumFractionDigits) {
         return new Intl.NumberFormat(this._localeCode(), {

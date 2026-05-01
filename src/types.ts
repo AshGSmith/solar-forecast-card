@@ -27,8 +27,10 @@ export interface SolarForecastCardConfig {
   remaining_today_entity?: string;
   /** Optional per-array actual-generation sensors. When set, renders stacked bar segments on today's column. */
   actual_arrays?: ActualArrayEntry[];
-  date_format: "DD/MM" | "MM/DD";
-  time_format: "24h" | "12h";
+  /** Legacy config key. Date labels now use Home Assistant locale formatting. */
+  date_format?: "DD/MM" | "MM/DD";
+  /** Legacy config key. Time labels now use Home Assistant locale formatting. */
+  time_format?: "24h" | "12h";
   /** When true, today's hourly forecast chart replaces the daily bar grid on the main card. */
   show_hourly_as_main: boolean;
   /** TEMP TESTING ONLY - remove before release. Overrides Home Assistant language detection. */

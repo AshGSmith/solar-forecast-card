@@ -114,8 +114,6 @@ interface FormData {
   next_hour_entity: string;
   remaining_today_entity: string;
   integration_type: string;
-  date_format: string;
-  time_format: string;
   show_hourly_as_main: boolean;
   language_override: string;
   inverter_max_kw: number | undefined;
@@ -155,8 +153,8 @@ export function normalizeConfig(
             typeof e === "object" && e !== null && typeof e.entity === "string"
         )
       : undefined,
-    date_format:          raw.date_format ?? "DD/MM",
-    time_format:          raw.time_format ?? "24h",
+    date_format:          raw.date_format,
+    time_format:          raw.time_format,
     show_hourly_as_main:  raw.show_hourly_as_main ?? false,
     language_override:    raw.language_override ?? "auto",
     inverter_max_kw:      raw.inverter_max_kw,
@@ -229,28 +227,6 @@ export class SolarForecastCardEditor extends LitElement {
 
   private _displaySchema(): HaFormSchema[] {
     return [
-      {
-        name: "date_format",
-        selector: {
-          select: {
-            options: [
-              { value: "DD/MM", label: this._t("editor.options.dateDdMm") },
-              { value: "MM/DD", label: this._t("editor.options.dateMmDd") },
-            ],
-          },
-        },
-      },
-      {
-        name: "time_format",
-        selector: {
-          select: {
-            options: [
-              { value: "24h", label: this._t("editor.options.time24h") },
-              { value: "12h", label: this._t("editor.options.time12h") },
-            ],
-          },
-        },
-      },
       ...SCHEMA_DISPLAY_BASE,
       {
         // TEMP TESTING ONLY - remove before release.
@@ -285,8 +261,6 @@ export class SolarForecastCardEditor extends LitElement {
       today_actual_entity:    cfg.today_actual_entity    ?? "",
       next_hour_entity:       cfg.next_hour_entity       ?? "",
       remaining_today_entity: cfg.remaining_today_entity ?? "",
-      date_format:         cfg.date_format         ?? "DD/MM",
-      time_format:         cfg.time_format         ?? "24h",
       show_hourly_as_main: cfg.show_hourly_as_main ?? false,
       language_override:   cfg.language_override   ?? "auto",
       inverter_max_kw:     cfg.inverter_max_kw,
@@ -328,8 +302,8 @@ export class SolarForecastCardEditor extends LitElement {
       next_hour_entity:       data.next_hour_entity       || undefined,
       remaining_today_entity: data.remaining_today_entity || undefined,
       actual_arrays:          this._config?.actual_arrays,
-      date_format: (data.date_format as "DD/MM" | "MM/DD") || "DD/MM",
-      time_format: (data.time_format as "24h" | "12h") || "24h",
+      date_format:            this._config?.date_format,
+      time_format:            this._config?.time_format,
       show_hourly_as_main: data.show_hourly_as_main,
       // TEMP TESTING ONLY - remove before release.
       language_override: (data.language_override as SolarForecastCardConfig["language_override"]) || "auto",
