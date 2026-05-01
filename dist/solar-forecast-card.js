@@ -12714,11 +12714,24 @@ let SolarForecastCard = class SolarForecastCard extends i {
          The amber values match the forecast bar / today column palette so the
          highlight feels at home in both light and dark HA themes. */
       .chart-row.current-hour {
+        position: relative;
+        border-radius: 4px;
+      }
+
+      .chart-row.current-hour::before {
+        content: "";
+        position: absolute;
+        inset: -2px -2px;
+        pointer-events: none;
+        border-radius: 4px;
         background: rgba(251, 191, 36, 0.07);
         box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.50);
-        border-radius: 4px;
-        box-sizing: border-box;
-        padding-inline: 2px 8px;
+        z-index: 0;
+      }
+
+      .chart-row.current-hour > * {
+        position: relative;
+        z-index: 1;
       }
 
       /* Amber time label so the current hour is easy to find at a glance */

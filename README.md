@@ -10,6 +10,9 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Changelog
 
+### v1.4.0-beta.08
+- **Current-hour highlight alignment:** Made the hourly popup current-hour highlight visual-only so row padding and right-side value alignment remain consistent with non-highlighted rows.
+
 ### v1.4.0-beta.07
 - **Translated header labels:** Added translated main-card header/default-title text across the expanded locale set, including live, export rate, next-hour, remaining, week, average, total, forecast, and generated labels.
 
