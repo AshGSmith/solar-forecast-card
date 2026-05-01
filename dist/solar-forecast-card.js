@@ -85,21 +85,21 @@ var af = {
     "saturday_short": "Sa"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sonvoorspelling",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
+      "live": "REGSTREEKS:",
+      "exportRate": "UITVOERTARIEF:",
+      "nextHour": "+1 U:",
+      "left": "OOR:",
       "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "avg": "GEM:",
+      "total": "Totaal",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "voorspelling",
+      "generated": "opgewek"
     },
     "days": {
       "sun": "Sun",
@@ -240,21 +240,21 @@ var ar = {
     "saturday_short": "السبت"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "توقع الطاقة الشمسية",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "مباشر:",
+      "exportRate": "تعرفة التصدير:",
+      "nextHour": "+1 س:",
+      "left": "المتبقي:",
+      "week": "الأسبوع:",
+      "avg": "متوسط:",
+      "total": "الإجمالي",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "توقع",
+      "generated": "مُولّد"
     },
     "days": {
       "sun": "Sun",
@@ -395,21 +395,21 @@ var bg = {
     "saturday_short": "сб"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Слънчева прогноза",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "НА ЖИВО:",
+      "exportRate": "ТАРИФА ИЗНОС:",
+      "nextHour": "+1 Ч:",
+      "left": "ОСТАВА:",
+      "week": "СЕДМИЦА:",
+      "avg": "СРЕДНО:",
+      "total": "Общо",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "прогноза",
+      "generated": "произведено"
     },
     "days": {
       "sun": "Sun",
@@ -550,21 +550,21 @@ var bn = {
     "saturday_short": "শনি"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "সৌর পূর্বাভাস",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "লাইভ:",
+      "exportRate": "রপ্তানি হার:",
+      "nextHour": "+1 ঘ:",
+      "left": "বাকি:",
+      "week": "সপ্তাহ:",
+      "avg": "গড়:",
+      "total": "মোট",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "পূর্বাভাস",
+      "generated": "উৎপন্ন"
     },
     "days": {
       "sun": "Sun",
@@ -705,21 +705,21 @@ var bs = {
     "saturday_short": "sub"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solarna prognoza",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "UŽIVO:",
+      "exportRate": "TARIFA IZVOZA:",
+      "nextHour": "+1 H:",
+      "left": "OSTALO:",
+      "week": "SEDMICA:",
+      "avg": "PROSJEK:",
+      "total": "Ukupno",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoza",
+      "generated": "proizvedeno"
     },
     "days": {
       "sun": "Sun",
@@ -860,21 +860,21 @@ var ca = {
     "saturday_short": "ds"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Previsió solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "EN DIRECTE:",
+      "exportRate": "TARIFA EXPORT:",
+      "nextHour": "+1 H:",
+      "left": "RESTANT:",
+      "week": "SETMANA:",
+      "avg": "MITJANA:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsió",
+      "generated": "generat"
     },
     "days": {
       "sun": "Sun",
@@ -1015,21 +1015,21 @@ var cs = {
     "saturday_short": "so"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solární předpověď",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ŽIVĚ:",
+      "exportRate": "VÝKUPNÍ TARIF:",
+      "nextHour": "+1 H:",
+      "left": "ZBÝVÁ:",
+      "week": "TÝDEN:",
+      "avg": "PRŮM.:",
+      "total": "Celkem",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "předpověď",
+      "generated": "vyrobeno"
     },
     "days": {
       "sun": "Sun",
@@ -1170,21 +1170,21 @@ var cy = {
     "saturday_short": "Sad"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Rhagolwg solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "BYW:",
+      "exportRate": "CYFRADD ALLFORIO:",
+      "nextHour": "+1 A:",
+      "left": "AR ÔL:",
+      "week": "WYTHNOS:",
+      "avg": "CYF:",
+      "total": "Cyfanswm",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "rhagolwg",
+      "generated": "cynhyrchwyd"
     },
     "days": {
       "sun": "Sun",
@@ -1325,21 +1325,21 @@ var da = {
     "saturday_short": "lør"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solprognose",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "exportRate": "EKSPORTTARIF:",
+      "nextHour": "+1 T:",
+      "left": "TILBAGE:",
+      "week": "UGE:",
+      "avg": "GENNEM.:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognose",
+      "generated": "produceret"
     },
     "days": {
       "sun": "Sun",
@@ -1635,21 +1635,21 @@ var el = {
     "saturday_short": "Σάβ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Ηλιακή πρόγνωση",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ΖΩΝΤΑΝΑ:",
+      "exportRate": "ΤΙΜΗ ΕΞΑΓΩΓΗΣ:",
+      "nextHour": "+1 Ω:",
+      "left": "ΥΠΟΛ.:",
+      "week": "ΕΒΔΟΜΑΔΑ:",
+      "avg": "Μ.Ο.:",
+      "total": "Σύνολο",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "πρόγνωση",
+      "generated": "παράχθηκε"
     },
     "days": {
       "sun": "Sun",
@@ -2100,21 +2100,21 @@ var eo = {
     "saturday_short": "sa"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Suna prognozo",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "VIVE:",
+      "exportRate": "EKSPORTA TARIFO:",
+      "nextHour": "+1 H:",
+      "left": "RESTAS:",
+      "week": "SEMAJNO:",
+      "avg": "MEZ.:",
+      "total": "Entute",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognozo",
+      "generated": "produktita"
     },
     "days": {
       "sun": "Sun",
@@ -2255,21 +2255,21 @@ var es = {
     "saturday_short": "sáb"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Pronóstico solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "EN VIVO:",
+      "exportRate": "TARIFA EXPORT.:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SEMANA:",
+      "avg": "PROM.:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsión",
+      "generated": "generado"
     },
     "days": {
       "sun": "Sun",
@@ -2410,21 +2410,21 @@ var es_419 = {
     "saturday_short": "sáb"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Pronóstico solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "EN VIVO:",
+      "exportRate": "TARIFA EXPORT.:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SEMANA:",
+      "avg": "PROM.:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "pronóstico",
+      "generated": "generado"
     },
     "days": {
       "sun": "Sun",
@@ -2565,21 +2565,21 @@ var et = {
     "saturday_short": "L"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Päikeseprognoos",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "OTSE:",
+      "exportRate": "MÜÜGITARIIF:",
+      "nextHour": "+1 H:",
+      "left": "JÄÄNUD:",
+      "week": "NÄDAL:",
+      "avg": "KESKM.:",
+      "total": "Kokku",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoos",
+      "generated": "toodetud"
     },
     "days": {
       "sun": "Sun",
@@ -2720,21 +2720,21 @@ var eu = {
     "saturday_short": "lr"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Eguzki iragarpena",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ZUZENEAN:",
+      "exportRate": "ESPORTAZIO TARIFA:",
+      "nextHour": "+1 H:",
+      "left": "GERATZEN:",
+      "week": "ASTEA:",
+      "avg": "BB:",
+      "total": "Guztira",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "iragarpena",
+      "generated": "sortua"
     },
     "days": {
       "sun": "Sun",
@@ -2875,21 +2875,21 @@ var fa = {
     "saturday_short": "شنبه"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "پیش‌بینی خورشیدی",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "زنده:",
+      "exportRate": "نرخ فروش:",
+      "nextHour": "+1 س:",
+      "left": "باقی‌مانده:",
+      "week": "هفته:",
+      "avg": "میانگین:",
+      "total": "مجموع",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "پیش‌بینی",
+      "generated": "تولیدشده"
     },
     "days": {
       "sun": "Sun",
@@ -3030,21 +3030,21 @@ var fi = {
     "saturday_short": "la"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Aurinkoennuste",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "MYYNTIHINTA:",
+      "nextHour": "+1 H:",
+      "left": "JÄLJELLÄ:",
+      "week": "VIIKKO:",
+      "avg": "KA:",
+      "total": "Yhteensä",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "ennuste",
+      "generated": "tuotettu"
     },
     "days": {
       "sun": "Sun",
@@ -3185,21 +3185,21 @@ var fy = {
     "saturday_short": "so"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sinnefoarsizzing",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "EKSPORTTARYF:",
+      "nextHour": "+1 O:",
+      "left": "OER:",
+      "week": "WIKE:",
+      "avg": "GEM.:",
+      "total": "Totaal",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "foarsizzing",
+      "generated": "opwekt"
     },
     "days": {
       "sun": "Sun",
@@ -3495,21 +3495,21 @@ var ga = {
     "saturday_short": "Sath"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Réamhaisnéis ghréine",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "BEO:",
+      "exportRate": "RÁTA EASPÓRT.:",
+      "nextHour": "+1 U:",
+      "left": "FÁGTHA:",
+      "week": "SEACHTAIN:",
+      "avg": "MEÁN:",
+      "total": "Iomlán",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "réamhaisnéis",
+      "generated": "giniúna"
     },
     "days": {
       "sun": "Sun",
@@ -3650,21 +3650,21 @@ var gl = {
     "saturday_short": "sáb"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Previsión solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "EN DIRECTO:",
+      "exportRate": "TARIFA EXPORT.:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SEMANA:",
+      "avg": "MEDIA:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsión",
+      "generated": "xerado"
     },
     "days": {
       "sun": "Sun",
@@ -3805,21 +3805,21 @@ var gsw = {
     "saturday_short": "Sa"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solarprognose",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "exportRate": "IISPIISIG:",
+      "nextHour": "+1 STD:",
+      "left": "REST:",
+      "week": "WUCHE:",
+      "avg": "Ø:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "Prognose",
+      "generated": "erzügt"
     },
     "days": {
       "sun": "Sun",
@@ -3960,21 +3960,21 @@ var he = {
     "saturday_short": "שבת"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "תחזית סולארית",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "חי:",
+      "exportRate": "תעריף ייצוא:",
+      "nextHour": "+1 ש:",
+      "left": "נותר:",
+      "week": "שבוע:",
+      "avg": "ממוצע:",
+      "total": "סה״כ",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "תחזית",
+      "generated": "יוצר"
     },
     "days": {
       "sun": "Sun",
@@ -4115,21 +4115,21 @@ var hi = {
     "saturday_short": "शनि"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "सौर पूर्वानुमान",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "लाइव:",
+      "exportRate": "निर्यात दर:",
+      "nextHour": "+1 घं:",
+      "left": "शेष:",
+      "week": "सप्ताह:",
+      "avg": "औसत:",
+      "total": "कुल",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "पूर्वानुमान",
+      "generated": "उत्पन्न"
     },
     "days": {
       "sun": "Sun",
@@ -4270,21 +4270,21 @@ var hr = {
     "saturday_short": "sub"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solarna prognoza",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "UŽIVO:",
+      "exportRate": "IZVOZNA TARIFA:",
+      "nextHour": "+1 H:",
+      "left": "PREOSTALO:",
+      "week": "TJEDAN:",
+      "avg": "PROSJEK:",
+      "total": "Ukupno",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoza",
+      "generated": "proizvedeno"
     },
     "days": {
       "sun": "Sun",
@@ -4425,21 +4425,21 @@ var hu = {
     "saturday_short": "Szo"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Napelem előrejelzés",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ÉLŐ:",
+      "exportRate": "BETÁPL. TARIFA:",
+      "nextHour": "+1 Ó:",
+      "left": "MARAD:",
+      "week": "HÉT:",
+      "avg": "ÁTL.:",
+      "total": "Összesen",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "előrejelzés",
+      "generated": "termelt"
     },
     "days": {
       "sun": "Sun",
@@ -4580,21 +4580,21 @@ var hy = {
     "saturday_short": "շբթ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Արևային կանխատեսում",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ՈՒՂԻՂ:",
+      "exportRate": "ԱՐՏԱՀԱՆՄԱՆ ՍԱԿԱԳԻՆ:",
+      "nextHour": "+1 Ժ:",
+      "left": "ՄՆԱՑԵԼ Է:",
+      "week": "ՇԱԲԱԹ:",
+      "avg": "ՄԻՋ.:",
+      "total": "Ընդամենը",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "կանխատեսում",
+      "generated": "արտադրված"
     },
     "days": {
       "sun": "Sun",
@@ -4735,21 +4735,21 @@ var id = {
     "saturday_short": "Sab"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Prakiraan Surya",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "LANGSUNG:",
+      "exportRate": "TARIF EKSPOR:",
+      "nextHour": "+1 JAM:",
+      "left": "SISA:",
+      "week": "MINGGU:",
+      "avg": "RATA2:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prakiraan",
+      "generated": "dihasilkan"
     },
     "days": {
       "sun": "Sun",
@@ -4890,21 +4890,21 @@ var it = {
     "saturday_short": "sab"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Previsione solare",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "TARIFFA EXPORT:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SETTIMANA:",
+      "avg": "MEDIA:",
+      "total": "Totale",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsione",
+      "generated": "prodotto"
     },
     "days": {
       "sun": "Sun",
@@ -5045,21 +5045,21 @@ var is = {
     "saturday_short": "lau"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sólarspá",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "Í BEINNI:",
+      "exportRate": "ÚTFLUTNINGSGJALD:",
+      "nextHour": "+1 KLST:",
+      "left": "EFTIR:",
+      "week": "VIKA:",
+      "avg": "MEÐALT.:",
+      "total": "Samtals",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "spá",
+      "generated": "framleitt"
     },
     "days": {
       "sun": "Sun",
@@ -5200,21 +5200,21 @@ var ja = {
     "saturday_short": "土"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "太陽光予測",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ライブ:",
+      "exportRate": "売電単価:",
+      "nextHour": "+1時間:",
+      "left": "残り:",
+      "week": "週:",
+      "avg": "平均:",
+      "total": "合計",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "予測",
+      "generated": "発電済み"
     },
     "days": {
       "sun": "Sun",
@@ -5355,21 +5355,21 @@ var ka = {
     "saturday_short": "შაბ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "მზის პროგნოზი",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "ექსპორტის ტარიფი:",
+      "nextHour": "+1 სთ:",
+      "left": "დარჩა:",
+      "week": "კვირა:",
+      "avg": "საშ.:",
+      "total": "სულ",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "პროგნოზი",
+      "generated": "გამომუშავდა"
     },
     "days": {
       "sun": "Sun",
@@ -5510,21 +5510,21 @@ var ko = {
     "saturday_short": "토"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "태양광 예보",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "실시간:",
+      "exportRate": "수출 요금:",
+      "nextHour": "+1시간:",
+      "left": "남음:",
+      "week": "주:",
+      "avg": "평균:",
+      "total": "합계",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "예보",
+      "generated": "발전됨"
     },
     "days": {
       "sun": "Sun",
@@ -5665,21 +5665,21 @@ var lb = {
     "saturday_short": "Sam"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solarprognos",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "exportRate": "EXPORTTARIF:",
+      "nextHour": "+1 ST:",
+      "left": "IWWREG:",
+      "week": "WOCH:",
+      "avg": "DUERCH.:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "Prognos",
+      "generated": "produzéiert"
     },
     "days": {
       "sun": "Sun",
@@ -5820,21 +5820,21 @@ var lt = {
     "saturday_short": "št"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Saulės prognozė",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "GYVAI:",
+      "exportRate": "EKSPORTO TARIFAS:",
+      "nextHour": "+1 VAL:",
+      "left": "LIKO:",
+      "week": "SAVAITĖ:",
+      "avg": "VID.:",
+      "total": "Iš viso",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognozė",
+      "generated": "pagaminta"
     },
     "days": {
       "sun": "Sun",
@@ -5975,21 +5975,21 @@ var lv = {
     "saturday_short": "Sestd"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Saules prognoze",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "TIEŠRAIDĒ:",
+      "exportRate": "EKSPORTA TARIFS:",
+      "nextHour": "+1 H:",
+      "left": "ATLICIS:",
+      "week": "NEDĒĻA:",
+      "avg": "VID.:",
+      "total": "Kopā",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoze",
+      "generated": "saražots"
     },
     "days": {
       "sun": "Sun",
@@ -6130,21 +6130,21 @@ var mk = {
     "saturday_short": "саб"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Соларна прогноза",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ВО ЖИВО:",
+      "exportRate": "ИЗВОЗНА ТАРИФА:",
+      "nextHour": "+1 Ч:",
+      "left": "ОСТАНАТО:",
+      "week": "НЕДЕЛА:",
+      "avg": "ПРОСЕК:",
+      "total": "Вкупно",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "прогноза",
+      "generated": "произведено"
     },
     "days": {
       "sun": "Sun",
@@ -6285,21 +6285,21 @@ var ml = {
     "saturday_short": "ശനി"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "സൗര പ്രവചനം",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ലൈവ്:",
+      "exportRate": "കയറ്റുമതി നിരക്ക്:",
+      "nextHour": "+1 മ:",
+      "left": "ബാക്കി:",
+      "week": "ആഴ്ച:",
+      "avg": "ശരാശരി:",
+      "total": "ആകെ",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "പ്രവചനം",
+      "generated": "ഉൽപ്പാദിപ്പിച്ചത്"
     },
     "days": {
       "sun": "Sun",
@@ -6440,21 +6440,21 @@ var nl = {
     "saturday_short": "za"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Zonneprognose",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
+      "exportRate": "TERUGLEVERTARIEF:",
+      "nextHour": "+1 U:",
+      "left": "REST:",
       "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "avg": "GEM.:",
+      "total": "Totaal",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognose",
+      "generated": "opgewekt"
     },
     "days": {
       "sun": "Sun",
@@ -6595,21 +6595,21 @@ var nb = {
     "saturday_short": "lør"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solprognose",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "EKSPORTTARIFF:",
+      "nextHour": "+1 T:",
+      "left": "IGJEN:",
+      "week": "UKE:",
+      "avg": "SNITT:",
+      "total": "Totalt",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognose",
+      "generated": "produsert"
     },
     "days": {
       "sun": "Sun",
@@ -6750,21 +6750,21 @@ var nn = {
     "saturday_short": "lau"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solprognose",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "EKSPORTTARIFF:",
+      "nextHour": "+1 T:",
+      "left": "IGJEN:",
+      "week": "VEKE:",
+      "avg": "SNITT:",
+      "total": "Totalt",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognose",
+      "generated": "produsert"
     },
     "days": {
       "sun": "Sun",
@@ -6905,21 +6905,21 @@ var pl = {
     "saturday_short": "sob"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Prognoza solarna",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "NA ŻYWO:",
+      "exportRate": "STAWKA EKSPORTU:",
+      "nextHour": "+1 H:",
+      "left": "POZOSTAŁO:",
+      "week": "TYDZIEŃ:",
+      "avg": "ŚR.:",
+      "total": "Razem",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoza",
+      "generated": "wygenerowano"
     },
     "days": {
       "sun": "Sun",
@@ -7060,21 +7060,21 @@ var pt = {
     "saturday_short": "sáb"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Previsão solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "AO VIVO:",
+      "exportRate": "TARIFA EXPORT.:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SEMANA:",
+      "avg": "MÉDIA:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsão",
+      "generated": "gerado"
     },
     "days": {
       "sun": "Sun",
@@ -7215,21 +7215,21 @@ var pt_BR = {
     "saturday_short": "sáb"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Previsão solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "AO VIVO:",
+      "exportRate": "TARIFA EXPORT.:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SEMANA:",
+      "avg": "MÉDIA:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsão",
+      "generated": "gerado"
     },
     "days": {
       "sun": "Sun",
@@ -7370,21 +7370,21 @@ var ro = {
     "saturday_short": "sâm"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Prognoză solară",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "exportRate": "TARIF EXPORT:",
+      "nextHour": "+1 H:",
+      "left": "RĂMAS:",
+      "week": "SĂPT.:",
+      "avg": "MEDIE:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoză",
+      "generated": "generat"
     },
     "days": {
       "sun": "Sun",
@@ -7525,21 +7525,21 @@ var ru = {
     "saturday_short": "сб"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Солнечный прогноз",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "СЕЙЧАС:",
+      "exportRate": "ТАРИФ ЭКСПОРТА:",
+      "nextHour": "+1 Ч:",
+      "left": "ОСТАЛОСЬ:",
+      "week": "НЕДЕЛЯ:",
+      "avg": "СРЕД.:",
+      "total": "Итого",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "прогноз",
+      "generated": "выработано"
     },
     "days": {
       "sun": "Sun",
@@ -7680,21 +7680,21 @@ var sk = {
     "saturday_short": "so"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solárna predpoveď",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "NAŽIVO:",
+      "exportRate": "VÝKUPNÝ TARIF:",
+      "nextHour": "+1 H:",
+      "left": "ZOSTÁVA:",
+      "week": "TÝŽDEŇ:",
+      "avg": "PRIEM.:",
+      "total": "Celkom",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "predpoveď",
+      "generated": "vyrobené"
     },
     "days": {
       "sun": "Sun",
@@ -7835,21 +7835,21 @@ var sl = {
     "saturday_short": "sob"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sončna napoved",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "V ŽIVO:",
+      "exportRate": "IZVOZNA TARIFA:",
+      "nextHour": "+1 H:",
+      "left": "OSTALO:",
+      "week": "TEDEN:",
+      "avg": "POVP.:",
+      "total": "Skupaj",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "napoved",
+      "generated": "proizvedeno"
     },
     "days": {
       "sun": "Sun",
@@ -7990,21 +7990,21 @@ var sr = {
     "saturday_short": "суб"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Соларна прогноза",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "УЖИВО:",
+      "exportRate": "ИЗВОЗНА ТАРИФА:",
+      "nextHour": "+1 Ч:",
+      "left": "ПРЕОСТАЛО:",
+      "week": "НЕДЕЉА:",
+      "avg": "ПРОСЕК:",
+      "total": "Укупно",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "прогноза",
+      "generated": "произведено"
     },
     "days": {
       "sun": "Sun",
@@ -8145,21 +8145,21 @@ var sr_Latn = {
     "saturday_short": "sub"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solarna prognoza",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "UŽIVO:",
+      "exportRate": "IZVOZNA TARIFA:",
+      "nextHour": "+1 H:",
+      "left": "PREOSTALO:",
+      "week": "NEDELJA:",
+      "avg": "PROSEK:",
+      "total": "Ukupno",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoza",
+      "generated": "proizvedeno"
     },
     "days": {
       "sun": "Sun",
@@ -8300,21 +8300,21 @@ var sv = {
     "saturday_short": "lör"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solprognos",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "EXPORTTARIFF:",
+      "nextHour": "+1 H:",
+      "left": "KVAR:",
+      "week": "VECKA:",
+      "avg": "SNITT:",
+      "total": "Totalt",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognos",
+      "generated": "producerat"
     },
     "days": {
       "sun": "Sun",
@@ -8455,21 +8455,21 @@ var sq = {
     "saturday_short": "sht"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Parashikimi diellor",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "TARIFA EKSPORTI:",
+      "nextHour": "+1 O:",
+      "left": "MBETUR:",
+      "week": "JAVË:",
+      "avg": "MES.:",
+      "total": "Totali",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "parashikim",
+      "generated": "prodhuar"
     },
     "days": {
       "sun": "Sun",
@@ -8610,21 +8610,21 @@ var ta = {
     "saturday_short": "சனி"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "சூரிய முன்னறிவிப்பு",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "நேரலை:",
+      "exportRate": "ஏற்றுமதி விகிதம்:",
+      "nextHour": "+1 ம:",
+      "left": "மீதம்:",
+      "week": "வாரம்:",
+      "avg": "சராசரி:",
+      "total": "மொத்தம்",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "முன்னறிவிப்பு",
+      "generated": "உற்பத்தி"
     },
     "days": {
       "sun": "Sun",
@@ -8765,21 +8765,21 @@ var te = {
     "saturday_short": "శని"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "సౌర అంచనా",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "లైవ్:",
+      "exportRate": "ఎగుమతి రేటు:",
+      "nextHour": "+1 గం:",
+      "left": "మిగిలింది:",
+      "week": "వారం:",
+      "avg": "సగటు:",
+      "total": "మొత్తం",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "అంచనా",
+      "generated": "ఉత్పత్తి"
     },
     "days": {
       "sun": "Sun",
@@ -8920,21 +8920,21 @@ var th = {
     "saturday_short": "ส"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "พยากรณ์พลังงานแสงอาทิตย์",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "สด:",
+      "exportRate": "อัตราส่งออก:",
+      "nextHour": "+1 ชม.:",
+      "left": "เหลือ:",
+      "week": "สัปดาห์:",
+      "avg": "เฉลี่ย:",
+      "total": "รวม",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "พยากรณ์",
+      "generated": "ผลิตแล้ว"
     },
     "days": {
       "sun": "Sun",
@@ -9075,21 +9075,21 @@ var tr = {
     "saturday_short": "Cmt"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Güneş tahmini",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "CANLI:",
+      "exportRate": "İHRACAT TARİFESİ:",
+      "nextHour": "+1 SA:",
+      "left": "KALAN:",
+      "week": "HAFTA:",
+      "avg": "ORT.:",
+      "total": "Toplam",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "tahmin",
+      "generated": "üretildi"
     },
     "days": {
       "sun": "Sun",
@@ -9230,21 +9230,21 @@ var uk = {
     "saturday_short": "сб"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Сонячний прогноз",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "НАЖИВО:",
+      "exportRate": "ТАРИФ ЕКСПОРТУ:",
+      "nextHour": "+1 Г:",
+      "left": "ЗАЛИШОК:",
+      "week": "ТИЖДЕНЬ:",
+      "avg": "СЕР.:",
+      "total": "Разом",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "прогноз",
+      "generated": "вироблено"
     },
     "days": {
       "sun": "Sun",
@@ -9385,21 +9385,21 @@ var ur = {
     "saturday_short": "ہفتہ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "شمسی پیش گوئی",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "لائیو:",
+      "exportRate": "برآمدی شرح:",
+      "nextHour": "+1 گھنٹہ:",
+      "left": "باقی:",
+      "week": "ہفتہ:",
+      "avg": "اوسط:",
+      "total": "کل",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "پیش گوئی",
+      "generated": "پیدا شدہ"
     },
     "days": {
       "sun": "Sun",
@@ -9540,21 +9540,21 @@ var vi = {
     "saturday_short": "Th 7"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Dự báo năng lượng mặt trời",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "TRỰC TIẾP:",
+      "exportRate": "GIÁ BÁN ĐIỆN:",
+      "nextHour": "+1 GIỜ:",
+      "left": "CÒN LẠI:",
+      "week": "TUẦN:",
+      "avg": "TB:",
+      "total": "Tổng",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "dự báo",
+      "generated": "đã tạo"
     },
     "days": {
       "sun": "Sun",
@@ -9695,21 +9695,21 @@ var zh_Hans = {
     "saturday_short": "周六"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "太阳能预测",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "实时:",
+      "exportRate": "上网电价:",
+      "nextHour": "+1小时:",
+      "left": "剩余:",
+      "week": "本周:",
+      "avg": "平均:",
+      "total": "总计",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "预测",
+      "generated": "已发电"
     },
     "days": {
       "sun": "Sun",
@@ -9850,21 +9850,21 @@ var zh_Hant = {
     "saturday_short": "週六"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "太陽能預測",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "即時:",
+      "exportRate": "躉售電價:",
+      "nextHour": "+1小時:",
+      "left": "剩餘:",
+      "week": "本週:",
+      "avg": "平均:",
+      "total": "總計",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "預測",
+      "generated": "已發電"
     },
     "days": {
       "sun": "Sun",

@@ -11,21 +11,21 @@
     "saturday_short": "শনি"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "সৌর পূর্বাভাস",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "লাইভ:",
+      "exportRate": "রপ্তানি হার:",
+      "nextHour": "+1 ঘ:",
+      "left": "বাকি:",
+      "week": "সপ্তাহ:",
+      "avg": "গড়:",
+      "total": "মোট",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "পূর্বাভাস",
+      "generated": "উৎপন্ন"
     },
     "days": {
       "sun": "Sun",

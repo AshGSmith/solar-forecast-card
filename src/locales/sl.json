@@ -11,21 +11,21 @@
     "saturday_short": "sob"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sončna napoved",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "V ŽIVO:",
+      "exportRate": "IZVOZNA TARIFA:",
+      "nextHour": "+1 H:",
+      "left": "OSTALO:",
+      "week": "TEDEN:",
+      "avg": "POVP.:",
+      "total": "Skupaj",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "napoved",
+      "generated": "proizvedeno"
     },
     "days": {
       "sun": "Sun",

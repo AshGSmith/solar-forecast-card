@@ -11,21 +11,21 @@
     "saturday_short": "토"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "태양광 예보",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "실시간:",
+      "exportRate": "수출 요금:",
+      "nextHour": "+1시간:",
+      "left": "남음:",
+      "week": "주:",
+      "avg": "평균:",
+      "total": "합계",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "예보",
+      "generated": "발전됨"
     },
     "days": {
       "sun": "Sun",

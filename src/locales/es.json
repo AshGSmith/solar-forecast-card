@@ -11,21 +11,21 @@
     "saturday_short": "sáb"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Pronóstico solar",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "live": "EN VIVO:",
+      "exportRate": "TARIFA EXPORT.:",
+      "nextHour": "+1 H:",
+      "left": "RESTANTE:",
+      "week": "SEMANA:",
+      "avg": "PROM.:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "previsión",
+      "generated": "generado"
     },
     "days": {
       "sun": "Sun",

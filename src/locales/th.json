@@ -11,21 +11,21 @@
     "saturday_short": "ส"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "พยากรณ์พลังงานแสงอาทิตย์",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "สด:",
+      "exportRate": "อัตราส่งออก:",
+      "nextHour": "+1 ชม.:",
+      "left": "เหลือ:",
+      "week": "สัปดาห์:",
+      "avg": "เฉลี่ย:",
+      "total": "รวม",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "พยากรณ์",
+      "generated": "ผลิตแล้ว"
     },
     "days": {
       "sun": "Sun",

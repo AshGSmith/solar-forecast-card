@@ -11,21 +11,21 @@
     "saturday_short": "сб"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Солнечный прогноз",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "СЕЙЧАС:",
+      "exportRate": "ТАРИФ ЭКСПОРТА:",
+      "nextHour": "+1 Ч:",
+      "left": "ОСТАЛОСЬ:",
+      "week": "НЕДЕЛЯ:",
+      "avg": "СРЕД.:",
+      "total": "Итого",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "прогноз",
+      "generated": "выработано"
     },
     "days": {
       "sun": "Sun",

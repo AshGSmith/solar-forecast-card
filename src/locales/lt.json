@@ -11,21 +11,21 @@
     "saturday_short": "št"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Saulės prognozė",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "GYVAI:",
+      "exportRate": "EKSPORTO TARIFAS:",
+      "nextHour": "+1 VAL:",
+      "left": "LIKO:",
+      "week": "SAVAITĖ:",
+      "avg": "VID.:",
+      "total": "Iš viso",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognozė",
+      "generated": "pagaminta"
     },
     "days": {
       "sun": "Sun",

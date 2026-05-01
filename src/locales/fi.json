@@ -11,21 +11,21 @@
     "saturday_short": "la"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Aurinkoennuste",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "MYYNTIHINTA:",
+      "nextHour": "+1 H:",
+      "left": "JÄLJELLÄ:",
+      "week": "VIIKKO:",
+      "avg": "KA:",
+      "total": "Yhteensä",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "ennuste",
+      "generated": "tuotettu"
     },
     "days": {
       "sun": "Sun",

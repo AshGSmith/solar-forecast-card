@@ -11,21 +11,21 @@
     "saturday_short": "Th 7"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Dự báo năng lượng mặt trời",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "TRỰC TIẾP:",
+      "exportRate": "GIÁ BÁN ĐIỆN:",
+      "nextHour": "+1 GIỜ:",
+      "left": "CÒN LẠI:",
+      "week": "TUẦN:",
+      "avg": "TB:",
+      "total": "Tổng",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "dự báo",
+      "generated": "đã tạo"
     },
     "days": {
       "sun": "Sun",

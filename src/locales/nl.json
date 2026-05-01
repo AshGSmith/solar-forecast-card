@@ -11,21 +11,21 @@
     "saturday_short": "za"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Zonneprognose",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
+      "exportRate": "TERUGLEVERTARIEF:",
+      "nextHour": "+1 U:",
+      "left": "REST:",
       "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "avg": "GEM.:",
+      "total": "Totaal",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognose",
+      "generated": "opgewekt"
     },
     "days": {
       "sun": "Sun",

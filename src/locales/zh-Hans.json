@@ -11,21 +11,21 @@
     "saturday_short": "周六"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "太阳能预测",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "实时:",
+      "exportRate": "上网电价:",
+      "nextHour": "+1小时:",
+      "left": "剩余:",
+      "week": "本周:",
+      "avg": "平均:",
+      "total": "总计",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "预测",
+      "generated": "已发电"
     },
     "days": {
       "sun": "Sun",

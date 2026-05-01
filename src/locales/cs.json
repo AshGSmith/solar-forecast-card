@@ -11,21 +11,21 @@
     "saturday_short": "so"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solární předpověď",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ŽIVĚ:",
+      "exportRate": "VÝKUPNÍ TARIF:",
+      "nextHour": "+1 H:",
+      "left": "ZBÝVÁ:",
+      "week": "TÝDEN:",
+      "avg": "PRŮM.:",
+      "total": "Celkem",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "předpověď",
+      "generated": "vyrobeno"
     },
     "days": {
       "sun": "Sun",

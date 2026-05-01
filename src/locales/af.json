@@ -11,21 +11,21 @@
     "saturday_short": "Sa"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sonvoorspelling",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
+      "live": "REGSTREEKS:",
+      "exportRate": "UITVOERTARIEF:",
+      "nextHour": "+1 U:",
+      "left": "OOR:",
       "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "avg": "GEM:",
+      "total": "Totaal",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "voorspelling",
+      "generated": "opgewek"
     },
     "days": {
       "sun": "Sun",

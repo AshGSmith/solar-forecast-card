@@ -11,21 +11,21 @@
     "saturday_short": "შაბ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "მზის პროგნოზი",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "ექსპორტის ტარიფი:",
+      "nextHour": "+1 სთ:",
+      "left": "დარჩა:",
+      "week": "კვირა:",
+      "avg": "საშ.:",
+      "total": "სულ",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "პროგნოზი",
+      "generated": "გამომუშავდა"
     },
     "days": {
       "sun": "Sun",

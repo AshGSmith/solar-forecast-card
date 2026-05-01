@@ -11,21 +11,21 @@
     "saturday_short": "so"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sinnefoarsizzing",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "EKSPORTTARYF:",
+      "nextHour": "+1 O:",
+      "left": "OER:",
+      "week": "WIKE:",
+      "avg": "GEM.:",
+      "total": "Totaal",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "foarsizzing",
+      "generated": "opwekt"
     },
     "days": {
       "sun": "Sun",

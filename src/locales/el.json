@@ -11,21 +11,21 @@
     "saturday_short": "Σάβ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Ηλιακή πρόγνωση",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ΖΩΝΤΑΝΑ:",
+      "exportRate": "ΤΙΜΗ ΕΞΑΓΩΓΗΣ:",
+      "nextHour": "+1 Ω:",
+      "left": "ΥΠΟΛ.:",
+      "week": "ΕΒΔΟΜΑΔΑ:",
+      "avg": "Μ.Ο.:",
+      "total": "Σύνολο",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "πρόγνωση",
+      "generated": "παράχθηκε"
     },
     "days": {
       "sun": "Sun",

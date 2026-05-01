@@ -11,21 +11,21 @@
     "saturday_short": "Szo"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Napelem előrejelzés",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ÉLŐ:",
+      "exportRate": "BETÁPL. TARIFA:",
+      "nextHour": "+1 Ó:",
+      "left": "MARAD:",
+      "week": "HÉT:",
+      "avg": "ÁTL.:",
+      "total": "Összesen",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "előrejelzés",
+      "generated": "termelt"
     },
     "days": {
       "sun": "Sun",

@@ -11,21 +11,21 @@
     "saturday_short": "ہفتہ"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "شمسی پیش گوئی",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "لائیو:",
+      "exportRate": "برآمدی شرح:",
+      "nextHour": "+1 گھنٹہ:",
+      "left": "باقی:",
+      "week": "ہفتہ:",
+      "avg": "اوسط:",
+      "total": "کل",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "پیش گوئی",
+      "generated": "پیدا شدہ"
     },
     "days": {
       "sun": "Sun",

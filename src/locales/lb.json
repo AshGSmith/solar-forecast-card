@@ -11,21 +11,21 @@
     "saturday_short": "Sam"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Solarprognos",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "exportRate": "EXPORTTARIF:",
+      "nextHour": "+1 ST:",
+      "left": "IWWREG:",
+      "week": "WOCH:",
+      "avg": "DUERCH.:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "Prognos",
+      "generated": "produzéiert"
     },
     "days": {
       "sun": "Sun",

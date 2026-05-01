@@ -11,21 +11,21 @@
     "saturday_short": "sâm"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Prognoză solară",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
+      "exportRate": "TARIF EXPORT:",
+      "nextHour": "+1 H:",
+      "left": "RĂMAS:",
+      "week": "SĂPT.:",
+      "avg": "MEDIE:",
       "total": "Total",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "prognoză",
+      "generated": "generat"
     },
     "days": {
       "sun": "Sun",

@@ -11,21 +11,21 @@
     "saturday_short": "lau"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Sólarspá",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "Í BEINNI:",
+      "exportRate": "ÚTFLUTNINGSGJALD:",
+      "nextHour": "+1 KLST:",
+      "left": "EFTIR:",
+      "week": "VIKA:",
+      "avg": "MEÐALT.:",
+      "total": "Samtals",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "spá",
+      "generated": "framleitt"
     },
     "days": {
       "sun": "Sun",

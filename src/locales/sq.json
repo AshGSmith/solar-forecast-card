@@ -11,21 +11,21 @@
     "saturday_short": "sht"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "Parashikimi diellor",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "exportRate": "TARIFA EKSPORTI:",
+      "nextHour": "+1 O:",
+      "left": "MBETUR:",
+      "week": "JAVË:",
+      "avg": "MES.:",
+      "total": "Totali",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "parashikim",
+      "generated": "prodhuar"
     },
     "days": {
       "sun": "Sun",

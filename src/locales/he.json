@@ -11,21 +11,21 @@
     "saturday_short": "שבת"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "תחזית סולארית",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "חי:",
+      "exportRate": "תעריף ייצוא:",
+      "nextHour": "+1 ש:",
+      "left": "נותר:",
+      "week": "שבוע:",
+      "avg": "ממוצע:",
+      "total": "סה״כ",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "תחזית",
+      "generated": "יוצר"
     },
     "days": {
       "sun": "Sun",

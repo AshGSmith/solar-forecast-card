@@ -11,21 +11,21 @@
     "saturday_short": "ശനി"
   },
   "card": {
-    "defaultTitle": "Solar Forecast",
+    "defaultTitle": "സൗര പ്രവചനം",
     "placeholder": "No forecast entities configured.",
     "placeholderAction": "Open the card editor to get started.",
     "twoDayNote": "2-day forecast available",
     "labels": {
-      "live": "LIVE:",
-      "exportRate": "EXPORT RATE:",
-      "nextHour": "+1HR:",
-      "left": "LEFT:",
-      "week": "WEEK:",
-      "avg": "AVG:",
-      "total": "Total",
+      "live": "ലൈവ്:",
+      "exportRate": "കയറ്റുമതി നിരക്ക്:",
+      "nextHour": "+1 മ:",
+      "left": "ബാക്കി:",
+      "week": "ആഴ്ച:",
+      "avg": "ശരാശരി:",
+      "total": "ആകെ",
       "p10": "P10",
-      "forecast": "forecast",
-      "generated": "generated"
+      "forecast": "പ്രവചനം",
+      "generated": "ഉൽപ്പാദിപ്പിച്ചത്"
     },
     "days": {
       "sun": "Sun",
