@@ -74,7 +74,7 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
 
 var af = {
   "day": {
-    "today": "Vdg",
+    "today": "Vandag",
     "tomorrow": "Môre",
     "sunday_short": "So",
     "monday_short": "Ma",
@@ -522,7 +522,7 @@ var bg = {
 var bn = {
   "day": {
     "today": "আজ",
-    "tomorrow": "কাল",
+    "tomorrow": "আগামীকাল",
     "sunday_short": "রবি",
     "monday_short": "সোম",
     "tuesday_short": "মঙ্গল",
@@ -1117,8 +1117,8 @@ var cs = {
 
 var cy = {
   "day": {
-    "today": "Hed",
-    "tomorrow": "Yfo",
+    "today": "Heddiw",
+    "tomorrow": "Yfory",
     "sunday_short": "Sul",
     "monday_short": "Llun",
     "tuesday_short": "Maw",
@@ -1267,7 +1267,7 @@ var cy = {
 var da = {
   "day": {
     "today": "I dag",
-    "tomorrow": "I mor",
+    "tomorrow": "I morgen",
     "sunday_short": "søn",
     "monday_short": "man",
     "tuesday_short": "tirs",
@@ -1415,8 +1415,8 @@ var da = {
 
 var de = {
   "day": {
-    "today": "Heu",
-    "tomorrow": "Mor",
+    "today": "Heute",
+    "tomorrow": "Morgen",
     "sunday_short": "So",
     "monday_short": "Mo",
     "tuesday_short": "Di",
@@ -1564,8 +1564,8 @@ var de = {
 
 var el = {
   "day": {
-    "today": "Σήμ",
-    "tomorrow": "Αύρ",
+    "today": "Σήμερα",
+    "tomorrow": "Αύριο",
     "sunday_short": "Κυρ",
     "monday_short": "Δευ",
     "tuesday_short": "Τρί",
@@ -2011,8 +2011,8 @@ var en_GB = {
 
 var eo = {
   "day": {
-    "today": "Hod",
-    "tomorrow": "Mor",
+    "today": "Hodiaŭ",
+    "tomorrow": "Morgaŭ",
     "sunday_short": "di",
     "monday_short": "lu",
     "tuesday_short": "ma",
@@ -2161,7 +2161,7 @@ var eo = {
 var es = {
   "day": {
     "today": "Hoy",
-    "tomorrow": "Mañ",
+    "tomorrow": "Mañana",
     "sunday_short": "dom",
     "monday_short": "lun",
     "tuesday_short": "mar",
@@ -2310,7 +2310,7 @@ var es = {
 var es_419 = {
   "day": {
     "today": "Hoy",
-    "tomorrow": "Mañ",
+    "tomorrow": "Mañana",
     "sunday_short": "dom",
     "monday_short": "lun",
     "tuesday_short": "mar",
@@ -2459,7 +2459,7 @@ var es_419 = {
 var et = {
   "day": {
     "today": "Täna",
-    "tomorrow": "Hom",
+    "tomorrow": "Homme",
     "sunday_short": "P",
     "monday_short": "E",
     "tuesday_short": "T",
@@ -2608,7 +2608,7 @@ var et = {
 var eu = {
   "day": {
     "today": "Gaur",
-    "tomorrow": "Bih",
+    "tomorrow": "Bihar",
     "sunday_short": "ig",
     "monday_short": "al",
     "tuesday_short": "ar",
@@ -2905,8 +2905,8 @@ var fa = {
 
 var fi = {
   "day": {
-    "today": "Tän",
-    "tomorrow": "Huo",
+    "today": "Tänään",
+    "tomorrow": "Huomenna",
     "sunday_short": "su",
     "monday_short": "ma",
     "tuesday_short": "ti",
@@ -3054,8 +3054,8 @@ var fi = {
 
 var fy = {
   "day": {
-    "today": "Hjo",
-    "tomorrow": "Moa",
+    "today": "Hjoed",
+    "tomorrow": "Moarn",
     "sunday_short": "si",
     "monday_short": "mo",
     "tuesday_short": "ti",
@@ -3203,8 +3203,8 @@ var fy = {
 
 var fr = {
   "day": {
-    "today": "Auj",
-    "tomorrow": "Dem",
+    "today": "Aujourd’hui",
+    "tomorrow": "Demain",
     "sunday_short": "dim",
     "monday_short": "lun",
     "tuesday_short": "mar",
@@ -3353,7 +3353,7 @@ var fr = {
 var ga = {
   "day": {
     "today": "Inniu",
-    "tomorrow": "Amár",
+    "tomorrow": "Amárach",
     "sunday_short": "Domh",
     "monday_short": "Luan",
     "tuesday_short": "Máirt",
@@ -3502,7 +3502,7 @@ var ga = {
 var gl = {
   "day": {
     "today": "Hoxe",
-    "tomorrow": "Mañ",
+    "tomorrow": "Mañá",
     "sunday_short": "dom",
     "monday_short": "luns",
     "tuesday_short": "mar",
@@ -3651,7 +3651,7 @@ var gl = {
 var gsw = {
   "day": {
     "today": "Hüt",
-    "tomorrow": "Mor",
+    "tomorrow": "Morn",
     "sunday_short": "Su",
     "monday_short": "Mä",
     "tuesday_short": "Zi",
@@ -4097,8 +4097,8 @@ var hi = {
 
 var hr = {
   "day": {
-    "today": "Dan",
-    "tomorrow": "Sut",
+    "today": "Danas",
+    "tomorrow": "Sutra",
     "sunday_short": "ned",
     "monday_short": "pon",
     "tuesday_short": "uto",
@@ -4247,7 +4247,7 @@ var hr = {
 var hu = {
   "day": {
     "today": "Ma",
-    "tomorrow": "Hol",
+    "tomorrow": "Holnap",
     "sunday_short": "V",
     "monday_short": "H",
     "tuesday_short": "K",
@@ -4395,8 +4395,8 @@ var hu = {
 
 var hy = {
   "day": {
-    "today": "Այս",
-    "tomorrow": "Վաղ",
+    "today": "Այսօր",
+    "tomorrow": "Վաղը",
     "sunday_short": "կիր",
     "monday_short": "երկ",
     "tuesday_short": "երք",
@@ -4544,8 +4544,8 @@ var hy = {
 
 var id = {
   "day": {
-    "today": "Ini",
-    "tomorrow": "Bsk",
+    "today": "Hari ini",
+    "tomorrow": "Besok",
     "sunday_short": "Min",
     "monday_short": "Sen",
     "tuesday_short": "Sel",
@@ -4694,7 +4694,7 @@ var id = {
 var it = {
   "day": {
     "today": "Oggi",
-    "tomorrow": "Dom",
+    "tomorrow": "Domani",
     "sunday_short": "dom",
     "monday_short": "lun",
     "tuesday_short": "mar",
@@ -4842,8 +4842,8 @@ var it = {
 
 var is = {
   "day": {
-    "today": "Í d",
-    "tomorrow": "Á m",
+    "today": "Í dag",
+    "tomorrow": "Á morgun",
     "sunday_short": "sun",
     "monday_short": "mán",
     "tuesday_short": "þri",
@@ -5438,8 +5438,8 @@ var ko = {
 
 var lb = {
   "day": {
-    "today": "Hau",
-    "tomorrow": "Mue",
+    "today": "Haut",
+    "tomorrow": "Muer",
     "sunday_short": "Son",
     "monday_short": "Méi",
     "tuesday_short": "Dën",
@@ -5587,8 +5587,8 @@ var lb = {
 
 var lt = {
   "day": {
-    "today": "Šia",
-    "tomorrow": "Ryt",
+    "today": "Šiandien",
+    "tomorrow": "Rytoj",
     "sunday_short": "sk",
     "monday_short": "pr",
     "tuesday_short": "an",
@@ -5736,7 +5736,7 @@ var lt = {
 
 var lv = {
   "day": {
-    "today": "Šod",
+    "today": "Šodien",
     "tomorrow": "Rīt",
     "sunday_short": "Svētd",
     "monday_short": "Pirmd",
@@ -5885,7 +5885,7 @@ var lv = {
 
 var mk = {
   "day": {
-    "today": "Ден",
+    "today": "Денес",
     "tomorrow": "Утре",
     "sunday_short": "нед",
     "monday_short": "пон",
@@ -6183,8 +6183,8 @@ var ml = {
 
 var nl = {
   "day": {
-    "today": "Van",
-    "tomorrow": "Mor",
+    "today": "Vandaag",
+    "tomorrow": "Morgen",
     "sunday_short": "zo",
     "monday_short": "ma",
     "tuesday_short": "di",
@@ -6332,8 +6332,8 @@ var nl = {
 
 var nb = {
   "day": {
-    "today": "I d",
-    "tomorrow": "I m",
+    "today": "I dag",
+    "tomorrow": "I morgen",
     "sunday_short": "søn",
     "monday_short": "man",
     "tuesday_short": "tir",
@@ -6481,8 +6481,8 @@ var nb = {
 
 var nn = {
   "day": {
-    "today": "I d",
-    "tomorrow": "I m",
+    "today": "I dag",
+    "tomorrow": "I morgon",
     "sunday_short": "søn",
     "monday_short": "mån",
     "tuesday_short": "tys",
@@ -6630,8 +6630,8 @@ var nn = {
 
 var pl = {
   "day": {
-    "today": "Dzi",
-    "tomorrow": "Jut",
+    "today": "Dzisiaj",
+    "tomorrow": "Jutro",
     "sunday_short": "niedz",
     "monday_short": "pon",
     "tuesday_short": "wt",
@@ -6779,8 +6779,8 @@ var pl = {
 
 var pt = {
   "day": {
-    "today": "Hoj",
-    "tomorrow": "Aman",
+    "today": "Hoje",
+    "tomorrow": "Amanhã",
     "sunday_short": "dom",
     "monday_short": "seg",
     "tuesday_short": "ter",
@@ -6928,8 +6928,8 @@ var pt = {
 
 var pt_BR = {
   "day": {
-    "today": "Hoj",
-    "tomorrow": "Aman",
+    "today": "Hoje",
+    "tomorrow": "Amanhã",
     "sunday_short": "dom",
     "monday_short": "seg",
     "tuesday_short": "ter",
@@ -7078,7 +7078,7 @@ var pt_BR = {
 var ro = {
   "day": {
     "today": "Azi",
-    "tomorrow": "Mâi",
+    "tomorrow": "Mâine",
     "sunday_short": "dum",
     "monday_short": "lun",
     "tuesday_short": "mar",
@@ -7226,8 +7226,8 @@ var ro = {
 
 var ru = {
   "day": {
-    "today": "Сег",
-    "tomorrow": "Зав",
+    "today": "Сегодня",
+    "tomorrow": "Завтра",
     "sunday_short": "вс",
     "monday_short": "пн",
     "tuesday_short": "вт",
@@ -7376,7 +7376,7 @@ var ru = {
 var sk = {
   "day": {
     "today": "Dnes",
-    "tomorrow": "Zaj",
+    "tomorrow": "Zajtra",
     "sunday_short": "ne",
     "monday_short": "po",
     "tuesday_short": "ut",
@@ -7524,8 +7524,8 @@ var sk = {
 
 var sl = {
   "day": {
-    "today": "Dan",
-    "tomorrow": "Jut",
+    "today": "Danes",
+    "tomorrow": "Jutri",
     "sunday_short": "ned",
     "monday_short": "pon",
     "tuesday_short": "tor",
@@ -7673,8 +7673,8 @@ var sl = {
 
 var sr = {
   "day": {
-    "today": "Дан",
-    "tomorrow": "Сут",
+    "today": "Данас",
+    "tomorrow": "Сутра",
     "sunday_short": "нед",
     "monday_short": "пон",
     "tuesday_short": "уто",
@@ -7822,8 +7822,8 @@ var sr = {
 
 var sr_Latn = {
   "day": {
-    "today": "Dan",
-    "tomorrow": "Sut",
+    "today": "Danas",
+    "tomorrow": "Sutra",
     "sunday_short": "ned",
     "monday_short": "pon",
     "tuesday_short": "uto",
@@ -7972,7 +7972,7 @@ var sr_Latn = {
 var sv = {
   "day": {
     "today": "Idag",
-    "tomorrow": "Imo",
+    "tomorrow": "Imorgon",
     "sunday_short": "sön",
     "monday_short": "mån",
     "tuesday_short": "tis",
@@ -8121,7 +8121,7 @@ var sv = {
 var sq = {
   "day": {
     "today": "Sot",
-    "tomorrow": "Nes",
+    "tomorrow": "Nesër",
     "sunday_short": "die",
     "monday_short": "hën",
     "tuesday_short": "mar",
@@ -8716,8 +8716,8 @@ var th = {
 
 var tr = {
   "day": {
-    "today": "Bug",
-    "tomorrow": "Yar",
+    "today": "Bugün",
+    "tomorrow": "Yarın",
     "sunday_short": "Paz",
     "monday_short": "Pzt",
     "tuesday_short": "Sal",
@@ -8865,8 +8865,8 @@ var tr = {
 
 var uk = {
   "day": {
-    "today": "Сьо",
-    "tomorrow": "Зав",
+    "today": "Сьогодні",
+    "tomorrow": "Завтра",
     "sunday_short": "нд",
     "monday_short": "пн",
     "tuesday_short": "вт",
@@ -9163,8 +9163,8 @@ var ur = {
 
 var vi = {
   "day": {
-    "today": "Nay",
-    "tomorrow": "Mai",
+    "today": "Hôm nay",
+    "tomorrow": "Ngày mai",
     "sunday_short": "CN",
     "monday_short": "Th 2",
     "tuesday_short": "Th 3",
@@ -10783,6 +10783,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
             const s = entityId ? this.hass.states[entityId] : undefined;
             const kwhVal = parseFloat(s?.state ?? "");
             return {
+                dayIndex: i + 1,
                 date,
                 isToday: i === 0,
                 entityId,
@@ -11304,19 +11305,13 @@ let SolarForecastCard = class SolarForecastCard extends i {
         }
     }
     // ── Formatting ────────────────────────────────────────────────────────────
-    _dayLabel(date, isToday) {
-        if (isToday)
+    _dayLabel(row) {
+        if (row.dayIndex === 1)
             return this._t("day.today");
-        if (this._isTomorrow(date))
+        if (row.dayIndex === 2)
             return this._t("day.tomorrow");
+        const { date } = row;
         return this._t(`day.${DAY_KEYS[date.getDay()]}`);
-    }
-    _isTomorrow(date) {
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        return date.getFullYear() === tomorrow.getFullYear()
-            && date.getMonth() === tomorrow.getMonth()
-            && date.getDate() === tomorrow.getDate();
     }
     _dateLabel(date) {
         try {
@@ -11549,6 +11544,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
 
       .col.today:hover {
         background: rgba(251, 191, 36, 0.16);
+      }
+
+      .col.primary-day-label {
+        padding-inline: 2px;
       }
 
       /* ── Value label ─────────────────────────────────────── */
@@ -11863,11 +11862,19 @@ let SolarForecastCard = class SolarForecastCard extends i {
         color: var(--primary-text-color);
         line-height: 1.25;
         white-space: nowrap;
+        text-align: center;
       }
 
       .col.today .day-name {
         font-weight: 700;
         color: var(--warning-color, #f59e0b);
+      }
+
+      .col.primary-day-label .day-name {
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.1;
       }
 
       .day-date {
@@ -12724,10 +12731,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
             : A;
         return b `
       <div
-        class="col ${isToday ? "today" : ""}"
+        class="col ${isToday ? "today" : ""} ${row.dayIndex <= 2 ? "primary-day-label" : ""}"
         role="button"
         tabindex="0"
-        aria-label=${this._t("card.aria.dayButton", { day: this._dayLabel(row.date, isToday), date: this._dateLabel(row.date) })}
+        aria-label=${this._t("card.aria.dayButton", { day: this._dayLabel(row), date: this._dateLabel(row.date) })}
         @click=${() => this._openPopup(row)}
         @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
@@ -12737,7 +12744,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
           ${bars}
         </div>
         <div class="col-label">
-          <span class="day-name">${this._dayLabel(row.date, isToday)}</span>
+          <span class="day-name">${this._dayLabel(row)}</span>
           <span class="day-date">${this._dateLabel(row.date)}</span>
         </div>
       </div>

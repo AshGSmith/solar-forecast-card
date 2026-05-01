@@ -20,6 +20,7 @@ const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
 
 interface ForecastRow {
+  dayIndex: number;
   date: Date;
   isToday: boolean;
   entityId: string;
@@ -225,6 +226,7 @@ export class SolarForecastCard extends LitElement {
       const kwhVal = parseFloat(s?.state ?? "");
 
       return {
+        dayIndex: i + 1,
         date,
         isToday: i === 0,
         entityId,
@@ -796,18 +798,11 @@ export class SolarForecastCard extends LitElement {
 
   // ── Formatting ────────────────────────────────────────────────────────────
 
-  private _dayLabel(date: Date, isToday: boolean): string {
-    if (isToday) return this._t("day.today");
-    if (this._isTomorrow(date)) return this._t("day.tomorrow");
+  private _dayLabel(row: ForecastRow): string {
+    if (row.dayIndex === 1) return this._t("day.today");
+    if (row.dayIndex === 2) return this._t("day.tomorrow");
+    const { date } = row;
     return this._t(`day.${DAY_KEYS[date.getDay()]}`);
-  }
-
-  private _isTomorrow(date: Date): boolean {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return date.getFullYear() === tomorrow.getFullYear()
-      && date.getMonth() === tomorrow.getMonth()
-      && date.getDate() === tomorrow.getDate();
   }
 
   private _dateLabel(date: Date): string {
@@ -1042,6 +1037,10 @@ export class SolarForecastCard extends LitElement {
 
       .col.today:hover {
         background: rgba(251, 191, 36, 0.16);
+      }
+
+      .col.primary-day-label {
+        padding-inline: 2px;
       }
 
       /* ── Value label ─────────────────────────────────────── */
@@ -1356,11 +1355,19 @@ export class SolarForecastCard extends LitElement {
         color: var(--primary-text-color);
         line-height: 1.25;
         white-space: nowrap;
+        text-align: center;
       }
 
       .col.today .day-name {
         font-weight: 700;
         color: var(--warning-color, #f59e0b);
+      }
+
+      .col.primary-day-label .day-name {
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.1;
       }
 
       .day-date {
@@ -2247,10 +2254,10 @@ export class SolarForecastCard extends LitElement {
 
     return html`
       <div
-        class="col ${isToday ? "today" : ""}"
+        class="col ${isToday ? "today" : ""} ${row.dayIndex <= 2 ? "primary-day-label" : ""}"
         role="button"
         tabindex="0"
-        aria-label=${this._t("card.aria.dayButton", { day: this._dayLabel(row.date, isToday), date: this._dateLabel(row.date) })}
+        aria-label=${this._t("card.aria.dayButton", { day: this._dayLabel(row), date: this._dateLabel(row.date) })}
         @click=${() => this._openPopup(row)}
         @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
@@ -2260,7 +2267,7 @@ export class SolarForecastCard extends LitElement {
           ${bars}
         </div>
         <div class="col-label">
-          <span class="day-name">${this._dayLabel(row.date, isToday)}</span>
+          <span class="day-name">${this._dayLabel(row)}</span>
           <span class="day-date">${this._dateLabel(row.date)}</span>
         </div>
       </div>
