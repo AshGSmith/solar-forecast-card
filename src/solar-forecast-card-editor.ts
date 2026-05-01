@@ -6,7 +6,7 @@ import type {
   HomeAssistant,
   EntityRegistryEntry,
 } from "./types.js";
-import { LANGUAGE_OPTIONS, localize, resolveLanguage } from "./localize.js";
+import { LANGUAGE_NAMES, LANGUAGE_OPTIONS, localize, resolveLanguage } from "./localize.js";
 
 // ── ha-form schema (minimal typings — HA provides the element at runtime) ────
 
@@ -261,11 +261,7 @@ export class SolarForecastCardEditor extends LitElement {
               { value: "auto", label: this._t("editor.options.auto") },
               ...LANGUAGE_OPTIONS.map((lang) => ({
                 value: lang,
-                label: lang === "de"
-                  ? this._t("editor.options.german")
-                  : lang === "fr"
-                    ? this._t("editor.options.french")
-                    : this._t("editor.options.english"),
+                label: LANGUAGE_NAMES[lang],
               })),
             ],
           },

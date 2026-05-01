@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "Inniu",
+    "tomorrow": "Amár",
+    "sunday_short": "Domh",
+    "monday_short": "Luan",
+    "tuesday_short": "Máirt",
+    "wednesday_short": "Céad",
+    "thursday_short": "Déar",
+    "friday_short": "Aoine",
+    "saturday_short": "Sath"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

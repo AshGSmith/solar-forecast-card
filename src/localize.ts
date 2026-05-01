@@ -1,18 +1,18 @@
+import { LANGUAGE_OPTIONS, LOCALES, type LocaleKey } from "./locales/index.js";
 import en from "./locales/en.json";
-import de from "./locales/de.json";
-import fr from "./locales/fr.json";
 import type { HomeAssistant, SolarForecastCardConfig } from "./types.js";
 
-export type LocaleKey = "en" | "fr" | "de";
 type LocaleTree = Record<string, unknown>;
 
-const LOCALES: Record<LocaleKey, LocaleTree> = { en, fr, de };
-export const LANGUAGE_OPTIONS: LocaleKey[] = ["en", "fr", "de"];
+export { LANGUAGE_NAMES, LANGUAGE_OPTIONS, type LocaleKey } from "./locales/index.js";
 
 function normaliseLanguage(value: unknown): LocaleKey {
   if (typeof value !== "string" || value.trim() === "") return "en";
-  const base = value.toLowerCase().replace("_", "-").split("-")[0];
-  return base in LOCALES ? (base as LocaleKey) : "en";
+  const requested = value.toLowerCase().replace("_", "-");
+  const exact = LANGUAGE_OPTIONS.find((language) => language.toLowerCase() === requested);
+  if (exact) return exact;
+  const base = requested.split("-")[0];
+  return LANGUAGE_OPTIONS.find((language) => language.toLowerCase() === base) ?? "en";
 }
 
 export function resolveLanguage(

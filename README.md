@@ -10,6 +10,10 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 ## Changelog
 
+### v1.4.0-beta.06
+- **Full Home Assistant locale coverage:** Added locale files for all supported Home Assistant frontend languages, each matching the English fallback key set.
+- **Locale validation:** Added a build-time locale validation script to catch invalid JSON, missing keys, extra keys, or missing locale files before release.
+
 ### v1.4.0-beta.05
 - **Translated short day labels:** Daily forecast graph labels now use explicit locale keys for today, tomorrow, and weekday abbreviations.
 - **German test locale:** Added `de.json` and German to the temporary language override selector.

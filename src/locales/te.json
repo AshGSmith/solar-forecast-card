@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "నేడు",
+    "tomorrow": "రేపు",
+    "sunday_short": "ఆది",
+    "monday_short": "సోమ",
+    "tuesday_short": "మంగళ",
+    "wednesday_short": "బుధ",
+    "thursday_short": "గురు",
+    "friday_short": "శుక్ర",
+    "saturday_short": "శని"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

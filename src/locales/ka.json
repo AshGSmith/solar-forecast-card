@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "დღეს",
+    "tomorrow": "ხვალ",
+    "sunday_short": "კვი",
+    "monday_short": "ორშ",
+    "tuesday_short": "სამ",
+    "wednesday_short": "ოთხ",
+    "thursday_short": "ხუთ",
+    "friday_short": "პარ",
+    "saturday_short": "შაბ"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

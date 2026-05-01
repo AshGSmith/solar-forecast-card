@@ -2,13 +2,13 @@
   "day": {
     "today": "Heu",
     "tomorrow": "Mor",
+    "sunday_short": "So",
     "monday_short": "Mo",
     "tuesday_short": "Di",
     "wednesday_short": "Mi",
     "thursday_short": "Do",
     "friday_short": "Fr",
-    "saturday_short": "Sa",
-    "sunday_short": "So"
+    "saturday_short": "Sa"
   },
   "card": {
     "defaultTitle": "Solarprognose",

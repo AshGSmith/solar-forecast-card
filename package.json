@@ -1,11 +1,13 @@
 {
   "name": "solar-forecast-card",
-  "version": "1.4.0-beta.05",
+  "version": "1.4.0-beta.06",
   "description": "A Home Assistant Lovelace custom card for solar forecast",
   "main": "dist/solar-forecast-card.js",
   "scripts": {
+    "prebuild": "npm run validate:locales",
     "build": "rollup -c rollup.config.mjs",
-    "dev": "rollup -c rollup.config.mjs --watch"
+    "dev": "rollup -c rollup.config.mjs --watch",
+    "validate:locales": "node scripts/validate-locales.cjs"
   },
   "keywords": [
     "home-assistant",

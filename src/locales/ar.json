@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "اليوم",
+    "tomorrow": "غدًا",
+    "sunday_short": "الأحد",
+    "monday_short": "الاثنين",
+    "tuesday_short": "الثلاثاء",
+    "wednesday_short": "الأربعاء",
+    "thursday_short": "الخميس",
+    "friday_short": "الجمعة",
+    "saturday_short": "السبت"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

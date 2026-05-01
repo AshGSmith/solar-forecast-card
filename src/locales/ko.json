@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "오늘",
+    "tomorrow": "내일",
+    "sunday_short": "일",
+    "monday_short": "월",
+    "tuesday_short": "화",
+    "wednesday_short": "수",
+    "thursday_short": "목",
+    "friday_short": "금",
+    "saturday_short": "토"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

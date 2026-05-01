@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "Azi",
+    "tomorrow": "Mâi",
+    "sunday_short": "dum",
+    "monday_short": "lun",
+    "tuesday_short": "mar",
+    "wednesday_short": "mie",
+    "thursday_short": "joi",
+    "friday_short": "vin",
+    "saturday_short": "sâm"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

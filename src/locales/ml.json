@@ -1,14 +1,14 @@
 {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "sunday_short": "Sun",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat"
+    "today": "ഇന്ന്",
+    "tomorrow": "നാളെ",
+    "sunday_short": "ഞായർ",
+    "monday_short": "തിങ്കൾ",
+    "tuesday_short": "ചൊവ്വ",
+    "wednesday_short": "ബുധൻ",
+    "thursday_short": "വ്യാഴം",
+    "friday_short": "വെള്ളി",
+    "saturday_short": "ശനി"
   },
   "card": {
     "defaultTitle": "Solar Forecast",

@@ -72,17 +72,1257 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
  * SPDX-License-Identifier: BSD-3-Clause
  */function r(r){return n({...r,state:true,attribute:false})}
 
-var en = {
+var af = {
   "day": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "monday_short": "Mon",
-    "tuesday_short": "Tue",
-    "wednesday_short": "Wed",
-    "thursday_short": "Thu",
-    "friday_short": "Fri",
-    "saturday_short": "Sat",
-    "sunday_short": "Sun"
+    "today": "Vdg",
+    "tomorrow": "Môre",
+    "sunday_short": "So",
+    "monday_short": "Ma",
+    "tuesday_short": "Di",
+    "wednesday_short": "Wo",
+    "thursday_short": "Do",
+    "friday_short": "Vr",
+    "saturday_short": "Sa"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ar = {
+  "day": {
+    "today": "اليوم",
+    "tomorrow": "غدًا",
+    "sunday_short": "الأحد",
+    "monday_short": "الاثنين",
+    "tuesday_short": "الثلاثاء",
+    "wednesday_short": "الأربعاء",
+    "thursday_short": "الخميس",
+    "friday_short": "الجمعة",
+    "saturday_short": "السبت"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var bg = {
+  "day": {
+    "today": "Днес",
+    "tomorrow": "Утре",
+    "sunday_short": "нд",
+    "monday_short": "пн",
+    "tuesday_short": "вт",
+    "wednesday_short": "ср",
+    "thursday_short": "чт",
+    "friday_short": "пт",
+    "saturday_short": "сб"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var bn = {
+  "day": {
+    "today": "আজ",
+    "tomorrow": "কাল",
+    "sunday_short": "রবি",
+    "monday_short": "সোম",
+    "tuesday_short": "মঙ্গল",
+    "wednesday_short": "বুধ",
+    "thursday_short": "বৃহস্পতি",
+    "friday_short": "শুক্র",
+    "saturday_short": "শনি"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var bs = {
+  "day": {
+    "today": "Danas",
+    "tomorrow": "Sutra",
+    "sunday_short": "ned",
+    "monday_short": "pon",
+    "tuesday_short": "uto",
+    "wednesday_short": "sri",
+    "thursday_short": "čet",
+    "friday_short": "pet",
+    "saturday_short": "sub"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ca = {
+  "day": {
+    "today": "Avui",
+    "tomorrow": "Demà",
+    "sunday_short": "dg",
+    "monday_short": "dl",
+    "tuesday_short": "dt",
+    "wednesday_short": "dc",
+    "thursday_short": "dj",
+    "friday_short": "dv",
+    "saturday_short": "ds"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var cs = {
+  "day": {
+    "today": "Dnes",
+    "tomorrow": "Zítra",
+    "sunday_short": "ne",
+    "monday_short": "po",
+    "tuesday_short": "út",
+    "wednesday_short": "st",
+    "thursday_short": "čt",
+    "friday_short": "pá",
+    "saturday_short": "so"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var cy = {
+  "day": {
+    "today": "Hed",
+    "tomorrow": "Yfo",
+    "sunday_short": "Sul",
+    "monday_short": "Llun",
+    "tuesday_short": "Maw",
+    "wednesday_short": "Mer",
+    "thursday_short": "Iau",
+    "friday_short": "Gwe",
+    "saturday_short": "Sad"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var da = {
+  "day": {
+    "today": "I dag",
+    "tomorrow": "I mor",
+    "sunday_short": "søn",
+    "monday_short": "man",
+    "tuesday_short": "tirs",
+    "wednesday_short": "ons",
+    "thursday_short": "tors",
+    "friday_short": "fre",
+    "saturday_short": "lør"
   },
   "card": {
     "defaultTitle": "Solar Forecast",
@@ -231,13 +1471,13 @@ var de = {
   "day": {
     "today": "Heu",
     "tomorrow": "Mor",
+    "sunday_short": "So",
     "monday_short": "Mo",
     "tuesday_short": "Di",
     "wednesday_short": "Mi",
     "thursday_short": "Do",
     "friday_short": "Fr",
-    "saturday_short": "Sa",
-    "sunday_short": "So"
+    "saturday_short": "Sa"
   },
   "card": {
     "defaultTitle": "Solarprognose",
@@ -382,20 +1622,1728 @@ var de = {
 }
 ;
 
+var el = {
+  "day": {
+    "today": "Σήμ",
+    "tomorrow": "Αύρ",
+    "sunday_short": "Κυρ",
+    "monday_short": "Δευ",
+    "tuesday_short": "Τρί",
+    "wednesday_short": "Τετ",
+    "thursday_short": "Πέμ",
+    "friday_short": "Παρ",
+    "saturday_short": "Σάβ"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var en = {
+  "day": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "sunday_short": "Sun",
+    "monday_short": "Mon",
+    "tuesday_short": "Tue",
+    "wednesday_short": "Wed",
+    "thursday_short": "Thu",
+    "friday_short": "Fri",
+    "saturday_short": "Sat"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var en_GB = {
+  "day": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "sunday_short": "Sun",
+    "monday_short": "Mon",
+    "tuesday_short": "Tue",
+    "wednesday_short": "Wed",
+    "thursday_short": "Thu",
+    "friday_short": "Fri",
+    "saturday_short": "Sat"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var eo = {
+  "day": {
+    "today": "Hod",
+    "tomorrow": "Mor",
+    "sunday_short": "di",
+    "monday_short": "lu",
+    "tuesday_short": "ma",
+    "wednesday_short": "me",
+    "thursday_short": "ĵa",
+    "friday_short": "ve",
+    "saturday_short": "sa"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var es = {
+  "day": {
+    "today": "Hoy",
+    "tomorrow": "Mañ",
+    "sunday_short": "dom",
+    "monday_short": "lun",
+    "tuesday_short": "mar",
+    "wednesday_short": "mié",
+    "thursday_short": "jue",
+    "friday_short": "vie",
+    "saturday_short": "sáb"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var es_419 = {
+  "day": {
+    "today": "Hoy",
+    "tomorrow": "Mañ",
+    "sunday_short": "dom",
+    "monday_short": "lun",
+    "tuesday_short": "mar",
+    "wednesday_short": "mié",
+    "thursday_short": "jue",
+    "friday_short": "vie",
+    "saturday_short": "sáb"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var et = {
+  "day": {
+    "today": "Täna",
+    "tomorrow": "Hom",
+    "sunday_short": "P",
+    "monday_short": "E",
+    "tuesday_short": "T",
+    "wednesday_short": "K",
+    "thursday_short": "N",
+    "friday_short": "R",
+    "saturday_short": "L"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var eu = {
+  "day": {
+    "today": "Gaur",
+    "tomorrow": "Bih",
+    "sunday_short": "ig",
+    "monday_short": "al",
+    "tuesday_short": "ar",
+    "wednesday_short": "az",
+    "thursday_short": "og",
+    "friday_short": "or",
+    "saturday_short": "lr"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var fa = {
+  "day": {
+    "today": "امروز",
+    "tomorrow": "فردا",
+    "sunday_short": "یکشنبه",
+    "monday_short": "دوشنبه",
+    "tuesday_short": "سه‌شنبه",
+    "wednesday_short": "چهارشنبه",
+    "thursday_short": "پنجشنبه",
+    "friday_short": "جمعه",
+    "saturday_short": "شنبه"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var fi = {
+  "day": {
+    "today": "Tän",
+    "tomorrow": "Huo",
+    "sunday_short": "su",
+    "monday_short": "ma",
+    "tuesday_short": "ti",
+    "wednesday_short": "ke",
+    "thursday_short": "to",
+    "friday_short": "pe",
+    "saturday_short": "la"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var fy = {
+  "day": {
+    "today": "Hjo",
+    "tomorrow": "Moa",
+    "sunday_short": "si",
+    "monday_short": "mo",
+    "tuesday_short": "ti",
+    "wednesday_short": "wo",
+    "thursday_short": "to",
+    "friday_short": "fr",
+    "saturday_short": "so"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
 var fr = {
   "day": {
     "today": "Auj",
     "tomorrow": "Dem",
-    "monday_short": "Lun",
-    "tuesday_short": "Mar",
-    "wednesday_short": "Mer",
-    "thursday_short": "Jeu",
-    "friday_short": "Ven",
-    "saturday_short": "Sam",
-    "sunday_short": "Dim"
+    "sunday_short": "dim",
+    "monday_short": "lun",
+    "tuesday_short": "mar",
+    "wednesday_short": "mer",
+    "thursday_short": "jeu",
+    "friday_short": "ven",
+    "saturday_short": "sam"
   },
   "card": {
     "defaultTitle": "Prévision solaire",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
     "labels": {
       "live": "DIRECT :",
       "exportRate": "TARIF EXPORT :",
@@ -404,55 +3352,6789 @@ var fr = {
       "week": "SEMAINE :",
       "avg": "MOY :",
       "total": "Total",
+      "p10": "P10",
       "forecast": "prévu",
       "generated": "produit"
     },
     "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
       "today": "Aujourd'hui",
-      "tomorrow": "Demain"
+      "tomorrow": "Demain",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
     },
     "popup": {
       "close": "Fermer",
+      "noForecastData": "No forecast data",
       "noHourlyData": "Aucune donnée horaire disponible pour ce jour.",
       "integrationNoHourlyData": "Les entités de prévision sélectionnées ne fournissent pas de données horaires.",
       "chart": {
         "time": "Heure",
         "power": "Puissance",
+        "kwh": "kWh",
         "forecastShort": "Prév.",
         "actualShort": "Réel"
       }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
     }
   },
   "editor": {
     "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
-      "language_override": "Langue forcée"
+      "language_override": "Langue forcée",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
       "auto": "Auto",
       "english": "Anglais",
       "french": "Français",
       "german": "Allemand",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
       "dateDdMm": "JJ/MM  (ex. 15/04)",
       "dateMmDd": "MM/JJ  (ex. 04/15)",
       "time24h": "24 h  (ex. 17:00)",
       "time12h": "12 h  (ex. 5pm)"
     },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
     "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
       "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
       "languageOverride": "TEMP TESTING ONLY - remove before release. Auto utilise la langue de Home Assistant."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
     }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
   }
 }
 ;
 
-const LOCALES = { en, fr, de };
-const LANGUAGE_OPTIONS = ["en", "fr", "de"];
+var ga = {
+  "day": {
+    "today": "Inniu",
+    "tomorrow": "Amár",
+    "sunday_short": "Domh",
+    "monday_short": "Luan",
+    "tuesday_short": "Máirt",
+    "wednesday_short": "Céad",
+    "thursday_short": "Déar",
+    "friday_short": "Aoine",
+    "saturday_short": "Sath"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var gl = {
+  "day": {
+    "today": "Hoxe",
+    "tomorrow": "Mañ",
+    "sunday_short": "dom",
+    "monday_short": "luns",
+    "tuesday_short": "mar",
+    "wednesday_short": "mér",
+    "thursday_short": "xov",
+    "friday_short": "ven",
+    "saturday_short": "sáb"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var gsw = {
+  "day": {
+    "today": "Hüt",
+    "tomorrow": "Mor",
+    "sunday_short": "Su",
+    "monday_short": "Mä",
+    "tuesday_short": "Zi",
+    "wednesday_short": "Mi",
+    "thursday_short": "Du",
+    "friday_short": "Fr",
+    "saturday_short": "Sa"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var he = {
+  "day": {
+    "today": "היום",
+    "tomorrow": "מחר",
+    "sunday_short": "יום א׳",
+    "monday_short": "יום ב׳",
+    "tuesday_short": "יום ג׳",
+    "wednesday_short": "יום ד׳",
+    "thursday_short": "יום ה׳",
+    "friday_short": "יום ו׳",
+    "saturday_short": "שבת"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var hi = {
+  "day": {
+    "today": "आज",
+    "tomorrow": "कल",
+    "sunday_short": "रवि",
+    "monday_short": "सोम",
+    "tuesday_short": "मंगल",
+    "wednesday_short": "बुध",
+    "thursday_short": "गुरु",
+    "friday_short": "शुक्र",
+    "saturday_short": "शनि"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var hr = {
+  "day": {
+    "today": "Dan",
+    "tomorrow": "Sut",
+    "sunday_short": "ned",
+    "monday_short": "pon",
+    "tuesday_short": "uto",
+    "wednesday_short": "sri",
+    "thursday_short": "čet",
+    "friday_short": "pet",
+    "saturday_short": "sub"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var hu = {
+  "day": {
+    "today": "Ma",
+    "tomorrow": "Hol",
+    "sunday_short": "V",
+    "monday_short": "H",
+    "tuesday_short": "K",
+    "wednesday_short": "Sze",
+    "thursday_short": "Cs",
+    "friday_short": "P",
+    "saturday_short": "Szo"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var hy = {
+  "day": {
+    "today": "Այս",
+    "tomorrow": "Վաղ",
+    "sunday_short": "կիր",
+    "monday_short": "երկ",
+    "tuesday_short": "երք",
+    "wednesday_short": "չրք",
+    "thursday_short": "հնգ",
+    "friday_short": "ուր",
+    "saturday_short": "շբթ"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var id = {
+  "day": {
+    "today": "Ini",
+    "tomorrow": "Bsk",
+    "sunday_short": "Min",
+    "monday_short": "Sen",
+    "tuesday_short": "Sel",
+    "wednesday_short": "Rab",
+    "thursday_short": "Kam",
+    "friday_short": "Jum",
+    "saturday_short": "Sab"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var it = {
+  "day": {
+    "today": "Oggi",
+    "tomorrow": "Dom",
+    "sunday_short": "dom",
+    "monday_short": "lun",
+    "tuesday_short": "mar",
+    "wednesday_short": "mer",
+    "thursday_short": "gio",
+    "friday_short": "ven",
+    "saturday_short": "sab"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var is = {
+  "day": {
+    "today": "Í d",
+    "tomorrow": "Á m",
+    "sunday_short": "sun",
+    "monday_short": "mán",
+    "tuesday_short": "þri",
+    "wednesday_short": "mið",
+    "thursday_short": "fim",
+    "friday_short": "fös",
+    "saturday_short": "lau"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ja = {
+  "day": {
+    "today": "今日",
+    "tomorrow": "明日",
+    "sunday_short": "日",
+    "monday_short": "月",
+    "tuesday_short": "火",
+    "wednesday_short": "水",
+    "thursday_short": "木",
+    "friday_short": "金",
+    "saturday_short": "土"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ka = {
+  "day": {
+    "today": "დღეს",
+    "tomorrow": "ხვალ",
+    "sunday_short": "კვი",
+    "monday_short": "ორშ",
+    "tuesday_short": "სამ",
+    "wednesday_short": "ოთხ",
+    "thursday_short": "ხუთ",
+    "friday_short": "პარ",
+    "saturday_short": "შაბ"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ko = {
+  "day": {
+    "today": "오늘",
+    "tomorrow": "내일",
+    "sunday_short": "일",
+    "monday_short": "월",
+    "tuesday_short": "화",
+    "wednesday_short": "수",
+    "thursday_short": "목",
+    "friday_short": "금",
+    "saturday_short": "토"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var lb = {
+  "day": {
+    "today": "Hau",
+    "tomorrow": "Mue",
+    "sunday_short": "Son",
+    "monday_short": "Méi",
+    "tuesday_short": "Dën",
+    "wednesday_short": "Mët",
+    "thursday_short": "Don",
+    "friday_short": "Fre",
+    "saturday_short": "Sam"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var lt = {
+  "day": {
+    "today": "Šia",
+    "tomorrow": "Ryt",
+    "sunday_short": "sk",
+    "monday_short": "pr",
+    "tuesday_short": "an",
+    "wednesday_short": "tr",
+    "thursday_short": "kt",
+    "friday_short": "pn",
+    "saturday_short": "št"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var lv = {
+  "day": {
+    "today": "Šod",
+    "tomorrow": "Rīt",
+    "sunday_short": "Svētd",
+    "monday_short": "Pirmd",
+    "tuesday_short": "Otrd",
+    "wednesday_short": "Trešd",
+    "thursday_short": "Ceturtd",
+    "friday_short": "Piektd",
+    "saturday_short": "Sestd"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var mk = {
+  "day": {
+    "today": "Ден",
+    "tomorrow": "Утре",
+    "sunday_short": "нед",
+    "monday_short": "пон",
+    "tuesday_short": "вто",
+    "wednesday_short": "сре",
+    "thursday_short": "чет",
+    "friday_short": "пет",
+    "saturday_short": "саб"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ml = {
+  "day": {
+    "today": "ഇന്ന്",
+    "tomorrow": "നാളെ",
+    "sunday_short": "ഞായർ",
+    "monday_short": "തിങ്കൾ",
+    "tuesday_short": "ചൊവ്വ",
+    "wednesday_short": "ബുധൻ",
+    "thursday_short": "വ്യാഴം",
+    "friday_short": "വെള്ളി",
+    "saturday_short": "ശനി"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var nl = {
+  "day": {
+    "today": "Van",
+    "tomorrow": "Mor",
+    "sunday_short": "zo",
+    "monday_short": "ma",
+    "tuesday_short": "di",
+    "wednesday_short": "wo",
+    "thursday_short": "do",
+    "friday_short": "vr",
+    "saturday_short": "za"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var nb = {
+  "day": {
+    "today": "I d",
+    "tomorrow": "I m",
+    "sunday_short": "søn",
+    "monday_short": "man",
+    "tuesday_short": "tir",
+    "wednesday_short": "ons",
+    "thursday_short": "tor",
+    "friday_short": "fre",
+    "saturday_short": "lør"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var nn = {
+  "day": {
+    "today": "I d",
+    "tomorrow": "I m",
+    "sunday_short": "søn",
+    "monday_short": "mån",
+    "tuesday_short": "tys",
+    "wednesday_short": "ons",
+    "thursday_short": "tor",
+    "friday_short": "fre",
+    "saturday_short": "lau"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var pl = {
+  "day": {
+    "today": "Dzi",
+    "tomorrow": "Jut",
+    "sunday_short": "niedz",
+    "monday_short": "pon",
+    "tuesday_short": "wt",
+    "wednesday_short": "śr",
+    "thursday_short": "czw",
+    "friday_short": "pt",
+    "saturday_short": "sob"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var pt = {
+  "day": {
+    "today": "Hoj",
+    "tomorrow": "Aman",
+    "sunday_short": "dom",
+    "monday_short": "seg",
+    "tuesday_short": "ter",
+    "wednesday_short": "qua",
+    "thursday_short": "qui",
+    "friday_short": "sex",
+    "saturday_short": "sáb"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var pt_BR = {
+  "day": {
+    "today": "Hoj",
+    "tomorrow": "Aman",
+    "sunday_short": "dom",
+    "monday_short": "seg",
+    "tuesday_short": "ter",
+    "wednesday_short": "qua",
+    "thursday_short": "qui",
+    "friday_short": "sex",
+    "saturday_short": "sáb"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ro = {
+  "day": {
+    "today": "Azi",
+    "tomorrow": "Mâi",
+    "sunday_short": "dum",
+    "monday_short": "lun",
+    "tuesday_short": "mar",
+    "wednesday_short": "mie",
+    "thursday_short": "joi",
+    "friday_short": "vin",
+    "saturday_short": "sâm"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ru = {
+  "day": {
+    "today": "Сег",
+    "tomorrow": "Зав",
+    "sunday_short": "вс",
+    "monday_short": "пн",
+    "tuesday_short": "вт",
+    "wednesday_short": "ср",
+    "thursday_short": "чт",
+    "friday_short": "пт",
+    "saturday_short": "сб"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var sk = {
+  "day": {
+    "today": "Dnes",
+    "tomorrow": "Zaj",
+    "sunday_short": "ne",
+    "monday_short": "po",
+    "tuesday_short": "ut",
+    "wednesday_short": "st",
+    "thursday_short": "št",
+    "friday_short": "pi",
+    "saturday_short": "so"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var sl = {
+  "day": {
+    "today": "Dan",
+    "tomorrow": "Jut",
+    "sunday_short": "ned",
+    "monday_short": "pon",
+    "tuesday_short": "tor",
+    "wednesday_short": "sre",
+    "thursday_short": "čet",
+    "friday_short": "pet",
+    "saturday_short": "sob"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var sr = {
+  "day": {
+    "today": "Дан",
+    "tomorrow": "Сут",
+    "sunday_short": "нед",
+    "monday_short": "пон",
+    "tuesday_short": "уто",
+    "wednesday_short": "сре",
+    "thursday_short": "чет",
+    "friday_short": "пет",
+    "saturday_short": "суб"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var sr_Latn = {
+  "day": {
+    "today": "Dan",
+    "tomorrow": "Sut",
+    "sunday_short": "ned",
+    "monday_short": "pon",
+    "tuesday_short": "uto",
+    "wednesday_short": "sre",
+    "thursday_short": "čet",
+    "friday_short": "pet",
+    "saturday_short": "sub"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var sv = {
+  "day": {
+    "today": "Idag",
+    "tomorrow": "Imo",
+    "sunday_short": "sön",
+    "monday_short": "mån",
+    "tuesday_short": "tis",
+    "wednesday_short": "ons",
+    "thursday_short": "tors",
+    "friday_short": "fre",
+    "saturday_short": "lör"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var sq = {
+  "day": {
+    "today": "Sot",
+    "tomorrow": "Nes",
+    "sunday_short": "die",
+    "monday_short": "hën",
+    "tuesday_short": "mar",
+    "wednesday_short": "mër",
+    "thursday_short": "enj",
+    "friday_short": "pre",
+    "saturday_short": "sht"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ta = {
+  "day": {
+    "today": "இன்று",
+    "tomorrow": "நாளை",
+    "sunday_short": "ஞாயி",
+    "monday_short": "திங்",
+    "tuesday_short": "செவ்",
+    "wednesday_short": "புத",
+    "thursday_short": "வியா",
+    "friday_short": "வெள்",
+    "saturday_short": "சனி"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var te = {
+  "day": {
+    "today": "నేడు",
+    "tomorrow": "రేపు",
+    "sunday_short": "ఆది",
+    "monday_short": "సోమ",
+    "tuesday_short": "మంగళ",
+    "wednesday_short": "బుధ",
+    "thursday_short": "గురు",
+    "friday_short": "శుక్ర",
+    "saturday_short": "శని"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var th = {
+  "day": {
+    "today": "วันนี้",
+    "tomorrow": "พรุ่งนี้",
+    "sunday_short": "อา",
+    "monday_short": "จ",
+    "tuesday_short": "อ",
+    "wednesday_short": "พ",
+    "thursday_short": "พฤ",
+    "friday_short": "ศ",
+    "saturday_short": "ส"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var tr = {
+  "day": {
+    "today": "Bug",
+    "tomorrow": "Yar",
+    "sunday_short": "Paz",
+    "monday_short": "Pzt",
+    "tuesday_short": "Sal",
+    "wednesday_short": "Çar",
+    "thursday_short": "Per",
+    "friday_short": "Cum",
+    "saturday_short": "Cmt"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var uk = {
+  "day": {
+    "today": "Сьо",
+    "tomorrow": "Зав",
+    "sunday_short": "нд",
+    "monday_short": "пн",
+    "tuesday_short": "вт",
+    "wednesday_short": "ср",
+    "thursday_short": "чт",
+    "friday_short": "пт",
+    "saturday_short": "сб"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var ur = {
+  "day": {
+    "today": "آج",
+    "tomorrow": "کل",
+    "sunday_short": "اتوار",
+    "monday_short": "پیر",
+    "tuesday_short": "منگل",
+    "wednesday_short": "بدھ",
+    "thursday_short": "جمعرات",
+    "friday_short": "جمعہ",
+    "saturday_short": "ہفتہ"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var vi = {
+  "day": {
+    "today": "Nay",
+    "tomorrow": "Mai",
+    "sunday_short": "CN",
+    "monday_short": "Th 2",
+    "tuesday_short": "Th 3",
+    "wednesday_short": "Th 4",
+    "thursday_short": "Th 5",
+    "friday_short": "Th 6",
+    "saturday_short": "Th 7"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var zh_Hans = {
+  "day": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "sunday_short": "周日",
+    "monday_short": "周一",
+    "tuesday_short": "周二",
+    "wednesday_short": "周三",
+    "thursday_short": "周四",
+    "friday_short": "周五",
+    "saturday_short": "周六"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+var zh_Hant = {
+  "day": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "sunday_short": "週日",
+    "monday_short": "週一",
+    "tuesday_short": "週二",
+    "wednesday_short": "週三",
+    "thursday_short": "週四",
+    "friday_short": "週五",
+    "saturday_short": "週六"
+  },
+  "card": {
+    "defaultTitle": "Solar Forecast",
+    "placeholder": "No forecast entities configured.",
+    "placeholderAction": "Open the card editor to get started.",
+    "twoDayNote": "2-day forecast available",
+    "labels": {
+      "live": "LIVE:",
+      "exportRate": "EXPORT RATE:",
+      "nextHour": "+1HR:",
+      "left": "LEFT:",
+      "week": "WEEK:",
+      "avg": "AVG:",
+      "total": "Total",
+      "p10": "P10",
+      "forecast": "forecast",
+      "generated": "generated"
+    },
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "day3": "Day 3",
+      "day4": "Day 4",
+      "day5": "Day 5",
+      "day6": "Day 6",
+      "day7": "Day 7"
+    },
+    "popup": {
+      "close": "Close",
+      "noForecastData": "No forecast data",
+      "noHourlyData": "No hourly data available for this day.",
+      "integrationNoHourlyData": "The selected forecast entities do not provide hourly forecast data.",
+      "chart": {
+        "time": "Time",
+        "power": "Power",
+        "kwh": "kWh",
+        "forecastShort": "Fcst",
+        "actualShort": "Act."
+      }
+    },
+    "aria": {
+      "dayButton": "{day} {date}"
+    },
+    "errors": {
+      "invalidConfig": "Invalid configuration"
+    },
+    "units": {
+      "watts": "W",
+      "kilowatts": "kW",
+      "kilowattHours": "kWh",
+      "kilowattHoursPerDay": "kWh/day"
+    }
+  },
+  "editor": {
+    "labels": {
+      "title": "Title (optional)",
+      "icon": "Header icon (optional, e.g. mdi:solar-power)",
+      "show_header": "Show header",
+      "display_estimate10": "Display Estimate10 Forecast Values",
+      "device_id": "Forecast Device",
+      "integration_type": "Integration Type",
+      "forecast_entity_0": "Day 1 — Today",
+      "forecast_entity_1": "Day 2 — Tomorrow",
+      "forecast_entity_2": "Day 3",
+      "forecast_entity_3": "Day 4",
+      "forecast_entity_4": "Day 5",
+      "forecast_entity_5": "Day 6",
+      "forecast_entity_6": "Day 7",
+      "export_rate_entity": "Current Export Rate Entity",
+      "live_power_entity": "Live power (optional, kW sensor)",
+      "today_actual_entity": "Today's actual generation (optional)",
+      "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
+      "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
+      "date_format": "Date format",
+      "time_format": "Time format (hourly popup)",
+      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "language_override": "Language Override",
+      "inverter_max_kw": "Inverter max output (kW)",
+      "solar_max_kwp": "Solar array size (kWp)",
+      "low_threshold": "Low threshold (kWh)",
+      "high_threshold": "High threshold (kWh)",
+      "desktop_text_scale": "Desktop Text Scale"
+    },
+    "options": {
+      "auto": "Auto",
+      "english": "English",
+      "french": "French",
+      "german": "German",
+      "autoDetect": "Auto-detect",
+      "solcast": "Solcast",
+      "volcast": "Volcast",
+      "forecastSolar": "Forecast.Solar",
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "dateDdMm": "DD/MM  (e.g. 15/04)",
+      "dateMmDd": "MM/DD  (e.g. 04/15)",
+      "time24h": "24h  (e.g. 17:00)",
+      "time12h": "12h  (e.g. 5pm)"
+    },
+    "sections": {
+      "integrationType": "Integration Type",
+      "dailyForecastEntities": "Daily Forecast Entities",
+      "liveData": "Live Data",
+      "actualGenerationArrays": "Actual Generation Arrays",
+      "systemParameters": "System Parameters",
+      "energyProvider": "Energy Provider",
+      "colourThresholds": "Colour Thresholds",
+      "dateTimeDisplay": "Date/Time & Display"
+    },
+    "helpers": {
+      "device": "Recommended: selecting a device will auto-configure the card",
+      "estimate10": "Display Estimate10 is only applicable when the integration type is Solcast",
+      "integrationType": "Automatically set when a forecast device is selected above. Override here only when configuring forecast entities manually without a device.",
+      "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
+      "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
+      "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+    },
+    "warnings": {
+      "manualEntities": "Changing device will not overwrite manually configured entities."
+    },
+    "arrays": {
+      "entity": "Array entity",
+      "label": "Label (1 char)",
+      "placeholder": "E",
+      "hint": "bar & popup",
+      "remove": "Remove",
+      "add": "Add array"
+    }
+  },
+  "customCard": {
+    "name": "Solar Forecast Card",
+    "description": "Daily solar energy forecast with hourly breakdown support."
+  }
+}
+;
+
+const LOCALES = {
+    "af": af,
+    "ar": ar,
+    "bg": bg,
+    "bn": bn,
+    "bs": bs,
+    "ca": ca,
+    "cs": cs,
+    "cy": cy,
+    "da": da,
+    "de": de,
+    "el": el,
+    "en": en,
+    "en-GB": en_GB,
+    "eo": eo,
+    "es": es,
+    "es-419": es_419,
+    "et": et,
+    "eu": eu,
+    "fa": fa,
+    "fi": fi,
+    "fy": fy,
+    "fr": fr,
+    "ga": ga,
+    "gl": gl,
+    "gsw": gsw,
+    "he": he,
+    "hi": hi,
+    "hr": hr,
+    "hu": hu,
+    "hy": hy,
+    "id": id,
+    "it": it,
+    "is": is,
+    "ja": ja,
+    "ka": ka,
+    "ko": ko,
+    "lb": lb,
+    "lt": lt,
+    "lv": lv,
+    "mk": mk,
+    "ml": ml,
+    "nl": nl,
+    "nb": nb,
+    "nn": nn,
+    "pl": pl,
+    "pt": pt,
+    "pt-BR": pt_BR,
+    "ro": ro,
+    "ru": ru,
+    "sk": sk,
+    "sl": sl,
+    "sr": sr,
+    "sr-Latn": sr_Latn,
+    "sv": sv,
+    "sq": sq,
+    "ta": ta,
+    "te": te,
+    "th": th,
+    "tr": tr,
+    "uk": uk,
+    "ur": ur,
+    "vi": vi,
+    "zh-Hans": zh_Hans,
+    "zh-Hant": zh_Hant,
+};
+const LANGUAGE_NAMES = {
+    "af": "Afrikaans",
+    "ar": "العربية",
+    "bg": "Български",
+    "bn": "বাংলা",
+    "bs": "Bosanski",
+    "ca": "Català",
+    "cs": "Čeština",
+    "cy": "Cymraeg",
+    "da": "Dansk",
+    "de": "Deutsch",
+    "el": "Ελληνικά",
+    "en": "English",
+    "en-GB": "English (GB)",
+    "eo": "Esperanto",
+    "es": "Español",
+    "es-419": "Español (Latin America)",
+    "et": "Eesti",
+    "eu": "Euskara",
+    "fa": "فارسی",
+    "fi": "Suomi",
+    "fy": "Frysk",
+    "fr": "Français",
+    "ga": "Gaeilge",
+    "gl": "Galego",
+    "gsw": "Schwiizerdütsch",
+    "he": "עברית",
+    "hi": "हिन्दी",
+    "hr": "Hrvatski",
+    "hu": "Magyar",
+    "hy": "Հայերեն",
+    "id": "Indonesia",
+    "it": "Italiano",
+    "is": "Íslenska",
+    "ja": "日本語",
+    "ka": "Kartuli",
+    "ko": "한국어",
+    "lb": "Lëtzebuergesch",
+    "lt": "Lietuvių",
+    "lv": "Latviešu",
+    "mk": "Македонски",
+    "ml": "മലയാളം",
+    "nl": "Nederlands",
+    "nb": "Norsk Bokmål",
+    "nn": "Norsk Nynorsk",
+    "pl": "Polski",
+    "pt": "Português",
+    "pt-BR": "Português (BR)",
+    "ro": "Română",
+    "ru": "Русский",
+    "sk": "Slovenčina",
+    "sl": "Slovenščina",
+    "sr": "Српски",
+    "sr-Latn": "Srpski",
+    "sv": "Svenska",
+    "sq": "Shqip",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "th": "ภาษาไทย",
+    "tr": "Türkçe",
+    "uk": "Українська",
+    "ur": "اُردُو",
+    "vi": "Tiếng Việt",
+    "zh-Hans": "简体中文",
+    "zh-Hant": "繁體中文",
+};
+const LANGUAGE_OPTIONS = ["af", "ar", "bg", "bn", "bs", "ca", "cs", "cy", "da", "de", "el", "en", "en-GB", "eo", "es", "es-419", "et", "eu", "fa", "fi", "fy", "fr", "ga", "gl", "gsw", "he", "hi", "hr", "hu", "hy", "id", "it", "is", "ja", "ka", "ko", "lb", "lt", "lv", "mk", "ml", "nl", "nb", "nn", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "sq", "ta", "te", "th", "tr", "uk", "ur", "vi", "zh-Hans", "zh-Hant"];
+
 function normaliseLanguage(value) {
     if (typeof value !== "string" || value.trim() === "")
         return "en";
-    const base = value.toLowerCase().replace("_", "-").split("-")[0];
-    return base in LOCALES ? base : "en";
+    const requested = value.toLowerCase().replace("_", "-");
+    const exact = LANGUAGE_OPTIONS.find((language) => language.toLowerCase() === requested);
+    if (exact)
+        return exact;
+    const base = requested.split("-")[0];
+    return LANGUAGE_OPTIONS.find((language) => language.toLowerCase() === base) ?? "en";
 }
 function resolveLanguage(hass, config) {
     if (config?.language_override && config.language_override !== "auto") {
@@ -652,11 +10334,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
                             { value: "auto", label: this._t("editor.options.auto") },
                             ...LANGUAGE_OPTIONS.map((lang) => ({
                                 value: lang,
-                                label: lang === "de"
-                                    ? this._t("editor.options.german")
-                                    : lang === "fr"
-                                        ? this._t("editor.options.french")
-                                        : this._t("editor.options.english"),
+                                label: LANGUAGE_NAMES[lang],
                             })),
                         ],
                     },
