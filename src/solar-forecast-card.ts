@@ -102,7 +102,7 @@ export class SolarForecastCard extends LitElement {
   }
 
   private _language() {
-    return resolveLanguage(this.hass, this._config);
+    return resolveLanguage(this.hass);
   }
 
   private _t(key: string, vars?: Record<string, string | number>): string {
@@ -114,10 +114,6 @@ export class SolarForecastCard extends LitElement {
   }
 
   private _dateLocaleCode(): string {
-    if (this._config?.language_override && this._config.language_override !== "auto") {
-      return this._localeCode();
-    }
-
     const localeLanguage =
       this.hass?.locale && typeof this.hass.locale === "object" && "language" in this.hass.locale
         ? this.hass.locale.language
@@ -153,7 +149,7 @@ export class SolarForecastCard extends LitElement {
 
     const oldHass = changedProps.get("hass") as HomeAssistant | undefined;
     if (!oldHass) return true;
-    if (resolveLanguage(oldHass, this._config) !== this._language()) return true;
+    if (resolveLanguage(oldHass) !== this._language()) return true;
 
     const watchIds = [
       ...this._config.forecast_entities,

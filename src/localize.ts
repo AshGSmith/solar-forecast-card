@@ -1,10 +1,10 @@
 import { LANGUAGE_OPTIONS, LOCALES, type LocaleKey } from "./locales/index.js";
 import en from "./locales/en.json";
-import type { HomeAssistant, SolarForecastCardConfig } from "./types.js";
+import type { HomeAssistant } from "./types.js";
 
 type LocaleTree = Record<string, unknown>;
 
-export { LANGUAGE_NAMES, LANGUAGE_OPTIONS, type LocaleKey } from "./locales/index.js";
+export { LANGUAGE_OPTIONS, type LocaleKey } from "./locales/index.js";
 
 function normaliseLanguage(value: unknown): LocaleKey {
   if (typeof value !== "string" || value.trim() === "") return "en";
@@ -15,14 +15,7 @@ function normaliseLanguage(value: unknown): LocaleKey {
   return LANGUAGE_OPTIONS.find((language) => language.toLowerCase() === base) ?? "en";
 }
 
-export function resolveLanguage(
-  hass: HomeAssistant | undefined,
-  config: Pick<SolarForecastCardConfig, "language_override"> | undefined
-): LocaleKey {
-  if (config?.language_override && config.language_override !== "auto") {
-    return normaliseLanguage(config.language_override);
-  }
-
+export function resolveLanguage(hass: HomeAssistant | undefined): LocaleKey {
   const localeLanguage =
     hass?.locale && typeof hass.locale === "object" && "language" in hass.locale
       ? (hass.locale as { language?: unknown }).language

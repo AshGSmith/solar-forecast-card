@@ -6,7 +6,7 @@ import type {
   HomeAssistant,
   EntityRegistryEntry,
 } from "./types.js";
-import { LANGUAGE_NAMES, LANGUAGE_OPTIONS, localize, resolveLanguage } from "./localize.js";
+import { localize, resolveLanguage } from "./localize.js";
 
 // ── ha-form schema (minimal typings — HA provides the element at runtime) ────
 
@@ -69,13 +69,16 @@ const SCHEMA_LIVE: HaFormSchema[] = [
   { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
 
-const SCHEMA_DISPLAY_BASE: HaFormSchema[] = [
+const SCHEMA_DISPLAY_TEXT_SCALE: HaFormSchema[] = [
   {
     name: "desktop_text_scale",
     selector: {
       number: { min: 100, max: 150, step: 5, mode: "slider", unit_of_measurement: "%" },
     },
   },
+];
+
+const SCHEMA_DISPLAY_HOURLY: HaFormSchema[] = [
   { name: "show_hourly_as_main", selector: { boolean: {} } },
 ];
 
@@ -115,7 +118,6 @@ interface FormData {
   remaining_today_entity: string;
   integration_type: string;
   show_hourly_as_main: boolean;
-  language_override: string;
   inverter_max_kw: number | undefined;
   solar_max_kwp: number | undefined;
   low_threshold: number | undefined;
@@ -156,7 +158,6 @@ export function normalizeConfig(
     date_format:          raw.date_format,
     time_format:          raw.time_format,
     show_hourly_as_main:  raw.show_hourly_as_main ?? false,
-    language_override:    raw.language_override ?? "auto",
     inverter_max_kw:      raw.inverter_max_kw,
     solar_max_kwp:        raw.solar_max_kwp,
     low_threshold:        raw.low_threshold,
@@ -199,7 +200,7 @@ export class SolarForecastCardEditor extends LitElement {
   }
 
   private _language() {
-    return resolveLanguage(this.hass, this._config);
+    return resolveLanguage(this.hass);
   }
 
   private _t(key: string, vars?: Record<string, string | number>): string {
@@ -225,27 +226,6 @@ export class SolarForecastCardEditor extends LitElement {
     ];
   }
 
-  private _displaySchema(): HaFormSchema[] {
-    return [
-      ...SCHEMA_DISPLAY_BASE,
-      {
-        // TEMP TESTING ONLY - remove before release.
-        name: "language_override",
-        selector: {
-          select: {
-            options: [
-              { value: "auto", label: this._t("editor.options.auto") },
-              ...LANGUAGE_OPTIONS.map((lang) => ({
-                value: lang,
-                label: LANGUAGE_NAMES[lang],
-              })),
-            ],
-          },
-        },
-      },
-    ];
-  }
-
   // ── Config ↔ flat FormData conversion ──────────────────────────────────────
 
   private _toFormData(cfg: SolarForecastCardConfig): FormData {
@@ -262,7 +242,6 @@ export class SolarForecastCardEditor extends LitElement {
       next_hour_entity:       cfg.next_hour_entity       ?? "",
       remaining_today_entity: cfg.remaining_today_entity ?? "",
       show_hourly_as_main: cfg.show_hourly_as_main ?? false,
-      language_override:   cfg.language_override   ?? "auto",
       inverter_max_kw:     cfg.inverter_max_kw,
       solar_max_kwp:       cfg.solar_max_kwp,
       low_threshold:       cfg.low_threshold,
@@ -305,8 +284,6 @@ export class SolarForecastCardEditor extends LitElement {
       date_format:            this._config?.date_format,
       time_format:            this._config?.time_format,
       show_hourly_as_main: data.show_hourly_as_main,
-      // TEMP TESTING ONLY - remove before release.
-      language_override: (data.language_override as SolarForecastCardConfig["language_override"]) || "auto",
       inverter_max_kw:    typeof data.inverter_max_kw    === "number" ? data.inverter_max_kw    : undefined,
       solar_max_kwp:      typeof data.solar_max_kwp      === "number" ? data.solar_max_kwp      : undefined,
       low_threshold:      typeof data.low_threshold      === "number" ? data.low_threshold      : undefined,
@@ -1059,7 +1036,7 @@ export class SolarForecastCardEditor extends LitElement {
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${this._displaySchema()}
+          .schema=${SCHEMA_DISPLAY_TEXT_SCALE}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
@@ -1067,13 +1044,16 @@ export class SolarForecastCardEditor extends LitElement {
           <ha-icon icon="mdi:information-outline"></ha-icon>
           ${this._t("editor.helpers.desktopTextScale")}
         </p>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_DISPLAY_HOURLY}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
           ${this._t("editor.helpers.hourlyAsMain")}
-        </p>
-        <p class="device-helper" style="margin:2px 0 6px">
-          <ha-icon icon="mdi:information-outline"></ha-icon>
-          ${this._t("editor.helpers.languageOverride")}
         </p>
       </ha-expansion-panel>
     `;

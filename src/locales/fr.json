@@ -92,7 +92,6 @@
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
-      "language_override": "Langue forcée",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -100,10 +99,6 @@
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "Anglais",
-      "french": "Français",
-      "german": "Allemand",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -131,8 +126,7 @@
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto utilise la langue de Home Assistant."
+      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."

@@ -92,7 +92,6 @@
       "date_format": "Datumsformat",
       "time_format": "Zeitformat (stündliches Popup)",
       "show_hourly_as_main": "Stündliche Prognose als Hauptkarte anzeigen",
-      "language_override": "Sprachüberschreibung",
       "inverter_max_kw": "Max. Wechselrichterleistung (kW)",
       "solar_max_kwp": "Größe der Solaranlage (kWp)",
       "low_threshold": "Niedriger Schwellenwert (kWh)",
@@ -100,10 +99,6 @@
       "desktop_text_scale": "Desktop-Textskalierung"
     },
     "options": {
-      "auto": "Auto",
-      "english": "Englisch",
-      "french": "Französisch",
-      "german": "Deutsch",
       "autoDetect": "Automatisch erkennen",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -131,8 +126,7 @@
       "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
       "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
       "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
-      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto verwendet die Home Assistant-Sprache."
+      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an."
     },
     "warnings": {
       "manualEntities": "Das Ändern des Geräts überschreibt manuell konfigurierte Entitäten nicht."

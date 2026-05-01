@@ -166,7 +166,6 @@ var af = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -174,10 +173,6 @@ var af = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -205,8 +200,7 @@ var af = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -321,7 +315,6 @@ var ar = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -329,10 +322,6 @@ var ar = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -360,8 +349,7 @@ var ar = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -476,7 +464,6 @@ var bg = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -484,10 +471,6 @@ var bg = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -515,8 +498,7 @@ var bg = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -631,7 +613,6 @@ var bn = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -639,10 +620,6 @@ var bn = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -670,8 +647,7 @@ var bn = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -786,7 +762,6 @@ var bs = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -794,10 +769,6 @@ var bs = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -825,8 +796,7 @@ var bs = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -941,7 +911,6 @@ var ca = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -949,10 +918,6 @@ var ca = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -980,8 +945,7 @@ var ca = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -1096,7 +1060,6 @@ var cs = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1104,10 +1067,6 @@ var cs = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -1135,8 +1094,7 @@ var cs = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -1251,7 +1209,6 @@ var cy = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1259,10 +1216,6 @@ var cy = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -1290,8 +1243,7 @@ var cy = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -1406,7 +1358,6 @@ var da = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1414,10 +1365,6 @@ var da = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -1445,8 +1392,7 @@ var da = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -1561,7 +1507,6 @@ var de = {
       "date_format": "Datumsformat",
       "time_format": "Zeitformat (stündliches Popup)",
       "show_hourly_as_main": "Stündliche Prognose als Hauptkarte anzeigen",
-      "language_override": "Sprachüberschreibung",
       "inverter_max_kw": "Max. Wechselrichterleistung (kW)",
       "solar_max_kwp": "Größe der Solaranlage (kWp)",
       "low_threshold": "Niedriger Schwellenwert (kWh)",
@@ -1569,10 +1514,6 @@ var de = {
       "desktop_text_scale": "Desktop-Textskalierung"
     },
     "options": {
-      "auto": "Auto",
-      "english": "Englisch",
-      "french": "Französisch",
-      "german": "Deutsch",
       "autoDetect": "Automatisch erkennen",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -1600,8 +1541,7 @@ var de = {
       "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
       "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
       "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
-      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto verwendet die Home Assistant-Sprache."
+      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an."
     },
     "warnings": {
       "manualEntities": "Das Ändern des Geräts überschreibt manuell konfigurierte Entitäten nicht."
@@ -1716,7 +1656,6 @@ var el = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1724,10 +1663,6 @@ var el = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -1755,8 +1690,7 @@ var el = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -1871,7 +1805,6 @@ var en = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1879,10 +1812,6 @@ var en = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -1910,8 +1839,7 @@ var en = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2026,7 +1954,6 @@ var en_GB = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2034,10 +1961,6 @@ var en_GB = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2065,8 +1988,7 @@ var en_GB = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2181,7 +2103,6 @@ var eo = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2189,10 +2110,6 @@ var eo = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2220,8 +2137,7 @@ var eo = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2336,7 +2252,6 @@ var es = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2344,10 +2259,6 @@ var es = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2375,8 +2286,7 @@ var es = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2491,7 +2401,6 @@ var es_419 = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2499,10 +2408,6 @@ var es_419 = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2530,8 +2435,7 @@ var es_419 = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2646,7 +2550,6 @@ var et = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2654,10 +2557,6 @@ var et = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2685,8 +2584,7 @@ var et = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2801,7 +2699,6 @@ var eu = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2809,10 +2706,6 @@ var eu = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2840,8 +2733,7 @@ var eu = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -2956,7 +2848,6 @@ var fa = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2964,10 +2855,6 @@ var fa = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -2995,8 +2882,7 @@ var fa = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -3111,7 +2997,6 @@ var fi = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3119,10 +3004,6 @@ var fi = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -3150,8 +3031,7 @@ var fi = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -3266,7 +3146,6 @@ var fy = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3274,10 +3153,6 @@ var fy = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -3305,8 +3180,7 @@ var fy = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -3421,7 +3295,6 @@ var fr = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
-      "language_override": "Langue forcée",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3429,10 +3302,6 @@ var fr = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "Anglais",
-      "french": "Français",
-      "german": "Allemand",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -3460,8 +3329,7 @@ var fr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto utilise la langue de Home Assistant."
+      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -3576,7 +3444,6 @@ var ga = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3584,10 +3451,6 @@ var ga = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -3615,8 +3478,7 @@ var ga = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -3731,7 +3593,6 @@ var gl = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3739,10 +3600,6 @@ var gl = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -3770,8 +3627,7 @@ var gl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -3886,7 +3742,6 @@ var gsw = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3894,10 +3749,6 @@ var gsw = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -3925,8 +3776,7 @@ var gsw = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4041,7 +3891,6 @@ var he = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4049,10 +3898,6 @@ var he = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -4080,8 +3925,7 @@ var he = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4196,7 +4040,6 @@ var hi = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4204,10 +4047,6 @@ var hi = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -4235,8 +4074,7 @@ var hi = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4351,7 +4189,6 @@ var hr = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4359,10 +4196,6 @@ var hr = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -4390,8 +4223,7 @@ var hr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4506,7 +4338,6 @@ var hu = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4514,10 +4345,6 @@ var hu = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -4545,8 +4372,7 @@ var hu = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4661,7 +4487,6 @@ var hy = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4669,10 +4494,6 @@ var hy = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -4700,8 +4521,7 @@ var hy = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4816,7 +4636,6 @@ var id = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4824,10 +4643,6 @@ var id = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -4855,8 +4670,7 @@ var id = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -4971,7 +4785,6 @@ var it = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4979,10 +4792,6 @@ var it = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5010,8 +4819,7 @@ var it = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -5126,7 +4934,6 @@ var is = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5134,10 +4941,6 @@ var is = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5165,8 +4968,7 @@ var is = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -5281,7 +5083,6 @@ var ja = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5289,10 +5090,6 @@ var ja = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5320,8 +5117,7 @@ var ja = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -5436,7 +5232,6 @@ var ka = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5444,10 +5239,6 @@ var ka = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5475,8 +5266,7 @@ var ka = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -5591,7 +5381,6 @@ var ko = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5599,10 +5388,6 @@ var ko = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5630,8 +5415,7 @@ var ko = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -5746,7 +5530,6 @@ var lb = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5754,10 +5537,6 @@ var lb = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5785,8 +5564,7 @@ var lb = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -5901,7 +5679,6 @@ var lt = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5909,10 +5686,6 @@ var lt = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -5940,8 +5713,7 @@ var lt = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6056,7 +5828,6 @@ var lv = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6064,10 +5835,6 @@ var lv = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -6095,8 +5862,7 @@ var lv = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6211,7 +5977,6 @@ var mk = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6219,10 +5984,6 @@ var mk = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -6250,8 +6011,7 @@ var mk = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6366,7 +6126,6 @@ var ml = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6374,10 +6133,6 @@ var ml = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -6405,8 +6160,7 @@ var ml = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6521,7 +6275,6 @@ var nl = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6529,10 +6282,6 @@ var nl = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -6560,8 +6309,7 @@ var nl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6676,7 +6424,6 @@ var nb = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6684,10 +6431,6 @@ var nb = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -6715,8 +6458,7 @@ var nb = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6831,7 +6573,6 @@ var nn = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6839,10 +6580,6 @@ var nn = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -6870,8 +6607,7 @@ var nn = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -6986,7 +6722,6 @@ var pl = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6994,10 +6729,6 @@ var pl = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7025,8 +6756,7 @@ var pl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -7141,7 +6871,6 @@ var pt = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7149,10 +6878,6 @@ var pt = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7180,8 +6905,7 @@ var pt = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -7296,7 +7020,6 @@ var pt_BR = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7304,10 +7027,6 @@ var pt_BR = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7335,8 +7054,7 @@ var pt_BR = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -7451,7 +7169,6 @@ var ro = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7459,10 +7176,6 @@ var ro = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7490,8 +7203,7 @@ var ro = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -7606,7 +7318,6 @@ var ru = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7614,10 +7325,6 @@ var ru = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7645,8 +7352,7 @@ var ru = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -7761,7 +7467,6 @@ var sk = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7769,10 +7474,6 @@ var sk = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7800,8 +7501,7 @@ var sk = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -7916,7 +7616,6 @@ var sl = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7924,10 +7623,6 @@ var sl = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -7955,8 +7650,7 @@ var sl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -8071,7 +7765,6 @@ var sr = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8079,10 +7772,6 @@ var sr = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -8110,8 +7799,7 @@ var sr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -8226,7 +7914,6 @@ var sr_Latn = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8234,10 +7921,6 @@ var sr_Latn = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -8265,8 +7948,7 @@ var sr_Latn = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -8381,7 +8063,6 @@ var sv = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8389,10 +8070,6 @@ var sv = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -8420,8 +8097,7 @@ var sv = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -8536,7 +8212,6 @@ var sq = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8544,10 +8219,6 @@ var sq = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -8575,8 +8246,7 @@ var sq = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -8691,7 +8361,6 @@ var ta = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8699,10 +8368,6 @@ var ta = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -8730,8 +8395,7 @@ var ta = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -8846,7 +8510,6 @@ var te = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8854,10 +8517,6 @@ var te = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -8885,8 +8544,7 @@ var te = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9001,7 +8659,6 @@ var th = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9009,10 +8666,6 @@ var th = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9040,8 +8693,7 @@ var th = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9156,7 +8808,6 @@ var tr = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9164,10 +8815,6 @@ var tr = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9195,8 +8842,7 @@ var tr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9311,7 +8957,6 @@ var uk = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9319,10 +8964,6 @@ var uk = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9350,8 +8991,7 @@ var uk = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9466,7 +9106,6 @@ var ur = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9474,10 +9113,6 @@ var ur = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9505,8 +9140,7 @@ var ur = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9621,7 +9255,6 @@ var vi = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9629,10 +9262,6 @@ var vi = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9660,8 +9289,7 @@ var vi = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9776,7 +9404,6 @@ var zh_Hans = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9784,10 +9411,6 @@ var zh_Hans = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9815,8 +9438,7 @@ var zh_Hans = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -9931,7 +9553,6 @@ var zh_Hant = {
       "date_format": "Date format",
       "time_format": "Time format (hourly popup)",
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
-      "language_override": "Language Override",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -9939,10 +9560,6 @@ var zh_Hant = {
       "desktop_text_scale": "Desktop Text Scale"
     },
     "options": {
-      "auto": "Auto",
-      "english": "English",
-      "french": "French",
-      "german": "German",
       "autoDetect": "Auto-detect",
       "solcast": "Solcast",
       "volcast": "Volcast",
@@ -9970,8 +9587,7 @@ var zh_Hant = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
-      "languageOverride": "TEMP TESTING ONLY - remove before release. Auto uses the Home Assistant language."
+      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."
@@ -10058,72 +9674,6 @@ const LOCALES = {
     "zh-Hans": zh_Hans,
     "zh-Hant": zh_Hant,
 };
-const LANGUAGE_NAMES = {
-    "af": "Afrikaans",
-    "ar": "العربية",
-    "bg": "Български",
-    "bn": "বাংলা",
-    "bs": "Bosanski",
-    "ca": "Català",
-    "cs": "Čeština",
-    "cy": "Cymraeg",
-    "da": "Dansk",
-    "de": "Deutsch",
-    "el": "Ελληνικά",
-    "en": "English",
-    "en-GB": "English (GB)",
-    "eo": "Esperanto",
-    "es": "Español",
-    "es-419": "Español (Latin America)",
-    "et": "Eesti",
-    "eu": "Euskara",
-    "fa": "فارسی",
-    "fi": "Suomi",
-    "fy": "Frysk",
-    "fr": "Français",
-    "ga": "Gaeilge",
-    "gl": "Galego",
-    "gsw": "Schwiizerdütsch",
-    "he": "עברית",
-    "hi": "हिन्दी",
-    "hr": "Hrvatski",
-    "hu": "Magyar",
-    "hy": "Հայերեն",
-    "id": "Indonesia",
-    "it": "Italiano",
-    "is": "Íslenska",
-    "ja": "日本語",
-    "ka": "Kartuli",
-    "ko": "한국어",
-    "lb": "Lëtzebuergesch",
-    "lt": "Lietuvių",
-    "lv": "Latviešu",
-    "mk": "Македонски",
-    "ml": "മലയാളം",
-    "nl": "Nederlands",
-    "nb": "Norsk Bokmål",
-    "nn": "Norsk Nynorsk",
-    "pl": "Polski",
-    "pt": "Português",
-    "pt-BR": "Português (BR)",
-    "ro": "Română",
-    "ru": "Русский",
-    "sk": "Slovenčina",
-    "sl": "Slovenščina",
-    "sr": "Српски",
-    "sr-Latn": "Srpski",
-    "sv": "Svenska",
-    "sq": "Shqip",
-    "ta": "தமிழ்",
-    "te": "తెలుగు",
-    "th": "ภาษาไทย",
-    "tr": "Türkçe",
-    "uk": "Українська",
-    "ur": "اُردُو",
-    "vi": "Tiếng Việt",
-    "zh-Hans": "简体中文",
-    "zh-Hant": "繁體中文",
-};
 const LANGUAGE_OPTIONS = ["af", "ar", "bg", "bn", "bs", "ca", "cs", "cy", "da", "de", "el", "en", "en-GB", "eo", "es", "es-419", "et", "eu", "fa", "fi", "fy", "fr", "ga", "gl", "gsw", "he", "hi", "hr", "hu", "hy", "id", "it", "is", "ja", "ka", "ko", "lb", "lt", "lv", "mk", "ml", "nl", "nb", "nn", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "sq", "ta", "te", "th", "tr", "uk", "ur", "vi", "zh-Hans", "zh-Hant"];
 
 function normaliseLanguage(value) {
@@ -10136,10 +9686,7 @@ function normaliseLanguage(value) {
     const base = requested.split("-")[0];
     return LANGUAGE_OPTIONS.find((language) => language.toLowerCase() === base) ?? "en";
 }
-function resolveLanguage(hass, config) {
-    if (config?.language_override && config.language_override !== "auto") {
-        return normaliseLanguage(config.language_override);
-    }
+function resolveLanguage(hass) {
     const localeLanguage = hass?.locale && typeof hass.locale === "object" && "language" in hass.locale
         ? hass.locale.language
         : undefined;
@@ -10194,13 +9741,15 @@ const SCHEMA_LIVE = [
     { name: "next_hour_entity", selector: { entity: { domain: "sensor" } } },
     { name: "remaining_today_entity", selector: { entity: { domain: "sensor" } } },
 ];
-const SCHEMA_DISPLAY_BASE = [
+const SCHEMA_DISPLAY_TEXT_SCALE = [
     {
         name: "desktop_text_scale",
         selector: {
             number: { min: 100, max: 150, step: 5, mode: "slider", unit_of_measurement: "%" },
         },
     },
+];
+const SCHEMA_DISPLAY_HOURLY = [
     { name: "show_hourly_as_main", selector: { boolean: {} } },
 ];
 const SCHEMA_ENERGY_PROVIDER = [
@@ -10241,7 +9790,6 @@ function normalizeConfig(raw) {
         date_format: raw.date_format,
         time_format: raw.time_format,
         show_hourly_as_main: raw.show_hourly_as_main ?? false,
-        language_override: raw.language_override ?? "auto",
         inverter_max_kw: raw.inverter_max_kw,
         solar_max_kwp: raw.solar_max_kwp,
         low_threshold: raw.low_threshold,
@@ -10277,7 +9825,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         this._config = normalizeConfig(config);
     }
     _language() {
-        return resolveLanguage(this.hass, this._config);
+        return resolveLanguage(this.hass);
     }
     _t(key, vars) {
         return localize(this._language(), key, vars);
@@ -10300,26 +9848,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             },
         ];
     }
-    _displaySchema() {
-        return [
-            ...SCHEMA_DISPLAY_BASE,
-            {
-                // TEMP TESTING ONLY - remove before release.
-                name: "language_override",
-                selector: {
-                    select: {
-                        options: [
-                            { value: "auto", label: this._t("editor.options.auto") },
-                            ...LANGUAGE_OPTIONS.map((lang) => ({
-                                value: lang,
-                                label: LANGUAGE_NAMES[lang],
-                            })),
-                        ],
-                    },
-                },
-            },
-        ];
-    }
     // ── Config ↔ flat FormData conversion ──────────────────────────────────────
     _toFormData(cfg) {
         return {
@@ -10335,7 +9863,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             next_hour_entity: cfg.next_hour_entity ?? "",
             remaining_today_entity: cfg.remaining_today_entity ?? "",
             show_hourly_as_main: cfg.show_hourly_as_main ?? false,
-            language_override: cfg.language_override ?? "auto",
             inverter_max_kw: cfg.inverter_max_kw,
             solar_max_kwp: cfg.solar_max_kwp,
             low_threshold: cfg.low_threshold,
@@ -10377,8 +9904,6 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
             date_format: this._config?.date_format,
             time_format: this._config?.time_format,
             show_hourly_as_main: data.show_hourly_as_main,
-            // TEMP TESTING ONLY - remove before release.
-            language_override: data.language_override || "auto",
             inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
             solar_max_kwp: typeof data.solar_max_kwp === "number" ? data.solar_max_kwp : undefined,
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
@@ -11055,7 +10580,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${this._displaySchema()}
+          .schema=${SCHEMA_DISPLAY_TEXT_SCALE}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
@@ -11063,13 +10588,16 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
           <ha-icon icon="mdi:information-outline"></ha-icon>
           ${this._t("editor.helpers.desktopTextScale")}
         </p>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_DISPLAY_HOURLY}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
           ${this._t("editor.helpers.hourlyAsMain")}
-        </p>
-        <p class="device-helper" style="margin:2px 0 6px">
-          <ha-icon icon="mdi:information-outline"></ha-icon>
-          ${this._t("editor.helpers.languageOverride")}
         </p>
       </ha-expansion-panel>
     `;
@@ -11153,7 +10681,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return 4;
     }
     _language() {
-        return resolveLanguage(this.hass, this._config);
+        return resolveLanguage(this.hass);
     }
     _t(key, vars) {
         return localize(this._language(), key, vars);
@@ -11162,9 +10690,6 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return this._language();
     }
     _dateLocaleCode() {
-        if (this._config?.language_override && this._config.language_override !== "auto") {
-            return this._localeCode();
-        }
         const localeLanguage = this.hass?.locale && typeof this.hass.locale === "object" && "language" in this.hass.locale
             ? this.hass.locale.language
             : undefined;
@@ -11194,7 +10719,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const oldHass = changedProps.get("hass");
         if (!oldHass)
             return true;
-        if (resolveLanguage(oldHass, this._config) !== this._language())
+        if (resolveLanguage(oldHass) !== this._language())
             return true;
         const watchIds = [
             ...this._config.forecast_entities,
