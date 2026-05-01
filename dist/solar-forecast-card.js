@@ -11186,6 +11186,21 @@ let SolarForecastCard = class SolarForecastCard extends i {
     _localeCode() {
         return this._language();
     }
+    _dateLocaleCode() {
+        if (this._config?.language_override && this._config.language_override !== "auto") {
+            return this._localeCode();
+        }
+        const localeLanguage = this.hass?.locale && typeof this.hass.locale === "object" && "language" in this.hass.locale
+            ? this.hass.locale.language
+            : undefined;
+        if (typeof localeLanguage === "string" && localeLanguage.trim() !== "") {
+            return localeLanguage.replace("_", "-");
+        }
+        if (typeof this.hass?.language === "string" && this.hass.language.trim() !== "") {
+            return this.hass.language.replace("_", "-");
+        }
+        return this._config?.date_format === "MM/DD" ? "en-US" : "en-GB";
+    }
     connectedCallback() {
         super.connectedCallback();
         document.addEventListener("keydown", this._onDocKey);
@@ -11804,9 +11819,17 @@ let SolarForecastCard = class SolarForecastCard extends i {
             && date.getDate() === tomorrow.getDate();
     }
     _dateLabel(date) {
-        const d = String(date.getDate()).padStart(2, "0");
-        const m = String(date.getMonth() + 1).padStart(2, "0");
-        return this._config.date_format === "MM/DD" ? `${m}/${d}` : `${d}/${m}`;
+        try {
+            return new Intl.DateTimeFormat(this._dateLocaleCode(), {
+                day: "2-digit",
+                month: "2-digit",
+            }).format(date);
+        }
+        catch {
+            const d = String(date.getDate()).padStart(2, "0");
+            const m = String(date.getMonth() + 1).padStart(2, "0");
+            return this._config.date_format === "MM/DD" ? `${m}/${d}` : `${d}/${m}`;
+        }
     }
     _fullDateLabel(date, isToday) {
         const weekday = isToday ? this._t("card.days.today") : date.toLocaleDateString(this._localeCode(), { weekday: "long" });
