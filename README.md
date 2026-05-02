@@ -6,7 +6,7 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data 
 
 This card is provided completely free of charge, but if you want to support me or just say thanks by buying me a coffee, that would mean so much!
 
-<a href="https://www.buymeacoffee.com/AshGSmith" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/AshGSmith" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me a Coffee" width="150"></a>
 
 ## Screenshots
 
