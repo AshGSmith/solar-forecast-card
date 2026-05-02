@@ -1,5 +1,6 @@
 import { LitElement, html, css, PropertyValues, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
 import type { SolarForecastCardConfig, HomeAssistant } from "./types.js";
 import { normalizeConfig } from "./solar-forecast-card-editor.js";
 import { localize, resolveLanguage } from "./localize.js";
@@ -96,6 +97,8 @@ export class SolarForecastCard extends LitElement {
     // @media (min-width: 768px) block so mobile sizing is never affected.
     const factor = (this._config.desktop_text_scale ?? 100) / 100;
     this.style.setProperty("--dts-factor", String(factor));
+    this._setOptionalCssPx("--sfc-font-size", this._config.font_size);
+    this._setOptionalCssPx("--sfc-bar-width", this._config.bar_width);
   }
 
   public getCardSize(): number {
@@ -108,6 +111,25 @@ export class SolarForecastCard extends LitElement {
 
   private _t(key: string, vars?: Record<string, string | number>): string {
     return localize(this._language(), key, vars);
+  }
+
+  private _setOptionalCssPx(name: string, value: number | undefined): void {
+    if (typeof value === "number" && Number.isFinite(value)) {
+      this.style.setProperty(name, `${value}px`);
+    } else {
+      this.style.removeProperty(name);
+    }
+  }
+
+  private _cardStyle(): Record<string, string> {
+    const styles: Record<string, string> = {};
+    if (typeof this._config?.font_size === "number" && Number.isFinite(this._config.font_size)) {
+      styles["--sfc-font-size"] = `${this._config.font_size}px`;
+    }
+    if (typeof this._config?.bar_width === "number" && Number.isFinite(this._config.bar_width)) {
+      styles["--sfc-bar-width"] = `${this._config.bar_width}px`;
+    }
+    return styles;
   }
 
   private _localeCode(): string {
@@ -860,6 +882,14 @@ export class SolarForecastCard extends LitElement {
     return css`
       :host {
         display: block;
+        --sfc-value-font-size-default: 0.75rem;
+        --sfc-value-unit-font-size-default: 0.60rem;
+        --sfc-value-estimate-font-size-default: 0.58rem;
+        --sfc-value-empty-font-size-default: 0.78rem;
+        --sfc-day-name-font-size-default: 0.75rem;
+        --sfc-day-date-font-size-default: 0.65rem;
+        --sfc-two-day-note-font-size-default: 0.65rem;
+        --sfc-array-label-font-size-default: 0.5rem;
       }
 
       ha-card {
@@ -994,12 +1024,12 @@ export class SolarForecastCard extends LitElement {
       .forecast-grid.two-day .bar-forecast,
       .forecast-grid.two-day .bar-actual,
       .forecast-grid.two-day .bar-dotted {
-        width: min(72px, 72%);
+        width: min(var(--sfc-bar-width, 72px), 72%);
       }
 
       .two-day-note {
         text-align: center;
-        font-size: 0.65rem;
+        font-size: var(--sfc-two-day-note-font-size-default);
         color: var(--secondary-text-color);
         opacity: 0.45;
         margin-top: 10px;
@@ -1057,7 +1087,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .value-num {
-        font-size: 0.75rem;
+        font-size: var(--sfc-font-size, var(--sfc-value-font-size-default));
         font-weight: 600;
         font-variant-numeric: tabular-nums;
         color: var(--primary-text-color);
@@ -1066,13 +1096,13 @@ export class SolarForecastCard extends LitElement {
       }
 
       .value-unit {
-        font-size: 0.60rem;
+        font-size: var(--sfc-font-size, var(--sfc-value-unit-font-size-default));
         color: var(--secondary-text-color);
         line-height: 1.2;
       }
 
       .value-estimate10 {
-        font-size: 0.58rem;
+        font-size: var(--sfc-font-size, var(--sfc-value-estimate-font-size-default));
         font-variant-numeric: tabular-nums;
         color: var(--secondary-text-color);
         opacity: 0.60;
@@ -1082,7 +1112,7 @@ export class SolarForecastCard extends LitElement {
 
 
       .value-empty {
-        font-size: 0.78rem;
+        font-size: var(--sfc-font-size, var(--sfc-value-empty-font-size-default));
         color: var(--secondary-text-color);
         opacity: 0.4;
         line-height: 30px;
@@ -1105,7 +1135,7 @@ export class SolarForecastCard extends LitElement {
         bottom: 0;
         left: 50%;
         translate: -50% 0;
-        width: min(24px, 72%);
+        width: min(var(--sfc-bar-width, 24px), 72%);
         height: 100%;
         border-radius: 8px;
         background: var(--secondary-background-color, rgba(128, 128, 128, 0.07));
@@ -1118,7 +1148,7 @@ export class SolarForecastCard extends LitElement {
         bottom: 0;
         left: 50%;
         translate: -50% 0;
-        width: min(24px, 72%);
+        width: min(var(--sfc-bar-width, 24px), 72%);
         transition:
           height 0.55s cubic-bezier(0.34, 1.15, 0.64, 1),
           bottom 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
@@ -1229,7 +1259,7 @@ export class SolarForecastCard extends LitElement {
         bottom: 0;
         left: 50%;
         translate: -50% 0;
-        width: min(24px, 72%);
+        width: min(var(--sfc-bar-width, 24px), 72%);
         display: flex;
         flex-direction: column-reverse; /* first array sits at the bottom */
         border-radius: 6px 6px 3px 3px;
@@ -1239,7 +1269,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .forecast-grid.two-day .bar-arrays-stack {
-        width: min(72px, 72%);
+        width: min(var(--sfc-bar-width, 72px), 72%);
       }
 
       .bar-array-segment {
@@ -1251,7 +1281,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .array-label {
-        font-size: 0.5rem;
+        font-size: var(--sfc-font-size, var(--sfc-array-label-font-size-default));
         font-weight: 800;
         color: rgba(255, 255, 255, 0.90);
         line-height: 1;
@@ -1350,7 +1380,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .day-name {
-        font-size: 0.75rem;
+        font-size: var(--sfc-font-size, var(--sfc-day-name-font-size-default));
         font-weight: 500;
         color: var(--primary-text-color);
         line-height: 1.25;
@@ -1371,7 +1401,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .day-date {
-        font-size: 0.65rem;
+        font-size: var(--sfc-font-size, var(--sfc-day-date-font-size-default));
         color: var(--secondary-text-color);
         font-variant-numeric: tabular-nums;
         line-height: 1.25;
@@ -1799,31 +1829,26 @@ export class SolarForecastCard extends LitElement {
          ══════════════════════════════════════════════════════════ */
 
       @media (min-width: 768px) {
+        :host {
+          --sfc-value-font-size-default: calc(0.75rem * var(--dts-factor, 1));
+          --sfc-value-unit-font-size-default: calc(0.60rem * var(--dts-factor, 1));
+          --sfc-value-estimate-font-size-default: calc(0.58rem * var(--dts-factor, 1));
+          --sfc-value-empty-font-size-default: calc(0.78rem * var(--dts-factor, 1));
+          --sfc-day-name-font-size-default: calc(0.75rem * var(--dts-factor, 1));
+          --sfc-day-date-font-size-default: calc(0.65rem * var(--dts-factor, 1));
+          --sfc-two-day-note-font-size-default: calc(0.65rem * var(--dts-factor, 1));
+          --sfc-array-label-font-size-default: calc(0.5rem * var(--dts-factor, 1));
+        }
+
         /* Header */
         .header-title    { font-size: calc(1.05rem * var(--dts-factor, 1)); }
         .export-rate-row { font-size: calc(0.75rem * var(--dts-factor, 1)); }
         .live-row        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
         .live-week       { font-size: calc(0.68rem * var(--dts-factor, 1)); }
 
-        /* Column value labels */
-        .value-num        { font-size: calc(0.75rem * var(--dts-factor, 1)); }
-        .value-unit       { font-size: calc(0.60rem * var(--dts-factor, 1)); }
-        .value-estimate10 { font-size: calc(0.58rem * var(--dts-factor, 1)); }
-        .value-empty      { font-size: calc(0.78rem * var(--dts-factor, 1)); }
-
-        /* Day labels */
-        .day-name         { font-size: calc(0.75rem * var(--dts-factor, 1)); }
-        .day-date         { font-size: calc(0.65rem * var(--dts-factor, 1)); }
-
-        /* Two-day footnote */
-        .two-day-note     { font-size: calc(0.65rem * var(--dts-factor, 1)); }
-
         /* Inline hourly summary */
         .main-hourly-day   { font-size: calc(0.82rem * var(--dts-factor, 1)); }
         .main-hourly-total { font-size: calc(0.74rem * var(--dts-factor, 1)); }
-
-        /* Bar segment labels */
-        .array-label      { font-size: calc(0.5rem  * var(--dts-factor, 1)); }
       }
     `;
   }
@@ -1851,10 +1876,11 @@ export class SolarForecastCard extends LitElement {
     ` : nothing;
 
     const rows = this._buildRows();
+    const cardStyle = this._cardStyle();
 
     if (this._config.show_hourly_as_main) {
       return html`
-        <ha-card>
+        <ha-card style=${styleMap(cardStyle)}>
           ${header}
           ${this._renderMainHourly(rows[0])}
         </ha-card>
@@ -1863,7 +1889,7 @@ export class SolarForecastCard extends LitElement {
 
     if (!hasEntities) {
       return html`
-        <ha-card>
+        <ha-card style=${styleMap(cardStyle)}>
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
@@ -1878,7 +1904,7 @@ export class SolarForecastCard extends LitElement {
     const displayRows = isTwoDay ? validRows : rows;
 
     return html`
-      <ha-card>
+      <ha-card style=${styleMap(cardStyle)}>
         ${header}
         <div class="forecast-grid ${isTwoDay ? "two-day" : ""}">
           ${displayRows.map((row) => this._renderCol(row))}

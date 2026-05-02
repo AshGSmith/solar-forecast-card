@@ -37,6 +37,10 @@ export interface SolarForecastCardConfig {
   high_threshold?: number;
   /** Scale factor for card text on desktop/wide viewports (100–150, step 5). Undefined = 100 (no change). Only applied at ≥ 768 px viewport width. */
   desktop_text_scale?: number;
+  /** Optional daily forecast value/day label font size in pixels. Undefined = CSS/default styling. */
+  font_size?: number;
+  /** Optional daily forecast bar width in pixels. Undefined = CSS/default styling. */
+  bar_width?: number;
 }
 
 export interface EntityRegistryEntry {

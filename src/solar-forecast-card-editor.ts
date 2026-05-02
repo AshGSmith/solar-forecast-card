@@ -78,6 +78,24 @@ const SCHEMA_DISPLAY_TEXT_SCALE: HaFormSchema[] = [
   },
 ];
 
+const SCHEMA_DISPLAY_FONT_SIZE: HaFormSchema[] = [
+  {
+    name: "font_size",
+    selector: {
+      number: { min: 10, max: 24, step: 1, mode: "box", unit_of_measurement: "px" },
+    },
+  },
+];
+
+const SCHEMA_DISPLAY_BAR_WIDTH: HaFormSchema[] = [
+  {
+    name: "bar_width",
+    selector: {
+      number: { min: 8, max: 40, step: 1, mode: "box", unit_of_measurement: "px" },
+    },
+  },
+];
+
 const SCHEMA_DISPLAY_HOURLY: HaFormSchema[] = [
   { name: "show_hourly_as_main", selector: { boolean: {} } },
 ];
@@ -123,6 +141,8 @@ interface FormData {
   low_threshold: number | undefined;
   high_threshold: number | undefined;
   desktop_text_scale: number;
+  font_size: number | undefined;
+  bar_width: number | undefined;
 }
 
 // ── Config normalisation (exported — also used by the main card) ──────────────
@@ -163,6 +183,8 @@ export function normalizeConfig(
     low_threshold:        raw.low_threshold,
     high_threshold:       raw.high_threshold,
     desktop_text_scale:   raw.desktop_text_scale,
+    font_size:            raw.font_size,
+    bar_width:            raw.bar_width,
   };
 }
 
@@ -247,6 +269,8 @@ export class SolarForecastCardEditor extends LitElement {
       low_threshold:       cfg.low_threshold,
       high_threshold:      cfg.high_threshold,
       desktop_text_scale:  cfg.desktop_text_scale ?? 100,
+      font_size:           cfg.font_size,
+      bar_width:           cfg.bar_width,
       forecast_entity_0:   cfg.forecast_entities[0] ?? "",
       forecast_entity_1:   cfg.forecast_entities[1] ?? "",
       forecast_entity_2:   cfg.forecast_entities[2] ?? "",
@@ -255,6 +279,10 @@ export class SolarForecastCardEditor extends LitElement {
       forecast_entity_5:   cfg.forecast_entities[5] ?? "",
       forecast_entity_6:   cfg.forecast_entities[6] ?? "",
     };
+  }
+
+  private _optionalNumber(value: unknown): number | undefined {
+    return typeof value === "number" && Number.isFinite(value) ? value : undefined;
   }
 
   private _fromFormData(data: FormData): SolarForecastCardConfig {
@@ -292,6 +320,8 @@ export class SolarForecastCardEditor extends LitElement {
       desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
         ? data.desktop_text_scale
         : undefined,
+      font_size: this._optionalNumber(data.font_size),
+      bar_width: this._optionalNumber(data.bar_width),
     };
   }
 
@@ -1043,6 +1073,28 @@ export class SolarForecastCardEditor extends LitElement {
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
           ${this._t("editor.helpers.desktopTextScale")}
+        </p>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_DISPLAY_FONT_SIZE}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          ${this._t("editor.helpers.fontSize")}
+        </p>
+        <ha-form
+          .hass=${this.hass}
+          .data=${data}
+          .schema=${SCHEMA_DISPLAY_BAR_WIDTH}
+          .computeLabel=${label}
+          @value-changed=${onChange}
+        ></ha-form>
+        <p class="device-helper" style="margin:2px 0 6px">
+          <ha-icon icon="mdi:information-outline"></ha-icon>
+          ${this._t("editor.helpers.barWidth")}
         </p>
         <ha-form
           .hass=${this.hass}

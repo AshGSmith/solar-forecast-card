@@ -96,7 +96,9 @@
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
       "high_threshold": "High threshold (kWh)",
-      "desktop_text_scale": "Desktop Text Scale"
+      "desktop_text_scale": "Desktop Text Scale",
+      "font_size": "Font Size",
+      "bar_width": "Bar Width"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -126,7 +128,9 @@
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière."
+      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
+      "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
+      "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
     "warnings": {
       "manualEntities": "Changing device will not overwrite manually configured entities."

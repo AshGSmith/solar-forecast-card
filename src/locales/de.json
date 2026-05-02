@@ -96,7 +96,9 @@
       "solar_max_kwp": "Größe der Solaranlage (kWp)",
       "low_threshold": "Niedriger Schwellenwert (kWh)",
       "high_threshold": "Hoher Schwellenwert (kWh)",
-      "desktop_text_scale": "Desktop-Textskalierung"
+      "desktop_text_scale": "Desktop-Textskalierung",
+      "font_size": "Font Size",
+      "bar_width": "Bar Width"
     },
     "options": {
       "autoDetect": "Automatisch erkennen",
@@ -126,7 +128,9 @@
       "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
       "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
       "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
-      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an."
+      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
+      "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
+      "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
     "warnings": {
       "manualEntities": "Das Ändern des Geräts überschreibt manuell konfigurierte Entitäten nicht."
