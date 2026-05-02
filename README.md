@@ -2,52 +2,25 @@
 
 A Home Assistant Lovelace custom card for displaying solar energy forecast data supplied by any forecasting integration, with simple setup for use with the Volcast, Solcast, Forecast.Solar, and Open-Meteo Solar Forecast integrations by selecting the relevant device in the card configuration to allow the auto-mapping of daily forecast entities.
 
+## Support
+
+This card is provided completely free of charge, but if you want to support me or just say thanks by buying me a coffee, that would mean so much!
+
+<a href="https://www.buymeacoffee.com/AshGSmith" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## Screenshots
 
-<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.3.0/card-main.jpg" alt="Solar Forecast Card — main view" width="600">
+### Main card
 
-<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.3.0/card-popup.jpg" alt="Solar Forecast Card — hourly popup" width="360">
+<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.4.0/card-main.jpg" alt="Solar Forecast Card — main view" width="600">
 
-## Changelog
+### Main card with multiple arrays
 
-### v1.4.0-beta.08
-- **Current-hour highlight alignment:** Made the hourly popup current-hour highlight visual-only so row padding and right-side value alignment remain consistent with non-highlighted rows.
+<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.4.0/card-main-multiple-arrays.jpg" alt="Solar Forecast Card — main view with multiple solar arrays" width="600">
 
-### v1.4.0-beta.07
-- **Translated header labels:** Added translated main-card header/default-title text across the expanded locale set, including live, export rate, next-hour, remaining, week, average, total, forecast, and generated labels.
+### Hourly forecast popup
 
-### v1.4.0-beta.06
-- **Full Home Assistant locale coverage:** Added locale files for all supported Home Assistant frontend languages, each matching the English fallback key set.
-- **Locale validation:** Added a build-time locale validation script to catch invalid JSON, missing keys, extra keys, or missing locale files before release.
-
-### v1.4.0-beta.05
-- **Translated short day labels:** Daily forecast graph labels now use explicit locale keys for today, tomorrow, and weekday abbreviations.
-- **German test locale:** Added `de.json` and German to the temporary language override selector.
-
-### v1.4.0-beta.04
-- **Translation framework:** Added locale-based translation support with English fallback and Home Assistant language detection.
-- **Temporary language override:** Added a visual editor language override for testing localisation before release.
-- **String audit:** Moved remaining visible card and editor copy into locale keys.
-
-### v1.4.0-beta.03
-- **Optional hourly main-card view:** Added `show_hourly_as_main`, allowing today's hourly forecast chart to replace the daily forecast bars directly on the main card.
-- **Reuses popup hourly features:** The inline hourly view uses the existing hourly parsing, actual-vs-forecast display, current-hour highlight, and 12h/24h time formatting.
-
-### v1.4.0-beta.02
-- **Hourly actual-vs-forecast comparison:** Today's hourly popup now shows actual generation as a slim comparison bar beneath the forecast bar, so measured output can be compared visually without changing forecast scaling.
-- **Actual value colouring:** Actual hourly values now use soft red, amber, or green styling when they are below, matching, or above the forecast value.
-- **Current-hour polish:** The current-hour highlight now extends slightly past the Actual column for a more balanced popup layout.
-
-### v1.3.2
-- **Removed debug artifact:** v1.3.1 inadvertently shipped a debugging label (a green `↑X.X kWh` value overlaid on today's forecast column) that was never intended for release. This label has been removed. No configuration changes are required.
-
-### v1.3.1
-- Added `actual_arrays` support for per-array stacked generation bars
-- Added `export_rate_entity`, `next_hour_entity`, and `remaining_today_entity` options
-- Added `desktop_text_scale` option for scaling card text on wide viewports
-- Added manual `integration_type` override in the visual editor
-- Improved Solcast hourly attribute lookup (`detailedForecast` / `hours` fallback)
-- Fixed `today_actual_entity` fallback when arrays are configured but not yet producing
+<img src="https://raw.githubusercontent.com/AshGSmith/solar-forecast-card/main/docs/screenshots/v1.4.0/card-popup.jpg" alt="Solar Forecast Card — hourly popup" width="360">
 
 ## Installation
 
@@ -107,6 +80,7 @@ inverter_max_kw: 5.0
 solar_max_kwp: 4.2
 date_format: DD/MM
 time_format: 24h
+desktop_text_scale: 100
 low_threshold: 10
 high_threshold: 30
 ```
@@ -122,6 +96,19 @@ high_threshold: 30
 | `icon` | string | no | `mdi:solar-power` | MDI icon shown to the left of the title (e.g. `mdi:solar-power-variant`) |
 | `show_header` | boolean | no | `true` | Show or hide the card header, including the title and live data badge |
 | `display_estimate10` | boolean | no | `false` | When enabled with the Solcast integration, shows a secondary P10 (10th-percentile) forecast value below each day's main forecast total |
+
+#### Hourly Forecasts
+
+Clicking a daily forecast column opens an hourly popup when hourly data is available from the configured integration. The popup reuses the same hourly data normalisation across Volcast, Solcast, Forecast.Solar, and Open-Meteo Solar Forecast.
+
+For today's forecast, the hourly popup can also compare actual generation against the forecast:
+
+- Forecast generation remains the main hourly bar.
+- Actual generation is shown as a slim comparison bar where actual history is available.
+- The Actual value is softly coloured red, amber, or green depending on whether it is below, matching, or above the forecast value.
+- The current hour is highlighted without changing row layout or value alignment.
+
+Set `show_hourly_as_main: true` to display today's hourly forecast directly on the main card instead of the 7-day daily forecast bars.
 
 #### Device & Entities
 
@@ -189,8 +176,13 @@ actual_arrays:
 | `date_format` | string | no | `DD/MM` | Date format for day column labels. `DD/MM` (e.g. 15/04) or `MM/DD` (e.g. 04/15) |
 | `time_format` | string | no | `24h` | Time format used in the hourly forecast popup. `24h` (e.g. `17:00`) or `12h` (e.g. `5pm`) |
 | `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
+| `desktop_text_scale` | number | no | `100` | Scales card text on wider screens only. Accepts values from 100 to 150 in the visual editor; mobile sizing is unchanged |
 | `font_size` | number | no | — | Optional daily forecast value and day/date label size in pixels. Leave unset to use CSS/default styling |
 | `bar_width` | number | no | — | Optional daily forecast bar width in pixels. Leave unset to use CSS/default styling |
+
+#### Language
+
+The card follows the active Home Assistant frontend language where a locale is available, with English used as the fallback for any missing translation. Date, time, and number formatting continue to use Home Assistant/browser locale behaviour where practical, while the existing `date_format` and `time_format` options remain available.
 
 #### Colour Thresholds
 
@@ -239,11 +231,6 @@ Available variables:
 | `--sfc-popup-border-radius` | Popup corner radius |
 | `--sfc-popup-text-color` | Popup primary text colour |
 | `--sfc-popup-accent-color` | Popup accent colour |
-
-## Support
-This card is provided completely free of charge, but if you want to support me or just say thanks by buying me a coffee, that would mean so much!
-
-<a href="https://www.buymeacoffee.com/AshGSmith" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## License
 
