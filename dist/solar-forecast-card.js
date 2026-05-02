@@ -11703,6 +11703,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         return i$5 `
       :host {
         display: block;
+        --sfc-card-padding-default: 16px 12px 14px;
         --sfc-value-font-size-default: 0.75rem;
         --sfc-value-unit-font-size-default: 0.60rem;
         --sfc-value-estimate-font-size-default: 0.58rem;
@@ -11714,7 +11715,10 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       ha-card {
-        padding: 16px 12px 14px;
+        background: var(--sfc-card-background, var(--ha-card-background, var(--card-background-color, var(--primary-background-color, #fff))));
+        border-radius: var(--sfc-card-border-radius, var(--ha-card-border-radius, 12px));
+        box-shadow: var(--sfc-card-box-shadow, var(--ha-card-box-shadow, none));
+        padding: var(--sfc-card-padding, var(--sfc-card-padding-default));
         overflow: hidden;
         box-sizing: border-box;
       }
@@ -11744,9 +11748,9 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 1.05rem;
+        font-size: var(--sfc-title-font-size, 1.05rem);
         font-weight: 500;
-        color: var(--primary-text-color);
+        color: var(--sfc-title-color, var(--primary-text-color));
         flex-wrap: wrap;
       }
 
@@ -11761,7 +11765,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         gap: 4px;
         font-size: 0.75rem;
         font-variant-numeric: tabular-nums;
-        color: var(--secondary-text-color);
+        color: var(--sfc-header-value-color, var(--secondary-text-color));
         white-space: nowrap;
       }
 
@@ -11781,23 +11785,24 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         gap: 4px;
         font-size: 0.75rem;
         font-variant-numeric: tabular-nums;
-        color: var(--secondary-text-color);
+        color: var(--sfc-header-value-color, var(--secondary-text-color));
       }
 
       .live-label {
         font-weight: 700;
-        color: var(--state-active-color, #fbbf24);
+        color: var(--sfc-header-label-color, var(--state-active-color, #fbbf24));
       }
 
       .live-week {
         font-size: 0.68rem;
         font-variant-numeric: tabular-nums;
-        color: var(--secondary-text-color);
+        color: var(--sfc-header-value-color, var(--secondary-text-color));
         opacity: 0.72;
       }
 
       .week-label {
         font-weight: 600;
+        color: var(--sfc-header-label-color, var(--sfc-header-value-color, var(--secondary-text-color)));
       }
 
       /* ── Placeholder ─────────────────────────────────────── */
@@ -11958,7 +11963,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         translate: -50% 0;
         width: min(var(--sfc-bar-width, 24px), 72%);
         height: 100%;
-        border-radius: 8px;
+        border-radius: var(--sfc-bar-radius, 8px);
         background: var(--secondary-background-color, rgba(128, 128, 128, 0.07));
       }
 
@@ -11978,12 +11983,12 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       /* ── Forecast bar — average (default, yellow/amber) ──────── */
 
       .bar-forecast {
-        border-radius: 6px 6px 3px 3px;
-        background: linear-gradient(
+        border-radius: var(--sfc-bar-radius, 6px 6px 3px 3px);
+        background: var(--sfc-average-color, linear-gradient(
           to top,
           rgba(245, 158, 11, 0.92),
           rgba(254, 215, 86, 0.78)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(251, 191, 36, 0.15),
           0 2px 10px 0 rgba(245, 158, 11, 0.28),
@@ -11991,11 +11996,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .bar-forecast.complete {
-        background: linear-gradient(
+        background: var(--sfc-average-color, linear-gradient(
           to top,
           rgba(245, 158, 11, 0.98),
           rgba(254, 215, 86, 0.88)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(251, 191, 36, 0.25),
           0 2px 12px 0 rgba(245, 158, 11, 0.42),
@@ -12005,11 +12010,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       /* ── Forecast bar — low (soft coral/rose) ────────────────── */
 
       .bar-forecast.low {
-        background: linear-gradient(
+        background: var(--sfc-low-color, linear-gradient(
           to top,
           rgba(220, 80, 80, 0.88),
           rgba(252, 160, 155, 0.74)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(239, 68, 68, 0.14),
           0 2px 10px 0 rgba(220, 80, 80, 0.24),
@@ -12017,11 +12022,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .bar-forecast.complete.low {
-        background: linear-gradient(
+        background: var(--sfc-low-color, linear-gradient(
           to top,
           rgba(220, 80, 80, 0.98),
           rgba(252, 160, 155, 0.88)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(239, 68, 68, 0.25),
           0 2px 12px 0 rgba(220, 80, 80, 0.40),
@@ -12031,11 +12036,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       /* ── Forecast bar — high (green) ─────────────────────────── */
 
       .bar-forecast.high {
-        background: linear-gradient(
+        background: var(--sfc-high-color, linear-gradient(
           to top,
           rgba(22, 163, 74, 0.92),
           rgba(74, 222, 128, 0.78)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(34, 197, 94, 0.15),
           0 2px 10px 0 rgba(22, 163, 74, 0.28),
@@ -12043,11 +12048,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .bar-forecast.complete.high {
-        background: linear-gradient(
+        background: var(--sfc-high-color, linear-gradient(
           to top,
           rgba(22, 163, 74, 0.98),
           rgba(74, 222, 128, 0.90)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(34, 197, 94, 0.25),
           0 2px 12px 0 rgba(22, 163, 74, 0.42),
@@ -12057,12 +12062,12 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       /* ── Actual generation bar — purple ──────────────────────── */
 
       .bar-actual {
-        border-radius: 6px 6px 3px 3px;
-        background: linear-gradient(
+        border-radius: var(--sfc-bar-radius, 6px 6px 3px 3px);
+        background: var(--sfc-actual-color, linear-gradient(
           to top,
           rgba(124, 58, 237, 0.90),
           rgba(196, 136, 255, 0.76)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(139, 92, 246, 0.15),
           0 2px 10px 0 rgba(124, 58, 237, 0.28),
@@ -12083,7 +12088,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         width: min(var(--sfc-bar-width, 24px), 72%);
         display: flex;
         flex-direction: column-reverse; /* first array sits at the bottom */
-        border-radius: 6px 6px 3px 3px;
+        border-radius: var(--sfc-bar-radius, 6px 6px 3px 3px);
         overflow: hidden;
         transition:
           height 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
@@ -12184,8 +12189,8 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         background: rgba(34, 197, 94, 0.06);
       }
 
-      .bar-dotted.full    { border-radius: 6px; }
-      .bar-dotted.partial { border-bottom: none; border-radius: 6px 6px 0 0; }
+      .bar-dotted.full    { border-radius: var(--sfc-bar-radius, 6px); }
+      .bar-dotted.partial { border-bottom: none; border-radius: var(--sfc-bar-radius, 6px 6px 0 0); }
 
       /* ── Day label ───────────────────────────────────────── */
 
@@ -12260,8 +12265,9 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
 
       .popup-panel {
         position: relative;
-        background: var(--ha-card-background, var(--card-background-color, #1c1c1e));
-        border-radius: 20px;
+        background: var(--sfc-popup-background, var(--ha-card-background, var(--card-background-color, #1c1c1e)));
+        border-radius: var(--sfc-popup-border-radius, 20px);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
         width: 100%;
         max-width: 400px;
         max-height: min(520px, calc(100dvh - 32px));
@@ -12307,7 +12313,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       .popup-day-name {
         font-size: 1.05rem;
         font-weight: 600;
-        color: var(--primary-text-color);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
         line-height: 1.2;
       }
 
@@ -12324,7 +12330,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         font-size: 0.95rem;
         font-weight: 600;
         font-variant-numeric: tabular-nums;
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
       .popup-close {
@@ -12346,7 +12352,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
 
       .popup-close:hover {
         background: var(--divider-color, rgba(128, 128, 128, 0.18));
-        color: var(--primary-text-color);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
       }
 
       .popup-close ha-icon {
@@ -12404,14 +12410,14 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         white-space: nowrap;
         font-size: 0.82rem;
         font-weight: 600;
-        color: var(--primary-text-color);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
       }
 
       .main-hourly-total {
         flex-shrink: 0;
         font-size: 0.74rem;
         font-variant-numeric: tabular-nums;
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
       .main-hourly-chart {
@@ -12481,11 +12487,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         position: absolute;
         inset: 0 auto 0 0;
         border-radius: 5px;
-        background: linear-gradient(
+        background: var(--sfc-average-color, linear-gradient(
           to right,
           rgba(245, 158, 11, 0.88),
           rgba(254, 215, 86, 0.76)
-        );
+        ));
         /* Bars animate in staggered via --delay set inline */
         animation: bar-in 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
         animation-delay: var(--delay, 0ms);
@@ -12497,11 +12503,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .chart-bar-fill.peak {
-        background: linear-gradient(
+        background: var(--sfc-average-color, linear-gradient(
           to right,
           rgba(245, 158, 11, 1.0),
           rgba(254, 215, 86, 0.92)
-        );
+        ));
         box-shadow: 0 0 7px 1px rgba(245, 158, 11, 0.38);
       }
 
@@ -12551,7 +12557,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .chart-val.peak {
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         font-weight: 600;
       }
 
@@ -12584,7 +12590,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .chart-val-actual.actual-match {
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
       .chart-val-actual.actual-over {
@@ -12616,7 +12622,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         pointer-events: none;
         border-radius: 4px;
         background: rgba(251, 191, 36, 0.07);
-        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.50);
+        box-shadow: inset 2px 0 0 0 var(--sfc-popup-accent-color, rgba(245, 158, 11, 0.50));
         z-index: 0;
       }
 
@@ -12627,7 +12633,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
 
       /* Amber time label so the current hour is easy to find at a glance */
       .chart-row.current-hour .chart-hour {
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         opacity: 1;
       }
 
@@ -12681,9 +12687,9 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         const icon = this._config.icon ?? "mdi:solar-power";
         const hasEntities = this._config.forecast_entities.some(Boolean);
         const header = this._config.show_header ? b `
-      <div class="card-header">
+      <div part="header" class="card-header">
         <div class="header-left">
-          <div class="header-title">
+          <div part="title" class="header-title">
             <ha-icon icon=${icon}></ha-icon>
             ${title}
           </div>
@@ -12696,7 +12702,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         const cardStyle = this._cardStyle();
         if (this._config.show_hourly_as_main) {
             return b `
-        <ha-card style=${o(cardStyle)}>
+        <ha-card part="card" style=${o(cardStyle)}>
           ${header}
           ${this._renderMainHourly(rows[0])}
         </ha-card>
@@ -12704,7 +12710,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         }
         if (!hasEntities) {
             return b `
-        <ha-card style=${o(cardStyle)}>
+        <ha-card part="card" style=${o(cardStyle)}>
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
@@ -12717,7 +12723,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         const isTwoDay = this._config.integration_type === "forecast_solar" && validRows.length <= 2;
         const displayRows = isTwoDay ? validRows : rows;
         return b `
-      <ha-card style=${o(cardStyle)}>
+      <ha-card part="card" style=${o(cardStyle)}>
         ${header}
         <div class="forecast-grid ${isTwoDay ? "two-day" : ""}">
           ${displayRows.map((row) => this._renderCol(row))}
@@ -13016,7 +13022,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
             if (isComplete) {
                 // Completion indicator — solid forecast bar regardless of arrays
-                bars = b `<div class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
+                bars = b `<div part="daily-bar" class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
             }
             else if (useStacked) {
                 // ── Stacked per-array segments ──────────────────────────────────────
@@ -13030,19 +13036,19 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 const stackPx = (actualPct / 100) * 120; // estimated total stack height
                 const hasDotted = dottedPct > 1;
                 bars = b `
-          <div class="bar-arrays-stack" style="height:${actualPct}%">
+          <div part="daily-bar" class="bar-arrays-stack" style="height:${actualPct}%">
             ${visibleArrays.map((arr, i) => {
                     const segPx = sumKwh > 0 ? (arr.kwh / sumKwh) * stackPx : 0;
                     const showLabel = arr.label && segPx >= 16;
                     return b `
-                <div class="bar-array-segment seg-color-${i % 8}" style="flex:${arr.kwh}">
+                <div part="daily-bar" class="bar-array-segment seg-color-${i % 8}" style="flex:${arr.kwh}">
                   ${showLabel ? b `<span class="array-label">${arr.label}</span>` : A}
                 </div>
               `;
                 })}
           </div>
           ${hasDotted ? b `
-            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
+            <div part="daily-bar" class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
                  style="height:${dottedPct}%;bottom:${actualPct}%"></div>
           ` : A}
         `;
@@ -13051,17 +13057,17 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 // ── Single-colour actual bar — default and single-source fallback ───
                 const hasDotted = dottedPct > 1;
                 bars = b `
-          <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
+          <div part="daily-bar" class="bar-actual ${hasDotted ? "below-dotted" : ""}"
                style="height:${actualPct}%"></div>
           ${hasDotted ? b `
-            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
+            <div part="daily-bar" class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
                  style="height:${dottedPct}%;bottom:${actualPct}%"></div>
           ` : A}
         `;
             }
         }
         else {
-            bars = b `<div class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
+            bars = b `<div part="daily-bar" class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
         }
         const valueLabel = row.forecastKwh !== null
             ? b `<span class="value-num">${this._formatNumber(row.forecastKwh, 1)}</span><span class="value-unit">${this._t("card.units.kilowattHours")}</span>`
@@ -13078,12 +13084,12 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         @click=${() => this._openPopup(row)}
         @keydown=${(e) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
-        <div class="col-value">${valueLabel}${estimate10Label}</div>
+        <div part="daily-value" class="col-value">${valueLabel}${estimate10Label}</div>
         <div class="col-bar-wrap">
-          <div class="bar-bg"></div>
+          <div part="daily-bar" class="bar-bg"></div>
           ${bars}
         </div>
-        <div class="col-label">
+        <div part="daily-label" class="col-label">
           <span class="day-name">${this._dayLabel(row)}</span>
           <span class="day-date">${this._dateLabel(row.date)}</span>
         </div>
@@ -13176,7 +13182,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         class="popup-overlay ${this._popupVisible ? "visible" : ""}"
         @click=${this._closePopup}
       >
-        <div class="popup-panel" @click=${(e) => e.stopPropagation()}>
+        <div part="popup" class="popup-panel" @click=${(e) => e.stopPropagation()}>
 
           <div class="popup-header">
             <div class="popup-title">
@@ -13265,7 +13271,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                             ? "actual-under"
                             : "actual-match";
                 return b `
-          <div class="chart-row
+          <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
             ${isCurrentHour ? "current-hour" : ""}">
             <span class="chart-hour">${this._hourLabel(pt.hour)}</span>

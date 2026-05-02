@@ -882,6 +882,7 @@ export class SolarForecastCard extends LitElement {
     return css`
       :host {
         display: block;
+        --sfc-card-padding-default: 16px 12px 14px;
         --sfc-value-font-size-default: 0.75rem;
         --sfc-value-unit-font-size-default: 0.60rem;
         --sfc-value-estimate-font-size-default: 0.58rem;
@@ -893,7 +894,10 @@ export class SolarForecastCard extends LitElement {
       }
 
       ha-card {
-        padding: 16px 12px 14px;
+        background: var(--sfc-card-background, var(--ha-card-background, var(--card-background-color, var(--primary-background-color, #fff))));
+        border-radius: var(--sfc-card-border-radius, var(--ha-card-border-radius, 12px));
+        box-shadow: var(--sfc-card-box-shadow, var(--ha-card-box-shadow, none));
+        padding: var(--sfc-card-padding, var(--sfc-card-padding-default));
         overflow: hidden;
         box-sizing: border-box;
       }
@@ -923,9 +927,9 @@ export class SolarForecastCard extends LitElement {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 1.05rem;
+        font-size: var(--sfc-title-font-size, 1.05rem);
         font-weight: 500;
-        color: var(--primary-text-color);
+        color: var(--sfc-title-color, var(--primary-text-color));
         flex-wrap: wrap;
       }
 
@@ -940,7 +944,7 @@ export class SolarForecastCard extends LitElement {
         gap: 4px;
         font-size: 0.75rem;
         font-variant-numeric: tabular-nums;
-        color: var(--secondary-text-color);
+        color: var(--sfc-header-value-color, var(--secondary-text-color));
         white-space: nowrap;
       }
 
@@ -960,23 +964,24 @@ export class SolarForecastCard extends LitElement {
         gap: 4px;
         font-size: 0.75rem;
         font-variant-numeric: tabular-nums;
-        color: var(--secondary-text-color);
+        color: var(--sfc-header-value-color, var(--secondary-text-color));
       }
 
       .live-label {
         font-weight: 700;
-        color: var(--state-active-color, #fbbf24);
+        color: var(--sfc-header-label-color, var(--state-active-color, #fbbf24));
       }
 
       .live-week {
         font-size: 0.68rem;
         font-variant-numeric: tabular-nums;
-        color: var(--secondary-text-color);
+        color: var(--sfc-header-value-color, var(--secondary-text-color));
         opacity: 0.72;
       }
 
       .week-label {
         font-weight: 600;
+        color: var(--sfc-header-label-color, var(--sfc-header-value-color, var(--secondary-text-color)));
       }
 
       /* ── Placeholder ─────────────────────────────────────── */
@@ -1137,7 +1142,7 @@ export class SolarForecastCard extends LitElement {
         translate: -50% 0;
         width: min(var(--sfc-bar-width, 24px), 72%);
         height: 100%;
-        border-radius: 8px;
+        border-radius: var(--sfc-bar-radius, 8px);
         background: var(--secondary-background-color, rgba(128, 128, 128, 0.07));
       }
 
@@ -1157,12 +1162,12 @@ export class SolarForecastCard extends LitElement {
       /* ── Forecast bar — average (default, yellow/amber) ──────── */
 
       .bar-forecast {
-        border-radius: 6px 6px 3px 3px;
-        background: linear-gradient(
+        border-radius: var(--sfc-bar-radius, 6px 6px 3px 3px);
+        background: var(--sfc-average-color, linear-gradient(
           to top,
           rgba(245, 158, 11, 0.92),
           rgba(254, 215, 86, 0.78)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(251, 191, 36, 0.15),
           0 2px 10px 0 rgba(245, 158, 11, 0.28),
@@ -1170,11 +1175,11 @@ export class SolarForecastCard extends LitElement {
       }
 
       .bar-forecast.complete {
-        background: linear-gradient(
+        background: var(--sfc-average-color, linear-gradient(
           to top,
           rgba(245, 158, 11, 0.98),
           rgba(254, 215, 86, 0.88)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(251, 191, 36, 0.25),
           0 2px 12px 0 rgba(245, 158, 11, 0.42),
@@ -1184,11 +1189,11 @@ export class SolarForecastCard extends LitElement {
       /* ── Forecast bar — low (soft coral/rose) ────────────────── */
 
       .bar-forecast.low {
-        background: linear-gradient(
+        background: var(--sfc-low-color, linear-gradient(
           to top,
           rgba(220, 80, 80, 0.88),
           rgba(252, 160, 155, 0.74)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(239, 68, 68, 0.14),
           0 2px 10px 0 rgba(220, 80, 80, 0.24),
@@ -1196,11 +1201,11 @@ export class SolarForecastCard extends LitElement {
       }
 
       .bar-forecast.complete.low {
-        background: linear-gradient(
+        background: var(--sfc-low-color, linear-gradient(
           to top,
           rgba(220, 80, 80, 0.98),
           rgba(252, 160, 155, 0.88)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(239, 68, 68, 0.25),
           0 2px 12px 0 rgba(220, 80, 80, 0.40),
@@ -1210,11 +1215,11 @@ export class SolarForecastCard extends LitElement {
       /* ── Forecast bar — high (green) ─────────────────────────── */
 
       .bar-forecast.high {
-        background: linear-gradient(
+        background: var(--sfc-high-color, linear-gradient(
           to top,
           rgba(22, 163, 74, 0.92),
           rgba(74, 222, 128, 0.78)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(34, 197, 94, 0.15),
           0 2px 10px 0 rgba(22, 163, 74, 0.28),
@@ -1222,11 +1227,11 @@ export class SolarForecastCard extends LitElement {
       }
 
       .bar-forecast.complete.high {
-        background: linear-gradient(
+        background: var(--sfc-high-color, linear-gradient(
           to top,
           rgba(22, 163, 74, 0.98),
           rgba(74, 222, 128, 0.90)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(34, 197, 94, 0.25),
           0 2px 12px 0 rgba(22, 163, 74, 0.42),
@@ -1236,12 +1241,12 @@ export class SolarForecastCard extends LitElement {
       /* ── Actual generation bar — purple ──────────────────────── */
 
       .bar-actual {
-        border-radius: 6px 6px 3px 3px;
-        background: linear-gradient(
+        border-radius: var(--sfc-bar-radius, 6px 6px 3px 3px);
+        background: var(--sfc-actual-color, linear-gradient(
           to top,
           rgba(124, 58, 237, 0.90),
           rgba(196, 136, 255, 0.76)
-        );
+        ));
         box-shadow:
           0 0 0 1px rgba(139, 92, 246, 0.15),
           0 2px 10px 0 rgba(124, 58, 237, 0.28),
@@ -1262,7 +1267,7 @@ export class SolarForecastCard extends LitElement {
         width: min(var(--sfc-bar-width, 24px), 72%);
         display: flex;
         flex-direction: column-reverse; /* first array sits at the bottom */
-        border-radius: 6px 6px 3px 3px;
+        border-radius: var(--sfc-bar-radius, 6px 6px 3px 3px);
         overflow: hidden;
         transition:
           height 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
@@ -1363,8 +1368,8 @@ export class SolarForecastCard extends LitElement {
         background: rgba(34, 197, 94, 0.06);
       }
 
-      .bar-dotted.full    { border-radius: 6px; }
-      .bar-dotted.partial { border-bottom: none; border-radius: 6px 6px 0 0; }
+      .bar-dotted.full    { border-radius: var(--sfc-bar-radius, 6px); }
+      .bar-dotted.partial { border-bottom: none; border-radius: var(--sfc-bar-radius, 6px 6px 0 0); }
 
       /* ── Day label ───────────────────────────────────────── */
 
@@ -1439,8 +1444,9 @@ export class SolarForecastCard extends LitElement {
 
       .popup-panel {
         position: relative;
-        background: var(--ha-card-background, var(--card-background-color, #1c1c1e));
-        border-radius: 20px;
+        background: var(--sfc-popup-background, var(--ha-card-background, var(--card-background-color, #1c1c1e)));
+        border-radius: var(--sfc-popup-border-radius, 20px);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
         width: 100%;
         max-width: 400px;
         max-height: min(520px, calc(100dvh - 32px));
@@ -1486,7 +1492,7 @@ export class SolarForecastCard extends LitElement {
       .popup-day-name {
         font-size: 1.05rem;
         font-weight: 600;
-        color: var(--primary-text-color);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
         line-height: 1.2;
       }
 
@@ -1503,7 +1509,7 @@ export class SolarForecastCard extends LitElement {
         font-size: 0.95rem;
         font-weight: 600;
         font-variant-numeric: tabular-nums;
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
       .popup-close {
@@ -1525,7 +1531,7 @@ export class SolarForecastCard extends LitElement {
 
       .popup-close:hover {
         background: var(--divider-color, rgba(128, 128, 128, 0.18));
-        color: var(--primary-text-color);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
       }
 
       .popup-close ha-icon {
@@ -1583,14 +1589,14 @@ export class SolarForecastCard extends LitElement {
         white-space: nowrap;
         font-size: 0.82rem;
         font-weight: 600;
-        color: var(--primary-text-color);
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
       }
 
       .main-hourly-total {
         flex-shrink: 0;
         font-size: 0.74rem;
         font-variant-numeric: tabular-nums;
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
       .main-hourly-chart {
@@ -1660,11 +1666,11 @@ export class SolarForecastCard extends LitElement {
         position: absolute;
         inset: 0 auto 0 0;
         border-radius: 5px;
-        background: linear-gradient(
+        background: var(--sfc-average-color, linear-gradient(
           to right,
           rgba(245, 158, 11, 0.88),
           rgba(254, 215, 86, 0.76)
-        );
+        ));
         /* Bars animate in staggered via --delay set inline */
         animation: bar-in 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
         animation-delay: var(--delay, 0ms);
@@ -1676,11 +1682,11 @@ export class SolarForecastCard extends LitElement {
       }
 
       .chart-bar-fill.peak {
-        background: linear-gradient(
+        background: var(--sfc-average-color, linear-gradient(
           to right,
           rgba(245, 158, 11, 1.0),
           rgba(254, 215, 86, 0.92)
-        );
+        ));
         box-shadow: 0 0 7px 1px rgba(245, 158, 11, 0.38);
       }
 
@@ -1730,7 +1736,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .chart-val.peak {
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         font-weight: 600;
       }
 
@@ -1763,7 +1769,7 @@ export class SolarForecastCard extends LitElement {
       }
 
       .chart-val-actual.actual-match {
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
       .chart-val-actual.actual-over {
@@ -1795,7 +1801,7 @@ export class SolarForecastCard extends LitElement {
         pointer-events: none;
         border-radius: 4px;
         background: rgba(251, 191, 36, 0.07);
-        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.50);
+        box-shadow: inset 2px 0 0 0 var(--sfc-popup-accent-color, rgba(245, 158, 11, 0.50));
         z-index: 0;
       }
 
@@ -1806,7 +1812,7 @@ export class SolarForecastCard extends LitElement {
 
       /* Amber time label so the current hour is easy to find at a glance */
       .chart-row.current-hour .chart-hour {
-        color: var(--warning-color, #f59e0b);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         opacity: 1;
       }
 
@@ -1863,9 +1869,9 @@ export class SolarForecastCard extends LitElement {
     const hasEntities = this._config.forecast_entities.some(Boolean);
 
     const header = this._config.show_header ? html`
-      <div class="card-header">
+      <div part="header" class="card-header">
         <div class="header-left">
-          <div class="header-title">
+          <div part="title" class="header-title">
             <ha-icon icon=${icon}></ha-icon>
             ${title}
           </div>
@@ -1880,7 +1886,7 @@ export class SolarForecastCard extends LitElement {
 
     if (this._config.show_hourly_as_main) {
       return html`
-        <ha-card style=${styleMap(cardStyle)}>
+        <ha-card part="card" style=${styleMap(cardStyle)}>
           ${header}
           ${this._renderMainHourly(rows[0])}
         </ha-card>
@@ -1889,7 +1895,7 @@ export class SolarForecastCard extends LitElement {
 
     if (!hasEntities) {
       return html`
-        <ha-card style=${styleMap(cardStyle)}>
+        <ha-card part="card" style=${styleMap(cardStyle)}>
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
@@ -1904,7 +1910,7 @@ export class SolarForecastCard extends LitElement {
     const displayRows = isTwoDay ? validRows : rows;
 
     return html`
-      <ha-card style=${styleMap(cardStyle)}>
+      <ha-card part="card" style=${styleMap(cardStyle)}>
         ${header}
         <div class="forecast-grid ${isTwoDay ? "two-day" : ""}">
           ${displayRows.map((row) => this._renderCol(row))}
@@ -2222,7 +2228,7 @@ export class SolarForecastCard extends LitElement {
     if (isToday && row.actualKwh !== null && row.forecastKwh !== null) {
       if (isComplete) {
         // Completion indicator — solid forecast bar regardless of arrays
-        bars = html`<div class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
+        bars = html`<div part="daily-bar" class="bar-forecast complete ${tier}" style="height:${forecastPct}%"></div>`;
 
       } else if (useStacked) {
         // ── Stacked per-array segments ──────────────────────────────────────
@@ -2237,19 +2243,19 @@ export class SolarForecastCard extends LitElement {
         const hasDotted = dottedPct > 1;
 
         bars = html`
-          <div class="bar-arrays-stack" style="height:${actualPct}%">
+          <div part="daily-bar" class="bar-arrays-stack" style="height:${actualPct}%">
             ${visibleArrays.map((arr, i) => {
               const segPx     = sumKwh > 0 ? (arr.kwh / sumKwh) * stackPx : 0;
               const showLabel = arr.label && segPx >= 16;
               return html`
-                <div class="bar-array-segment seg-color-${i % 8}" style="flex:${arr.kwh}">
+                <div part="daily-bar" class="bar-array-segment seg-color-${i % 8}" style="flex:${arr.kwh}">
                   ${showLabel ? html`<span class="array-label">${arr.label}</span>` : nothing}
                 </div>
               `;
             })}
           </div>
           ${hasDotted ? html`
-            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
+            <div part="daily-bar" class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
                  style="height:${dottedPct}%;bottom:${actualPct}%"></div>
           ` : nothing}
         `;
@@ -2258,16 +2264,16 @@ export class SolarForecastCard extends LitElement {
         // ── Single-colour actual bar — default and single-source fallback ───
         const hasDotted = dottedPct > 1;
         bars = html`
-          <div class="bar-actual ${hasDotted ? "below-dotted" : ""}"
+          <div part="daily-bar" class="bar-actual ${hasDotted ? "below-dotted" : ""}"
                style="height:${actualPct}%"></div>
           ${hasDotted ? html`
-            <div class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
+            <div part="daily-bar" class="bar-dotted ${tier} ${actualPct > 0 ? "partial" : "full"}"
                  style="height:${dottedPct}%;bottom:${actualPct}%"></div>
           ` : nothing}
         `;
       }
     } else {
-      bars = html`<div class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
+      bars = html`<div part="daily-bar" class="bar-forecast ${tier}" style="height:${forecastPct}%"></div>`;
     }
 
     const valueLabel = row.forecastKwh !== null
@@ -2287,12 +2293,12 @@ export class SolarForecastCard extends LitElement {
         @click=${() => this._openPopup(row)}
         @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && this._openPopup(row)}
       >
-        <div class="col-value">${valueLabel}${estimate10Label}</div>
+        <div part="daily-value" class="col-value">${valueLabel}${estimate10Label}</div>
         <div class="col-bar-wrap">
-          <div class="bar-bg"></div>
+          <div part="daily-bar" class="bar-bg"></div>
           ${bars}
         </div>
-        <div class="col-label">
+        <div part="daily-label" class="col-label">
           <span class="day-name">${this._dayLabel(row)}</span>
           <span class="day-date">${this._dateLabel(row.date)}</span>
         </div>
@@ -2404,7 +2410,7 @@ export class SolarForecastCard extends LitElement {
         class="popup-overlay ${this._popupVisible ? "visible" : ""}"
         @click=${this._closePopup}
       >
-        <div class="popup-panel" @click=${(e: Event) => e.stopPropagation()}>
+        <div part="popup" class="popup-panel" @click=${(e: Event) => e.stopPropagation()}>
 
           <div class="popup-header">
             <div class="popup-title">
@@ -2505,7 +2511,7 @@ export class SolarForecastCard extends LitElement {
               : "actual-match";
 
         return html`
-          <div class="chart-row
+          <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
             ${isCurrentHour ? "current-hour" : ""}">
             <span class="chart-hour">${this._hourLabel(pt.hour)}</span>

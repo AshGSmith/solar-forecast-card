@@ -189,6 +189,8 @@ actual_arrays:
 | `date_format` | string | no | `DD/MM` | Date format for day column labels. `DD/MM` (e.g. 15/04) or `MM/DD` (e.g. 04/15) |
 | `time_format` | string | no | `24h` | Time format used in the hourly forecast popup. `24h` (e.g. `17:00`) or `12h` (e.g. `5pm`) |
 | `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
+| `font_size` | number | no | — | Optional daily forecast value and day/date label size in pixels. Leave unset to use CSS/default styling |
+| `bar_width` | number | no | — | Optional daily forecast bar width in pixels. Leave unset to use CSS/default styling |
 
 #### Colour Thresholds
 
@@ -198,6 +200,45 @@ Bar colours change based on each day's forecast total. When neither threshold is
 |--------|------|----------|---------|-------------|
 | `low_threshold` | number | no | — | Days forecast below this value (kWh) are shown in a soft red/coral colour |
 | `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
+
+## Card-mod / CSS Customisation
+
+The card exposes CSS custom properties for card-mod and theme-level styling while keeping the default appearance unchanged.
+
+```yaml
+card_mod:
+  style: |
+    solar-forecast-card {
+      --sfc-card-background: rgba(20, 20, 30, 0.8);
+      --sfc-font-size: 14px;
+      --sfc-bar-width: 18px;
+      --sfc-actual-color: #a78bfa;
+    }
+```
+
+Available variables:
+
+| Variable | Area |
+|----------|------|
+| `--sfc-card-background` | Main card background |
+| `--sfc-card-border-radius` | Main card corner radius |
+| `--sfc-card-padding` | Main card padding |
+| `--sfc-card-box-shadow` | Main card shadow |
+| `--sfc-title-color` | Header title colour |
+| `--sfc-title-font-size` | Header title size |
+| `--sfc-header-label-color` | Header label colour |
+| `--sfc-header-value-color` | Header value colour |
+| `--sfc-font-size` | Daily forecast values and day/date labels |
+| `--sfc-bar-width` | Daily forecast bar width |
+| `--sfc-bar-radius` | Daily forecast bar corner radius |
+| `--sfc-low-color` | Low forecast bar background |
+| `--sfc-average-color` | Average forecast bar background |
+| `--sfc-high-color` | High forecast bar background |
+| `--sfc-actual-color` | Actual generation bar background |
+| `--sfc-popup-background` | Popup background |
+| `--sfc-popup-border-radius` | Popup corner radius |
+| `--sfc-popup-text-color` | Popup primary text colour |
+| `--sfc-popup-accent-color` | Popup accent colour |
 
 ## Support
 This card is provided completely free of charge, but if you want to support me or just say thanks by buying me a coffee, that would mean so much!
