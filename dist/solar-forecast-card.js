@@ -10946,6 +10946,7 @@ const DAY_KEYS = [
 ];
 const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
+const MAIN_ACTUAL_REFRESH_MS = 60000;
 let SolarForecastCard = class SolarForecastCard extends i$2 {
     constructor() {
         super(...arguments);
@@ -10966,6 +10967,8 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
          * inline chart's Actual column.
          */
         this._mainActualHourly = null;
+        this._mainActualRefreshInFlight = false;
+        this._mainActualNextRefreshAt = 0;
         this._onDocKey = (e) => {
             if (e.key === "Escape" && this._popup)
                 this._closePopup();
@@ -10986,6 +10989,9 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             throw new Error(localize("en", "card.errors.invalidConfig"));
         this._config = normalizeConfig(config);
         this._mainActualFetchKey = undefined;
+        this._mainActualDataScope = undefined;
+        this._mainActualRefreshInFlight = false;
+        this._mainActualNextRefreshAt = 0;
         this._mainActualHourly = null;
         // Apply the desktop text scale as a CSS custom property on the host element.
         // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
@@ -13128,20 +13134,48 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         const entityId = this._config?.today_actual_entity;
         if (!this._config?.show_hourly_as_main || !row.isToday || !entityId) {
             this._mainActualFetchKey = undefined;
+            this._mainActualDataScope = undefined;
+            this._mainActualRefreshInFlight = false;
+            this._mainActualNextRefreshAt = 0;
             if (this._mainActualHourly !== null)
                 this._mainActualHourly = null;
             return;
         }
-        const state = this.hass?.states[entityId];
         const todayKey = new Date().toDateString();
-        const key = `${entityId}|${todayKey}|${new Date().getHours()}|${state?.last_updated ?? state?.state ?? ""}`;
-        if (this._mainActualFetchKey === key)
+        const scopeKey = `${entityId}|${todayKey}`;
+        if (this._mainActualDataScope !== scopeKey) {
+            this._mainActualDataScope = scopeKey;
+            this._mainActualFetchKey = undefined;
+            this._mainActualRefreshInFlight = false;
+            this._mainActualNextRefreshAt = 0;
+            if (this._mainActualHourly !== null)
+                this._mainActualHourly = null;
+        }
+        const refreshKey = `${scopeKey}|${new Date().getHours()}`;
+        const now = Date.now();
+        const hasActualData = this._mainActualHourly instanceof Map;
+        if (this._mainActualRefreshInFlight ||
+            (hasActualData && this._mainActualFetchKey === refreshKey && now < this._mainActualNextRefreshAt)) {
             return;
-        this._mainActualFetchKey = key;
-        this._mainActualHourly = null;
+        }
+        this._mainActualFetchKey = refreshKey;
+        this._mainActualRefreshInFlight = true;
         this._fetchActualHourly(entityId).then((map) => {
-            if (this._mainActualFetchKey === key && this._config?.show_hourly_as_main) {
-                this._mainActualHourly = map;
+            if (this._mainActualFetchKey === refreshKey &&
+                this._mainActualDataScope === scopeKey &&
+                this._config?.show_hourly_as_main) {
+                // Keep the last known non-empty dataset visible if HA briefly returns an
+                // empty history response during a refresh. This prevents the inline
+                // hourly Actual column from disappearing on frequent sensor updates.
+                const hasExistingData = this._mainActualHourly instanceof Map && this._mainActualHourly.size > 0;
+                if (map.size > 0 || !hasExistingData) {
+                    this._mainActualHourly = map;
+                }
+                this._mainActualNextRefreshAt = Date.now() + MAIN_ACTUAL_REFRESH_MS;
+            }
+        }).finally(() => {
+            if (this._mainActualFetchKey === refreshKey && this._mainActualDataScope === scopeKey) {
+                this._mainActualRefreshInFlight = false;
             }
         });
     }

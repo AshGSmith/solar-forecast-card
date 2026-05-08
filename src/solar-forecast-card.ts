@@ -19,6 +19,7 @@ const DAY_KEYS = [
 ] as const;
 const COMPLETE_THRESHOLD = 1.0;
 const POPUP_CLOSE_MS = 260;
+const MAIN_ACTUAL_REFRESH_MS = 60_000;
 
 interface ForecastRow {
   dayIndex: number;
@@ -68,6 +69,9 @@ export class SolarForecastCard extends LitElement {
    */
   @state() private _mainActualHourly: Map<number, number> | null = null;
   private _mainActualFetchKey?: string;
+  private _mainActualDataScope?: string;
+  private _mainActualRefreshInFlight = false;
+  private _mainActualNextRefreshAt = 0;
 
   private _closeTimer?: ReturnType<typeof setTimeout>;
   private readonly _onDocKey = (e: KeyboardEvent) => {
@@ -91,6 +95,9 @@ export class SolarForecastCard extends LitElement {
     if (!config) throw new Error(localize("en", "card.errors.invalidConfig"));
     this._config = normalizeConfig(config);
     this._mainActualFetchKey = undefined;
+    this._mainActualDataScope = undefined;
+    this._mainActualRefreshInFlight = false;
+    this._mainActualNextRefreshAt = 0;
     this._mainActualHourly = null;
     // Apply the desktop text scale as a CSS custom property on the host element.
     // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
@@ -2342,20 +2349,53 @@ export class SolarForecastCard extends LitElement {
     const entityId = this._config?.today_actual_entity;
     if (!this._config?.show_hourly_as_main || !row.isToday || !entityId) {
       this._mainActualFetchKey = undefined;
+      this._mainActualDataScope = undefined;
+      this._mainActualRefreshInFlight = false;
+      this._mainActualNextRefreshAt = 0;
       if (this._mainActualHourly !== null) this._mainActualHourly = null;
       return;
     }
 
-    const state = this.hass?.states[entityId];
     const todayKey = new Date().toDateString();
-    const key = `${entityId}|${todayKey}|${new Date().getHours()}|${state?.last_updated ?? state?.state ?? ""}`;
-    if (this._mainActualFetchKey === key) return;
+    const scopeKey = `${entityId}|${todayKey}`;
+    if (this._mainActualDataScope !== scopeKey) {
+      this._mainActualDataScope = scopeKey;
+      this._mainActualFetchKey = undefined;
+      this._mainActualRefreshInFlight = false;
+      this._mainActualNextRefreshAt = 0;
+      if (this._mainActualHourly !== null) this._mainActualHourly = null;
+    }
 
-    this._mainActualFetchKey = key;
-    this._mainActualHourly = null;
+    const refreshKey = `${scopeKey}|${new Date().getHours()}`;
+    const now = Date.now();
+    const hasActualData = this._mainActualHourly instanceof Map;
+    if (
+      this._mainActualRefreshInFlight ||
+      (hasActualData && this._mainActualFetchKey === refreshKey && now < this._mainActualNextRefreshAt)
+    ) {
+      return;
+    }
+
+    this._mainActualFetchKey = refreshKey;
+    this._mainActualRefreshInFlight = true;
     this._fetchActualHourly(entityId).then((map) => {
-      if (this._mainActualFetchKey === key && this._config?.show_hourly_as_main) {
-        this._mainActualHourly = map;
+      if (
+        this._mainActualFetchKey === refreshKey &&
+        this._mainActualDataScope === scopeKey &&
+        this._config?.show_hourly_as_main
+      ) {
+        // Keep the last known non-empty dataset visible if HA briefly returns an
+        // empty history response during a refresh. This prevents the inline
+        // hourly Actual column from disappearing on frequent sensor updates.
+        const hasExistingData = this._mainActualHourly instanceof Map && this._mainActualHourly.size > 0;
+        if (map.size > 0 || !hasExistingData) {
+          this._mainActualHourly = map;
+        }
+        this._mainActualNextRefreshAt = Date.now() + MAIN_ACTUAL_REFRESH_MS;
+      }
+    }).finally(() => {
+      if (this._mainActualFetchKey === refreshKey && this._mainActualDataScope === scopeKey) {
+        this._mainActualRefreshInFlight = false;
       }
     });
   }
