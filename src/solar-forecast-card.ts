@@ -1035,20 +1035,13 @@ export class SolarForecastCard extends LitElement {
       .export-limit-badge {
         display: inline-flex;
         align-items: center;
-        gap: 3px;
-        padding: 2px 6px;
-        border-radius: 999px;
-        background: rgba(245, 158, 11, 0.10);
+        gap: 4px;
+        margin-top: -1px;
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
-        font-size: 0.66rem;
-        font-weight: 700;
-        line-height: 1;
-        white-space: nowrap;
-      }
-
-      .export-limit-badge ha-icon {
-        --mdc-icon-size: 12px;
-        color: currentColor;
+        font-size: 0.68rem;
+        font-weight: 600;
+        line-height: 1.2;
+        opacity: 0.82;
       }
 
       .export-rate-row {
@@ -1261,10 +1254,14 @@ export class SolarForecastCard extends LitElement {
         background: color-mix(in srgb, var(--ha-card-background, #fff) 76%, transparent);
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28);
+        line-height: 0;
       }
 
       .bar-limit-marker ha-icon {
-        --mdc-icon-size: 11px;
+        --mdc-icon-size: 10px;
+        display: block;
+        width: 10px;
+        height: 10px;
       }
 
       .bar-bg {
@@ -1773,18 +1770,6 @@ export class SolarForecastCard extends LitElement {
         height: 24px;
       }
 
-      .chart-row.export-limit-exceeded {
-        position: relative;
-        border-radius: 4px;
-        background: rgba(245, 158, 11, 0.045);
-        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.40);
-      }
-
-      .chart-row.export-limit-exceeded > * {
-        position: relative;
-        z-index: 1;
-      }
-
       .chart-hour {
         font-size: 0.70rem;
         color: var(--secondary-text-color);
@@ -2028,13 +2013,12 @@ export class SolarForecastCard extends LitElement {
           <div part="title" class="header-title">
             <ha-icon icon=${icon}></ha-icon>
             <span>${title}</span>
-            ${todayExportLimitWarning ? html`
-              <span class="export-limit-badge" title=${this._exportLimitTitle()}>
-                <ha-icon icon="mdi:alert-outline"></ha-icon>
-                <span>${this._t("card.labels.exportLimitShort")}</span>
-              </span>
-            ` : nothing}
           </div>
+          ${todayExportLimitWarning ? html`
+            <div class="export-limit-badge" title=${this._exportLimitTitle()}>
+              ${this._t("card.labels.exportLimitToday")}
+            </div>
+          ` : nothing}
           ${this._renderExportRate()}
         </div>
         ${this._renderLive()}
@@ -2704,15 +2688,8 @@ export class SolarForecastCard extends LitElement {
         return html`
           <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
-            ${isCurrentHour ? "current-hour" : ""}
-            ${exportLimitExceeded ? "export-limit-exceeded" : ""}"
-            title=${exportLimitExceeded ? this._exportLimitTitle() : ""}>
-            <span class="chart-hour">
-              ${this._hourLabel(pt.hour)}
-              ${exportLimitExceeded ? html`
-                <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
-              ` : nothing}
-            </span>
+            ${isCurrentHour ? "current-hour" : ""}">
+            <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
             <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
                 class="chart-bar-fill ${isPeak ? "peak" : ""}"
@@ -2727,6 +2704,13 @@ export class SolarForecastCard extends LitElement {
             </div>
             <span class="chart-val ${isPeak ? "peak" : ""}">
               ${this._formatNumber(pt.kwh, 2)}
+              ${exportLimitExceeded ? html`
+                <ha-icon
+                  class="chart-limit-icon"
+                  icon="mdi:alert-outline"
+                  title=${this._exportLimitTitle()}
+                ></ha-icon>
+              ` : nothing}
             </span>
             ${showActualCol ? html`
               <span class="chart-val-actual ${actualKwh !== null ? compareClass : "empty"}">

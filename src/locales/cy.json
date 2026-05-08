@@ -27,7 +27,8 @@
       "forecast": "rhagolwg",
       "generated": "cynhyrchwyd",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",

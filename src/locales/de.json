@@ -27,7 +27,8 @@
       "forecast": "Prognose",
       "generated": "erzeugt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} Einspeiselimit"
+      "exportLimitTooltip": "> {limit} {unit} Einspeiselimit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "So",

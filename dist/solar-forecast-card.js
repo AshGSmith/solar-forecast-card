@@ -114,7 +114,8 @@ var af = {
       "forecast": "voorspelling",
       "generated": "opgewek",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -270,7 +271,8 @@ var ar = {
       "forecast": "توقع",
       "generated": "مُولّد",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -426,7 +428,8 @@ var bg = {
       "forecast": "прогноза",
       "generated": "произведено",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -582,7 +585,8 @@ var bn = {
       "forecast": "পূর্বাভাস",
       "generated": "উৎপন্ন",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -738,7 +742,8 @@ var bs = {
       "forecast": "prognoza",
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -894,7 +899,8 @@ var ca = {
       "forecast": "previsió",
       "generated": "generat",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -1050,7 +1056,8 @@ var cs = {
       "forecast": "předpověď",
       "generated": "vyrobeno",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -1206,7 +1213,8 @@ var cy = {
       "forecast": "rhagolwg",
       "generated": "cynhyrchwyd",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -1362,7 +1370,8 @@ var da = {
       "forecast": "prognose",
       "generated": "produceret",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -1518,7 +1527,8 @@ var de = {
       "forecast": "Prognose",
       "generated": "erzeugt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} Einspeiselimit"
+      "exportLimitTooltip": "> {limit} {unit} Einspeiselimit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "So",
@@ -1674,7 +1684,8 @@ var el = {
       "forecast": "πρόγνωση",
       "generated": "παράχθηκε",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -1830,7 +1841,8 @@ var en = {
       "forecast": "forecast",
       "generated": "generated",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -1986,7 +1998,8 @@ var en_GB = {
       "forecast": "forecast",
       "generated": "generated",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -2142,7 +2155,8 @@ var eo = {
       "forecast": "prognozo",
       "generated": "produktita",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -2298,7 +2312,8 @@ var es = {
       "forecast": "previsión",
       "generated": "generado",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -2454,7 +2469,8 @@ var es_419 = {
       "forecast": "pronóstico",
       "generated": "generado",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -2610,7 +2626,8 @@ var et = {
       "forecast": "prognoos",
       "generated": "toodetud",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -2766,7 +2783,8 @@ var eu = {
       "forecast": "iragarpena",
       "generated": "sortua",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -2922,7 +2940,8 @@ var fa = {
       "forecast": "پیش‌بینی",
       "generated": "تولیدشده",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -3078,7 +3097,8 @@ var fi = {
       "forecast": "ennuste",
       "generated": "tuotettu",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -3234,7 +3254,8 @@ var fy = {
       "forecast": "foarsizzing",
       "generated": "opwekt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -3390,7 +3411,8 @@ var fr = {
       "forecast": "prévu",
       "generated": "produit",
       "exportLimitShort": "Limite",
-      "exportLimitTooltip": "> {limit} {unit} limite d'export"
+      "exportLimitTooltip": "> {limit} {unit} limite d'export",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -3546,7 +3568,8 @@ var ga = {
       "forecast": "réamhaisnéis",
       "generated": "giniúna",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -3702,7 +3725,8 @@ var gl = {
       "forecast": "previsión",
       "generated": "xerado",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -3858,7 +3882,8 @@ var gsw = {
       "forecast": "Prognose",
       "generated": "erzügt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4014,7 +4039,8 @@ var he = {
       "forecast": "תחזית",
       "generated": "יוצר",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4170,7 +4196,8 @@ var hi = {
       "forecast": "पूर्वानुमान",
       "generated": "उत्पन्न",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4326,7 +4353,8 @@ var hr = {
       "forecast": "prognoza",
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4482,7 +4510,8 @@ var hu = {
       "forecast": "előrejelzés",
       "generated": "termelt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4638,7 +4667,8 @@ var hy = {
       "forecast": "կանխատեսում",
       "generated": "արտադրված",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4794,7 +4824,8 @@ var id = {
       "forecast": "prakiraan",
       "generated": "dihasilkan",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -4950,7 +4981,8 @@ var it = {
       "forecast": "previsione",
       "generated": "prodotto",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -5106,7 +5138,8 @@ var is = {
       "forecast": "spá",
       "generated": "framleitt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -5262,7 +5295,8 @@ var ja = {
       "forecast": "予測",
       "generated": "発電済み",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -5418,7 +5452,8 @@ var ka = {
       "forecast": "პროგნოზი",
       "generated": "გამომუშავდა",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -5574,7 +5609,8 @@ var ko = {
       "forecast": "예보",
       "generated": "발전됨",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -5730,7 +5766,8 @@ var lb = {
       "forecast": "Prognos",
       "generated": "produzéiert",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -5886,7 +5923,8 @@ var lt = {
       "forecast": "prognozė",
       "generated": "pagaminta",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6042,7 +6080,8 @@ var lv = {
       "forecast": "prognoze",
       "generated": "saražots",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6198,7 +6237,8 @@ var mk = {
       "forecast": "прогноза",
       "generated": "произведено",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6354,7 +6394,8 @@ var ml = {
       "forecast": "പ്രവചനം",
       "generated": "ഉൽപ്പാദിപ്പിച്ചത്",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6510,7 +6551,8 @@ var nl = {
       "forecast": "prognose",
       "generated": "opgewekt",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6666,7 +6708,8 @@ var nb = {
       "forecast": "prognose",
       "generated": "produsert",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6822,7 +6865,8 @@ var nn = {
       "forecast": "prognose",
       "generated": "produsert",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -6978,7 +7022,8 @@ var pl = {
       "forecast": "prognoza",
       "generated": "wygenerowano",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -7134,7 +7179,8 @@ var pt = {
       "forecast": "previsão",
       "generated": "gerado",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -7290,7 +7336,8 @@ var pt_BR = {
       "forecast": "previsão",
       "generated": "gerado",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -7446,7 +7493,8 @@ var ro = {
       "forecast": "prognoză",
       "generated": "generat",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -7602,7 +7650,8 @@ var ru = {
       "forecast": "прогноз",
       "generated": "выработано",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -7758,7 +7807,8 @@ var sk = {
       "forecast": "predpoveď",
       "generated": "vyrobené",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -7914,7 +7964,8 @@ var sl = {
       "forecast": "napoved",
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -8070,7 +8121,8 @@ var sr = {
       "forecast": "прогноза",
       "generated": "произведено",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -8226,7 +8278,8 @@ var sr_Latn = {
       "forecast": "prognoza",
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -8382,7 +8435,8 @@ var sv = {
       "forecast": "prognos",
       "generated": "producerat",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -8538,7 +8592,8 @@ var sq = {
       "forecast": "parashikim",
       "generated": "prodhuar",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -8694,7 +8749,8 @@ var ta = {
       "forecast": "முன்னறிவிப்பு",
       "generated": "உற்பத்தி",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -8850,7 +8906,8 @@ var te = {
       "forecast": "అంచనా",
       "generated": "ఉత్పత్తి",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9006,7 +9063,8 @@ var th = {
       "forecast": "พยากรณ์",
       "generated": "ผลิตแล้ว",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9162,7 +9220,8 @@ var tr = {
       "forecast": "tahmin",
       "generated": "üretildi",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9318,7 +9377,8 @@ var uk = {
       "forecast": "прогноз",
       "generated": "вироблено",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9474,7 +9534,8 @@ var ur = {
       "forecast": "پیش گوئی",
       "generated": "پیدا شدہ",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9630,7 +9691,8 @@ var vi = {
       "forecast": "dự báo",
       "generated": "đã tạo",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9786,7 +9848,8 @@ var zh_Hans = {
       "forecast": "预测",
       "generated": "已发电",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -9942,7 +10005,8 @@ var zh_Hant = {
       "forecast": "預測",
       "generated": "已發電",
       "exportLimitShort": "Limit",
-      "exportLimitTooltip": "> {limit} {unit} export limit"
+      "exportLimitTooltip": "> {limit} {unit} export limit",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
@@ -12040,20 +12104,13 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       .export-limit-badge {
         display: inline-flex;
         align-items: center;
-        gap: 3px;
-        padding: 2px 6px;
-        border-radius: 999px;
-        background: rgba(245, 158, 11, 0.10);
+        gap: 4px;
+        margin-top: -1px;
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
-        font-size: 0.66rem;
-        font-weight: 700;
-        line-height: 1;
-        white-space: nowrap;
-      }
-
-      .export-limit-badge ha-icon {
-        --mdc-icon-size: 12px;
-        color: currentColor;
+        font-size: 0.68rem;
+        font-weight: 600;
+        line-height: 1.2;
+        opacity: 0.82;
       }
 
       .export-rate-row {
@@ -12266,10 +12323,14 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         background: color-mix(in srgb, var(--ha-card-background, #fff) 76%, transparent);
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28);
+        line-height: 0;
       }
 
       .bar-limit-marker ha-icon {
-        --mdc-icon-size: 11px;
+        --mdc-icon-size: 10px;
+        display: block;
+        width: 10px;
+        height: 10px;
       }
 
       .bar-bg {
@@ -12778,18 +12839,6 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         height: 24px;
       }
 
-      .chart-row.export-limit-exceeded {
-        position: relative;
-        border-radius: 4px;
-        background: rgba(245, 158, 11, 0.045);
-        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.40);
-      }
-
-      .chart-row.export-limit-exceeded > * {
-        position: relative;
-        z-index: 1;
-      }
-
       .chart-hour {
         font-size: 0.70rem;
         color: var(--secondary-text-color);
@@ -13030,13 +13079,12 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
           <div part="title" class="header-title">
             <ha-icon icon=${icon}></ha-icon>
             <span>${title}</span>
-            ${todayExportLimitWarning ? b `
-              <span class="export-limit-badge" title=${this._exportLimitTitle()}>
-                <ha-icon icon="mdi:alert-outline"></ha-icon>
-                <span>${this._t("card.labels.exportLimitShort")}</span>
-              </span>
-            ` : A}
           </div>
+          ${todayExportLimitWarning ? b `
+            <div class="export-limit-badge" title=${this._exportLimitTitle()}>
+              ${this._t("card.labels.exportLimitToday")}
+            </div>
+          ` : A}
           ${this._renderExportRate()}
         </div>
         ${this._renderLive()}
@@ -13644,15 +13692,8 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 return b `
           <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
-            ${isCurrentHour ? "current-hour" : ""}
-            ${exportLimitExceeded ? "export-limit-exceeded" : ""}"
-            title=${exportLimitExceeded ? this._exportLimitTitle() : ""}>
-            <span class="chart-hour">
-              ${this._hourLabel(pt.hour)}
-              ${exportLimitExceeded ? b `
-                <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
-              ` : A}
-            </span>
+            ${isCurrentHour ? "current-hour" : ""}">
+            <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
             <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
                 class="chart-bar-fill ${isPeak ? "peak" : ""}"
@@ -13667,6 +13708,13 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             </div>
             <span class="chart-val ${isPeak ? "peak" : ""}">
               ${this._formatNumber(pt.kwh, 2)}
+              ${exportLimitExceeded ? b `
+                <ha-icon
+                  class="chart-limit-icon"
+                  icon="mdi:alert-outline"
+                  title=${this._exportLimitTitle()}
+                ></ha-icon>
+              ` : A}
             </span>
             ${showActualCol ? b `
               <span class="chart-val-actual ${actualKwh !== null ? compareClass : "empty"}">

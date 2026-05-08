@@ -27,7 +27,8 @@
       "forecast": "prévu",
       "generated": "produit",
       "exportLimitShort": "Limite",
-      "exportLimitTooltip": "> {limit} {unit} limite d'export"
+      "exportLimitTooltip": "> {limit} {unit} limite d'export",
+      "exportLimitToday": "⚠ Export will be limited at times today"
     },
     "days": {
       "sun": "Sun",
