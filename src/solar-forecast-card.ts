@@ -42,6 +42,8 @@ interface ForecastRow {
 interface HourPoint {
   hour: number;
   kwh: number;
+  /** Peak average kW among the source intervals represented by this displayed hour. */
+  maxKw?: number;
 }
 
 @customElement("solar-forecast-card")
@@ -265,17 +267,7 @@ export class SolarForecastCard extends LitElement {
         estimate10Kwh: showEstimate10
           ? this._sumEstimate10(s?.attributes?.detailedForecast)
           : null,
-        rawHoursAttr: cfg.integration_type === "solcast"
-          // Prefer detailedForecast (standard Solcast attribute); fall back to
-          // hours so manually-configured cards work with alternate attribute names.
-          ? (s?.attributes?.detailedForecast ?? s?.attributes?.hours)
-          : cfg.integration_type === "volcast"
-            ? s?.attributes?.hours
-            : cfg.integration_type === "forecast_solar"
-              ? undefined
-              : cfg.integration_type === "open_meteo_solar_forecast"
-                ? s?.attributes?.wh_period
-                : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
+        rawHoursAttr: this._rawHoursForState(s, cfg.integration_type),
       };
     });
 
@@ -390,7 +382,8 @@ export class SolarForecastCard extends LitElement {
         points = raw.map((v, i): HourPoint => {
           // 1 — bare number, index = hour
           if (typeof v === "number") {
-            return { hour: i, kwh: isFinite(v) ? v : 0 };
+            const kwh = isFinite(v) ? v : 0;
+            return { hour: i, kwh, maxKw: kwh };
           }
 
           // 2 — object with hour + value fields
@@ -411,14 +404,28 @@ export class SolarForecastCard extends LitElement {
             const kwh = typeof rawV === "number" ? rawV
                       : typeof rawV === "string" ? parseFloat(rawV)
                       : 0;
+            const rawPower = obj.power_kw ?? obj.pv_estimate;
+            const rawDurationHours = obj.duration_hours ?? obj.interval_hours;
+            const rawDurationMinutes = obj.duration_minutes ?? obj.interval_minutes;
+            const durationHours =
+              typeof rawDurationHours === "number" ? rawDurationHours :
+              typeof rawDurationHours === "string" ? parseFloat(rawDurationHours) :
+              typeof rawDurationMinutes === "number" ? rawDurationMinutes / 60 :
+              typeof rawDurationMinutes === "string" ? parseFloat(rawDurationMinutes) / 60 :
+              1;
+            const maxKw = typeof rawPower === "number" ? rawPower
+                        : typeof rawPower === "string" ? parseFloat(rawPower)
+                        : durationHours > 0 ? kwh / durationHours : kwh;
 
+            const safeKwh = isFinite(kwh) ? kwh : 0;
             return {
               hour: isFinite(hour) ? hour : i,
-              kwh:  isFinite(kwh)  ? kwh  : 0,
+              kwh:  safeKwh,
+              maxKw: isFinite(maxKw) ? maxKw : safeKwh,
             };
           }
 
-          return { hour: i, kwh: 0 };
+          return { hour: i, kwh: 0, maxKw: 0 };
         });
         } // close else (non-Solcast array)
 
@@ -439,6 +446,7 @@ export class SolarForecastCard extends LitElement {
             return {
               hour: isFinite(hour) ? hour : 0,
               kwh:  isFinite(kwh)  ? kwh  : 0,
+              maxKw: isFinite(kwh) ? kwh : 0,
             };
           })
           .sort((a, b) => a.hour - b.hour);
@@ -475,6 +483,7 @@ export class SolarForecastCard extends LitElement {
 
   private _parseSolcastPeriods(entries: Array<Record<string, unknown>>): HourPoint[] {
     const buckets = new Map<number, number>();
+    const peakKw = new Map<number, number>();
     for (const entry of entries) {
       const periodStart = entry.period_start;
       if (typeof periodStart !== "string") continue;
@@ -484,9 +493,10 @@ export class SolarForecastCard extends LitElement {
       const estimate = typeof entry.pv_estimate === "number" ? entry.pv_estimate : 0;
       const kwh      = estimate * 0.5; // 30-min period in kW → kWh
       buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+      peakKw.set(hour, Math.max(peakKw.get(hour) ?? 0, estimate));
     }
     return Array.from(buckets.entries())
-      .map(([hour, kwh]) => ({ hour, kwh }))
+      .map(([hour, kwh]) => ({ hour, kwh, maxKw: peakKw.get(hour) ?? kwh }))
       .sort((a, b) => a.hour - b.hour);
   }
 
@@ -516,6 +526,7 @@ export class SolarForecastCard extends LitElement {
     if (raw.length === 0) return [];
 
     const buckets = new Map<number, number>();
+    const peakKw = new Map<number, number>();
 
     for (let i = 0; i < raw.length; i++) {
       const v = raw[i];
@@ -559,6 +570,19 @@ export class SolarForecastCard extends LitElement {
             : typeof rawV === "string" ? parseFloat(rawV)
             : 0;
         if (!isFinite(kwh)) kwh = 0;
+        const rawPower = obj.power_kw ?? obj.pv_estimate;
+        const rawDurationHours = obj.duration_hours ?? obj.interval_hours;
+        const rawDurationMinutes = obj.duration_minutes ?? obj.interval_minutes;
+        const durationHours =
+          typeof rawDurationHours === "number" ? rawDurationHours :
+          typeof rawDurationHours === "string" ? parseFloat(rawDurationHours) :
+          typeof rawDurationMinutes === "number" ? rawDurationMinutes / 60 :
+          typeof rawDurationMinutes === "string" ? parseFloat(rawDurationMinutes) / 60 :
+          1;
+        const maxKw = typeof rawPower === "number" ? rawPower
+                    : typeof rawPower === "string" ? parseFloat(rawPower)
+                    : durationHours > 0 ? kwh / durationHours : kwh;
+        peakKw.set(hour, Math.max(peakKw.get(hour) ?? 0, isFinite(maxKw) ? maxKw : kwh));
 
       } else {
         continue; // skip null / unexpected types
@@ -566,10 +590,11 @@ export class SolarForecastCard extends LitElement {
 
       if (!isFinite(hour) || hour < 0 || hour > 23) continue;
       buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+      if (!peakKw.has(hour)) peakKw.set(hour, kwh);
     }
 
     const points = Array.from(buckets.entries())
-      .map(([hour, kwh]) => ({ hour, kwh }))
+      .map(([hour, kwh]) => ({ hour, kwh, maxKw: peakKw.get(hour) ?? kwh }))
       .sort((a, b) => a.hour - b.hour);
 
     // Trim leading / trailing zeros — consistent with all other parsers
@@ -590,23 +615,42 @@ export class SolarForecastCard extends LitElement {
    * Values are converted from Wh to kWh.
    */
   private _parseOpenMeteoWhPeriod(raw: Record<string, unknown>): HourPoint[] {
-    const buckets = new Map<number, number>();
+    const entries = Object.entries(raw)
+      .map(([isoKey, val]) => {
+        const hourMatch = isoKey.match(/T(\d{2}):/);
+        const timestamp = Date.parse(isoKey);
+        const wh = typeof val === "number" ? val
+                 : typeof val === "string"  ? parseFloat(val)
+                 : NaN;
+        return {
+          timestamp,
+          hour: hourMatch ? parseInt(hourMatch[1], 10) : NaN,
+          wh,
+        };
+      })
+      .filter((entry) =>
+        isFinite(entry.hour) && entry.hour >= 0 && entry.hour <= 23 &&
+        isFinite(entry.wh)
+      )
+      .sort((a, b) => a.timestamp - b.timestamp);
 
-    for (const [isoKey, val] of Object.entries(raw)) {
+    const buckets = new Map<number, number>();
+    const peakKw = new Map<number, number>();
+
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
       // Extract the hour directly from the ISO string (the T-portion is the
       // local hour in HA's timezone). Using new Date().getHours() would shift
       // the hour to the browser's local timezone, which may differ from HA's.
-      const hourMatch = isoKey.match(/T(\d{2}):/);
-      if (!hourMatch) continue;
-      const hour = parseInt(hourMatch[1], 10);
-      if (!isFinite(hour) || hour < 0 || hour > 23) continue;
-
-      const wh = typeof val === "number" ? val
-               : typeof val === "string"  ? parseFloat(val)
-               : NaN;
-      if (!isFinite(wh)) continue;
-
-      buckets.set(hour, (buckets.get(hour) ?? 0) + wh / 1000); // Wh → kWh
+      const hour = entry.hour;
+      const kwh = entry.wh / 1000; // Wh → kWh
+      const nextTimestamp = entries[i + 1]?.timestamp;
+      const durationHours = isFinite(entry.timestamp) && isFinite(nextTimestamp)
+        ? Math.max((nextTimestamp - entry.timestamp) / 3_600_000, 0)
+        : 1;
+      const avgKw = durationHours > 0 ? kwh / durationHours : kwh;
+      buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+      peakKw.set(hour, Math.max(peakKw.get(hour) ?? 0, avgKw));
     }
 
     // Filter out hours with zero generation — Open-Meteo includes all 24 hours
@@ -615,8 +659,60 @@ export class SolarForecastCard extends LitElement {
     // we remove ALL zero-value hours so the popup shows only generating periods.
     return Array.from(buckets.entries())
       .filter(([, kwh]) => kwh > 0)
-      .map(([hour, kwh]) => ({ hour, kwh }))
+      .map(([hour, kwh]) => ({ hour, kwh, maxKw: peakKw.get(hour) ?? kwh }))
       .sort((a, b) => a.hour - b.hour);
+  }
+
+  private _rawHoursForState(
+    state: HomeAssistant["states"][string] | undefined,
+    integrationType: SolarForecastCardConfig["integration_type"] | undefined
+  ): unknown {
+    if (!state) return undefined;
+    if (integrationType === "solcast") {
+      return state.attributes?.detailedForecast ?? state.attributes?.hours;
+    }
+    if (integrationType === "volcast") {
+      return state.attributes?.hours;
+    }
+    if (integrationType === "forecast_solar") {
+      return state.attributes?.hours ?? state.attributes?.detailedForecast ?? state.attributes?.wh_period;
+    }
+    if (integrationType === "open_meteo_solar_forecast") {
+      return state.attributes?.wh_period;
+    }
+    return state.attributes?.hours ?? state.attributes?.detailedForecast ?? state.attributes?.wh_period;
+  }
+
+  private _exportLimitKw(): number | null {
+    const limit = this._config?.export_limit_kw;
+    return typeof limit === "number" && isFinite(limit) && limit > 0 ? limit : null;
+  }
+
+  private _forecastAverageKw(point: HourPoint): number {
+    if (typeof point.maxKw === "number" && isFinite(point.maxKw)) return point.maxKw;
+    return isFinite(point.kwh) ? point.kwh : 0;
+  }
+
+  private _exceedsExportLimit(point: HourPoint): boolean {
+    const limit = this._exportLimitKw();
+    if (limit === null) return false;
+    const avgKw = this._forecastAverageKw(point);
+    return isFinite(avgKw) && avgKw > limit;
+  }
+
+  private _rowExceedsExportLimit(row: ForecastRow | undefined): boolean {
+    if (!row || this._exportLimitKw() === null) return false;
+    return this._parseHours(row.rawHoursAttr, this._config?.integration_type, true)
+      .some((point) => this._exceedsExportLimit(point));
+  }
+
+  private _exportLimitTitle(): string {
+    const limit = this._exportLimitKw();
+    if (limit === null) return "";
+    return this._t("card.labels.exportLimitTooltip", {
+      limit: this._formatNumber(limit, 2),
+      unit: this._t("card.units.kilowatts"),
+    });
   }
 
   // ── Estimate10 ───────────────────────────────────────────────────────────
@@ -667,16 +763,7 @@ export class SolarForecastCard extends LitElement {
     // Re-read the entity state fresh at click time so we always get the latest hours
     const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
     const intType = this._config?.integration_type;
-    const freshHours = intType === "solcast"
-      // Prefer detailedForecast; fall back to hours for manually-configured setups.
-      ? (freshState?.attributes?.detailedForecast ?? freshState?.attributes?.hours)
-      : intType === "volcast"
-        ? freshState?.attributes?.hours
-        : intType === "forecast_solar"
-          ? undefined
-          : intType === "open_meteo_solar_forecast"
-            ? freshState?.attributes?.wh_period
-            : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
+    const freshHours = this._rawHoursForState(freshState, intType);
 
     // Log which entity is being used and what the hours attribute looks like
     const hoursType = freshHours === undefined ? "missing"
@@ -945,6 +1032,25 @@ export class SolarForecastCard extends LitElement {
         flex-shrink: 0;
       }
 
+      .export-limit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: rgba(245, 158, 11, 0.10);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
+        font-size: 0.66rem;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .export-limit-badge ha-icon {
+        --mdc-icon-size: 12px;
+        color: currentColor;
+      }
+
       .export-rate-row {
         display: flex;
         align-items: center;
@@ -1140,6 +1246,25 @@ export class SolarForecastCard extends LitElement {
         align-items: flex-end;
         justify-content: center;
         pointer-events: none;
+      }
+
+      .bar-limit-marker {
+        position: absolute;
+        top: 4px;
+        left: calc(50% + 8px);
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--ha-card-background, #fff) 76%, transparent);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
+        box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28);
+      }
+
+      .bar-limit-marker ha-icon {
+        --mdc-icon-size: 11px;
       }
 
       .bar-bg {
@@ -1648,6 +1773,18 @@ export class SolarForecastCard extends LitElement {
         height: 24px;
       }
 
+      .chart-row.export-limit-exceeded {
+        position: relative;
+        border-radius: 4px;
+        background: rgba(245, 158, 11, 0.045);
+        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.40);
+      }
+
+      .chart-row.export-limit-exceeded > * {
+        position: relative;
+        z-index: 1;
+      }
+
       .chart-hour {
         font-size: 0.70rem;
         color: var(--secondary-text-color);
@@ -1655,6 +1792,14 @@ export class SolarForecastCard extends LitElement {
         text-align: right;
         line-height: 1;
         opacity: 0.75;
+      }
+
+      .chart-limit-icon {
+        --mdc-icon-size: 11px;
+        margin-left: 2px;
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
+        opacity: 0.9;
+        vertical-align: -2px;
       }
 
       .chart-bar-track {
@@ -1874,13 +2019,21 @@ export class SolarForecastCard extends LitElement {
     const title = this._config.title ?? this._t("card.defaultTitle");
     const icon  = this._config.icon  ?? "mdi:solar-power";
     const hasEntities = this._config.forecast_entities.some(Boolean);
+    const rows = this._buildRows();
+    const todayExportLimitWarning = this._rowExceedsExportLimit(rows[0]);
 
     const header = this._config.show_header ? html`
       <div part="header" class="card-header">
         <div class="header-left">
           <div part="title" class="header-title">
             <ha-icon icon=${icon}></ha-icon>
-            ${title}
+            <span>${title}</span>
+            ${todayExportLimitWarning ? html`
+              <span class="export-limit-badge" title=${this._exportLimitTitle()}>
+                <ha-icon icon="mdi:alert-outline"></ha-icon>
+                <span>${this._t("card.labels.exportLimitShort")}</span>
+              </span>
+            ` : nothing}
           </div>
           ${this._renderExportRate()}
         </div>
@@ -1888,7 +2041,6 @@ export class SolarForecastCard extends LitElement {
       </div>
     ` : nothing;
 
-    const rows = this._buildRows();
     const cardStyle = this._cardStyle();
 
     if (this._config.show_hourly_as_main) {
@@ -2059,14 +2211,7 @@ export class SolarForecastCard extends LitElement {
     if (todayEntityId && todayFcState) {
       const intType = cfg.integration_type;
       // Mirrors the attribute resolution in _openPopup — keep in sync if that changes.
-      const rawHours =
-        // Solcast: prefer detailedForecast, fall back to hours for manual configs.
-        intType === "solcast"                   ? (todayFcState.attributes?.detailedForecast ?? todayFcState.attributes?.hours) :
-        intType === "volcast"                   ? todayFcState.attributes?.hours            :
-        intType === "forecast_solar"            ? undefined                                 :
-        intType === "open_meteo_solar_forecast" ? todayFcState.attributes?.wh_period        :
-        // manual / unknown — try both common attribute names
-        (todayFcState.attributes?.hours ?? todayFcState.attributes?.detailedForecast);
+      const rawHours = this._rawHoursForState(todayFcState, intType);
 
       if (rawHours !== undefined) {
         try {
@@ -2222,6 +2367,7 @@ export class SolarForecastCard extends LitElement {
   private _renderCol(row: ForecastRow) {
     const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
     const tier = this._tier(row.forecastKwh);
+    const exportLimitWarning = this._rowExceedsExportLimit(row);
 
     // Arrays that are currently producing (kwh > 0).
     // Used to decide stacked vs single-bar path.
@@ -2304,6 +2450,11 @@ export class SolarForecastCard extends LitElement {
         <div class="col-bar-wrap">
           <div part="daily-bar" class="bar-bg"></div>
           ${bars}
+          ${exportLimitWarning ? html`
+            <span class="bar-limit-marker" title=${this._exportLimitTitle()}>
+              <ha-icon icon="mdi:alert-outline"></ha-icon>
+            </span>
+          ` : nothing}
         </div>
         <div part="daily-label" class="col-label">
           <span class="day-name">${this._dayLabel(row)}</span>
@@ -2404,15 +2555,14 @@ export class SolarForecastCard extends LitElement {
     row: ForecastRow,
     actualHourly?: Map<number, number> | null
   ) {
-    if (this._config?.integration_type === "forecast_solar") {
+    const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
+    if (this._config?.integration_type === "forecast_solar" && points.length === 0) {
       return html`
         <div class="chart-no-data">
           <p>${this._t("card.popup.integrationNoHourlyData")}</p>
         </div>
       `;
     }
-
-    const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
     const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
 
     const { inverter_max_kw, solar_max_kwp } = this._config!;
@@ -2530,6 +2680,7 @@ export class SolarForecastCard extends LitElement {
         const pct           = maxRef > 0 ? Math.min((pt.kwh / maxRef) * 100, 100) : 0;
         const isPeak        = pt.kwh === peakKwh && peakKwh > 0;
         const isCurrentHour = pt.hour === currentHour;
+        const exportLimitExceeded = this._exceedsExportLimit(pt);
         // Stagger: 20ms base + 18ms per row, capped at 300ms
         const delay         = Math.min(20 + i * 18, 300);
 
@@ -2553,8 +2704,15 @@ export class SolarForecastCard extends LitElement {
         return html`
           <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
-            ${isCurrentHour ? "current-hour" : ""}">
-            <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
+            ${isCurrentHour ? "current-hour" : ""}
+            ${exportLimitExceeded ? "export-limit-exceeded" : ""}"
+            title=${exportLimitExceeded ? this._exportLimitTitle() : ""}>
+            <span class="chart-hour">
+              ${this._hourLabel(pt.hour)}
+              ${exportLimitExceeded ? html`
+                <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
+              ` : nothing}
+            </span>
             <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
                 class="chart-bar-fill ${isPeak ? "peak" : ""}"

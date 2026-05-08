@@ -25,7 +25,9 @@
       "total": "Összesen",
       "p10": "P10",
       "forecast": "előrejelzés",
-      "generated": "termelt"
+      "generated": "termelt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -98,7 +100,8 @@
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",

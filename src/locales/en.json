@@ -25,7 +25,9 @@
       "total": "Total",
       "p10": "P10",
       "forecast": "forecast",
-      "generated": "generated"
+      "generated": "generated",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -94,6 +96,7 @@
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
+      "export_limit_kw": "Export Limit (kW)",
       "low_threshold": "Low threshold (kWh)",
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",

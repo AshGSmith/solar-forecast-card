@@ -112,7 +112,9 @@ var af = {
       "total": "Totaal",
       "p10": "P10",
       "forecast": "voorspelling",
-      "generated": "opgewek"
+      "generated": "opgewek",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -185,7 +187,8 @@ var af = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -265,7 +268,9 @@ var ar = {
       "total": "الإجمالي",
       "p10": "P10",
       "forecast": "توقع",
-      "generated": "مُولّد"
+      "generated": "مُولّد",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -338,7 +343,8 @@ var ar = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -418,7 +424,9 @@ var bg = {
       "total": "Общо",
       "p10": "P10",
       "forecast": "прогноза",
-      "generated": "произведено"
+      "generated": "произведено",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -491,7 +499,8 @@ var bg = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -571,7 +580,9 @@ var bn = {
       "total": "মোট",
       "p10": "P10",
       "forecast": "পূর্বাভাস",
-      "generated": "উৎপন্ন"
+      "generated": "উৎপন্ন",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -644,7 +655,8 @@ var bn = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -724,7 +736,9 @@ var bs = {
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",
-      "generated": "proizvedeno"
+      "generated": "proizvedeno",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -797,7 +811,8 @@ var bs = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -877,7 +892,9 @@ var ca = {
       "total": "Total",
       "p10": "P10",
       "forecast": "previsió",
-      "generated": "generat"
+      "generated": "generat",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -950,7 +967,8 @@ var ca = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -1030,7 +1048,9 @@ var cs = {
       "total": "Celkem",
       "p10": "P10",
       "forecast": "předpověď",
-      "generated": "vyrobeno"
+      "generated": "vyrobeno",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -1103,7 +1123,8 @@ var cs = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -1183,7 +1204,9 @@ var cy = {
       "total": "Cyfanswm",
       "p10": "P10",
       "forecast": "rhagolwg",
-      "generated": "cynhyrchwyd"
+      "generated": "cynhyrchwyd",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -1256,7 +1279,8 @@ var cy = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -1336,7 +1360,9 @@ var da = {
       "total": "Total",
       "p10": "P10",
       "forecast": "prognose",
-      "generated": "produceret"
+      "generated": "produceret",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -1409,7 +1435,8 @@ var da = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -1489,7 +1516,9 @@ var de = {
       "total": "Gesamt",
       "p10": "P10",
       "forecast": "Prognose",
-      "generated": "erzeugt"
+      "generated": "erzeugt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} Einspeiselimit"
     },
     "days": {
       "sun": "So",
@@ -1562,7 +1591,8 @@ var de = {
       "high_threshold": "Hoher Schwellenwert (kWh)",
       "desktop_text_scale": "Desktop-Textskalierung",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Einspeiselimit (kW)"
     },
     "options": {
       "autoDetect": "Automatisch erkennen",
@@ -1642,7 +1672,9 @@ var el = {
       "total": "Σύνολο",
       "p10": "P10",
       "forecast": "πρόγνωση",
-      "generated": "παράχθηκε"
+      "generated": "παράχθηκε",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -1715,7 +1747,8 @@ var el = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -1795,7 +1828,9 @@ var en = {
       "total": "Total",
       "p10": "P10",
       "forecast": "forecast",
-      "generated": "generated"
+      "generated": "generated",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -1864,6 +1899,7 @@ var en = {
       "show_hourly_as_main": "Show Hourly Forecast as Main Card",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
+      "export_limit_kw": "Export Limit (kW)",
       "low_threshold": "Low threshold (kWh)",
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
@@ -1948,7 +1984,9 @@ var en_GB = {
       "total": "Total",
       "p10": "P10",
       "forecast": "forecast",
-      "generated": "generated"
+      "generated": "generated",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2021,7 +2059,8 @@ var en_GB = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -2101,7 +2140,9 @@ var eo = {
       "total": "Entute",
       "p10": "P10",
       "forecast": "prognozo",
-      "generated": "produktita"
+      "generated": "produktita",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2174,7 +2215,8 @@ var eo = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -2254,7 +2296,9 @@ var es = {
       "total": "Total",
       "p10": "P10",
       "forecast": "previsión",
-      "generated": "generado"
+      "generated": "generado",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2327,7 +2371,8 @@ var es = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -2407,7 +2452,9 @@ var es_419 = {
       "total": "Total",
       "p10": "P10",
       "forecast": "pronóstico",
-      "generated": "generado"
+      "generated": "generado",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2480,7 +2527,8 @@ var es_419 = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -2560,7 +2608,9 @@ var et = {
       "total": "Kokku",
       "p10": "P10",
       "forecast": "prognoos",
-      "generated": "toodetud"
+      "generated": "toodetud",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2633,7 +2683,8 @@ var et = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -2713,7 +2764,9 @@ var eu = {
       "total": "Guztira",
       "p10": "P10",
       "forecast": "iragarpena",
-      "generated": "sortua"
+      "generated": "sortua",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2786,7 +2839,8 @@ var eu = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -2866,7 +2920,9 @@ var fa = {
       "total": "مجموع",
       "p10": "P10",
       "forecast": "پیش‌بینی",
-      "generated": "تولیدشده"
+      "generated": "تولیدشده",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -2939,7 +2995,8 @@ var fa = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3019,7 +3076,9 @@ var fi = {
       "total": "Yhteensä",
       "p10": "P10",
       "forecast": "ennuste",
-      "generated": "tuotettu"
+      "generated": "tuotettu",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -3092,7 +3151,8 @@ var fi = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3172,7 +3232,9 @@ var fy = {
       "total": "Totaal",
       "p10": "P10",
       "forecast": "foarsizzing",
-      "generated": "opwekt"
+      "generated": "opwekt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -3245,7 +3307,8 @@ var fy = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3325,7 +3388,9 @@ var fr = {
       "total": "Total",
       "p10": "P10",
       "forecast": "prévu",
-      "generated": "produit"
+      "generated": "produit",
+      "exportLimitShort": "Limite",
+      "exportLimitTooltip": "> {limit} {unit} limite d'export"
     },
     "days": {
       "sun": "Sun",
@@ -3398,7 +3463,8 @@ var fr = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Limite d'export (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3478,7 +3544,9 @@ var ga = {
       "total": "Iomlán",
       "p10": "P10",
       "forecast": "réamhaisnéis",
-      "generated": "giniúna"
+      "generated": "giniúna",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -3551,7 +3619,8 @@ var ga = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3631,7 +3700,9 @@ var gl = {
       "total": "Total",
       "p10": "P10",
       "forecast": "previsión",
-      "generated": "xerado"
+      "generated": "xerado",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -3704,7 +3775,8 @@ var gl = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3784,7 +3856,9 @@ var gsw = {
       "total": "Total",
       "p10": "P10",
       "forecast": "Prognose",
-      "generated": "erzügt"
+      "generated": "erzügt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -3857,7 +3931,8 @@ var gsw = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -3937,7 +4012,9 @@ var he = {
       "total": "סה״כ",
       "p10": "P10",
       "forecast": "תחזית",
-      "generated": "יוצר"
+      "generated": "יוצר",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4010,7 +4087,8 @@ var he = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -4090,7 +4168,9 @@ var hi = {
       "total": "कुल",
       "p10": "P10",
       "forecast": "पूर्वानुमान",
-      "generated": "उत्पन्न"
+      "generated": "उत्पन्न",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4163,7 +4243,8 @@ var hi = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -4243,7 +4324,9 @@ var hr = {
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",
-      "generated": "proizvedeno"
+      "generated": "proizvedeno",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4316,7 +4399,8 @@ var hr = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -4396,7 +4480,9 @@ var hu = {
       "total": "Összesen",
       "p10": "P10",
       "forecast": "előrejelzés",
-      "generated": "termelt"
+      "generated": "termelt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4469,7 +4555,8 @@ var hu = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -4549,7 +4636,9 @@ var hy = {
       "total": "Ընդամենը",
       "p10": "P10",
       "forecast": "կանխատեսում",
-      "generated": "արտադրված"
+      "generated": "արտադրված",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4622,7 +4711,8 @@ var hy = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -4702,7 +4792,9 @@ var id = {
       "total": "Total",
       "p10": "P10",
       "forecast": "prakiraan",
-      "generated": "dihasilkan"
+      "generated": "dihasilkan",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4775,7 +4867,8 @@ var id = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -4855,7 +4948,9 @@ var it = {
       "total": "Totale",
       "p10": "P10",
       "forecast": "previsione",
-      "generated": "prodotto"
+      "generated": "prodotto",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -4928,7 +5023,8 @@ var it = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5008,7 +5104,9 @@ var is = {
       "total": "Samtals",
       "p10": "P10",
       "forecast": "spá",
-      "generated": "framleitt"
+      "generated": "framleitt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5081,7 +5179,8 @@ var is = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5161,7 +5260,9 @@ var ja = {
       "total": "合計",
       "p10": "P10",
       "forecast": "予測",
-      "generated": "発電済み"
+      "generated": "発電済み",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5234,7 +5335,8 @@ var ja = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5314,7 +5416,9 @@ var ka = {
       "total": "სულ",
       "p10": "P10",
       "forecast": "პროგნოზი",
-      "generated": "გამომუშავდა"
+      "generated": "გამომუშავდა",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5387,7 +5491,8 @@ var ka = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5467,7 +5572,9 @@ var ko = {
       "total": "합계",
       "p10": "P10",
       "forecast": "예보",
-      "generated": "발전됨"
+      "generated": "발전됨",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5540,7 +5647,8 @@ var ko = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5620,7 +5728,9 @@ var lb = {
       "total": "Total",
       "p10": "P10",
       "forecast": "Prognos",
-      "generated": "produzéiert"
+      "generated": "produzéiert",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5693,7 +5803,8 @@ var lb = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5773,7 +5884,9 @@ var lt = {
       "total": "Iš viso",
       "p10": "P10",
       "forecast": "prognozė",
-      "generated": "pagaminta"
+      "generated": "pagaminta",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5846,7 +5959,8 @@ var lt = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -5926,7 +6040,9 @@ var lv = {
       "total": "Kopā",
       "p10": "P10",
       "forecast": "prognoze",
-      "generated": "saražots"
+      "generated": "saražots",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -5999,7 +6115,8 @@ var lv = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6079,7 +6196,9 @@ var mk = {
       "total": "Вкупно",
       "p10": "P10",
       "forecast": "прогноза",
-      "generated": "произведено"
+      "generated": "произведено",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -6152,7 +6271,8 @@ var mk = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6232,7 +6352,9 @@ var ml = {
       "total": "ആകെ",
       "p10": "P10",
       "forecast": "പ്രവചനം",
-      "generated": "ഉൽപ്പാദിപ്പിച്ചത്"
+      "generated": "ഉൽപ്പാദിപ്പിച്ചത്",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -6305,7 +6427,8 @@ var ml = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6385,7 +6508,9 @@ var nl = {
       "total": "Totaal",
       "p10": "P10",
       "forecast": "prognose",
-      "generated": "opgewekt"
+      "generated": "opgewekt",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -6458,7 +6583,8 @@ var nl = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6538,7 +6664,9 @@ var nb = {
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognose",
-      "generated": "produsert"
+      "generated": "produsert",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -6611,7 +6739,8 @@ var nb = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6691,7 +6820,9 @@ var nn = {
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognose",
-      "generated": "produsert"
+      "generated": "produsert",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -6764,7 +6895,8 @@ var nn = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6844,7 +6976,9 @@ var pl = {
       "total": "Razem",
       "p10": "P10",
       "forecast": "prognoza",
-      "generated": "wygenerowano"
+      "generated": "wygenerowano",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -6917,7 +7051,8 @@ var pl = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -6997,7 +7132,9 @@ var pt = {
       "total": "Total",
       "p10": "P10",
       "forecast": "previsão",
-      "generated": "gerado"
+      "generated": "gerado",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7070,7 +7207,8 @@ var pt = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -7150,7 +7288,9 @@ var pt_BR = {
       "total": "Total",
       "p10": "P10",
       "forecast": "previsão",
-      "generated": "gerado"
+      "generated": "gerado",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7223,7 +7363,8 @@ var pt_BR = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -7303,7 +7444,9 @@ var ro = {
       "total": "Total",
       "p10": "P10",
       "forecast": "prognoză",
-      "generated": "generat"
+      "generated": "generat",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7376,7 +7519,8 @@ var ro = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -7456,7 +7600,9 @@ var ru = {
       "total": "Итого",
       "p10": "P10",
       "forecast": "прогноз",
-      "generated": "выработано"
+      "generated": "выработано",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7529,7 +7675,8 @@ var ru = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -7609,7 +7756,9 @@ var sk = {
       "total": "Celkom",
       "p10": "P10",
       "forecast": "predpoveď",
-      "generated": "vyrobené"
+      "generated": "vyrobené",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7682,7 +7831,8 @@ var sk = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -7762,7 +7912,9 @@ var sl = {
       "total": "Skupaj",
       "p10": "P10",
       "forecast": "napoved",
-      "generated": "proizvedeno"
+      "generated": "proizvedeno",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7835,7 +7987,8 @@ var sl = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -7915,7 +8068,9 @@ var sr = {
       "total": "Укупно",
       "p10": "P10",
       "forecast": "прогноза",
-      "generated": "произведено"
+      "generated": "произведено",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -7988,7 +8143,8 @@ var sr = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8068,7 +8224,9 @@ var sr_Latn = {
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",
-      "generated": "proizvedeno"
+      "generated": "proizvedeno",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -8141,7 +8299,8 @@ var sr_Latn = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8221,7 +8380,9 @@ var sv = {
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognos",
-      "generated": "producerat"
+      "generated": "producerat",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -8294,7 +8455,8 @@ var sv = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8374,7 +8536,9 @@ var sq = {
       "total": "Totali",
       "p10": "P10",
       "forecast": "parashikim",
-      "generated": "prodhuar"
+      "generated": "prodhuar",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -8447,7 +8611,8 @@ var sq = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8527,7 +8692,9 @@ var ta = {
       "total": "மொத்தம்",
       "p10": "P10",
       "forecast": "முன்னறிவிப்பு",
-      "generated": "உற்பத்தி"
+      "generated": "உற்பத்தி",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -8600,7 +8767,8 @@ var ta = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8680,7 +8848,9 @@ var te = {
       "total": "మొత్తం",
       "p10": "P10",
       "forecast": "అంచనా",
-      "generated": "ఉత్పత్తి"
+      "generated": "ఉత్పత్తి",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -8753,7 +8923,8 @@ var te = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8833,7 +9004,9 @@ var th = {
       "total": "รวม",
       "p10": "P10",
       "forecast": "พยากรณ์",
-      "generated": "ผลิตแล้ว"
+      "generated": "ผลิตแล้ว",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -8906,7 +9079,8 @@ var th = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -8986,7 +9160,9 @@ var tr = {
       "total": "Toplam",
       "p10": "P10",
       "forecast": "tahmin",
-      "generated": "üretildi"
+      "generated": "üretildi",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -9059,7 +9235,8 @@ var tr = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -9139,7 +9316,9 @@ var uk = {
       "total": "Разом",
       "p10": "P10",
       "forecast": "прогноз",
-      "generated": "вироблено"
+      "generated": "вироблено",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -9212,7 +9391,8 @@ var uk = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -9292,7 +9472,9 @@ var ur = {
       "total": "کل",
       "p10": "P10",
       "forecast": "پیش گوئی",
-      "generated": "پیدا شدہ"
+      "generated": "پیدا شدہ",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -9365,7 +9547,8 @@ var ur = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -9445,7 +9628,9 @@ var vi = {
       "total": "Tổng",
       "p10": "P10",
       "forecast": "dự báo",
-      "generated": "đã tạo"
+      "generated": "đã tạo",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -9518,7 +9703,8 @@ var vi = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -9598,7 +9784,9 @@ var zh_Hans = {
       "total": "总计",
       "p10": "P10",
       "forecast": "预测",
-      "generated": "已发电"
+      "generated": "已发电",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -9671,7 +9859,8 @@ var zh_Hans = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -9751,7 +9940,9 @@ var zh_Hant = {
       "total": "總計",
       "p10": "P10",
       "forecast": "預測",
-      "generated": "已發電"
+      "generated": "已發電",
+      "exportLimitShort": "Limit",
+      "exportLimitTooltip": "> {limit} {unit} export limit"
     },
     "days": {
       "sun": "Sun",
@@ -9824,7 +10015,8 @@ var zh_Hant = {
       "high_threshold": "High threshold (kWh)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
-      "bar_width": "Bar Width"
+      "bar_width": "Bar Width",
+      "export_limit_kw": "Export Limit (kW)"
     },
     "options": {
       "autoDetect": "Auto-detect",
@@ -10043,6 +10235,7 @@ const SCHEMA_ENERGY_PROVIDER = [
 const SCHEMA_SYSTEM = [
     { name: "inverter_max_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW" } } },
     { name: "solar_max_kwp", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWp" } } },
+    { name: "export_limit_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW" } } },
 ];
 const SCHEMA_THRESHOLDS = [
     { name: "low_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
@@ -10077,6 +10270,7 @@ function normalizeConfig(raw) {
         show_hourly_as_main: raw.show_hourly_as_main ?? false,
         inverter_max_kw: raw.inverter_max_kw,
         solar_max_kwp: raw.solar_max_kwp,
+        export_limit_kw: raw.export_limit_kw,
         low_threshold: raw.low_threshold,
         high_threshold: raw.high_threshold,
         desktop_text_scale: raw.desktop_text_scale,
@@ -10152,6 +10346,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i$2 {
             show_hourly_as_main: cfg.show_hourly_as_main ?? false,
             inverter_max_kw: cfg.inverter_max_kw,
             solar_max_kwp: cfg.solar_max_kwp,
+            export_limit_kw: cfg.export_limit_kw,
             low_threshold: cfg.low_threshold,
             high_threshold: cfg.high_threshold,
             desktop_text_scale: cfg.desktop_text_scale ?? 100,
@@ -10198,6 +10393,7 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i$2 {
             show_hourly_as_main: data.show_hourly_as_main,
             inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
             solar_max_kwp: typeof data.solar_max_kwp === "number" ? data.solar_max_kwp : undefined,
+            export_limit_kw: typeof data.export_limit_kw === "number" ? data.export_limit_kw : undefined,
             low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
             high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
             // Only persist when non-default (100) so YAML stays clean for most users.
@@ -11135,17 +11331,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 estimate10Kwh: showEstimate10
                     ? this._sumEstimate10(s?.attributes?.detailedForecast)
                     : null,
-                rawHoursAttr: cfg.integration_type === "solcast"
-                    // Prefer detailedForecast (standard Solcast attribute); fall back to
-                    // hours so manually-configured cards work with alternate attribute names.
-                    ? (s?.attributes?.detailedForecast ?? s?.attributes?.hours)
-                    : cfg.integration_type === "volcast"
-                        ? s?.attributes?.hours
-                        : cfg.integration_type === "forecast_solar"
-                            ? undefined
-                            : cfg.integration_type === "open_meteo_solar_forecast"
-                                ? s?.attributes?.wh_period
-                                : s?.attributes?.hours ?? s?.attributes?.detailedForecast,
+                rawHoursAttr: this._rawHoursForState(s, cfg.integration_type),
             };
         });
         const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
@@ -11247,7 +11433,8 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                     points = raw.map((v, i) => {
                         // 1 — bare number, index = hour
                         if (typeof v === "number") {
-                            return { hour: i, kwh: isFinite(v) ? v : 0 };
+                            const kwh = isFinite(v) ? v : 0;
+                            return { hour: i, kwh, maxKw: kwh };
                         }
                         // 2 — object with hour + value fields
                         if (typeof v === "object" && v !== null) {
@@ -11264,12 +11451,25 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                             const kwh = typeof rawV === "number" ? rawV
                                 : typeof rawV === "string" ? parseFloat(rawV)
                                     : 0;
+                            const rawPower = obj.power_kw ?? obj.pv_estimate;
+                            const rawDurationHours = obj.duration_hours ?? obj.interval_hours;
+                            const rawDurationMinutes = obj.duration_minutes ?? obj.interval_minutes;
+                            const durationHours = typeof rawDurationHours === "number" ? rawDurationHours :
+                                typeof rawDurationHours === "string" ? parseFloat(rawDurationHours) :
+                                    typeof rawDurationMinutes === "number" ? rawDurationMinutes / 60 :
+                                        typeof rawDurationMinutes === "string" ? parseFloat(rawDurationMinutes) / 60 :
+                                            1;
+                            const maxKw = typeof rawPower === "number" ? rawPower
+                                : typeof rawPower === "string" ? parseFloat(rawPower)
+                                    : durationHours > 0 ? kwh / durationHours : kwh;
+                            const safeKwh = isFinite(kwh) ? kwh : 0;
                             return {
                                 hour: isFinite(hour) ? hour : i,
-                                kwh: isFinite(kwh) ? kwh : 0,
+                                kwh: safeKwh,
+                                maxKw: isFinite(maxKw) ? maxKw : safeKwh,
                             };
                         }
-                        return { hour: i, kwh: 0 };
+                        return { hour: i, kwh: 0, maxKw: 0 };
                     });
                 } // close else (non-Solcast array)
                 // ── Format 3: plain object keyed by hour ────────────────────────────
@@ -11290,6 +11490,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                     return {
                         hour: isFinite(hour) ? hour : 0,
                         kwh: isFinite(kwh) ? kwh : 0,
+                        maxKw: isFinite(kwh) ? kwh : 0,
                     };
                 })
                     .sort((a, b) => a.hour - b.hour);
@@ -11326,6 +11527,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
     }
     _parseSolcastPeriods(entries) {
         const buckets = new Map();
+        const peakKw = new Map();
         for (const entry of entries) {
             const periodStart = entry.period_start;
             if (typeof periodStart !== "string")
@@ -11337,9 +11539,10 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             const estimate = typeof entry.pv_estimate === "number" ? entry.pv_estimate : 0;
             const kwh = estimate * 0.5; // 30-min period in kW → kWh
             buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+            peakKw.set(hour, Math.max(peakKw.get(hour) ?? 0, estimate));
         }
         return Array.from(buckets.entries())
-            .map(([hour, kwh]) => ({ hour, kwh }))
+            .map(([hour, kwh]) => ({ hour, kwh, maxKw: peakKw.get(hour) ?? kwh }))
             .sort((a, b) => a.hour - b.hour);
     }
     /**
@@ -11368,6 +11571,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         if (raw.length === 0)
             return [];
         const buckets = new Map();
+        const peakKw = new Map();
         for (let i = 0; i < raw.length; i++) {
             const v = raw[i];
             let hour;
@@ -11409,6 +11613,18 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                         : 0;
                 if (!isFinite(kwh))
                     kwh = 0;
+                const rawPower = obj.power_kw ?? obj.pv_estimate;
+                const rawDurationHours = obj.duration_hours ?? obj.interval_hours;
+                const rawDurationMinutes = obj.duration_minutes ?? obj.interval_minutes;
+                const durationHours = typeof rawDurationHours === "number" ? rawDurationHours :
+                    typeof rawDurationHours === "string" ? parseFloat(rawDurationHours) :
+                        typeof rawDurationMinutes === "number" ? rawDurationMinutes / 60 :
+                            typeof rawDurationMinutes === "string" ? parseFloat(rawDurationMinutes) / 60 :
+                                1;
+                const maxKw = typeof rawPower === "number" ? rawPower
+                    : typeof rawPower === "string" ? parseFloat(rawPower)
+                        : durationHours > 0 ? kwh / durationHours : kwh;
+                peakKw.set(hour, Math.max(peakKw.get(hour) ?? 0, isFinite(maxKw) ? maxKw : kwh));
             }
             else {
                 continue; // skip null / unexpected types
@@ -11416,9 +11632,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             if (!isFinite(hour) || hour < 0 || hour > 23)
                 continue;
             buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+            if (!peakKw.has(hour))
+                peakKw.set(hour, kwh);
         }
         const points = Array.from(buckets.entries())
-            .map(([hour, kwh]) => ({ hour, kwh }))
+            .map(([hour, kwh]) => ({ hour, kwh, maxKw: peakKw.get(hour) ?? kwh }))
             .sort((a, b) => a.hour - b.hour);
         // Trim leading / trailing zeros — consistent with all other parsers
         let first = -1, last = -1;
@@ -11442,23 +11660,38 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
      * Values are converted from Wh to kWh.
      */
     _parseOpenMeteoWhPeriod(raw) {
-        const buckets = new Map();
-        for (const [isoKey, val] of Object.entries(raw)) {
-            // Extract the hour directly from the ISO string (the T-portion is the
-            // local hour in HA's timezone). Using new Date().getHours() would shift
-            // the hour to the browser's local timezone, which may differ from HA's.
+        const entries = Object.entries(raw)
+            .map(([isoKey, val]) => {
             const hourMatch = isoKey.match(/T(\d{2}):/);
-            if (!hourMatch)
-                continue;
-            const hour = parseInt(hourMatch[1], 10);
-            if (!isFinite(hour) || hour < 0 || hour > 23)
-                continue;
+            const timestamp = Date.parse(isoKey);
             const wh = typeof val === "number" ? val
                 : typeof val === "string" ? parseFloat(val)
                     : NaN;
-            if (!isFinite(wh))
-                continue;
-            buckets.set(hour, (buckets.get(hour) ?? 0) + wh / 1000); // Wh → kWh
+            return {
+                timestamp,
+                hour: hourMatch ? parseInt(hourMatch[1], 10) : NaN,
+                wh,
+            };
+        })
+            .filter((entry) => isFinite(entry.hour) && entry.hour >= 0 && entry.hour <= 23 &&
+            isFinite(entry.wh))
+            .sort((a, b) => a.timestamp - b.timestamp);
+        const buckets = new Map();
+        const peakKw = new Map();
+        for (let i = 0; i < entries.length; i++) {
+            const entry = entries[i];
+            // Extract the hour directly from the ISO string (the T-portion is the
+            // local hour in HA's timezone). Using new Date().getHours() would shift
+            // the hour to the browser's local timezone, which may differ from HA's.
+            const hour = entry.hour;
+            const kwh = entry.wh / 1000; // Wh → kWh
+            const nextTimestamp = entries[i + 1]?.timestamp;
+            const durationHours = isFinite(entry.timestamp) && isFinite(nextTimestamp)
+                ? Math.max((nextTimestamp - entry.timestamp) / 3600000, 0)
+                : 1;
+            const avgKw = durationHours > 0 ? kwh / durationHours : kwh;
+            buckets.set(hour, (buckets.get(hour) ?? 0) + kwh);
+            peakKw.set(hour, Math.max(peakKw.get(hour) ?? 0, avgKw));
         }
         // Filter out hours with zero generation — Open-Meteo includes all 24 hours
         // in wh_period (including night/cloudy hours with 0 Wh). The generic path
@@ -11466,8 +11699,56 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         // we remove ALL zero-value hours so the popup shows only generating periods.
         return Array.from(buckets.entries())
             .filter(([, kwh]) => kwh > 0)
-            .map(([hour, kwh]) => ({ hour, kwh }))
+            .map(([hour, kwh]) => ({ hour, kwh, maxKw: peakKw.get(hour) ?? kwh }))
             .sort((a, b) => a.hour - b.hour);
+    }
+    _rawHoursForState(state, integrationType) {
+        if (!state)
+            return undefined;
+        if (integrationType === "solcast") {
+            return state.attributes?.detailedForecast ?? state.attributes?.hours;
+        }
+        if (integrationType === "volcast") {
+            return state.attributes?.hours;
+        }
+        if (integrationType === "forecast_solar") {
+            return state.attributes?.hours ?? state.attributes?.detailedForecast ?? state.attributes?.wh_period;
+        }
+        if (integrationType === "open_meteo_solar_forecast") {
+            return state.attributes?.wh_period;
+        }
+        return state.attributes?.hours ?? state.attributes?.detailedForecast ?? state.attributes?.wh_period;
+    }
+    _exportLimitKw() {
+        const limit = this._config?.export_limit_kw;
+        return typeof limit === "number" && isFinite(limit) && limit > 0 ? limit : null;
+    }
+    _forecastAverageKw(point) {
+        if (typeof point.maxKw === "number" && isFinite(point.maxKw))
+            return point.maxKw;
+        return isFinite(point.kwh) ? point.kwh : 0;
+    }
+    _exceedsExportLimit(point) {
+        const limit = this._exportLimitKw();
+        if (limit === null)
+            return false;
+        const avgKw = this._forecastAverageKw(point);
+        return isFinite(avgKw) && avgKw > limit;
+    }
+    _rowExceedsExportLimit(row) {
+        if (!row || this._exportLimitKw() === null)
+            return false;
+        return this._parseHours(row.rawHoursAttr, this._config?.integration_type, true)
+            .some((point) => this._exceedsExportLimit(point));
+    }
+    _exportLimitTitle() {
+        const limit = this._exportLimitKw();
+        if (limit === null)
+            return "";
+        return this._t("card.labels.exportLimitTooltip", {
+            limit: this._formatNumber(limit, 2),
+            unit: this._t("card.units.kilowatts"),
+        });
     }
     // ── Estimate10 ───────────────────────────────────────────────────────────
     /**
@@ -11515,16 +11796,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         // Re-read the entity state fresh at click time so we always get the latest hours
         const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
         const intType = this._config?.integration_type;
-        const freshHours = intType === "solcast"
-            // Prefer detailedForecast; fall back to hours for manually-configured setups.
-            ? (freshState?.attributes?.detailedForecast ?? freshState?.attributes?.hours)
-            : intType === "volcast"
-                ? freshState?.attributes?.hours
-                : intType === "forecast_solar"
-                    ? undefined
-                    : intType === "open_meteo_solar_forecast"
-                        ? freshState?.attributes?.wh_period
-                        : freshState?.attributes?.hours ?? freshState?.attributes?.detailedForecast;
+        const freshHours = this._rawHoursForState(freshState, intType);
         // Log which entity is being used and what the hours attribute looks like
         const hoursType = freshHours === undefined ? "missing"
             : freshHours === null ? "null"
@@ -11765,6 +12037,25 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         flex-shrink: 0;
       }
 
+      .export-limit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: rgba(245, 158, 11, 0.10);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
+        font-size: 0.66rem;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .export-limit-badge ha-icon {
+        --mdc-icon-size: 12px;
+        color: currentColor;
+      }
+
       .export-rate-row {
         display: flex;
         align-items: center;
@@ -11960,6 +12251,25 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         align-items: flex-end;
         justify-content: center;
         pointer-events: none;
+      }
+
+      .bar-limit-marker {
+        position: absolute;
+        top: 4px;
+        left: calc(50% + 8px);
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--ha-card-background, #fff) 76%, transparent);
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
+        box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28);
+      }
+
+      .bar-limit-marker ha-icon {
+        --mdc-icon-size: 11px;
       }
 
       .bar-bg {
@@ -12468,6 +12778,18 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         height: 24px;
       }
 
+      .chart-row.export-limit-exceeded {
+        position: relative;
+        border-radius: 4px;
+        background: rgba(245, 158, 11, 0.045);
+        box-shadow: inset 2px 0 0 0 rgba(245, 158, 11, 0.40);
+      }
+
+      .chart-row.export-limit-exceeded > * {
+        position: relative;
+        z-index: 1;
+      }
+
       .chart-hour {
         font-size: 0.70rem;
         color: var(--secondary-text-color);
@@ -12475,6 +12797,14 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         text-align: right;
         line-height: 1;
         opacity: 0.75;
+      }
+
+      .chart-limit-icon {
+        --mdc-icon-size: 11px;
+        margin-left: 2px;
+        color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
+        opacity: 0.9;
+        vertical-align: -2px;
       }
 
       .chart-bar-track {
@@ -12692,19 +13022,26 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         const title = this._config.title ?? this._t("card.defaultTitle");
         const icon = this._config.icon ?? "mdi:solar-power";
         const hasEntities = this._config.forecast_entities.some(Boolean);
+        const rows = this._buildRows();
+        const todayExportLimitWarning = this._rowExceedsExportLimit(rows[0]);
         const header = this._config.show_header ? b `
       <div part="header" class="card-header">
         <div class="header-left">
           <div part="title" class="header-title">
             <ha-icon icon=${icon}></ha-icon>
-            ${title}
+            <span>${title}</span>
+            ${todayExportLimitWarning ? b `
+              <span class="export-limit-badge" title=${this._exportLimitTitle()}>
+                <ha-icon icon="mdi:alert-outline"></ha-icon>
+                <span>${this._t("card.labels.exportLimitShort")}</span>
+              </span>
+            ` : A}
           </div>
           ${this._renderExportRate()}
         </div>
         ${this._renderLive()}
       </div>
     ` : A;
-        const rows = this._buildRows();
         const cardStyle = this._cardStyle();
         if (this._config.show_hourly_as_main) {
             return b `
@@ -12863,14 +13200,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         if (todayEntityId && todayFcState) {
             const intType = cfg.integration_type;
             // Mirrors the attribute resolution in _openPopup — keep in sync if that changes.
-            const rawHours = 
-            // Solcast: prefer detailedForecast, fall back to hours for manual configs.
-            intType === "solcast" ? (todayFcState.attributes?.detailedForecast ?? todayFcState.attributes?.hours) :
-                intType === "volcast" ? todayFcState.attributes?.hours :
-                    intType === "forecast_solar" ? undefined :
-                        intType === "open_meteo_solar_forecast" ? todayFcState.attributes?.wh_period :
-                            // manual / unknown — try both common attribute names
-                            (todayFcState.attributes?.hours ?? todayFcState.attributes?.detailedForecast);
+            const rawHours = this._rawHoursForState(todayFcState, intType);
             if (rawHours !== undefined) {
                 try {
                     // nextForecastHour is the next FULL hour slot after whatever the clock
@@ -13018,6 +13348,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
     _renderCol(row) {
         const { forecastPct, actualPct, dottedPct, isComplete, isToday } = row;
         const tier = this._tier(row.forecastKwh);
+        const exportLimitWarning = this._rowExceedsExportLimit(row);
         // Arrays that are currently producing (kwh > 0).
         // Used to decide stacked vs single-bar path.
         const visibleArrays = row.actualArrays?.filter((a) => a.kwh > 0) ?? [];
@@ -13094,6 +13425,11 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         <div class="col-bar-wrap">
           <div part="daily-bar" class="bar-bg"></div>
           ${bars}
+          ${exportLimitWarning ? b `
+            <span class="bar-limit-marker" title=${this._exportLimitTitle()}>
+              <ha-icon icon="mdi:alert-outline"></ha-icon>
+            </span>
+          ` : A}
         </div>
         <div part="daily-label" class="col-label">
           <span class="day-name">${this._dayLabel(row)}</span>
@@ -13180,14 +13516,14 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         });
     }
     _renderHourlyChartContent(row, actualHourly) {
-        if (this._config?.integration_type === "forecast_solar") {
+        const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
+        if (this._config?.integration_type === "forecast_solar" && points.length === 0) {
             return b `
         <div class="chart-no-data">
           <p>${this._t("card.popup.integrationNoHourlyData")}</p>
         </div>
       `;
         }
-        const points = this._parseHours(row.rawHoursAttr, this._config?.integration_type);
         const peakKwh = points.length ? Math.max(...points.map((p) => p.kwh)) : 0;
         const { inverter_max_kw, solar_max_kwp } = this._config;
         let maxRef;
@@ -13286,6 +13622,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 const pct = maxRef > 0 ? Math.min((pt.kwh / maxRef) * 100, 100) : 0;
                 const isPeak = pt.kwh === peakKwh && peakKwh > 0;
                 const isCurrentHour = pt.hour === currentHour;
+                const exportLimitExceeded = this._exceedsExportLimit(pt);
                 // Stagger: 20ms base + 18ms per row, capped at 300ms
                 const delay = Math.min(20 + i * 18, 300);
                 // Look up actual kWh for this hour.
@@ -13307,8 +13644,15 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 return b `
           <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
-            ${isCurrentHour ? "current-hour" : ""}">
-            <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
+            ${isCurrentHour ? "current-hour" : ""}
+            ${exportLimitExceeded ? "export-limit-exceeded" : ""}"
+            title=${exportLimitExceeded ? this._exportLimitTitle() : ""}>
+            <span class="chart-hour">
+              ${this._hourLabel(pt.hour)}
+              ${exportLimitExceeded ? b `
+                <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
+              ` : A}
+            </span>
             <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
                 class="chart-bar-fill ${isPeak ? "peak" : ""}"

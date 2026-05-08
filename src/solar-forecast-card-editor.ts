@@ -107,6 +107,7 @@ const SCHEMA_ENERGY_PROVIDER: HaFormSchema[] = [
 const SCHEMA_SYSTEM: HaFormSchema[] = [
   { name: "inverter_max_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW"  } } },
   { name: "solar_max_kwp",   selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWp" } } },
+  { name: "export_limit_kw", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kW"  } } },
 ];
 
 const SCHEMA_THRESHOLDS: HaFormSchema[] = [
@@ -138,6 +139,7 @@ interface FormData {
   show_hourly_as_main: boolean;
   inverter_max_kw: number | undefined;
   solar_max_kwp: number | undefined;
+  export_limit_kw: number | undefined;
   low_threshold: number | undefined;
   high_threshold: number | undefined;
   desktop_text_scale: number;
@@ -180,6 +182,7 @@ export function normalizeConfig(
     show_hourly_as_main:  raw.show_hourly_as_main ?? false,
     inverter_max_kw:      raw.inverter_max_kw,
     solar_max_kwp:        raw.solar_max_kwp,
+    export_limit_kw:      raw.export_limit_kw,
     low_threshold:        raw.low_threshold,
     high_threshold:       raw.high_threshold,
     desktop_text_scale:   raw.desktop_text_scale,
@@ -266,6 +269,7 @@ export class SolarForecastCardEditor extends LitElement {
       show_hourly_as_main: cfg.show_hourly_as_main ?? false,
       inverter_max_kw:     cfg.inverter_max_kw,
       solar_max_kwp:       cfg.solar_max_kwp,
+      export_limit_kw:     cfg.export_limit_kw,
       low_threshold:       cfg.low_threshold,
       high_threshold:      cfg.high_threshold,
       desktop_text_scale:  cfg.desktop_text_scale ?? 100,
@@ -314,6 +318,7 @@ export class SolarForecastCardEditor extends LitElement {
       show_hourly_as_main: data.show_hourly_as_main,
       inverter_max_kw:    typeof data.inverter_max_kw    === "number" ? data.inverter_max_kw    : undefined,
       solar_max_kwp:      typeof data.solar_max_kwp      === "number" ? data.solar_max_kwp      : undefined,
+      export_limit_kw:    typeof data.export_limit_kw    === "number" ? data.export_limit_kw    : undefined,
       low_threshold:      typeof data.low_threshold      === "number" ? data.low_threshold      : undefined,
       high_threshold:     typeof data.high_threshold     === "number" ? data.high_threshold     : undefined,
       // Only persist when non-default (100) so YAML stays clean for most users.

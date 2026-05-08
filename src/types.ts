@@ -33,6 +33,8 @@ export interface SolarForecastCardConfig {
   show_hourly_as_main: boolean;
   inverter_max_kw?: number;
   solar_max_kwp?: number;
+  /** Optional grid export limit in kW. When set, hourly forecast periods above this average kW show subtle warnings. */
+  export_limit_kw?: number;
   low_threshold?: number;
   high_threshold?: number;
   /** Scale factor for card text on desktop/wide viewports (100–150, step 5). Undefined = 100 (no change). Only applied at ≥ 768 px viewport width. */
