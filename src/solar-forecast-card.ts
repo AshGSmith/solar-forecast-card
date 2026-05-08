@@ -63,6 +63,7 @@ export class SolarForecastCard extends LitElement {
    * Map   = fetch completed; map may be empty if no generating hours found.
    */
   @state() private _popupActualHourly: Map<number, number> | null = null;
+  @state() private _exportLimitTooltipHour: number | null = null;
 
   /**
    * Same actual-history data as the popup uses, but for the optional main-card
@@ -176,7 +177,7 @@ export class SolarForecastCard extends LitElement {
   // ── Update optimisation ───────────────────────────────────────────────────
 
   protected override shouldUpdate(changedProps: PropertyValues): boolean {
-    if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly")) return true;
+    if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly") || changedProps.has("_exportLimitTooltipHour")) return true;
     if (!this._config || !this.hass) return false;
 
     const oldHass = changedProps.get("hass") as HomeAssistant | undefined;
@@ -715,6 +716,17 @@ export class SolarForecastCard extends LitElement {
     });
   }
 
+  private _toggleExportLimitTooltip(hour: number, event?: Event): void {
+    event?.stopPropagation();
+    this._exportLimitTooltipHour = this._exportLimitTooltipHour === hour ? null : hour;
+  }
+
+  private _handleExportLimitTooltipKeydown(hour: number, event: KeyboardEvent): void {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    this._toggleExportLimitTooltip(hour, event);
+  }
+
   // ── Estimate10 ───────────────────────────────────────────────────────────
 
   /**
@@ -779,6 +791,7 @@ export class SolarForecastCard extends LitElement {
 
     this._popup = { ...row, rawHoursAttr: freshHours ?? row.rawHoursAttr };
     this._popupVisible = false;
+    this._exportLimitTooltipHour = null;
 
     // Fetch per-hour actual-generation history for today's popup.
     // Reset to null first so the popup renders forecast-only until the fetch
@@ -799,6 +812,7 @@ export class SolarForecastCard extends LitElement {
   private _closePopup(): void {
     this._popupVisible = false;
     this._popupActualHourly = null;
+    this._exportLimitTooltipHour = null;
     this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
   }
 
@@ -1247,21 +1261,25 @@ export class SolarForecastCard extends LitElement {
         left: calc(50% + 8px);
         width: 14px;
         height: 14px;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 999px;
         background: color-mix(in srgb, var(--ha-card-background, #fff) 76%, transparent);
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28);
-        line-height: 0;
+        line-height: 1;
       }
 
       .bar-limit-marker ha-icon {
         --mdc-icon-size: 10px;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 10px;
         height: 10px;
+        margin: 0;
+        line-height: 1;
       }
 
       .bar-bg {
@@ -1770,6 +1788,10 @@ export class SolarForecastCard extends LitElement {
         height: 24px;
       }
 
+      .chart-row.has-export-limit-warning {
+        cursor: help;
+      }
+
       .chart-hour {
         font-size: 0.70rem;
         color: var(--secondary-text-color);
@@ -1781,10 +1803,52 @@ export class SolarForecastCard extends LitElement {
 
       .chart-limit-icon {
         --mdc-icon-size: 11px;
-        margin-left: 2px;
+        display: block;
+        width: 11px;
+        height: 11px;
+        margin: 0;
+      }
+
+      .chart-limit-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        margin: 0 0 0 1px;
+        padding: 0;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         opacity: 0.9;
-        vertical-align: -2px;
+        line-height: 1;
+        cursor: help;
+      }
+
+      .chart-limit-button:focus-visible {
+        outline: 1px solid currentColor;
+        outline-offset: 1px;
+      }
+
+      .chart-limit-tooltip {
+        position: absolute;
+        top: calc(100% + 5px);
+        right: 0;
+        width: min(230px, calc(100vw - 48px));
+        padding: 8px 9px;
+        border-radius: 8px;
+        background: var(--sfc-popup-background, var(--ha-card-background, var(--card-background-color, #fff)));
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(245, 158, 11, 0.24);
+        font-size: 0.70rem;
+        font-weight: 500;
+        line-height: 1.35;
+        white-space: normal;
+        z-index: 5;
+      }
       }
 
       .chart-bar-track {
@@ -1864,6 +1928,10 @@ export class SolarForecastCard extends LitElement {
       }
 
       .chart-val {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
         font-size: 0.70rem;
         font-weight: 500;
         font-variant-numeric: tabular-nums;
@@ -2665,6 +2733,7 @@ export class SolarForecastCard extends LitElement {
         const isPeak        = pt.kwh === peakKwh && peakKwh > 0;
         const isCurrentHour = pt.hour === currentHour;
         const exportLimitExceeded = this._exceedsExportLimit(pt);
+        const showExportLimitTooltip = exportLimitExceeded && this._exportLimitTooltipHour === pt.hour;
         // Stagger: 20ms base + 18ms per row, capped at 300ms
         const delay         = Math.min(20 + i * 18, 300);
 
@@ -2688,7 +2757,12 @@ export class SolarForecastCard extends LitElement {
         return html`
           <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
-            ${isCurrentHour ? "current-hour" : ""}">
+            ${isCurrentHour ? "current-hour" : ""}
+            ${exportLimitExceeded ? "has-export-limit-warning" : ""}"
+            tabindex=${exportLimitExceeded ? "0" : nothing}
+            aria-label=${exportLimitExceeded ? this._t("card.labels.exportLimitHourTooltip") : nothing}
+            @click=${(event: Event) => exportLimitExceeded && this._toggleExportLimitTooltip(pt.hour, event)}
+            @keydown=${(event: KeyboardEvent) => exportLimitExceeded && this._handleExportLimitTooltipKeydown(pt.hour, event)}>
             <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
             <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
@@ -2705,11 +2779,20 @@ export class SolarForecastCard extends LitElement {
             <span class="chart-val ${isPeak ? "peak" : ""}">
               ${this._formatNumber(pt.kwh, 2)}
               ${exportLimitExceeded ? html`
-                <ha-icon
-                  class="chart-limit-icon"
-                  icon="mdi:alert-outline"
-                  title=${this._exportLimitTitle()}
-                ></ha-icon>
+                <button
+                  class="chart-limit-button"
+                  type="button"
+                  aria-label=${this._t("card.labels.exportLimitHourTooltip")}
+                  title=${this._t("card.labels.exportLimitHourTooltip")}
+                  @click=${(event: Event) => this._toggleExportLimitTooltip(pt.hour, event)}
+                >
+                  <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
+                </button>
+                ${showExportLimitTooltip ? html`
+                  <span class="chart-limit-tooltip" role="tooltip">
+                    ${this._t("card.labels.exportLimitHourTooltip")}
+                  </span>
+                ` : nothing}
               ` : nothing}
             </span>
             ${showActualCol ? html`

@@ -28,7 +28,8 @@
       "generated": "ഉൽപ്പാദിപ്പിച്ചത്",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",

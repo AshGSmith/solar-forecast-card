@@ -115,7 +115,8 @@ var af = {
       "generated": "opgewek",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -272,7 +273,8 @@ var ar = {
       "generated": "مُولّد",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -429,7 +431,8 @@ var bg = {
       "generated": "произведено",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -586,7 +589,8 @@ var bn = {
       "generated": "উৎপন্ন",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -743,7 +747,8 @@ var bs = {
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -900,7 +905,8 @@ var ca = {
       "generated": "generat",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -1057,7 +1063,8 @@ var cs = {
       "generated": "vyrobeno",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -1214,7 +1221,8 @@ var cy = {
       "generated": "cynhyrchwyd",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -1371,7 +1379,8 @@ var da = {
       "generated": "produceret",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -1528,7 +1537,8 @@ var de = {
       "generated": "erzeugt",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} Einspeiselimit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "So",
@@ -1685,7 +1695,8 @@ var el = {
       "generated": "παράχθηκε",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -1842,7 +1853,8 @@ var en = {
       "generated": "generated",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -1999,7 +2011,8 @@ var en_GB = {
       "generated": "generated",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -2156,7 +2169,8 @@ var eo = {
       "generated": "produktita",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -2313,7 +2327,8 @@ var es = {
       "generated": "generado",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -2470,7 +2485,8 @@ var es_419 = {
       "generated": "generado",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -2627,7 +2643,8 @@ var et = {
       "generated": "toodetud",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -2784,7 +2801,8 @@ var eu = {
       "generated": "sortua",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -2941,7 +2959,8 @@ var fa = {
       "generated": "تولیدشده",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -3098,7 +3117,8 @@ var fi = {
       "generated": "tuotettu",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -3255,7 +3275,8 @@ var fy = {
       "generated": "opwekt",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -3412,7 +3433,8 @@ var fr = {
       "generated": "produit",
       "exportLimitShort": "Limite",
       "exportLimitTooltip": "> {limit} {unit} limite d'export",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -3569,7 +3591,8 @@ var ga = {
       "generated": "giniúna",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -3726,7 +3749,8 @@ var gl = {
       "generated": "xerado",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -3883,7 +3907,8 @@ var gsw = {
       "generated": "erzügt",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4040,7 +4065,8 @@ var he = {
       "generated": "יוצר",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4197,7 +4223,8 @@ var hi = {
       "generated": "उत्पन्न",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4354,7 +4381,8 @@ var hr = {
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4511,7 +4539,8 @@ var hu = {
       "generated": "termelt",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4668,7 +4697,8 @@ var hy = {
       "generated": "արտադրված",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4825,7 +4855,8 @@ var id = {
       "generated": "dihasilkan",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -4982,7 +5013,8 @@ var it = {
       "generated": "prodotto",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -5139,7 +5171,8 @@ var is = {
       "generated": "framleitt",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -5296,7 +5329,8 @@ var ja = {
       "generated": "発電済み",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -5453,7 +5487,8 @@ var ka = {
       "generated": "გამომუშავდა",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -5610,7 +5645,8 @@ var ko = {
       "generated": "발전됨",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -5767,7 +5803,8 @@ var lb = {
       "generated": "produzéiert",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -5924,7 +5961,8 @@ var lt = {
       "generated": "pagaminta",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -6081,7 +6119,8 @@ var lv = {
       "generated": "saražots",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -6238,7 +6277,8 @@ var mk = {
       "generated": "произведено",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -6395,7 +6435,8 @@ var ml = {
       "generated": "ഉൽപ്പാദിപ്പിച്ചത്",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -6552,7 +6593,8 @@ var nl = {
       "generated": "opgewekt",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -6709,7 +6751,8 @@ var nb = {
       "generated": "produsert",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -6866,7 +6909,8 @@ var nn = {
       "generated": "produsert",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7023,7 +7067,8 @@ var pl = {
       "generated": "wygenerowano",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7180,7 +7225,8 @@ var pt = {
       "generated": "gerado",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7337,7 +7383,8 @@ var pt_BR = {
       "generated": "gerado",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7494,7 +7541,8 @@ var ro = {
       "generated": "generat",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7651,7 +7699,8 @@ var ru = {
       "generated": "выработано",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7808,7 +7857,8 @@ var sk = {
       "generated": "vyrobené",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -7965,7 +8015,8 @@ var sl = {
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -8122,7 +8173,8 @@ var sr = {
       "generated": "произведено",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -8279,7 +8331,8 @@ var sr_Latn = {
       "generated": "proizvedeno",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -8436,7 +8489,8 @@ var sv = {
       "generated": "producerat",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -8593,7 +8647,8 @@ var sq = {
       "generated": "prodhuar",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -8750,7 +8805,8 @@ var ta = {
       "generated": "உற்பத்தி",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -8907,7 +8963,8 @@ var te = {
       "generated": "ఉత్పత్తి",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -9064,7 +9121,8 @@ var th = {
       "generated": "ผลิตแล้ว",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -9221,7 +9279,8 @@ var tr = {
       "generated": "üretildi",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -9378,7 +9437,8 @@ var uk = {
       "generated": "вироблено",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -9535,7 +9595,8 @@ var ur = {
       "generated": "پیدا شدہ",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -9692,7 +9753,8 @@ var vi = {
       "generated": "đã tạo",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -9849,7 +9911,8 @@ var zh_Hans = {
       "generated": "已发电",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -10006,7 +10069,8 @@ var zh_Hant = {
       "generated": "已發電",
       "exportLimitShort": "Limit",
       "exportLimitTooltip": "> {limit} {unit} export limit",
-      "exportLimitToday": "⚠ Export will be limited at times today"
+      "exportLimitToday": "⚠ Export will be limited at times today due to your export limitation",
+      "exportLimitHourTooltip": "Export will be limited during this time due to your export limitation, consider adjusting your usage to utilise your solar generation."
     },
     "days": {
       "sun": "Sun",
@@ -11221,6 +11285,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
          * Map   = fetch completed; map may be empty if no generating hours found.
          */
         this._popupActualHourly = null;
+        this._exportLimitTooltipHour = null;
         /**
          * Same actual-history data as the popup uses, but for the optional main-card
          * hourly view. Kept separate so opening/closing the popup never resets the
@@ -11314,7 +11379,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
     }
     // ── Update optimisation ───────────────────────────────────────────────────
     shouldUpdate(changedProps) {
-        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly"))
+        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly") || changedProps.has("_exportLimitTooltipHour"))
             return true;
         if (!this._config || !this.hass)
             return false;
@@ -11814,6 +11879,16 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             unit: this._t("card.units.kilowatts"),
         });
     }
+    _toggleExportLimitTooltip(hour, event) {
+        event?.stopPropagation();
+        this._exportLimitTooltipHour = this._exportLimitTooltipHour === hour ? null : hour;
+    }
+    _handleExportLimitTooltipKeydown(hour, event) {
+        if (event.key !== "Enter" && event.key !== " ")
+            return;
+        event.preventDefault();
+        this._toggleExportLimitTooltip(hour, event);
+    }
     // ── Estimate10 ───────────────────────────────────────────────────────────
     /**
      * Sum the pv_estimate10 values from a Solcast detailedForecast attribute.
@@ -11869,6 +11944,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         console.debug("[solar-forecast-card] popup →", row.entityId || "(no entity)", "| state:", freshState?.state ?? "n/a", "| hours:", hoursType);
         this._popup = { ...row, rawHoursAttr: freshHours ?? row.rawHoursAttr };
         this._popupVisible = false;
+        this._exportLimitTooltipHour = null;
         // Fetch per-hour actual-generation history for today's popup.
         // Reset to null first so the popup renders forecast-only until the fetch
         // completes, then re-renders cleanly when the Map arrives.
@@ -11887,6 +11963,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
     _closePopup() {
         this._popupVisible = false;
         this._popupActualHourly = null;
+        this._exportLimitTooltipHour = null;
         this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
     }
     // ── Actual-generation history ─────────────────────────────────────────────
@@ -12316,21 +12393,25 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         left: calc(50% + 8px);
         width: 14px;
         height: 14px;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 999px;
         background: color-mix(in srgb, var(--ha-card-background, #fff) 76%, transparent);
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28);
-        line-height: 0;
+        line-height: 1;
       }
 
       .bar-limit-marker ha-icon {
         --mdc-icon-size: 10px;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 10px;
         height: 10px;
+        margin: 0;
+        line-height: 1;
       }
 
       .bar-bg {
@@ -12839,6 +12920,10 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         height: 24px;
       }
 
+      .chart-row.has-export-limit-warning {
+        cursor: help;
+      }
+
       .chart-hour {
         font-size: 0.70rem;
         color: var(--secondary-text-color);
@@ -12850,10 +12935,52 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
 
       .chart-limit-icon {
         --mdc-icon-size: 11px;
-        margin-left: 2px;
+        display: block;
+        width: 11px;
+        height: 11px;
+        margin: 0;
+      }
+
+      .chart-limit-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        margin: 0 0 0 1px;
+        padding: 0;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
         opacity: 0.9;
-        vertical-align: -2px;
+        line-height: 1;
+        cursor: help;
+      }
+
+      .chart-limit-button:focus-visible {
+        outline: 1px solid currentColor;
+        outline-offset: 1px;
+      }
+
+      .chart-limit-tooltip {
+        position: absolute;
+        top: calc(100% + 5px);
+        right: 0;
+        width: min(230px, calc(100vw - 48px));
+        padding: 8px 9px;
+        border-radius: 8px;
+        background: var(--sfc-popup-background, var(--ha-card-background, var(--card-background-color, #fff)));
+        color: var(--sfc-popup-text-color, var(--primary-text-color));
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(245, 158, 11, 0.24);
+        font-size: 0.70rem;
+        font-weight: 500;
+        line-height: 1.35;
+        white-space: normal;
+        z-index: 5;
+      }
       }
 
       .chart-bar-track {
@@ -12933,6 +13060,10 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .chart-val {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
         font-size: 0.70rem;
         font-weight: 500;
         font-variant-numeric: tabular-nums;
@@ -13671,6 +13802,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 const isPeak = pt.kwh === peakKwh && peakKwh > 0;
                 const isCurrentHour = pt.hour === currentHour;
                 const exportLimitExceeded = this._exceedsExportLimit(pt);
+                const showExportLimitTooltip = exportLimitExceeded && this._exportLimitTooltipHour === pt.hour;
                 // Stagger: 20ms base + 18ms per row, capped at 300ms
                 const delay = Math.min(20 + i * 18, 300);
                 // Look up actual kWh for this hour.
@@ -13692,7 +13824,12 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                 return b `
           <div part="popup-row" class="chart-row
             ${showActualCol ? "with-actuals" : ""}
-            ${isCurrentHour ? "current-hour" : ""}">
+            ${isCurrentHour ? "current-hour" : ""}
+            ${exportLimitExceeded ? "has-export-limit-warning" : ""}"
+            tabindex=${exportLimitExceeded ? "0" : A}
+            aria-label=${exportLimitExceeded ? this._t("card.labels.exportLimitHourTooltip") : A}
+            @click=${(event) => exportLimitExceeded && this._toggleExportLimitTooltip(pt.hour, event)}
+            @keydown=${(event) => exportLimitExceeded && this._handleExportLimitTooltipKeydown(pt.hour, event)}>
             <span class="chart-hour">${this._hourLabel(pt.hour)}</span>
             <div class="chart-bar-track ${actualKwh !== null ? "with-actual" : ""}">
               <div
@@ -13709,11 +13846,20 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             <span class="chart-val ${isPeak ? "peak" : ""}">
               ${this._formatNumber(pt.kwh, 2)}
               ${exportLimitExceeded ? b `
-                <ha-icon
-                  class="chart-limit-icon"
-                  icon="mdi:alert-outline"
-                  title=${this._exportLimitTitle()}
-                ></ha-icon>
+                <button
+                  class="chart-limit-button"
+                  type="button"
+                  aria-label=${this._t("card.labels.exportLimitHourTooltip")}
+                  title=${this._t("card.labels.exportLimitHourTooltip")}
+                  @click=${(event) => this._toggleExportLimitTooltip(pt.hour, event)}
+                >
+                  <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
+                </button>
+                ${showExportLimitTooltip ? b `
+                  <span class="chart-limit-tooltip" role="tooltip">
+                    ${this._t("card.labels.exportLimitHourTooltip")}
+                  </span>
+                ` : A}
               ` : A}
             </span>
             ${showActualCol ? b `
@@ -13742,6 +13888,9 @@ __decorate([
 __decorate([
     r()
 ], SolarForecastCard.prototype, "_popupActualHourly", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_exportLimitTooltipHour", void 0);
 __decorate([
     r()
 ], SolarForecastCard.prototype, "_mainActualHourly", void 0);
