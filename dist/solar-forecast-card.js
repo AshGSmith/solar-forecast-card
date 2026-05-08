@@ -12981,7 +12981,6 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         white-space: normal;
         z-index: 5;
       }
-      }
 
       .chart-bar-track {
         position: relative;
@@ -13060,16 +13059,20 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
       }
 
       .chart-val {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        gap: 2px;
         font-size: 0.70rem;
         font-weight: 500;
         font-variant-numeric: tabular-nums;
         color: var(--secondary-text-color);
         line-height: 1;
         text-align: left;
+      }
+
+      .chart-val-content {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        line-height: 1;
       }
 
       .chart-val.peak {
@@ -13844,23 +13847,25 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
               ` : A}
             </div>
             <span class="chart-val ${isPeak ? "peak" : ""}">
-              ${this._formatNumber(pt.kwh, 2)}
-              ${exportLimitExceeded ? b `
-                <button
-                  class="chart-limit-button"
-                  type="button"
-                  aria-label=${this._t("card.labels.exportLimitHourTooltip")}
-                  title=${this._t("card.labels.exportLimitHourTooltip")}
-                  @click=${(event) => this._toggleExportLimitTooltip(pt.hour, event)}
-                >
-                  <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
-                </button>
-                ${showExportLimitTooltip ? b `
-                  <span class="chart-limit-tooltip" role="tooltip">
-                    ${this._t("card.labels.exportLimitHourTooltip")}
-                  </span>
+              <span class="chart-val-content">
+                ${this._formatNumber(pt.kwh, 2)}
+                ${exportLimitExceeded ? b `
+                  <button
+                    class="chart-limit-button"
+                    type="button"
+                    aria-label=${this._t("card.labels.exportLimitHourTooltip")}
+                    title=${this._t("card.labels.exportLimitHourTooltip")}
+                    @click=${(event) => this._toggleExportLimitTooltip(pt.hour, event)}
+                  >
+                    <ha-icon class="chart-limit-icon" icon="mdi:alert-outline"></ha-icon>
+                  </button>
+                  ${showExportLimitTooltip ? b `
+                    <span class="chart-limit-tooltip" role="tooltip">
+                      ${this._t("card.labels.exportLimitHourTooltip")}
+                    </span>
+                  ` : A}
                 ` : A}
-              ` : A}
+              </span>
             </span>
             ${showActualCol ? b `
               <span class="chart-val-actual ${actualKwh !== null ? compareClass : "empty"}">
