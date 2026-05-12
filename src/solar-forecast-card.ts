@@ -76,10 +76,27 @@ export class SolarForecastCard extends LitElement {
   private _mainActualRefreshInFlight = false;
   private _mainActualNextRefreshAt = 0;
   private _warnedConfigIssues = new Set<string>();
+  private _popupTouchStartX: number | null = null;
+  private _popupTouchStartY: number | null = null;
+  private _popupTouchLastX: number | null = null;
+  private _popupTouchLastY: number | null = null;
 
   private _closeTimer?: ReturnType<typeof setTimeout>;
   private readonly _onDocKey = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && this._popup) this._closePopup();
+    if (!this._popup) return;
+    if (e.key === "Escape") {
+      this._closePopup();
+      return;
+    }
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      this._navigatePopup(-1);
+      return;
+    }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      this._navigatePopup(1);
+    }
   };
 
   // ── Lovelace lifecycle ────────────────────────────────────────────────────
@@ -867,7 +884,10 @@ export class SolarForecastCard extends LitElement {
 
   private _openPopup(row: ForecastRow): void {
     clearTimeout(this._closeTimer);
+    this._showPopupRow(row, true);
+  }
 
+  private _showPopupRow(row: ForecastRow, animate: boolean): void {
     // Re-read the entity state fresh at click time so we always get the latest hours
     const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
     const intType = this._config?.integration_type;
@@ -886,7 +906,7 @@ export class SolarForecastCard extends LitElement {
     );
 
     this._popup = { ...row, rawHoursAttr: freshHours ?? row.rawHoursAttr };
-    this._popupVisible = false;
+    this._popupVisible = animate ? false : true;
     this._exportLimitTooltipHour = null;
 
     // Fetch per-hour actual-generation history for today's popup.
@@ -895,21 +915,96 @@ export class SolarForecastCard extends LitElement {
     this._popupActualHourly = null;
     if (row.isToday && this._config?.today_actual_entity) {
       const entityId = this._config.today_actual_entity;
+      const popupDayIndex = row.dayIndex;
       this._fetchActualHourly(entityId).then((map) => {
         // Only apply if the popup is still open (user may have closed it while fetching)
-        if (this._popup) this._popupActualHourly = map;
+        if (this._popup?.dayIndex === popupDayIndex) this._popupActualHourly = map;
       });
     }
 
     // Single rAF lets Lit stamp the overlay into the DOM before we add .visible
-    requestAnimationFrame(() => { this._popupVisible = true; });
+    if (animate) requestAnimationFrame(() => { this._popupVisible = true; });
   }
 
   private _closePopup(): void {
     this._popupVisible = false;
     this._popupActualHourly = null;
     this._exportLimitTooltipHour = null;
+    this._resetPopupTouch();
     this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
+  }
+
+  private _popupNavigationRows(): ForecastRow[] {
+    return this._buildRows().filter((row) => row.entityId);
+  }
+
+  private _popupNavigationState(row: ForecastRow | null = this._popup): {
+    rows: ForecastRow[];
+    index: number;
+    canPrev: boolean;
+    canNext: boolean;
+  } {
+    const rows = this._popupNavigationRows();
+    const index = row ? rows.findIndex((candidate) => candidate.dayIndex === row.dayIndex) : -1;
+    return {
+      rows,
+      index,
+      canPrev: index > 0,
+      canNext: index >= 0 && index < rows.length - 1,
+    };
+  }
+
+  private _navigatePopup(delta: -1 | 1): void {
+    if (!this._popup) return;
+    const { rows, index } = this._popupNavigationState(this._popup);
+    if (index < 0) return;
+    const target = rows[index + delta];
+    if (!target) return;
+    this._showPopupRow(target, false);
+  }
+
+  private _onPopupTouchStart(event: TouchEvent): void {
+    if (event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    this._popupTouchStartX = touch.clientX;
+    this._popupTouchStartY = touch.clientY;
+    this._popupTouchLastX = touch.clientX;
+    this._popupTouchLastY = touch.clientY;
+  }
+
+  private _onPopupTouchMove(event: TouchEvent): void {
+    if (event.touches.length !== 1 || this._popupTouchStartX === null || this._popupTouchStartY === null) return;
+    const touch = event.touches[0];
+    this._popupTouchLastX = touch.clientX;
+    this._popupTouchLastY = touch.clientY;
+  }
+
+  private _onPopupTouchEnd(): void {
+    if (
+      this._popupTouchStartX === null ||
+      this._popupTouchStartY === null ||
+      this._popupTouchLastX === null ||
+      this._popupTouchLastY === null
+    ) {
+      this._resetPopupTouch();
+      return;
+    }
+
+    const deltaX = this._popupTouchLastX - this._popupTouchStartX;
+    const deltaY = this._popupTouchLastY - this._popupTouchStartY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    this._resetPopupTouch();
+
+    if (absX < 55 || absX < absY * 1.5) return;
+    this._navigatePopup(deltaX < 0 ? 1 : -1);
+  }
+
+  private _resetPopupTouch(): void {
+    this._popupTouchStartX = null;
+    this._popupTouchStartY = null;
+    this._popupTouchLastX = null;
+    this._popupTouchLastY = null;
   }
 
   // ── Actual-generation history ─────────────────────────────────────────────
@@ -1706,6 +1801,7 @@ export class SolarForecastCard extends LitElement {
           transform ${POPUP_CLOSE_MS + 40}ms cubic-bezier(0.34, 1.28, 0.64, 1),
           opacity ${POPUP_CLOSE_MS}ms ease;
         will-change: transform, opacity;
+        touch-action: pan-y;
       }
 
       .popup-overlay.visible .popup-panel {
@@ -1730,6 +1826,7 @@ export class SolarForecastCard extends LitElement {
         flex-direction: column;
         gap: 3px;
         min-width: 0;
+        flex: 1;
       }
 
       .popup-day-name {
@@ -1755,6 +1852,15 @@ export class SolarForecastCard extends LitElement {
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
+      .popup-actions {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: -2px;
+      }
+
+      .popup-nav,
       .popup-close {
         flex-shrink: 0;
         background: var(--secondary-background-color, rgba(128, 128, 128, 0.10));
@@ -1768,15 +1874,22 @@ export class SolarForecastCard extends LitElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.15s, color 0.15s;
-        margin-top: -2px;
+        transition: background 0.15s, color 0.15s, opacity 0.15s;
       }
 
+      .popup-nav:hover,
       .popup-close:hover {
         background: var(--divider-color, rgba(128, 128, 128, 0.18));
         color: var(--sfc-popup-text-color, var(--primary-text-color));
       }
 
+      .popup-nav[disabled] {
+        opacity: 0.24;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .popup-nav ha-icon,
       .popup-close ha-icon {
         --mdc-icon-size: 18px;
       }
@@ -2750,13 +2863,22 @@ export class SolarForecastCard extends LitElement {
       row,
       row.isToday ? this._popupActualHourly : undefined
     );
+    const popupNav = this._popupNavigationState(row);
 
     return html`
       <div
         class="popup-overlay ${this._popupVisible ? "visible" : ""}"
         @click=${this._closePopup}
       >
-        <div part="popup" class="popup-panel" @click=${(e: Event) => e.stopPropagation()}>
+        <div
+          part="popup"
+          class="popup-panel"
+          @click=${(e: Event) => e.stopPropagation()}
+          @touchstart=${(event: TouchEvent) => this._onPopupTouchStart(event)}
+          @touchmove=${(event: TouchEvent) => this._onPopupTouchMove(event)}
+          @touchend=${() => this._onPopupTouchEnd()}
+          @touchcancel=${() => this._resetPopupTouch()}
+        >
 
           <div class="popup-header">
             <div class="popup-title">
@@ -2770,13 +2892,33 @@ export class SolarForecastCard extends LitElement {
               </span>
               ${this._renderActualSubtitle(row)}
             </div>
-            <button
-              class="popup-close"
-              aria-label=${this._t("card.popup.close")}
-              @click=${this._closePopup}
-            >
-              <ha-icon icon="mdi:close"></ha-icon>
-            </button>
+            <div class="popup-actions">
+              <button
+                class="popup-nav"
+                aria-label=${this._t("card.popup.previousDay")}
+                title=${this._t("card.popup.previousDay")}
+                ?disabled=${!popupNav.canPrev}
+                @click=${() => this._navigatePopup(-1)}
+              >
+                <ha-icon icon="mdi:chevron-left"></ha-icon>
+              </button>
+              <button
+                class="popup-nav"
+                aria-label=${this._t("card.popup.nextDay")}
+                title=${this._t("card.popup.nextDay")}
+                ?disabled=${!popupNav.canNext}
+                @click=${() => this._navigatePopup(1)}
+              >
+                <ha-icon icon="mdi:chevron-right"></ha-icon>
+              </button>
+              <button
+                class="popup-close"
+                aria-label=${this._t("card.popup.close")}
+                @click=${this._closePopup}
+              >
+                <ha-icon icon="mdi:close"></ha-icon>
+              </button>
+            </div>
           </div>
 
           <div class="chart-scroll">

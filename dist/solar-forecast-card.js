@@ -145,7 +145,9 @@ var af = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -303,7 +305,9 @@ var ar = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -461,7 +465,9 @@ var bg = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -619,7 +625,9 @@ var bn = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -777,7 +785,9 @@ var bs = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -935,7 +945,9 @@ var ca = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1093,7 +1105,9 @@ var cs = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1251,7 +1265,9 @@ var cy = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1409,7 +1425,9 @@ var da = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1567,7 +1585,9 @@ var de = {
         "kwh": "kWh",
         "forecastShort": "Prog.",
         "actualShort": "Ist"
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1725,7 +1745,9 @@ var el = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1883,7 +1905,9 @@ var en = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2041,7 +2065,9 @@ var en_GB = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2199,7 +2225,9 @@ var eo = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2357,7 +2385,9 @@ var es = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2515,7 +2545,9 @@ var es_419 = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2673,7 +2705,9 @@ var et = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2831,7 +2865,9 @@ var eu = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2989,7 +3025,9 @@ var fa = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3147,7 +3185,9 @@ var fi = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3305,7 +3345,9 @@ var fy = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3463,7 +3505,9 @@ var fr = {
         "kwh": "kWh",
         "forecastShort": "Prév.",
         "actualShort": "Réel"
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3621,7 +3665,9 @@ var ga = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3779,7 +3825,9 @@ var gl = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3937,7 +3985,9 @@ var gsw = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4095,7 +4145,9 @@ var he = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4253,7 +4305,9 @@ var hi = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4411,7 +4465,9 @@ var hr = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4569,7 +4625,9 @@ var hu = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4727,7 +4785,9 @@ var hy = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4885,7 +4945,9 @@ var id = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5043,7 +5105,9 @@ var it = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5201,7 +5265,9 @@ var is = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5359,7 +5425,9 @@ var ja = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5517,7 +5585,9 @@ var ka = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5675,7 +5745,9 @@ var ko = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5833,7 +5905,9 @@ var lb = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5991,7 +6065,9 @@ var lt = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6149,7 +6225,9 @@ var lv = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6307,7 +6385,9 @@ var mk = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6465,7 +6545,9 @@ var ml = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6623,7 +6705,9 @@ var nl = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6781,7 +6865,9 @@ var nb = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6939,7 +7025,9 @@ var nn = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7097,7 +7185,9 @@ var pl = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7255,7 +7345,9 @@ var pt = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7413,7 +7505,9 @@ var pt_BR = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7571,7 +7665,9 @@ var ro = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7729,7 +7825,9 @@ var ru = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7887,7 +7985,9 @@ var sk = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8045,7 +8145,9 @@ var sl = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8203,7 +8305,9 @@ var sr = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8361,7 +8465,9 @@ var sr_Latn = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8519,7 +8625,9 @@ var sv = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8677,7 +8785,9 @@ var sq = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8835,7 +8945,9 @@ var ta = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8993,7 +9105,9 @@ var te = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9151,7 +9265,9 @@ var th = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9309,7 +9425,9 @@ var tr = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9467,7 +9585,9 @@ var uk = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9625,7 +9745,9 @@ var ur = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9783,7 +9905,9 @@ var vi = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9941,7 +10065,9 @@ var zh_Hans = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -10099,7 +10225,9 @@ var zh_Hant = {
         "kwh": "kWh",
         "forecastShort": "Fcst",
         "actualShort": "Act."
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -11316,9 +11444,26 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         this._mainActualRefreshInFlight = false;
         this._mainActualNextRefreshAt = 0;
         this._warnedConfigIssues = new Set();
+        this._popupTouchStartX = null;
+        this._popupTouchStartY = null;
+        this._popupTouchLastX = null;
+        this._popupTouchLastY = null;
         this._onDocKey = (e) => {
-            if (e.key === "Escape" && this._popup)
+            if (!this._popup)
+                return;
+            if (e.key === "Escape") {
                 this._closePopup();
+                return;
+            }
+            if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                this._navigatePopup(-1);
+                return;
+            }
+            if (e.key === "ArrowRight") {
+                e.preventDefault();
+                this._navigatePopup(1);
+            }
         };
     }
     // ── Lovelace lifecycle ────────────────────────────────────────────────────
@@ -12030,6 +12175,9 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
     // ── Popup ─────────────────────────────────────────────────────────────────
     _openPopup(row) {
         clearTimeout(this._closeTimer);
+        this._showPopupRow(row, true);
+    }
+    _showPopupRow(row, animate) {
         // Re-read the entity state fresh at click time so we always get the latest hours
         const freshState = row.entityId ? this.hass?.states[row.entityId] : undefined;
         const intType = this._config?.integration_type;
@@ -12041,7 +12189,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
                     : `${typeof freshHours}`;
         console.debug("[solar-forecast-card] popup →", row.entityId || "(no entity)", "| state:", freshState?.state ?? "n/a", "| hours:", hoursType);
         this._popup = { ...row, rawHoursAttr: freshHours ?? row.rawHoursAttr };
-        this._popupVisible = false;
+        this._popupVisible = animate ? false : true;
         this._exportLimitTooltipHour = null;
         // Fetch per-hour actual-generation history for today's popup.
         // Reset to null first so the popup renders forecast-only until the fetch
@@ -12049,20 +12197,86 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         this._popupActualHourly = null;
         if (row.isToday && this._config?.today_actual_entity) {
             const entityId = this._config.today_actual_entity;
+            const popupDayIndex = row.dayIndex;
             this._fetchActualHourly(entityId).then((map) => {
                 // Only apply if the popup is still open (user may have closed it while fetching)
-                if (this._popup)
+                if (this._popup?.dayIndex === popupDayIndex)
                     this._popupActualHourly = map;
             });
         }
         // Single rAF lets Lit stamp the overlay into the DOM before we add .visible
-        requestAnimationFrame(() => { this._popupVisible = true; });
+        if (animate)
+            requestAnimationFrame(() => { this._popupVisible = true; });
     }
     _closePopup() {
         this._popupVisible = false;
         this._popupActualHourly = null;
         this._exportLimitTooltipHour = null;
+        this._resetPopupTouch();
         this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
+    }
+    _popupNavigationRows() {
+        return this._buildRows().filter((row) => row.entityId);
+    }
+    _popupNavigationState(row = this._popup) {
+        const rows = this._popupNavigationRows();
+        const index = row ? rows.findIndex((candidate) => candidate.dayIndex === row.dayIndex) : -1;
+        return {
+            rows,
+            index,
+            canPrev: index > 0,
+            canNext: index >= 0 && index < rows.length - 1,
+        };
+    }
+    _navigatePopup(delta) {
+        if (!this._popup)
+            return;
+        const { rows, index } = this._popupNavigationState(this._popup);
+        if (index < 0)
+            return;
+        const target = rows[index + delta];
+        if (!target)
+            return;
+        this._showPopupRow(target, false);
+    }
+    _onPopupTouchStart(event) {
+        if (event.touches.length !== 1)
+            return;
+        const touch = event.touches[0];
+        this._popupTouchStartX = touch.clientX;
+        this._popupTouchStartY = touch.clientY;
+        this._popupTouchLastX = touch.clientX;
+        this._popupTouchLastY = touch.clientY;
+    }
+    _onPopupTouchMove(event) {
+        if (event.touches.length !== 1 || this._popupTouchStartX === null || this._popupTouchStartY === null)
+            return;
+        const touch = event.touches[0];
+        this._popupTouchLastX = touch.clientX;
+        this._popupTouchLastY = touch.clientY;
+    }
+    _onPopupTouchEnd() {
+        if (this._popupTouchStartX === null ||
+            this._popupTouchStartY === null ||
+            this._popupTouchLastX === null ||
+            this._popupTouchLastY === null) {
+            this._resetPopupTouch();
+            return;
+        }
+        const deltaX = this._popupTouchLastX - this._popupTouchStartX;
+        const deltaY = this._popupTouchLastY - this._popupTouchStartY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        this._resetPopupTouch();
+        if (absX < 55 || absX < absY * 1.5)
+            return;
+        this._navigatePopup(deltaX < 0 ? 1 : -1);
+    }
+    _resetPopupTouch() {
+        this._popupTouchStartX = null;
+        this._popupTouchStartY = null;
+        this._popupTouchLastX = null;
+        this._popupTouchLastY = null;
     }
     // ── Actual-generation history ─────────────────────────────────────────────
     /**
@@ -12840,6 +13054,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
           transform ${POPUP_CLOSE_MS + 40}ms cubic-bezier(0.34, 1.28, 0.64, 1),
           opacity ${POPUP_CLOSE_MS}ms ease;
         will-change: transform, opacity;
+        touch-action: pan-y;
       }
 
       .popup-overlay.visible .popup-panel {
@@ -12864,6 +13079,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         flex-direction: column;
         gap: 3px;
         min-width: 0;
+        flex: 1;
       }
 
       .popup-day-name {
@@ -12889,6 +13105,15 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         color: var(--sfc-popup-accent-color, var(--warning-color, #f59e0b));
       }
 
+      .popup-actions {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: -2px;
+      }
+
+      .popup-nav,
       .popup-close {
         flex-shrink: 0;
         background: var(--secondary-background-color, rgba(128, 128, 128, 0.10));
@@ -12902,15 +13127,22 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.15s, color 0.15s;
-        margin-top: -2px;
+        transition: background 0.15s, color 0.15s, opacity 0.15s;
       }
 
+      .popup-nav:hover,
       .popup-close:hover {
         background: var(--divider-color, rgba(128, 128, 128, 0.18));
         color: var(--sfc-popup-text-color, var(--primary-text-color));
       }
 
+      .popup-nav[disabled] {
+        opacity: 0.24;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .popup-nav ha-icon,
       .popup-close ha-icon {
         --mdc-icon-size: 18px;
       }
@@ -13832,12 +14064,21 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             return A;
         const row = this._popup;
         const chartContent = this._renderHourlyChartContent(row, row.isToday ? this._popupActualHourly : undefined);
+        const popupNav = this._popupNavigationState(row);
         return b `
       <div
         class="popup-overlay ${this._popupVisible ? "visible" : ""}"
         @click=${this._closePopup}
       >
-        <div part="popup" class="popup-panel" @click=${(e) => e.stopPropagation()}>
+        <div
+          part="popup"
+          class="popup-panel"
+          @click=${(e) => e.stopPropagation()}
+          @touchstart=${(event) => this._onPopupTouchStart(event)}
+          @touchmove=${(event) => this._onPopupTouchMove(event)}
+          @touchend=${() => this._onPopupTouchEnd()}
+          @touchcancel=${() => this._resetPopupTouch()}
+        >
 
           <div class="popup-header">
             <div class="popup-title">
@@ -13851,13 +14092,33 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
               </span>
               ${this._renderActualSubtitle(row)}
             </div>
-            <button
-              class="popup-close"
-              aria-label=${this._t("card.popup.close")}
-              @click=${this._closePopup}
-            >
-              <ha-icon icon="mdi:close"></ha-icon>
-            </button>
+            <div class="popup-actions">
+              <button
+                class="popup-nav"
+                aria-label=${this._t("card.popup.previousDay")}
+                title=${this._t("card.popup.previousDay")}
+                ?disabled=${!popupNav.canPrev}
+                @click=${() => this._navigatePopup(-1)}
+              >
+                <ha-icon icon="mdi:chevron-left"></ha-icon>
+              </button>
+              <button
+                class="popup-nav"
+                aria-label=${this._t("card.popup.nextDay")}
+                title=${this._t("card.popup.nextDay")}
+                ?disabled=${!popupNav.canNext}
+                @click=${() => this._navigatePopup(1)}
+              >
+                <ha-icon icon="mdi:chevron-right"></ha-icon>
+              </button>
+              <button
+                class="popup-close"
+                aria-label=${this._t("card.popup.close")}
+                @click=${this._closePopup}
+              >
+                <ha-icon icon="mdi:close"></ha-icon>
+              </button>
+            </div>
           </div>
 
           <div class="chart-scroll">

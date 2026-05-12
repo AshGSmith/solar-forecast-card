@@ -58,7 +58,9 @@
         "kwh": "kWh",
         "forecastShort": "Prog.",
         "actualShort": "Ist"
-      }
+      },
+      "previousDay": "Previous day",
+      "nextDay": "Next day"
     },
     "aria": {
       "dayButton": "{day} {date}"
