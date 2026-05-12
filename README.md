@@ -78,8 +78,6 @@ actual_arrays:
     label: W
 inverter_max_kw: 5.0
 solar_max_kwp: 4.2
-date_format: DD/MM
-time_format: 24h
 desktop_text_scale: 100
 low_threshold: 10
 high_threshold: 30
@@ -173,16 +171,21 @@ actual_arrays:
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
-| `date_format` | string | no | `DD/MM` | Date format for day column labels. `DD/MM` (e.g. 15/04) or `MM/DD` (e.g. 04/15) |
-| `time_format` | string | no | `24h` | Time format used in the hourly forecast popup. `24h` (e.g. `17:00`) or `12h` (e.g. `5pm`) |
 | `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
 | `desktop_text_scale` | number | no | `100` | Scales card text on wider screens only. Accepts values from 100 to 150 in the visual editor; mobile sizing is unchanged |
 | `font_size` | number | no | — | Optional daily forecast value and day/date label size in pixels. Leave unset to use CSS/default styling |
 | `bar_width` | number | no | — | Optional daily forecast bar width in pixels. Leave unset to use CSS/default styling |
 
-#### Language
+#### Language and date/time format
 
-The card follows the active Home Assistant frontend language where a locale is available, with English used as the fallback for any missing translation. Date, time, and number formatting continue to use Home Assistant/browser locale behaviour where practical, while the existing `date_format` and `time_format` options remain available.
+The card follows the active Home Assistant frontend language where a locale is available, with English used as the fallback for any missing translation. Date labels, time labels, and number formatting follow the Home Assistant frontend locale and time settings for the current user.
+
+To change how dates and times are shown in the card, update your Home Assistant user/browser preferences:
+
+1. Open Home Assistant.
+2. Select your user profile.
+3. Update the language, number format, time format, or related locale settings.
+4. Refresh the dashboard if the card does not update immediately.
 
 #### Colour Thresholds
 
