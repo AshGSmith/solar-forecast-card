@@ -10049,9 +10049,32 @@ const SCHEMA_THRESHOLDS = [
     { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
 ];
 // ── Config normalisation (exported — also used by the main card) ──────────────
+function optionalString(value) {
+    return typeof value === "string" && value.trim() !== "" ? value.trim() : undefined;
+}
+function optionalNumber(value) {
+    return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+function normalizeActualArrays(value) {
+    if (!Array.isArray(value))
+        return undefined;
+    const entries = value
+        .filter((entry) => typeof entry === "object" && entry !== null && !Array.isArray(entry))
+        .map((entry) => {
+        const entity = optionalString(entry.entity);
+        if (!entity)
+            return undefined;
+        return {
+            entity,
+            label: optionalString(entry.label) ?? "?",
+        };
+    })
+        .filter((entry) => entry !== undefined);
+    return entries.length > 0 ? entries : undefined;
+}
 function normalizeConfig(raw) {
     const incoming = Array.isArray(raw.forecast_entities)
-        ? raw.forecast_entities.slice(0, 7)
+        ? raw.forecast_entities.slice(0, 7).map((entityId) => optionalString(entityId) ?? "")
         : [];
     while (incoming.length < 7)
         incoming.push("");
@@ -10061,27 +10084,25 @@ function normalizeConfig(raw) {
         icon: raw.icon,
         show_header: raw.show_header !== false,
         display_estimate10: raw.display_estimate10 ?? false,
-        device_id: raw.device_id,
+        device_id: optionalString(raw.device_id),
         integration_type: raw.integration_type ?? "manual",
         forecast_entities: incoming,
-        export_rate_entity: raw.export_rate_entity,
-        live_power_entity: raw.live_power_entity,
-        today_actual_entity: raw.today_actual_entity,
-        next_hour_entity: raw.next_hour_entity,
-        remaining_today_entity: raw.remaining_today_entity,
-        actual_arrays: Array.isArray(raw.actual_arrays)
-            ? raw.actual_arrays.filter((e) => typeof e === "object" && e !== null && typeof e.entity === "string")
-            : undefined,
-        date_format: raw.date_format,
-        time_format: raw.time_format,
+        export_rate_entity: optionalString(raw.export_rate_entity),
+        live_power_entity: optionalString(raw.live_power_entity),
+        today_actual_entity: optionalString(raw.today_actual_entity),
+        next_hour_entity: optionalString(raw.next_hour_entity),
+        remaining_today_entity: optionalString(raw.remaining_today_entity),
+        actual_arrays: normalizeActualArrays(raw.actual_arrays),
+        date_format: raw.date_format === "DD/MM" || raw.date_format === "MM/DD" ? raw.date_format : undefined,
+        time_format: raw.time_format === "24h" || raw.time_format === "12h" ? raw.time_format : undefined,
         show_hourly_as_main: raw.show_hourly_as_main ?? false,
-        inverter_max_kw: raw.inverter_max_kw,
-        solar_max_kwp: raw.solar_max_kwp,
-        low_threshold: raw.low_threshold,
-        high_threshold: raw.high_threshold,
-        desktop_text_scale: raw.desktop_text_scale,
-        font_size: raw.font_size,
-        bar_width: raw.bar_width,
+        inverter_max_kw: optionalNumber(raw.inverter_max_kw),
+        solar_max_kwp: optionalNumber(raw.solar_max_kwp),
+        low_threshold: optionalNumber(raw.low_threshold),
+        high_threshold: optionalNumber(raw.high_threshold),
+        desktop_text_scale: optionalNumber(raw.desktop_text_scale),
+        font_size: optionalNumber(raw.font_size),
+        bar_width: optionalNumber(raw.bar_width),
     };
 }
 // ── Editor element ────────────────────────────────────────────────────────────
@@ -10969,6 +10990,7 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         this._mainActualHourly = null;
         this._mainActualRefreshInFlight = false;
         this._mainActualNextRefreshAt = 0;
+        this._warnedConfigIssues = new Set();
         this._onDocKey = (e) => {
             if (e.key === "Escape" && this._popup)
                 this._closePopup();
@@ -10987,6 +11009,8 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
     setConfig(config) {
         if (!config)
             throw new Error(localize("en", "card.errors.invalidConfig"));
+        this._warnedConfigIssues.clear();
+        this._warnForRawConfigIssues(config);
         this._config = normalizeConfig(config);
         this._mainActualFetchKey = undefined;
         this._mainActualDataScope = undefined;
@@ -11027,6 +11051,80 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
             styles["--sfc-bar-width"] = `${this._config.bar_width}px`;
         }
         return styles;
+    }
+    _warnOnce(key, message) {
+        if (this._warnedConfigIssues.has(key))
+            return;
+        this._warnedConfigIssues.add(key);
+        console.warn(`[solar-forecast-card] ${message}`);
+    }
+    _warnForRawConfigIssues(config) {
+        if ("actual_arrays" in config && config.actual_arrays !== undefined) {
+            if (!Array.isArray(config.actual_arrays)) {
+                this._warnOnce("actual_arrays:not-array", "Ignoring actual_arrays because it is not a YAML list. Each array must be nested under a '-' item.");
+            }
+            else {
+                config.actual_arrays.forEach((entry, index) => {
+                    if (typeof entry !== "object" || entry === null || Array.isArray(entry)) {
+                        this._warnOnce(`actual_arrays:${index}:invalid`, `Ignoring actual_arrays item ${index + 1} because it is not an object.`);
+                        return;
+                    }
+                    const actualArrayEntry = entry;
+                    if (typeof actualArrayEntry.entity !== "string" || actualArrayEntry.entity === "") {
+                        this._warnOnce(`actual_arrays:${index}:missing-entity`, `Ignoring actual_arrays item ${index + 1} because it is missing an entity. Check YAML indentation for entity and label.`);
+                    }
+                });
+            }
+        }
+        for (const key of ["date_format", "time_format"]) {
+            const value = config[key];
+            if (value !== undefined && typeof value !== "string") {
+                this._warnOnce(`${key}:invalid`, `Ignoring legacy ${key} because it is not a string.`);
+            }
+        }
+    }
+    _warnForRuntimeConfigIssues(rows) {
+        if (!this._config || !this.hass)
+            return;
+        const cfg = this._config;
+        const forecastIds = cfg.forecast_entities.filter(Boolean);
+        if (forecastIds.length === 0) {
+            this._warnOnce("forecast_entities:empty", "No forecast_entities configured; the card cannot render forecast bars.");
+        }
+        cfg.forecast_entities.forEach((entityId, index) => {
+            if (!entityId)
+                return;
+            const state = this.hass.states[entityId];
+            if (!state) {
+                this._warnOnce(`forecast:${entityId}:missing`, `Forecast entity for day ${index + 1} was not found: ${entityId}`);
+                return;
+            }
+            const value = parseFloat(state.state);
+            if (!isFinite(value)) {
+                this._warnOnce(`forecast:${entityId}:non-numeric`, `Forecast entity for day ${index + 1} is not numeric: ${entityId}`);
+            }
+        });
+        const optionalEntityFields = [
+            "export_rate_entity",
+            "live_power_entity",
+            "today_actual_entity",
+            "next_hour_entity",
+            "remaining_today_entity",
+        ];
+        for (const field of optionalEntityFields) {
+            const entityId = cfg[field];
+            if (entityId && !this.hass.states[entityId]) {
+                this._warnOnce(`${field}:${entityId}:missing`, `Optional entity configured for ${field} was not found: ${entityId}`);
+            }
+        }
+        for (const entry of cfg.actual_arrays ?? []) {
+            if (entry.entity && !this.hass.states[entry.entity]) {
+                this._warnOnce(`actual_arrays:${entry.entity}:missing`, `Actual array entity was not found and will be ignored: ${entry.entity}`);
+            }
+        }
+        if (forecastIds.length > 0 && !rows.some((row) => row.forecastKwh !== null)) {
+            this._warnOnce("forecast_entities:no-readable-values", "forecast_entities are configured, but no numeric forecast values could be read.");
+        }
     }
     _localeCode() {
         return this._language();
@@ -12692,6 +12790,9 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         const title = this._config.title ?? this._t("card.defaultTitle");
         const icon = this._config.icon ?? "mdi:solar-power";
         const hasEntities = this._config.forecast_entities.some(Boolean);
+        const rows = this._buildRows();
+        this._warnForRuntimeConfigIssues(rows);
+        const hasForecastValues = rows.some((row) => row.forecastKwh !== null);
         const header = this._config.show_header ? b `
       <div part="header" class="card-header">
         <div class="header-left">
@@ -12704,7 +12805,6 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         ${this._renderLive()}
       </div>
     ` : A;
-        const rows = this._buildRows();
         const cardStyle = this._cardStyle();
         if (this._config.show_hourly_as_main) {
             return b `
@@ -12714,13 +12814,16 @@ let SolarForecastCard = class SolarForecastCard extends i$2 {
         </ha-card>
       `;
         }
-        if (!hasEntities) {
+        if (!hasEntities || !hasForecastValues) {
             return b `
         <ha-card part="card" style=${o(cardStyle)}>
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
-            <p>${this._t("card.placeholder")}<br />${this._t("card.placeholderAction")}</p>
+            <p>
+              ${hasEntities ? this._t("card.popup.noForecastData") : this._t("card.placeholder")}
+              <br />${this._t("card.placeholderAction")}
+            </p>
           </div>
         </ha-card>
       `;

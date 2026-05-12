@@ -72,6 +72,7 @@ export class SolarForecastCard extends LitElement {
   private _mainActualDataScope?: string;
   private _mainActualRefreshInFlight = false;
   private _mainActualNextRefreshAt = 0;
+  private _warnedConfigIssues = new Set<string>();
 
   private _closeTimer?: ReturnType<typeof setTimeout>;
   private readonly _onDocKey = (e: KeyboardEvent) => {
@@ -93,6 +94,8 @@ export class SolarForecastCard extends LitElement {
 
   public setConfig(config: Partial<SolarForecastCardConfig>): void {
     if (!config) throw new Error(localize("en", "card.errors.invalidConfig"));
+    this._warnedConfigIssues.clear();
+    this._warnForRawConfigIssues(config);
     this._config = normalizeConfig(config);
     this._mainActualFetchKey = undefined;
     this._mainActualDataScope = undefined;
@@ -137,6 +140,99 @@ export class SolarForecastCard extends LitElement {
       styles["--sfc-bar-width"] = `${this._config.bar_width}px`;
     }
     return styles;
+  }
+
+  private _warnOnce(key: string, message: string): void {
+    if (this._warnedConfigIssues.has(key)) return;
+    this._warnedConfigIssues.add(key);
+    console.warn(`[solar-forecast-card] ${message}`);
+  }
+
+  private _warnForRawConfigIssues(config: Partial<SolarForecastCardConfig>): void {
+    if ("actual_arrays" in config && config.actual_arrays !== undefined) {
+      if (!Array.isArray(config.actual_arrays)) {
+        this._warnOnce(
+          "actual_arrays:not-array",
+          "Ignoring actual_arrays because it is not a YAML list. Each array must be nested under a '-' item."
+        );
+      } else {
+        config.actual_arrays.forEach((entry, index) => {
+          if (typeof entry !== "object" || entry === null || Array.isArray(entry)) {
+            this._warnOnce(
+              `actual_arrays:${index}:invalid`,
+              `Ignoring actual_arrays item ${index + 1} because it is not an object.`
+            );
+            return;
+          }
+          const actualArrayEntry = entry as unknown as Record<string, unknown>;
+          if (typeof actualArrayEntry.entity !== "string" || actualArrayEntry.entity === "") {
+            this._warnOnce(
+              `actual_arrays:${index}:missing-entity`,
+              `Ignoring actual_arrays item ${index + 1} because it is missing an entity. Check YAML indentation for entity and label.`
+            );
+          }
+        });
+      }
+    }
+
+    for (const key of ["date_format", "time_format"] as const) {
+      const value = config[key];
+      if (value !== undefined && typeof value !== "string") {
+        this._warnOnce(`${key}:invalid`, `Ignoring legacy ${key} because it is not a string.`);
+      }
+    }
+  }
+
+  private _warnForRuntimeConfigIssues(rows: ForecastRow[]): void {
+    if (!this._config || !this.hass) return;
+    const cfg = this._config;
+    const forecastIds = cfg.forecast_entities.filter(Boolean);
+    if (forecastIds.length === 0) {
+      this._warnOnce("forecast_entities:empty", "No forecast_entities configured; the card cannot render forecast bars.");
+    }
+
+    cfg.forecast_entities.forEach((entityId, index) => {
+      if (!entityId) return;
+      const state = this.hass!.states[entityId];
+      if (!state) {
+        this._warnOnce(`forecast:${entityId}:missing`, `Forecast entity for day ${index + 1} was not found: ${entityId}`);
+        return;
+      }
+      const value = parseFloat(state.state);
+      if (!isFinite(value)) {
+        this._warnOnce(`forecast:${entityId}:non-numeric`, `Forecast entity for day ${index + 1} is not numeric: ${entityId}`);
+      }
+    });
+
+    const optionalEntityFields: Array<keyof Pick<
+      SolarForecastCardConfig,
+      "export_rate_entity" | "live_power_entity" | "today_actual_entity" | "next_hour_entity" | "remaining_today_entity"
+    >> = [
+      "export_rate_entity",
+      "live_power_entity",
+      "today_actual_entity",
+      "next_hour_entity",
+      "remaining_today_entity",
+    ];
+    for (const field of optionalEntityFields) {
+      const entityId = cfg[field];
+      if (entityId && !this.hass.states[entityId]) {
+        this._warnOnce(`${field}:${entityId}:missing`, `Optional entity configured for ${field} was not found: ${entityId}`);
+      }
+    }
+
+    for (const entry of cfg.actual_arrays ?? []) {
+      if (entry.entity && !this.hass.states[entry.entity]) {
+        this._warnOnce(`actual_arrays:${entry.entity}:missing`, `Actual array entity was not found and will be ignored: ${entry.entity}`);
+      }
+    }
+
+    if (forecastIds.length > 0 && !rows.some((row) => row.forecastKwh !== null)) {
+      this._warnOnce(
+        "forecast_entities:no-readable-values",
+        "forecast_entities are configured, but no numeric forecast values could be read."
+      );
+    }
   }
 
   private _localeCode(): string {
@@ -1874,6 +1970,9 @@ export class SolarForecastCard extends LitElement {
     const title = this._config.title ?? this._t("card.defaultTitle");
     const icon  = this._config.icon  ?? "mdi:solar-power";
     const hasEntities = this._config.forecast_entities.some(Boolean);
+    const rows = this._buildRows();
+    this._warnForRuntimeConfigIssues(rows);
+    const hasForecastValues = rows.some((row) => row.forecastKwh !== null);
 
     const header = this._config.show_header ? html`
       <div part="header" class="card-header">
@@ -1888,7 +1987,6 @@ export class SolarForecastCard extends LitElement {
       </div>
     ` : nothing;
 
-    const rows = this._buildRows();
     const cardStyle = this._cardStyle();
 
     if (this._config.show_hourly_as_main) {
@@ -1900,13 +1998,16 @@ export class SolarForecastCard extends LitElement {
       `;
     }
 
-    if (!hasEntities) {
+    if (!hasEntities || !hasForecastValues) {
       return html`
         <ha-card part="card" style=${styleMap(cardStyle)}>
           ${header}
           <div class="placeholder">
             <ha-icon icon="mdi:weather-sunny"></ha-icon>
-            <p>${this._t("card.placeholder")}<br />${this._t("card.placeholderAction")}</p>
+            <p>
+              ${hasEntities ? this._t("card.popup.noForecastData") : this._t("card.placeholder")}
+              <br />${this._t("card.placeholderAction")}
+            </p>
           </div>
         </ha-card>
       `;

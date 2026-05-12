@@ -78,8 +78,6 @@ actual_arrays:
     label: W
 inverter_max_kw: 5.0
 solar_max_kwp: 4.2
-date_format: DD/MM
-time_format: 24h
 desktop_text_scale: 100
 low_threshold: 10
 high_threshold: 30
@@ -173,16 +171,60 @@ actual_arrays:
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
-| `date_format` | string | no | `DD/MM` | Date format for day column labels. `DD/MM` (e.g. 15/04) or `MM/DD` (e.g. 04/15) |
-| `time_format` | string | no | `24h` | Time format used in the hourly forecast popup. `24h` (e.g. `17:00`) or `12h` (e.g. `5pm`) |
 | `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
 | `desktop_text_scale` | number | no | `100` | Scales card text on wider screens only. Accepts values from 100 to 150 in the visual editor; mobile sizing is unchanged |
 | `font_size` | number | no | — | Optional daily forecast value and day/date label size in pixels. Leave unset to use CSS/default styling |
 | `bar_width` | number | no | — | Optional daily forecast bar width in pixels. Leave unset to use CSS/default styling |
 
-#### Language
+#### Language and date/time format
 
-The card follows the active Home Assistant frontend language where a locale is available, with English used as the fallback for any missing translation. Date, time, and number formatting continue to use Home Assistant/browser locale behaviour where practical, while the existing `date_format` and `time_format` options remain available.
+The card follows the active Home Assistant frontend language where a locale is available, with English used as the fallback for any missing translation.
+
+Date labels, time labels, and number formatting follow the Home Assistant frontend locale/time settings for the current user. The card no longer needs manual date/time format options in YAML.
+
+To change the date or time format used by the card:
+
+1. In Home Assistant, open your user profile by selecting your username/avatar in the sidebar.
+2. Check the **Language** setting and choose the language/region you want to use.
+3. Check the **Time format** setting if your Home Assistant version shows one.
+4. Save the profile settings and refresh the dashboard.
+
+Older configs may still contain legacy `date_format` or `time_format` keys. They are ignored safely and can be removed from YAML.
+
+## Troubleshooting
+
+### Forecast.Solar manual YAML
+
+You can configure Forecast.Solar manually without selecting a device. Set `integration_type: forecast_solar` and provide the daily forecast sensors directly:
+
+```yaml
+type: custom:solar-forecast-card
+integration_type: forecast_solar
+forecast_entities:
+  - sensor.energy_production_today
+  - sensor.energy_production_tomorrow
+live_power_entity: sensor.solar_power_now
+today_actual_entity: sensor.solar_energy_today
+remaining_today_entity: sensor.energy_production_today_remaining
+```
+
+Optional fields such as `live_power_entity`, `today_actual_entity`, `next_hour_entity`, `remaining_today_entity`, `export_rate_entity`, and `actual_arrays` can be omitted. Missing optional entities will not stop the daily forecast bars from rendering.
+
+Forecast.Solar setups may only provide daily forecast values. If no hourly data is exposed by the integration, the card will still render the daily forecast, but the hourly popup may show that no hourly data is available.
+
+### Correct `actual_arrays` indentation
+
+Each actual array entry must have its `entity` and `label` nested under the same `-` item:
+
+```yaml
+actual_arrays:
+  - entity: sensor.solar_east_array_energy_today
+    label: E
+  - entity: sensor.solar_west_array_energy_today
+    label: W
+```
+
+Incorrect indentation can make `label` a separate YAML key instead of part of the array item. If `actual_arrays` is malformed, the card ignores it and falls back to `today_actual_entity` where available.
 
 #### Colour Thresholds
 

@@ -147,11 +147,39 @@ interface FormData {
 
 // ── Config normalisation (exported — also used by the main card) ──────────────
 
+function optionalString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() !== "" ? value.trim() : undefined;
+}
+
+function optionalNumber(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+
+function normalizeActualArrays(value: unknown): ActualArrayEntry[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+
+  const entries = value
+    .filter((entry): entry is Record<string, unknown> =>
+      typeof entry === "object" && entry !== null && !Array.isArray(entry)
+    )
+    .map((entry) => {
+      const entity = optionalString(entry.entity);
+      if (!entity) return undefined;
+      return {
+        entity,
+        label: optionalString(entry.label) ?? "?",
+      };
+    })
+    .filter((entry): entry is ActualArrayEntry => entry !== undefined);
+
+  return entries.length > 0 ? entries : undefined;
+}
+
 export function normalizeConfig(
   raw: Partial<SolarForecastCardConfig>
 ): SolarForecastCardConfig {
   const incoming = Array.isArray(raw.forecast_entities)
-    ? raw.forecast_entities.slice(0, 7)
+    ? raw.forecast_entities.slice(0, 7).map((entityId) => optionalString(entityId) ?? "")
     : [];
   while (incoming.length < 7) incoming.push("");
 
@@ -161,30 +189,25 @@ export function normalizeConfig(
     icon:               raw.icon,
     show_header:          raw.show_header !== false,
     display_estimate10:   raw.display_estimate10 ?? false,
-    device_id:          raw.device_id,
+    device_id:          optionalString(raw.device_id),
     integration_type:   raw.integration_type ?? "manual",
     forecast_entities:  incoming as SolarForecastCardConfig["forecast_entities"],
-    export_rate_entity:     raw.export_rate_entity,
-    live_power_entity:      raw.live_power_entity,
-    today_actual_entity:    raw.today_actual_entity,
-    next_hour_entity:       raw.next_hour_entity,
-    remaining_today_entity: raw.remaining_today_entity,
-    actual_arrays: Array.isArray(raw.actual_arrays)
-      ? (raw.actual_arrays as ActualArrayEntry[]).filter(
-          (e): e is ActualArrayEntry =>
-            typeof e === "object" && e !== null && typeof e.entity === "string"
-        )
-      : undefined,
-    date_format:          raw.date_format,
-    time_format:          raw.time_format,
+    export_rate_entity:     optionalString(raw.export_rate_entity),
+    live_power_entity:      optionalString(raw.live_power_entity),
+    today_actual_entity:    optionalString(raw.today_actual_entity),
+    next_hour_entity:       optionalString(raw.next_hour_entity),
+    remaining_today_entity: optionalString(raw.remaining_today_entity),
+    actual_arrays:          normalizeActualArrays(raw.actual_arrays),
+    date_format:            raw.date_format === "DD/MM" || raw.date_format === "MM/DD" ? raw.date_format : undefined,
+    time_format:            raw.time_format === "24h" || raw.time_format === "12h" ? raw.time_format : undefined,
     show_hourly_as_main:  raw.show_hourly_as_main ?? false,
-    inverter_max_kw:      raw.inverter_max_kw,
-    solar_max_kwp:        raw.solar_max_kwp,
-    low_threshold:        raw.low_threshold,
-    high_threshold:       raw.high_threshold,
-    desktop_text_scale:   raw.desktop_text_scale,
-    font_size:            raw.font_size,
-    bar_width:            raw.bar_width,
+    inverter_max_kw:      optionalNumber(raw.inverter_max_kw),
+    solar_max_kwp:        optionalNumber(raw.solar_max_kwp),
+    low_threshold:        optionalNumber(raw.low_threshold),
+    high_threshold:       optionalNumber(raw.high_threshold),
+    desktop_text_scale:   optionalNumber(raw.desktop_text_scale),
+    font_size:            optionalNumber(raw.font_size),
+    bar_width:            optionalNumber(raw.bar_width),
   };
 }
 
