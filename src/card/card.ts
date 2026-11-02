@@ -74,6 +74,12 @@ export class SolarForecastCard extends LitElement {
     this.style.setProperty("--dts-factor", String(factor));
     this._setOptionalCssPx("--sfc-font-size", this._config.font_size);
     this._setOptionalCssPx("--sfc-bar-width", this._config.bar_width);
+    const zoneOpacity = this._config.threshold_zone_opacity;
+    if (typeof zoneOpacity === "number" && Number.isFinite(zoneOpacity)) {
+      this.style.setProperty("--sfc-threshold-zone-opacity", String(zoneOpacity / 100));
+    } else {
+      this.style.removeProperty("--sfc-threshold-zone-opacity");
+    }
   }
 
   public getCardSize(): number {

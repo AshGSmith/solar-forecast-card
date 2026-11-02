@@ -40,10 +40,15 @@ describe("editor form data", () => {
     font_size: 14,
     show_low_threshold_zone: true,
     show_high_threshold_zone: true,
+    threshold_zone_opacity: 40,
   });
 
   it("round-trips a config", () => {
     expect(fromFormData(toFormData(cfg), cfg)).toEqual(cfg);
+  });
+
+  it("shows the default tint opacity when unset", () => {
+    expect(toFormData(normalizeConfig({})).threshold_zone_opacity).toBe(15);
   });
 
   it("keeps fields ha-form doesn't manage", () => {
@@ -53,11 +58,18 @@ describe("editor form data", () => {
     expect(result.date_format).toBe("MM/DD");
   });
 
-  it("omits blank values and the default text scale", () => {
-    const data = { ...toFormData(cfg), title: "", live_power_entity: "", desktop_text_scale: 100 };
+  it("omits blank values and default slider values", () => {
+    const data = {
+      ...toFormData(cfg),
+      title: "",
+      live_power_entity: "",
+      desktop_text_scale: 100,
+      threshold_zone_opacity: 15,
+    };
     const result = fromFormData(data, cfg);
     expect(result.title).toBeUndefined();
     expect(result.live_power_entity).toBeUndefined();
     expect(result.desktop_text_scale).toBeUndefined();
+    expect(result.threshold_zone_opacity).toBeUndefined();
   });
 });

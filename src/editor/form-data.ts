@@ -1,3 +1,4 @@
+import { DEFAULT_THRESHOLD_ZONE_OPACITY } from "../config.js";
 import type { SolarForecastCardConfig } from "../types.js";
 
 // ── Flat form data (ha-form requires a plain object) ─────────────────────────
@@ -30,6 +31,7 @@ export interface FormData {
   high_threshold_entity: string;
   show_low_threshold_zone: boolean;
   show_high_threshold_zone: boolean;
+  threshold_zone_opacity: number;
   desktop_text_scale: number;
   font_size: number | undefined;
   bar_width: number | undefined;
@@ -69,6 +71,7 @@ export function toFormData(cfg: SolarForecastCardConfig): FormData {
     high_threshold_entity: cfg.high_threshold_entity ?? "",
     show_low_threshold_zone:  cfg.show_low_threshold_zone ?? false,
     show_high_threshold_zone: cfg.show_high_threshold_zone ?? false,
+    threshold_zone_opacity:   cfg.threshold_zone_opacity ?? DEFAULT_THRESHOLD_ZONE_OPACITY,
     desktop_text_scale:  cfg.desktop_text_scale ?? 100,
     font_size:           cfg.font_size,
     bar_width:           cfg.bar_width,
@@ -123,6 +126,12 @@ export function fromFormData(
     high_threshold_entity: data.high_threshold_entity || undefined,
     show_low_threshold_zone:  data.show_low_threshold_zone,
     show_high_threshold_zone: data.show_high_threshold_zone,
+    // Only persist when non-default, as for desktop_text_scale.
+    threshold_zone_opacity:
+      typeof data.threshold_zone_opacity === "number" &&
+      data.threshold_zone_opacity !== DEFAULT_THRESHOLD_ZONE_OPACITY
+        ? data.threshold_zone_opacity
+        : undefined,
     // Only persist when non-default (100) so YAML stays clean for most users.
     desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
       ? data.desktop_text_scale

@@ -85,6 +85,7 @@ var af = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -223,6 +224,7 @@ var ar = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -361,6 +363,7 @@ var bg = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -499,6 +502,7 @@ var bn = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -637,6 +641,7 @@ var bs = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -775,6 +780,7 @@ var ca = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -913,6 +919,7 @@ var cs = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1051,6 +1058,7 @@ var cy = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1189,6 +1197,7 @@ var da = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1327,6 +1336,7 @@ var de = {
       "high_threshold_entity": "Hoher Schwellenwert Sensor (kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop-Textskalierung",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1465,6 +1475,7 @@ var el = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1603,6 +1614,7 @@ var en = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1741,6 +1753,7 @@ var en_GB = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1879,6 +1892,7 @@ var eo = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2017,6 +2031,7 @@ var es = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2155,6 +2170,7 @@ var es_419 = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2293,6 +2309,7 @@ var et = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2431,6 +2448,7 @@ var eu = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2569,6 +2587,7 @@ var fa = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2707,6 +2726,7 @@ var fi = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2845,6 +2865,7 @@ var fy = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2983,6 +3004,7 @@ var fr = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3121,6 +3143,7 @@ var ga = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3259,6 +3282,7 @@ var gl = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3397,6 +3421,7 @@ var gsw = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3535,6 +3560,7 @@ var he = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3673,6 +3699,7 @@ var hi = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3811,6 +3838,7 @@ var hr = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3949,6 +3977,7 @@ var hu = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4087,6 +4116,7 @@ var hy = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4225,6 +4255,7 @@ var id = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4363,6 +4394,7 @@ var it = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4501,6 +4533,7 @@ var is = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4639,6 +4672,7 @@ var ja = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4777,6 +4811,7 @@ var ka = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4915,6 +4950,7 @@ var ko = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5053,6 +5089,7 @@ var lb = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5191,6 +5228,7 @@ var lt = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5329,6 +5367,7 @@ var lv = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5467,6 +5506,7 @@ var mk = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5605,6 +5645,7 @@ var ml = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5743,6 +5784,7 @@ var nl = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5881,6 +5923,7 @@ var nb = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6019,6 +6062,7 @@ var nn = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6157,6 +6201,7 @@ var pl = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6295,6 +6340,7 @@ var pt = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6433,6 +6479,7 @@ var pt_BR = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6571,6 +6618,7 @@ var ro = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6709,6 +6757,7 @@ var ru = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6847,6 +6896,7 @@ var sk = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6985,6 +7035,7 @@ var sl = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7123,6 +7174,7 @@ var sr = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7261,6 +7313,7 @@ var sr_Latn = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7399,6 +7452,7 @@ var sv = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7537,6 +7591,7 @@ var sq = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7675,6 +7730,7 @@ var ta = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7813,6 +7869,7 @@ var te = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7951,6 +8008,7 @@ var th = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8089,6 +8147,7 @@ var tr = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8227,6 +8286,7 @@ var uk = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8365,6 +8425,7 @@ var ur = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8503,6 +8564,7 @@ var vi = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8641,6 +8703,7 @@ var zh_Hans = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8779,6 +8842,7 @@ var zh_Hant = {
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -9010,6 +9074,8 @@ const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);
  * SPDX-License-Identifier: BSD-3-Clause
  */function r(r){return n({...r,state:true,attribute:false})}
 
+/** Keep in step with the fallback alpha on .bar-bg in card/styles/day-column.ts. */
+const DEFAULT_THRESHOLD_ZONE_OPACITY = 15;
 function normalizeConfig(raw) {
     const incoming = Array.isArray(raw.forecast_entities)
         ? raw.forecast_entities.slice(0, 7)
@@ -9044,6 +9110,7 @@ function normalizeConfig(raw) {
         high_threshold_entity: raw.high_threshold_entity,
         show_low_threshold_zone: raw.show_low_threshold_zone ?? false,
         show_high_threshold_zone: raw.show_high_threshold_zone ?? false,
+        threshold_zone_opacity: raw.threshold_zone_opacity,
         desktop_text_scale: raw.desktop_text_scale,
         font_size: raw.font_size,
         bar_width: raw.bar_width,
@@ -10574,10 +10641,10 @@ const dayColumnStyles = i$3 `
     /* Threshold zones. With the zone edges unset, both tints have zero height. */
     background-image: linear-gradient(
       to top,
-      var(--sfc-low-threshold-zone-color, rgba(220, 80, 80, 0.26)) var(--sfc-low-zone-top, 0%),
+      var(--sfc-low-threshold-zone-color, rgba(220, 80, 80, var(--sfc-threshold-zone-opacity, 0.15))) var(--sfc-low-zone-top, 0%),
       transparent var(--sfc-low-zone-top, 0%),
       transparent var(--sfc-high-zone-bottom, 100%),
-      var(--sfc-high-threshold-zone-color, rgba(22, 163, 74, 0.26)) var(--sfc-high-zone-bottom, 100%)
+      var(--sfc-high-threshold-zone-color, rgba(22, 163, 74, var(--sfc-threshold-zone-opacity, 0.15))) var(--sfc-high-zone-bottom, 100%)
     );
   }
 
@@ -11477,6 +11544,13 @@ let SolarForecastCard = class SolarForecastCard extends i {
         this.style.setProperty("--dts-factor", String(factor));
         this._setOptionalCssPx("--sfc-font-size", this._config.font_size);
         this._setOptionalCssPx("--sfc-bar-width", this._config.bar_width);
+        const zoneOpacity = this._config.threshold_zone_opacity;
+        if (typeof zoneOpacity === "number" && Number.isFinite(zoneOpacity)) {
+            this.style.setProperty("--sfc-threshold-zone-opacity", String(zoneOpacity / 100));
+        }
+        else {
+            this.style.removeProperty("--sfc-threshold-zone-opacity");
+        }
     }
     getCardSize() {
         return 4;
@@ -11677,6 +11751,7 @@ function toFormData(cfg) {
         high_threshold_entity: cfg.high_threshold_entity ?? "",
         show_low_threshold_zone: cfg.show_low_threshold_zone ?? false,
         show_high_threshold_zone: cfg.show_high_threshold_zone ?? false,
+        threshold_zone_opacity: cfg.threshold_zone_opacity ?? DEFAULT_THRESHOLD_ZONE_OPACITY,
         desktop_text_scale: cfg.desktop_text_scale ?? 100,
         font_size: cfg.font_size,
         bar_width: cfg.bar_width,
@@ -11727,6 +11802,11 @@ function fromFormData(data, current) {
         high_threshold_entity: data.high_threshold_entity || undefined,
         show_low_threshold_zone: data.show_low_threshold_zone,
         show_high_threshold_zone: data.show_high_threshold_zone,
+        // Only persist when non-default, as for desktop_text_scale.
+        threshold_zone_opacity: typeof data.threshold_zone_opacity === "number" &&
+            data.threshold_zone_opacity !== DEFAULT_THRESHOLD_ZONE_OPACITY
+            ? data.threshold_zone_opacity
+            : undefined,
         // Only persist when non-default (100) so YAML stays clean for most users.
         desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
             ? data.desktop_text_scale
@@ -11806,6 +11886,12 @@ const SCHEMA_THRESHOLDS = [
     { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
     { name: "high_threshold_entity", selector: { entity: { domain: "sensor" } } },
     { name: "show_high_threshold_zone", selector: { boolean: {} } },
+    {
+        name: "threshold_zone_opacity",
+        selector: {
+            number: { min: 5, max: 100, step: 5, mode: "slider", unit_of_measurement: "%" },
+        },
+    },
 ];
 function integrationSchema(t) {
     return [

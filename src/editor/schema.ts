@@ -96,6 +96,12 @@ export const SCHEMA_THRESHOLDS: HaFormSchema[] = [
   { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
   { name: "high_threshold_entity", selector: { entity: { domain: "sensor" } } },
   { name: "show_high_threshold_zone", selector: { boolean: {} } },
+  {
+    name: "threshold_zone_opacity",
+    selector: {
+      number: { min: 5, max: 100, step: 5, mode: "slider", unit_of_measurement: "%" },
+    },
+  },
 ];
 
 type Translate = (key: string) => string;

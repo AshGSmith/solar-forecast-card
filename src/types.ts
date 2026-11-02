@@ -48,6 +48,8 @@ export interface SolarForecastCardConfig {
   show_low_threshold_zone: boolean;
   /** When true, tints the daily bar track above the high threshold. */
   show_high_threshold_zone: boolean;
+  /** Opacity of the threshold tints as a percentage (5–100, step 5). Undefined = 15. */
+  threshold_zone_opacity?: number;
   /** Scale factor for card text on desktop/wide viewports (100–150, step 5). Undefined = 100 (no change). Only applied at ≥ 768 px viewport width. */
   desktop_text_scale?: number;
   /** Optional daily forecast value/day label font size in pixels. Undefined = CSS/default styling. */

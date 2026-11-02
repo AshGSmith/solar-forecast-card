@@ -197,6 +197,7 @@ Bar colours change based on each day's forecast total. When neither threshold is
 | `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
 | `show_low_threshold_zone` | boolean | no | `false` | Tint the bar track red below the current low threshold |
 | `show_high_threshold_zone` | boolean | no | `false` | Tint the bar track green above the current high threshold |
+| `threshold_zone_opacity` | number | no | `15` | Opacity of the threshold tints as a percentage, from 5 to 100. Lower values are more transparent |
 
 Threshold zones use the same scale as the bars, which is set by the week's highest forecast. A zone is hidden while its threshold is above that value.
 
@@ -236,6 +237,7 @@ Available variables:
 | `--sfc-actual-color` | Actual generation bar background |
 | `--sfc-low-threshold-zone-color` | Low threshold zone colour |
 | `--sfc-high-threshold-zone-color` | High threshold zone colour |
+| `--sfc-threshold-zone-opacity` | Threshold tint opacity, from 0 to 1. Not used when a zone colour variable is set |
 | `--sfc-popup-background` | Popup background |
 | `--sfc-popup-border-radius` | Popup corner radius |
 | `--sfc-popup-text-color` | Popup primary text colour |

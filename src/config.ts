@@ -1,5 +1,8 @@
 import type { ActualArrayEntry, SolarForecastCardConfig } from "./types.js";
 
+/** Keep in step with the fallback alpha on .bar-bg in card/styles/day-column.ts. */
+export const DEFAULT_THRESHOLD_ZONE_OPACITY = 15;
+
 export function normalizeConfig(
   raw: Partial<SolarForecastCardConfig>
 ): SolarForecastCardConfig {
@@ -39,6 +42,7 @@ export function normalizeConfig(
     high_threshold_entity: raw.high_threshold_entity,
     show_low_threshold_zone:  raw.show_low_threshold_zone ?? false,
     show_high_threshold_zone: raw.show_high_threshold_zone ?? false,
+    threshold_zone_opacity:   raw.threshold_zone_opacity,
     desktop_text_scale:   raw.desktop_text_scale,
     font_size:            raw.font_size,
     bar_width:            raw.bar_width,

@@ -140,10 +140,10 @@ export const dayColumnStyles = css`
     /* Threshold zones. With the zone edges unset, both tints have zero height. */
     background-image: linear-gradient(
       to top,
-      var(--sfc-low-threshold-zone-color, rgba(220, 80, 80, 0.26)) var(--sfc-low-zone-top, 0%),
+      var(--sfc-low-threshold-zone-color, rgba(220, 80, 80, var(--sfc-threshold-zone-opacity, 0.15))) var(--sfc-low-zone-top, 0%),
       transparent var(--sfc-low-zone-top, 0%),
       transparent var(--sfc-high-zone-bottom, 100%),
-      var(--sfc-high-threshold-zone-color, rgba(22, 163, 74, 0.26)) var(--sfc-high-zone-bottom, 100%)
+      var(--sfc-high-threshold-zone-color, rgba(22, 163, 74, var(--sfc-threshold-zone-opacity, 0.15))) var(--sfc-high-zone-bottom, 100%)
     );
   }
 

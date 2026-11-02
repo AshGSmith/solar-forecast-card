@@ -85,6 +85,7 @@
       "high_threshold_entity": "Hoher Schwellenwert Sensor (kWh)",
       "show_low_threshold_zone": "Tint bar track below low threshold",
       "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop-Textskalierung",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
