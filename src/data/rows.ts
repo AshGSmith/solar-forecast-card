@@ -18,6 +18,9 @@ export interface ForecastRow {
   rawHoursAttr: unknown;     // raw "hours" attribute — parsed lazily
   /** Summed pv_estimate10 for the day (kWh). Null when not applicable or unavailable. */
   estimate10Kwh: number | null;
+  /** Line positions on the bar scale. Null when the line is off, unset or above the scale. */
+  lowThresholdPct: number | null;
+  highThresholdPct: number | null;
   forecastPct: number;       // 0–100, relative to week max
   actualPct: number;         // 0–100, capped at forecastPct
   dottedPct: number;         // forecastPct - actualPct
@@ -30,7 +33,10 @@ export function buildRows(hass: HomeAssistant, cfg: SolarForecastCardConfig): Fo
   const todayArrays = readArrayActuals(hass, cfg);
   const todayActualKwh = resolveActualKwh(hass, cfg, todayArrays);
 
-  type Raw = Omit<ForecastRow, "forecastPct" | "actualPct" | "dottedPct" | "isComplete">;
+  type Raw = Omit<
+    ForecastRow,
+    "lowThresholdPct" | "highThresholdPct" | "forecastPct" | "actualPct" | "dottedPct" | "isComplete"
+  >;
 
   const showEstimate10 =
     cfg.integration_type === "solcast" && cfg.display_estimate10;
@@ -58,6 +64,10 @@ export function buildRows(hass: HomeAssistant, cfg: SolarForecastCardConfig): Fo
 
   const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
 
+  const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
+  const lowThresholdPct  = cfg.show_low_threshold_line  ? thresholdLinePct(lowKwh, maxKwh)  : null;
+  const highThresholdPct = cfg.show_high_threshold_line ? thresholdLinePct(highKwh, maxKwh) : null;
+
   return raw.map((r): ForecastRow => {
     const forecastPct = r.forecastKwh !== null
       ? Math.round((r.forecastKwh / maxKwh) * 100) : 0;
@@ -70,7 +80,7 @@ export function buildRows(hass: HomeAssistant, cfg: SolarForecastCardConfig): Fo
       && r.actualKwh !== null
       && r.actualKwh / r.forecastKwh >= COMPLETE_THRESHOLD;
 
-    return { ...r, forecastPct, actualPct, dottedPct, isComplete };
+    return { ...r, lowThresholdPct, highThresholdPct, forecastPct, actualPct, dottedPct, isComplete };
   });
 }
 
@@ -100,6 +110,23 @@ function resolveThreshold(
     : undefined;
 }
 
+function resolveThresholds(
+  hass: HomeAssistant | undefined,
+  cfg: SolarForecastCardConfig
+): { lowKwh: number | undefined; highKwh: number | undefined } {
+  return {
+    lowKwh:  resolveThreshold(hass, cfg.low_threshold_entity, cfg.low_threshold),
+    highKwh: resolveThreshold(hass, cfg.high_threshold_entity, cfg.high_threshold),
+  };
+}
+
+/** Bars scale to the week's peak, so a threshold above it has no place on the chart. */
+function thresholdLinePct(kwh: number | undefined, maxKwh: number): number | null {
+  if (kwh === undefined) return null;
+  const pct = (kwh / maxKwh) * 100;
+  return pct <= 100 ? pct : null;
+}
+
 export function forecastTier(
   hass: HomeAssistant | undefined,
   cfg: SolarForecastCardConfig,
@@ -107,11 +134,10 @@ export function forecastTier(
 ): Tier {
   if (kwh === null) return "average";
 
-  const lo = resolveThreshold(hass, cfg.low_threshold_entity, cfg.low_threshold);
-  const hi = resolveThreshold(hass, cfg.high_threshold_entity, cfg.high_threshold);
+  const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
 
-  if (lo !== undefined && kwh < lo) return "low";
-  if (hi !== undefined && kwh > hi) return "high";
+  if (lowKwh !== undefined && kwh < lowKwh) return "low";
+  if (highKwh !== undefined && kwh > highKwh) return "high";
 
   return "average";
 }

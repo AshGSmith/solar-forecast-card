@@ -116,6 +116,8 @@ export class SolarForecastCard extends LitElement {
       this._config.next_hour_entity,
       this._config.remaining_today_entity,
       this._config.export_rate_entity,
+      this._config.low_threshold_entity,
+      this._config.high_threshold_entity,
       ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
     ].filter(Boolean) as string[];
 

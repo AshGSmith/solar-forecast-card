@@ -10,6 +10,8 @@ describe("normalizeConfig", () => {
       show_header: true,
       display_estimate10: false,
       show_hourly_as_main: false,
+      show_low_threshold_line: false,
+      show_high_threshold_line: false,
       integration_type: "manual",
       forecast_entities: ["", "", "", "", "", "", ""],
     });
@@ -36,6 +38,8 @@ describe("editor form data", () => {
     inverter_max_kw: 5,
     desktop_text_scale: 120,
     font_size: 14,
+    show_low_threshold_line: true,
+    show_high_threshold_line: true,
   });
 
   it("round-trips a config", () => {

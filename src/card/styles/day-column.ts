@@ -364,6 +364,35 @@ export const dayColumnStyles = css`
   .bar-dotted.full    { border-radius: var(--sfc-bar-radius, 6px); }
   .bar-dotted.partial { border-bottom: none; border-radius: var(--sfc-bar-radius, 6px 6px 0 0); }
 
+  /* ── Threshold lines ─────────────────────────────────────── */
+
+  /* Each column draws its own segment. The side offsets close the gap to the
+     next column (3px column padding + half the 2px grid gap) so the segments
+     read as one line. The drop shadow keeps a line visible over a bar of the
+     same colour. */
+  .threshold-line {
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    translate: 0 50%;
+    border-top: 2px dashed;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.45));
+    transition: bottom 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
+  }
+
+  .threshold-line.low {
+    border-top-color: var(--sfc-low-threshold-line-color, rgba(239, 68, 68, 0.9));
+  }
+
+  .threshold-line.high {
+    border-top-color: var(--sfc-high-threshold-line-color, rgba(34, 197, 94, 0.9));
+  }
+
+  .forecast-grid.two-day .threshold-line {
+    left: -6px;
+    right: -6px;
+  }
+
   /* ── Day label ───────────────────────────────────────── */
 
   .col-label {

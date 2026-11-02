@@ -28,6 +28,8 @@ export interface FormData {
   low_threshold_entity: string;
   high_threshold: number | undefined;
   high_threshold_entity: string;
+  show_low_threshold_line: boolean;
+  show_high_threshold_line: boolean;
   desktop_text_scale: number;
   font_size: number | undefined;
   bar_width: number | undefined;
@@ -65,6 +67,8 @@ export function toFormData(cfg: SolarForecastCardConfig): FormData {
     low_threshold_entity: cfg.low_threshold_entity ?? "",
     high_threshold:      cfg.high_threshold,
     high_threshold_entity: cfg.high_threshold_entity ?? "",
+    show_low_threshold_line:  cfg.show_low_threshold_line ?? false,
+    show_high_threshold_line: cfg.show_high_threshold_line ?? false,
     desktop_text_scale:  cfg.desktop_text_scale ?? 100,
     font_size:           cfg.font_size,
     bar_width:           cfg.bar_width,
@@ -117,6 +121,8 @@ export function fromFormData(
     high_threshold:     typeof data.high_threshold     === "number" ? data.high_threshold     : undefined,
     low_threshold_entity: data.low_threshold_entity || undefined,
     high_threshold_entity: data.high_threshold_entity || undefined,
+    show_low_threshold_line:  data.show_low_threshold_line,
+    show_high_threshold_line: data.show_high_threshold_line,
     // Only persist when non-default (100) so YAML stays clean for most users.
     desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
       ? data.desktop_text_scale

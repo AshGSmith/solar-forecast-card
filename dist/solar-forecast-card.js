@@ -83,6 +83,8 @@ var af = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -219,6 +221,8 @@ var ar = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -355,6 +359,8 @@ var bg = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -491,6 +497,8 @@ var bn = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -627,6 +635,8 @@ var bs = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -763,6 +773,8 @@ var ca = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -899,6 +911,8 @@ var cs = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1035,6 +1049,8 @@ var cy = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1171,6 +1187,8 @@ var da = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1307,6 +1325,8 @@ var de = {
       "high_threshold": "Hoher Schwellenwert (kWh)",
       "low_threshold_entity": "Niedriger Schwellenwert Sensor (kWh)",
       "high_threshold_entity": "Hoher Schwellenwert Sensor (kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop-Textskalierung",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1443,6 +1463,8 @@ var el = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1579,6 +1601,8 @@ var en = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1715,6 +1739,8 @@ var en_GB = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1851,6 +1877,8 @@ var eo = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -1987,6 +2015,8 @@ var es = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2123,6 +2153,8 @@ var es_419 = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2259,6 +2291,8 @@ var et = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2395,6 +2429,8 @@ var eu = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2531,6 +2567,8 @@ var fa = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2667,6 +2705,8 @@ var fi = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2803,6 +2843,8 @@ var fy = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -2939,6 +2981,8 @@ var fr = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3075,6 +3119,8 @@ var ga = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3211,6 +3257,8 @@ var gl = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3347,6 +3395,8 @@ var gsw = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3483,6 +3533,8 @@ var he = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3619,6 +3671,8 @@ var hi = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3755,6 +3809,8 @@ var hr = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -3891,6 +3947,8 @@ var hu = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4027,6 +4085,8 @@ var hy = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4163,6 +4223,8 @@ var id = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4299,6 +4361,8 @@ var it = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4435,6 +4499,8 @@ var is = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4571,6 +4637,8 @@ var ja = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4707,6 +4775,8 @@ var ka = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4843,6 +4913,8 @@ var ko = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -4979,6 +5051,8 @@ var lb = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5115,6 +5189,8 @@ var lt = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5251,6 +5327,8 @@ var lv = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5387,6 +5465,8 @@ var mk = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5523,6 +5603,8 @@ var ml = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5659,6 +5741,8 @@ var nl = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5795,6 +5879,8 @@ var nb = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -5931,6 +6017,8 @@ var nn = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6067,6 +6155,8 @@ var pl = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6203,6 +6293,8 @@ var pt = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6339,6 +6431,8 @@ var pt_BR = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6475,6 +6569,8 @@ var ro = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6611,6 +6707,8 @@ var ru = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6747,6 +6845,8 @@ var sk = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -6883,6 +6983,8 @@ var sl = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7019,6 +7121,8 @@ var sr = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7155,6 +7259,8 @@ var sr_Latn = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7291,6 +7397,8 @@ var sv = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7427,6 +7535,8 @@ var sq = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7563,6 +7673,8 @@ var ta = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7699,6 +7811,8 @@ var te = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7835,6 +7949,8 @@ var th = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -7971,6 +8087,8 @@ var tr = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8107,6 +8225,8 @@ var uk = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8243,6 +8363,8 @@ var ur = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8379,6 +8501,8 @@ var vi = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8515,6 +8639,8 @@ var zh_Hans = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8651,6 +8777,8 @@ var zh_Hant = {
       "high_threshold": "High threshold (kWh)",
       "low_threshold_entity": "Low threshold sensor (optional, kWh)",
       "high_threshold_entity": "High threshold sensor (optional, kWh)",
+      "show_low_threshold_line": "Show low threshold line",
+      "show_high_threshold_line": "Show high threshold line",
       "desktop_text_scale": "Desktop Text Scale",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -8914,6 +9042,8 @@ function normalizeConfig(raw) {
         low_threshold_entity: raw.low_threshold_entity,
         high_threshold: raw.high_threshold,
         high_threshold_entity: raw.high_threshold_entity,
+        show_low_threshold_line: raw.show_low_threshold_line ?? false,
+        show_high_threshold_line: raw.show_high_threshold_line ?? false,
         desktop_text_scale: raw.desktop_text_scale,
         font_size: raw.font_size,
         bar_width: raw.bar_width,
@@ -9658,6 +9788,9 @@ function buildRows(hass, cfg) {
         };
     });
     const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
+    const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
+    const lowThresholdPct = cfg.show_low_threshold_line ? thresholdLinePct(lowKwh, maxKwh) : null;
+    const highThresholdPct = cfg.show_high_threshold_line ? thresholdLinePct(highKwh, maxKwh) : null;
     return raw.map((r) => {
         const forecastPct = r.forecastKwh !== null
             ? Math.round((r.forecastKwh / maxKwh) * 100) : 0;
@@ -9669,7 +9802,7 @@ function buildRows(hass, cfg) {
             && r.forecastKwh !== null && r.forecastKwh > 0
             && r.actualKwh !== null
             && r.actualKwh / r.forecastKwh >= COMPLETE_THRESHOLD;
-        return { ...r, forecastPct, actualPct, dottedPct, isComplete };
+        return { ...r, lowThresholdPct, highThresholdPct, forecastPct, actualPct, dottedPct, isComplete };
     });
 }
 function resolveThreshold(hass, entityId, fallback) {
@@ -9690,14 +9823,26 @@ function resolveThreshold(hass, entityId, fallback) {
         ? fallback
         : undefined;
 }
+function resolveThresholds(hass, cfg) {
+    return {
+        lowKwh: resolveThreshold(hass, cfg.low_threshold_entity, cfg.low_threshold),
+        highKwh: resolveThreshold(hass, cfg.high_threshold_entity, cfg.high_threshold),
+    };
+}
+/** Bars scale to the week's peak, so a threshold above it has no place on the chart. */
+function thresholdLinePct(kwh, maxKwh) {
+    if (kwh === undefined)
+        return null;
+    const pct = (kwh / maxKwh) * 100;
+    return pct <= 100 ? pct : null;
+}
 function forecastTier(hass, cfg, kwh) {
     if (kwh === null)
         return "average";
-    const lo = resolveThreshold(hass, cfg.low_threshold_entity, cfg.low_threshold);
-    const hi = resolveThreshold(hass, cfg.high_threshold_entity, cfg.high_threshold);
-    if (lo !== undefined && kwh < lo)
+    const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
+    if (lowKwh !== undefined && kwh < lowKwh)
         return "low";
-    if (hi !== undefined && kwh > hi)
+    if (highKwh !== undefined && kwh > highKwh)
         return "high";
     return "average";
 }
@@ -9861,6 +10006,11 @@ function renderBars(row, tier) {
     ${dotted}
   `;
 }
+function renderThresholdLine(pct, level) {
+    if (pct === null)
+        return A;
+    return b `<div part="threshold-line" class="threshold-line ${level}" style="bottom:${pct.toFixed(1)}%" aria-hidden="true"></div>`;
+}
 function renderDayColumn(row, tier, fmt, onOpen) {
     const valueLabel = row.forecastKwh !== null
         ? b `<span class="value-num">${fmt.number(row.forecastKwh, 1)}</span><span class="value-unit">${fmt.t("card.units.kilowattHours")}</span>`
@@ -9881,6 +10031,8 @@ function renderDayColumn(row, tier, fmt, onOpen) {
       <div class="col-bar-wrap">
         <div part="daily-bar" class="bar-bg"></div>
         ${renderBars(row, tier)}
+        ${renderThresholdLine(row.lowThresholdPct, "low")}
+        ${renderThresholdLine(row.highThresholdPct, "high")}
       </div>
       <div part="daily-label" class="col-label">
         <span class="day-name">${fmt.dayLabel(row)}</span>
@@ -10645,6 +10797,35 @@ const dayColumnStyles = i$3 `
   .bar-dotted.full    { border-radius: var(--sfc-bar-radius, 6px); }
   .bar-dotted.partial { border-bottom: none; border-radius: var(--sfc-bar-radius, 6px 6px 0 0); }
 
+  /* ── Threshold lines ─────────────────────────────────────── */
+
+  /* Each column draws its own segment. The side offsets close the gap to the
+     next column (3px column padding + half the 2px grid gap) so the segments
+     read as one line. The drop shadow keeps a line visible over a bar of the
+     same colour. */
+  .threshold-line {
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    translate: 0 50%;
+    border-top: 2px dashed;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.45));
+    transition: bottom 0.55s cubic-bezier(0.34, 1.15, 0.64, 1);
+  }
+
+  .threshold-line.low {
+    border-top-color: var(--sfc-low-threshold-line-color, rgba(239, 68, 68, 0.9));
+  }
+
+  .threshold-line.high {
+    border-top-color: var(--sfc-high-threshold-line-color, rgba(34, 197, 94, 0.9));
+  }
+
+  .forecast-grid.two-day .threshold-line {
+    left: -6px;
+    right: -6px;
+  }
+
   /* ── Day label ───────────────────────────────────────── */
 
   .col-label {
@@ -11355,6 +11536,8 @@ let SolarForecastCard = class SolarForecastCard extends i {
             this._config.next_hour_entity,
             this._config.remaining_today_entity,
             this._config.export_rate_entity,
+            this._config.low_threshold_entity,
+            this._config.high_threshold_entity,
             ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
         ].filter(Boolean);
         return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
@@ -11512,6 +11695,8 @@ function toFormData(cfg) {
         low_threshold_entity: cfg.low_threshold_entity ?? "",
         high_threshold: cfg.high_threshold,
         high_threshold_entity: cfg.high_threshold_entity ?? "",
+        show_low_threshold_line: cfg.show_low_threshold_line ?? false,
+        show_high_threshold_line: cfg.show_high_threshold_line ?? false,
         desktop_text_scale: cfg.desktop_text_scale ?? 100,
         font_size: cfg.font_size,
         bar_width: cfg.bar_width,
@@ -11560,6 +11745,8 @@ function fromFormData(data, current) {
         high_threshold: typeof data.high_threshold === "number" ? data.high_threshold : undefined,
         low_threshold_entity: data.low_threshold_entity || undefined,
         high_threshold_entity: data.high_threshold_entity || undefined,
+        show_low_threshold_line: data.show_low_threshold_line,
+        show_high_threshold_line: data.show_high_threshold_line,
         // Only persist when non-default (100) so YAML stays clean for most users.
         desktop_text_scale: typeof data.desktop_text_scale === "number" && data.desktop_text_scale !== 100
             ? data.desktop_text_scale
@@ -11635,8 +11822,10 @@ const SCHEMA_SYSTEM = [
 const SCHEMA_THRESHOLDS = [
     { name: "low_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
     { name: "low_threshold_entity", selector: { entity: { domain: "sensor" } } },
+    { name: "show_low_threshold_line", selector: { boolean: {} } },
     { name: "high_threshold", selector: { number: { min: 0, step: 0.1, mode: "box", unit_of_measurement: "kWh" } } },
     { name: "high_threshold_entity", selector: { entity: { domain: "sensor" } } },
+    { name: "show_high_threshold_line", selector: { boolean: {} } },
 ];
 function integrationSchema(t) {
     return [

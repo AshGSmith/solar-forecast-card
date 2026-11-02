@@ -212,6 +212,8 @@ classDiagram
         +actualArrays ArrayActual[]
         +rawHoursAttr unknown
         +estimate10Kwh number
+        +lowThresholdPct number
+        +highThresholdPct number
         +forecastPct number
         +actualPct number
         +dottedPct number
@@ -416,4 +418,3 @@ Commit the rebuilt `dist/solar-forecast-card.js` with your source changes, or CI
 ## Known limitations
 
 - **Solcast hours follow the browser's timezone.** Volcast and Open-Meteo use the hour written in the timestamp. Viewing the dashboard from a different timezone than the server shifts the Solcast chart and the `+1HR` and `LEFT` values.
-- **Threshold sensors don't trigger a re-render.** `low_threshold_entity` and `high_threshold_entity` are missing from `watchIds` in `shouldUpdate`, so bar colours update only when another watched entity changes.
