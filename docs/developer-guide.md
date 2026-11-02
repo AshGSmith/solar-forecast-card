@@ -408,6 +408,7 @@ TZ=Asia/Kolkata npm test                    # a specific timezone
 | `tests/history.test.ts` | History day totals, scoring and chart scale |
 | `tests/history-log.test.ts` | The card's own log: recording, sunset rule and gap filling |
 | `tests/solcast-history.test.ts` | Past forecasts from Solcast's own storage |
+| `tests/statistics.test.ts` | Daily actuals from long-term statistics |
 | `tests/config.test.ts` | `normalizeConfig` and editor form data |
 | `tests/localize.test.ts` | Language resolution, translation lookup, locale table |
 | `tests/timezone.test.ts` | How each parser resolves the hour |
@@ -438,11 +439,19 @@ Commit the rebuilt `dist/solar-forecast-card.js` with your source changes, or CI
 
 ## Forecast history sources
 
-The history view combines three sources in `data/forecast-history.ts`, in this order:
+The history view combines several sources in `data/forecast-history.ts`.
+
+Forecasts, in order:
 
 1. Recorder history.
 2. The card's own log in `data/history-log.ts`.
 3. The integration's past forecasts, from the optional `forecastHistory` adapter method. Only Solcast has one so far. It supplies forecasts only, because Solcast's estimated actuals are modelled and aren't your real generation.
+
+Actuals, in order:
+
+1. Long-term statistics, through `queryDailyEnergy` in `data/history.ts`. The daily `change` handles daily-reset sensors and lifetime totals.
+2. Recorder history, using the day's peak.
+3. The card's own log, for days seen after sunset.
 
 The log is saved through `frontend/set_user_data`, keyed by forecast entity, at most every 15 minutes from `willUpdate`. It stores the earliest forecast, the highest actual, and whether the actual was seen after sunset.
 

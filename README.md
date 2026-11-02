@@ -110,7 +110,9 @@ Set `main_view: hourly` to display today's hourly forecast directly on the main 
 
 Set `main_view: history` to compare the last 7 full days of forecast and actual generation. It shows an accuracy score, the average daily miss, whether generation ran above or below the forecast, and a chart you can tap for each day's numbers.
 
-History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors should be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00, and a day's actual is that sensor's highest value, so actual sensors need to reset daily.
+History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors should be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00.
+
+Actual generation comes from Home Assistant's long-term statistics when your sensor has them, which is the same data the Energy dashboard uses. This works whether the sensor resets daily or is a lifetime total, and isn't limited to recorder's 10 days. A sensor has statistics when it has a `state_class`, such as `total_increasing`. Without statistics, the card uses the sensor's highest value that day, which needs a sensor that resets daily.
 
 With Solcast, past forecasts also come from the integration's own storage, so the forecast line appears right away even if the recorder has nothing. These are Solcast's last forecast for each period, so they can be closer to reality than a morning forecast. Recorder and logged forecasts are used first when they exist. This needs a version of the Solcast integration with the `query_forecast_data` action.
 

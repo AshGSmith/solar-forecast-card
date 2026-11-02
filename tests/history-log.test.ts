@@ -13,7 +13,7 @@ function storage(initial?: HistoryLog) {
   const saved: { value: HistoryLog | undefined } = { value: initial };
   const callWS = vi.fn(async (message: Record<string, unknown>) => {
     if (message.type === "frontend/get_user_data") return { value: saved.value ?? null };
-    saved.value = message.value as HistoryLog;
+    if (message.type === "frontend/set_user_data") saved.value = message.value as HistoryLog;
     return null;
   });
   return { saved, callWS: callWS as unknown as HomeAssistant["callWS"], mock: callWS };

@@ -1,4 +1,5 @@
 import type { HomeAssistant } from "../types.js";
+import { dayKey } from "./history-log.js";
 
 export interface HistEntry {
   entity_id?: string;
@@ -44,6 +45,57 @@ export async function queryHistory(
 
   } catch (err) {
     console.debug("[solar-forecast-card] history fetch failed:", err);
+    return null;
+  }
+}
+
+interface StatisticRow {
+  /** Epoch milliseconds, or an ISO string on older Home Assistant versions. */
+  start: number | string;
+  change?: number | null;
+}
+
+/**
+ * Read each day's energy from long-term statistics, the data behind the Energy
+ * dashboard, as a total per local day across the given sensors.
+ *
+ * Statistics outlive recorder's purge, and "change" is correct for sensors that
+ * reset daily and for lifetime totals alike. Sensors need a state_class to have
+ * statistics. Returns null when they can't be read.
+ */
+export async function queryDailyEnergy(
+  hass: HomeAssistant,
+  entityIds: string[],
+  start: Date,
+  end: Date
+): Promise<Map<string, number> | null> {
+  if (!hass.callWS || entityIds.length === 0) return null;
+
+  try {
+    const result = await hass.callWS<Record<string, StatisticRow[]>>({
+      type: "recorder/statistics_during_period",
+      start_time: start.toISOString(),
+      end_time: end.toISOString(),
+      statistic_ids: entityIds,
+      period: "day",
+      types: ["change"],
+      units: { energy: "kWh" },
+    });
+
+    const totals = new Map<string, number>();
+    for (const rows of Object.values(result ?? {})) {
+      for (const row of rows) {
+        const time = typeof row.start === "number" ? row.start : Date.parse(row.start);
+        // No change means the sensor was offline, not that nothing was generated.
+        if (!isFinite(time) || typeof row.change !== "number" || row.change <= 0) continue;
+        const key = dayKey(new Date(time));
+        totals.set(key, (totals.get(key) ?? 0) + row.change);
+      }
+    }
+    return totals;
+
+  } catch (err) {
+    console.debug("[solar-forecast-card] statistics fetch failed:", err);
     return null;
   }
 }

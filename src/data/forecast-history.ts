@@ -2,7 +2,7 @@ import { readForecastHistory } from "../integrations/index.js";
 import type { ForecastPeriod } from "../integrations/types.js";
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
 import { dayKey, FIRST_RELIABLE_HOUR, loadHistoryLog, type HistoryLog } from "./history-log.js";
-import { queryHistory, type HistEntry } from "./history.js";
+import { queryDailyEnergy, queryHistory, type HistEntry } from "./history.js";
 
 const HISTORY_DAYS = 7;
 /** A day's forecast is the reading in place at this local hour. */
@@ -126,8 +126,11 @@ function reportsWh(hass: HomeAssistant, entityId: string): boolean {
 }
 
 /**
- * Load the last week of forecast and actual totals. Recorder history comes
- * first, then the card's own log, then the integration's past forecasts.
+ * Load the last week of forecast and actual totals.
+ *
+ * Forecasts: recorder history, the card's log, then the integration's past forecasts.
+ * Actuals: long-term statistics, recorder history, then the card's log.
+ *
  * Returns null if no source is readable, so the caller can retry.
  */
 export async function fetchForecastHistory(
@@ -141,12 +144,13 @@ export async function fetchForecastHistory(
   const actualIds = actualEntities(cfg);
   const start = new Date(localDay(now, HISTORY_DAYS));
   const end = new Date(localDay(now, 0));
-  const [history, log, periods] = await Promise.all([
+  const [history, log, periods, dailyEnergy] = await Promise.all([
     queryHistory(hass, [forecastId, ...actualIds], start, end),
     loadHistoryLog(hass, forecastId),
     readForecastHistory(hass, cfg.integration_type, forecastId, start, end),
+    queryDailyEnergy(hass, actualIds, start, end),
   ]);
-  if (!history && !log && !periods) return null;
+  if (!history && !log && !periods && !dailyEnergy) return null;
 
   const days = buildHistoryDays(
     toReadings(history?.get(forecastId), reportsWh(hass, forecastId)),
@@ -154,7 +158,11 @@ export async function fetchForecastHistory(
     now
   );
   const logged = log ? fillFromLog(days, log) : days;
-  return periods ? fillFromIntegration(logged, periods) : logged;
+  const filled = periods ? fillFromIntegration(logged, periods) : logged;
+  return filled.map((day) => ({
+    ...day,
+    actualKwh: dailyEnergy?.get(dayKey(day.date)) ?? day.actualKwh,
+  }));
 }
 
 export function scoreHistory(days: HistoryDay[]): HistoryScore | null {

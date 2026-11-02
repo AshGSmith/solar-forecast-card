@@ -10923,6 +10923,45 @@ async function queryHistory(hass, entityIds, start, end) {
     }
 }
 /**
+ * Read each day's energy from long-term statistics, the data behind the Energy
+ * dashboard, as a total per local day across the given sensors.
+ *
+ * Statistics outlive recorder's purge, and "change" is correct for sensors that
+ * reset daily and for lifetime totals alike. Sensors need a state_class to have
+ * statistics. Returns null when they can't be read.
+ */
+async function queryDailyEnergy(hass, entityIds, start, end) {
+    if (!hass.callWS || entityIds.length === 0)
+        return null;
+    try {
+        const result = await hass.callWS({
+            type: "recorder/statistics_during_period",
+            start_time: start.toISOString(),
+            end_time: end.toISOString(),
+            statistic_ids: entityIds,
+            period: "day",
+            types: ["change"],
+            units: { energy: "kWh" },
+        });
+        const totals = new Map();
+        for (const rows of Object.values(result ?? {})) {
+            for (const row of rows) {
+                const time = typeof row.start === "number" ? row.start : Date.parse(row.start);
+                // No change means the sensor was offline, not that nothing was generated.
+                if (!isFinite(time) || typeof row.change !== "number" || row.change <= 0)
+                    continue;
+                const key = dayKey(new Date(time));
+                totals.set(key, (totals.get(key) ?? 0) + row.change);
+            }
+        }
+        return totals;
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] statistics fetch failed:", err);
+        return null;
+    }
+}
+/**
  * Fetch hourly actual-generation values for today from the HA history API.
  *
  * today_actual_entity is a cumulative energy sensor (kWh or Wh) whose value
@@ -11089,8 +11128,11 @@ function reportsWh(hass, entityId) {
     return unit?.toLowerCase() === "wh";
 }
 /**
- * Load the last week of forecast and actual totals. Recorder history comes
- * first, then the card's own log, then the integration's past forecasts.
+ * Load the last week of forecast and actual totals.
+ *
+ * Forecasts: recorder history, the card's log, then the integration's past forecasts.
+ * Actuals: long-term statistics, recorder history, then the card's log.
+ *
  * Returns null if no source is readable, so the caller can retry.
  */
 async function fetchForecastHistory(hass, cfg) {
@@ -11101,16 +11143,21 @@ async function fetchForecastHistory(hass, cfg) {
     const actualIds = actualEntities(cfg);
     const start = new Date(localDay(now, HISTORY_DAYS));
     const end = new Date(localDay(now, 0));
-    const [history, log, periods] = await Promise.all([
+    const [history, log, periods, dailyEnergy] = await Promise.all([
         queryHistory(hass, [forecastId, ...actualIds], start, end),
         loadHistoryLog(hass, forecastId),
         readForecastHistory(hass, cfg.integration_type, forecastId, start, end),
+        queryDailyEnergy(hass, actualIds, start, end),
     ]);
-    if (!history && !log && !periods)
+    if (!history && !log && !periods && !dailyEnergy)
         return null;
     const days = buildHistoryDays(toReadings(history?.get(forecastId), reportsWh(hass, forecastId)), actualIds.map((id) => toReadings(history?.get(id), reportsWh(hass, id))), now);
     const logged = log ? fillFromLog(days, log) : days;
-    return periods ? fillFromIntegration(logged, periods) : logged;
+    const filled = periods ? fillFromIntegration(logged, periods) : logged;
+    return filled.map((day) => ({
+        ...day,
+        actualKwh: dailyEnergy?.get(dayKey(day.date)) ?? day.actualKwh,
+    }));
 }
 function scoreHistory(days) {
     const paired = days.flatMap((d) => d.forecastKwh !== null && d.forecastKwh > 0 && d.actualKwh !== null
