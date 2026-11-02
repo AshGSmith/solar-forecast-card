@@ -44,10 +44,10 @@ export interface SolarForecastCardConfig {
   high_threshold?: number;
   low_threshold_entity?: string,
   high_threshold_entity?: string;
-  /** When true, draws a dashed line across the daily bars at the low threshold. */
-  show_low_threshold_line: boolean;
-  /** When true, draws a dashed line across the daily bars at the high threshold. */
-  show_high_threshold_line: boolean;
+  /** When true, tints the daily bar track below the low threshold. */
+  show_low_threshold_zone: boolean;
+  /** When true, tints the daily bar track above the high threshold. */
+  show_high_threshold_zone: boolean;
   /** Scale factor for card text on desktop/wide viewports (100–150, step 5). Undefined = 100 (no change). Only applied at ≥ 768 px viewport width. */
   desktop_text_scale?: number;
   /** Optional daily forecast value/day label font size in pixels. Undefined = CSS/default styling. */

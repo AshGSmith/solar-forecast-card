@@ -195,10 +195,10 @@ Bar colours change based on each day's forecast total. When neither threshold is
 |--------|------|----------|---------|-------------|
 | `low_threshold` | number | no | — | Days forecast below this value (kWh) are shown in a soft red/coral colour |
 | `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
-| `show_low_threshold_line` | boolean | no | `false` | Draw a dashed line across the daily bars at the current low threshold |
-| `show_high_threshold_line` | boolean | no | `false` | Draw a dashed line across the daily bars at the current high threshold |
+| `show_low_threshold_zone` | boolean | no | `false` | Tint the bar track red below the current low threshold |
+| `show_high_threshold_zone` | boolean | no | `false` | Tint the bar track green above the current high threshold |
 
-Threshold lines use the same scale as the bars, which is set by the week's highest forecast. A line is hidden while its threshold is above that value.
+Threshold zones use the same scale as the bars, which is set by the week's highest forecast. A zone is hidden while its threshold is above that value.
 
 ## Card-mod / CSS Customisation
 
@@ -234,8 +234,8 @@ Available variables:
 | `--sfc-average-color` | Average forecast bar background |
 | `--sfc-high-color` | High forecast bar background |
 | `--sfc-actual-color` | Actual generation bar background |
-| `--sfc-low-threshold-line-color` | Low threshold line colour |
-| `--sfc-high-threshold-line-color` | High threshold line colour |
+| `--sfc-low-threshold-zone-color` | Low threshold zone colour |
+| `--sfc-high-threshold-zone-color` | High threshold zone colour |
 | `--sfc-popup-background` | Popup background |
 | `--sfc-popup-border-radius` | Popup corner radius |
 | `--sfc-popup-text-color` | Popup primary text colour |

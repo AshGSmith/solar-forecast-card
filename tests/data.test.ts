@@ -145,7 +145,7 @@ describe("forecastTier", () => {
   });
 });
 
-describe("threshold lines", () => {
+describe("threshold zones", () => {
   const ids = ["sensor.d0", "sensor.d1"] as never;
   const hass = makeHass({
     "sensor.d0": entity(5, KWH),
@@ -161,11 +161,11 @@ describe("threshold lines", () => {
     expect(row.highThresholdPct).toBeNull();
   });
 
-  it("switches each line independently, on the bar scale", () => {
+  it("switches each zone independently, on the bar scale", () => {
     const thresholds = { low_threshold: 5, high_threshold: 15 };
-    expect(firstRow({ ...thresholds, show_low_threshold_line: true }))
+    expect(firstRow({ ...thresholds, show_low_threshold_zone: true }))
       .toMatchObject({ lowThresholdPct: 25, highThresholdPct: null });
-    expect(firstRow({ ...thresholds, show_high_threshold_line: true }))
+    expect(firstRow({ ...thresholds, show_high_threshold_zone: true }))
       .toMatchObject({ lowThresholdPct: null, highThresholdPct: 75 });
   });
 
@@ -173,7 +173,7 @@ describe("threshold lines", () => {
     const rows = buildRows(hass, makeConfig({
       forecast_entities: ids,
       low_threshold: 5,
-      show_low_threshold_line: true,
+      show_low_threshold_zone: true,
     }));
     expect(rows.map((r) => r.lowThresholdPct)).toEqual(Array(7).fill(25));
   });
@@ -182,19 +182,19 @@ describe("threshold lines", () => {
     const row = firstRow({
       low_threshold: 1,
       low_threshold_entity: "sensor.lo",
-      show_low_threshold_line: true,
+      show_low_threshold_zone: true,
     });
     expect(row.lowThresholdPct).toBe(50);
   });
 
-  it("hides a line above the scale but keeps one at the top", () => {
-    expect(firstRow({ high_threshold: 21, show_high_threshold_line: true }).highThresholdPct).toBeNull();
-    expect(firstRow({ high_threshold: 20, show_high_threshold_line: true }).highThresholdPct).toBe(100);
+  it("hides a zone above the scale but keeps one at the top", () => {
+    expect(firstRow({ high_threshold: 21, show_high_threshold_zone: true }).highThresholdPct).toBeNull();
+    expect(firstRow({ high_threshold: 20, show_high_threshold_zone: true }).highThresholdPct).toBe(100);
   });
 
-  it("has no line without a threshold or any forecast", () => {
-    expect(firstRow({ show_low_threshold_line: true }).lowThresholdPct).toBeNull();
-    const rows = buildRows(makeHass({}), makeConfig({ low_threshold: 5, show_low_threshold_line: true }));
+  it("has no zone without a threshold or any forecast", () => {
+    expect(firstRow({ show_low_threshold_zone: true }).lowThresholdPct).toBeNull();
+    const rows = buildRows(makeHass({}), makeConfig({ low_threshold: 5, show_low_threshold_zone: true }));
     expect(rows[0].lowThresholdPct).toBeNull();
   });
 });

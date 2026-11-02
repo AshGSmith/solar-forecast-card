@@ -18,7 +18,7 @@ export interface ForecastRow {
   rawHoursAttr: unknown;     // raw "hours" attribute — parsed lazily
   /** Summed pv_estimate10 for the day (kWh). Null when not applicable or unavailable. */
   estimate10Kwh: number | null;
-  /** Line positions on the bar scale. Null when the line is off, unset or above the scale. */
+  /** Zone edges on the bar scale. Null when the zone is off, unset or above the scale. */
   lowThresholdPct: number | null;
   highThresholdPct: number | null;
   forecastPct: number;       // 0–100, relative to week max
@@ -65,8 +65,8 @@ export function buildRows(hass: HomeAssistant, cfg: SolarForecastCardConfig): Fo
   const maxKwh = Math.max(...raw.map((r) => r.forecastKwh ?? 0), 0.001);
 
   const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
-  const lowThresholdPct  = cfg.show_low_threshold_line  ? thresholdLinePct(lowKwh, maxKwh)  : null;
-  const highThresholdPct = cfg.show_high_threshold_line ? thresholdLinePct(highKwh, maxKwh) : null;
+  const lowThresholdPct  = cfg.show_low_threshold_zone  ? thresholdPct(lowKwh, maxKwh)  : null;
+  const highThresholdPct = cfg.show_high_threshold_zone ? thresholdPct(highKwh, maxKwh) : null;
 
   return raw.map((r): ForecastRow => {
     const forecastPct = r.forecastKwh !== null
@@ -121,7 +121,7 @@ function resolveThresholds(
 }
 
 /** Bars scale to the week's peak, so a threshold above it has no place on the chart. */
-function thresholdLinePct(kwh: number | undefined, maxKwh: number): number | null {
+function thresholdPct(kwh: number | undefined, maxKwh: number): number | null {
   if (kwh === undefined) return null;
   const pct = (kwh / maxKwh) * 100;
   return pct <= 100 ? pct : null;

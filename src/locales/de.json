@@ -83,8 +83,8 @@
       "high_threshold": "Hoher Schwellenwert (kWh)",
       "low_threshold_entity": "Niedriger Schwellenwert Sensor (kWh)",
       "high_threshold_entity": "Hoher Schwellenwert Sensor (kWh)",
-      "show_low_threshold_line": "Show low threshold line",
-      "show_high_threshold_line": "Show high threshold line",
+      "show_low_threshold_zone": "Tint bar track below low threshold",
+      "show_high_threshold_zone": "Tint bar track above high threshold",
       "desktop_text_scale": "Desktop-Textskalierung",
       "font_size": "Font Size",
       "bar_width": "Bar Width"

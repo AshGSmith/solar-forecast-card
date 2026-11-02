@@ -59,9 +59,13 @@ function renderBars(row: ForecastRow, tier: Tier) {
   `;
 }
 
-function renderThresholdLine(pct: number | null, level: "low" | "high") {
-  if (pct === null) return nothing;
-  return html`<div part="threshold-line" class="threshold-line ${level}" style="bottom:${pct.toFixed(1)}%" aria-hidden="true"></div>`;
+/** Zone edges for the track's background, consumed by .bar-bg in the styles. */
+function thresholdZoneStyle(row: ForecastRow): string {
+  const edges = [
+    row.lowThresholdPct  === null ? "" : `--sfc-low-zone-top:${row.lowThresholdPct.toFixed(1)}%;`,
+    row.highThresholdPct === null ? "" : `--sfc-high-zone-bottom:${row.highThresholdPct.toFixed(1)}%;`,
+  ];
+  return edges.join("");
 }
 
 export function renderDayColumn(
@@ -89,10 +93,8 @@ export function renderDayColumn(
     >
       <div part="daily-value" class="col-value">${valueLabel}${estimate10Label}</div>
       <div class="col-bar-wrap">
-        <div part="daily-bar" class="bar-bg"></div>
+        <div part="daily-bar" class="bar-bg" style=${thresholdZoneStyle(row)}></div>
         ${renderBars(row, tier)}
-        ${renderThresholdLine(row.lowThresholdPct, "low")}
-        ${renderThresholdLine(row.highThresholdPct, "high")}
       </div>
       <div part="daily-label" class="col-label">
         <span class="day-name">${fmt.dayLabel(row)}</span>
