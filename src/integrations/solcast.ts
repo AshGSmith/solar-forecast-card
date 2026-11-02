@@ -8,7 +8,7 @@ import {
   sensorUnit,
   trimZeroHours,
 } from "./shared.js";
-import type { AutoDetectResult, HourPoint, IntegrationAdapter } from "./types.js";
+import type { AutoDetectResult, ForecastPeriod, HourPoint, IntegrationAdapter } from "./types.js";
 
 const DAY_KEYWORDS: Array<[string, number]> = [
   ["forecast_today",    0],
@@ -103,6 +103,43 @@ function detect(
   };
 }
 
+/**
+ * Solcast keeps past forecasts in its own cache, up to 730 days by default, and
+ * returns them from the query_forecast_data action. For past periods this is
+ * the last forecast made, so it can be closer to reality than a morning one.
+ */
+async function forecastHistory(
+  hass: HomeAssistant,
+  start: Date,
+  end: Date
+): Promise<ForecastPeriod[] | null> {
+  if (!hass.callWS) return null;
+
+  try {
+    const result = await hass.callWS<{ response?: { data?: Array<Record<string, unknown>> } }>({
+      type: "call_service",
+      domain: "solcast_solar",
+      service: "query_forecast_data",
+      service_data: {
+        start_date_time: start.toISOString(),
+        end_date_time: end.toISOString(),
+      },
+      return_response: true,
+    });
+
+    return (result?.response?.data ?? []).flatMap((entry) => {
+      const time = Date.parse(String(entry.period_start));
+      const estimate = entry.pv_estimate;
+      return isFinite(time) && typeof estimate === "number"
+        ? [{ time, kwh: estimate * 0.5 }] // 30-min period in kW → kWh
+        : [];
+    });
+  } catch (err) {
+    console.debug("[solar-forecast-card] Solcast forecast history failed:", err);
+    return null;
+  }
+}
+
 export const solcast: IntegrationAdapter = {
   // Prefer detailedForecast (standard Solcast attribute); fall back to
   // hours so manually-configured cards work with alternate attribute names.
@@ -114,4 +151,5 @@ export const solcast: IntegrationAdapter = {
       : parseKeyedHours(raw),
 
   detect,
+  forecastHistory,
 };

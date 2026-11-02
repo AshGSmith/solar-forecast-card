@@ -8,7 +8,7 @@ import { forecastSolar } from "./forecast-solar.js";
 import { manual } from "./manual.js";
 import { openMeteo } from "./open-meteo.js";
 import { solcast } from "./solcast.js";
-import type { AutoDetectResult, HourPoint, IntegrationAdapter } from "./types.js";
+import type { AutoDetectResult, ForecastPeriod, HourPoint, IntegrationAdapter } from "./types.js";
 import { detectVolcast, volcast } from "./volcast.js";
 
 export type { AutoDetectResult, HourPoint } from "./types.js";
@@ -44,6 +44,23 @@ export function parseHours(type: IntegrationType | undefined, raw: unknown): Hou
     console.debug("[solar-forecast-card] hours: parse failed →", err, "\nraw value:", raw);
     return [];
   }
+}
+
+/**
+ * Past forecasts from the integration behind forecastId, if it keeps any. The
+ * sensor's platform is checked too, because cards set up by hand stay "manual".
+ */
+export async function readForecastHistory(
+  hass: HomeAssistant,
+  type: IntegrationType | undefined,
+  forecastId: string,
+  start: Date,
+  end: Date
+): Promise<ForecastPeriod[] | null> {
+  const adapter = hass.entities?.[forecastId]?.platform === "solcast_solar"
+    ? solcast
+    : adapterFor(type);
+  return adapter.forecastHistory?.(hass, start, end) ?? null;
 }
 
 export function autoDetect(

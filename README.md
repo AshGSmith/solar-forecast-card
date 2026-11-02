@@ -112,6 +112,8 @@ Set `main_view: history` to compare the last 7 full days of forecast and actual 
 
 History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors should be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00, and a day's actual is that sensor's highest value, so actual sensors need to reset daily.
 
+With Solcast, past forecasts also come from the integration's own storage, so the forecast line appears right away even if the recorder has nothing. These are Solcast's last forecast for each period, so they can be closer to reality than a morning forecast. Recorder and logged forecasts are used first when they exist. This needs a version of the Solcast integration with the `query_forecast_data` action.
+
 The card also keeps its own 8-day log in Home Assistant's per-user storage, which fills any days the recorder doesn't have. It can only save while a dashboard containing the card is open, so open it at least once each day after sunset. A logged day counts only if the card was open after sunset, because an earlier reading would be a partial day. Each Home Assistant user has a separate log.
 
 #### Device & Entities

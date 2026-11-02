@@ -169,6 +169,7 @@ classDiagram
         +hoursAttr(state) unknown
         +parseHours(raw) HourPoint[]
         +detect(sensors, hass) AutoDetectResult
+        +forecastHistory(hass, start, end) ForecastPeriod[]
     }
 
     class solcast {
@@ -362,6 +363,7 @@ sequenceDiagram
    - `hoursAttr` returns the attribute holding hourly data.
    - `parseHours` returns points sorted by hour, in kWh, with `trimZeroHours` or equivalent applied. It never receives `null` or `undefined`.
    - `detect` returns `null` unless the sensors belong to this integration. Check with `hasPlatform`.
+   - `forecastHistory` is optional. Add it if the integration stores its own past forecasts.
 3. Register it in `ADAPTERS` in `src/integrations/index.ts`, and in `PLATFORM_ADAPTERS` if it has `detect`.
 4. Add a dropdown option in `integrationSchema` in `src/editor/schema.ts`.
 5. Add the option's `editor.options.*` label to **every** locale file.
@@ -405,6 +407,7 @@ TZ=Asia/Kolkata npm test                    # a specific timezone
 | `tests/data.test.ts` | Sensor reads, rows, colour tiers, header stats, history |
 | `tests/history.test.ts` | History day totals, scoring and chart scale |
 | `tests/history-log.test.ts` | The card's own log: recording, sunset rule and gap filling |
+| `tests/solcast-history.test.ts` | Past forecasts from Solcast's own storage |
 | `tests/config.test.ts` | `normalizeConfig` and editor form data |
 | `tests/localize.test.ts` | Language resolution, translation lookup, locale table |
 | `tests/timezone.test.ts` | How each parser resolves the hour |
@@ -435,7 +438,11 @@ Commit the rebuilt `dist/solar-forecast-card.js` with your source changes, or CI
 
 ## Forecast history sources
 
-The history view combines two sources in `data/forecast-history.ts`. Recorder history comes first. The card's own log in `data/history-log.ts` fills any gaps.
+The history view combines three sources in `data/forecast-history.ts`, in this order:
+
+1. Recorder history.
+2. The card's own log in `data/history-log.ts`.
+3. The integration's past forecasts, from the optional `forecastHistory` adapter method. Only Solcast has one so far. It supplies forecasts only, because Solcast's estimated actuals are modelled and aren't your real generation.
 
 The log is saved through `frontend/set_user_data`, keyed by forecast entity, at most every 15 minutes from `willUpdate`. It stores the earliest forecast, the highest actual, and whether the actual was seen after sunset.
 

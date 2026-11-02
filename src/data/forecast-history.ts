@@ -1,3 +1,5 @@
+import { readForecastHistory } from "../integrations/index.js";
+import type { ForecastPeriod } from "../integrations/types.js";
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
 import { dayKey, FIRST_RELIABLE_HOUR, loadHistoryLog, type HistoryLog } from "./history-log.js";
 import { queryHistory, type HistEntry } from "./history.js";
@@ -97,6 +99,20 @@ function fillFromLog(days: HistoryDay[], log: HistoryLog): HistoryDay[] {
   });
 }
 
+/** Fill remaining forecast gaps from the integration's own past forecasts. */
+function fillFromIntegration(days: HistoryDay[], periods: ForecastPeriod[]): HistoryDay[] {
+  const totals = new Map<string, number>();
+  for (const period of periods) {
+    const key = dayKey(new Date(period.time));
+    totals.set(key, (totals.get(key) ?? 0) + period.kwh);
+  }
+
+  return days.map((day) => ({
+    ...day,
+    forecastKwh: day.forecastKwh ?? totals.get(dayKey(day.date)) ?? null,
+  }));
+}
+
 /** Array sensors take precedence over today_actual_entity, as they do for the live total. */
 function actualEntities(cfg: SolarForecastCardConfig): string[] {
   const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
@@ -110,9 +126,9 @@ function reportsWh(hass: HomeAssistant, entityId: string): boolean {
 }
 
 /**
- * Load the last week of forecast and actual totals from recorder history,
- * filling any gaps from the card's own log.
- * Returns null if neither source is readable, so the caller can retry.
+ * Load the last week of forecast and actual totals. Recorder history comes
+ * first, then the card's own log, then the integration's past forecasts.
+ * Returns null if no source is readable, so the caller can retry.
  */
 export async function fetchForecastHistory(
   hass: HomeAssistant | undefined,
@@ -123,23 +139,22 @@ export async function fetchForecastHistory(
 
   const now = new Date();
   const actualIds = actualEntities(cfg);
-  const [history, log] = await Promise.all([
-    queryHistory(
-      hass,
-      [forecastId, ...actualIds],
-      new Date(localDay(now, HISTORY_DAYS)),
-      new Date(localDay(now, 0))
-    ),
+  const start = new Date(localDay(now, HISTORY_DAYS));
+  const end = new Date(localDay(now, 0));
+  const [history, log, periods] = await Promise.all([
+    queryHistory(hass, [forecastId, ...actualIds], start, end),
     loadHistoryLog(hass, forecastId),
+    readForecastHistory(hass, cfg.integration_type, forecastId, start, end),
   ]);
-  if (!history && !log) return null;
+  if (!history && !log && !periods) return null;
 
   const days = buildHistoryDays(
     toReadings(history?.get(forecastId), reportsWh(hass, forecastId)),
     actualIds.map((id) => toReadings(history?.get(id), reportsWh(hass, id))),
     now
   );
-  return log ? fillFromLog(days, log) : days;
+  const logged = log ? fillFromLog(days, log) : days;
+  return periods ? fillFromIntegration(logged, periods) : logged;
 }
 
 export function scoreHistory(days: HistoryDay[]): HistoryScore | null {

@@ -10,6 +10,13 @@ export interface HourPoint {
   kwh: number;
 }
 
+/** One forecast period's energy, as reported by the integration itself. */
+export interface ForecastPeriod {
+  /** Period start, in epoch milliseconds. */
+  time: number;
+  kwh: number;
+}
+
 /** Return type for every adapter's detect(). */
 export interface AutoDetectResult {
   forecast_entities: SolarForecastCardConfig["forecast_entities"];
@@ -31,4 +38,9 @@ export interface IntegrationAdapter {
    * to another integration. Absent when there is no identifying platform.
    */
   detect?(sensors: EntityRegistryEntry[], hass: HomeAssistant): AutoDetectResult | null;
+  /**
+   * Past forecasts from the integration's own storage, independent of recorder.
+   * Returns null if they can't be read. Absent when the integration has none.
+   */
+  forecastHistory?(hass: HomeAssistant, start: Date, end: Date): Promise<ForecastPeriod[] | null>;
 }

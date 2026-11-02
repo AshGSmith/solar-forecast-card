@@ -10141,366 +10141,6 @@ function normalizeConfig(raw) {
     };
 }
 
-/** Read an energy sensor, normalising Wh to kWh. Null when absent or non-numeric. */
-function readKwh(hass, entityId) {
-    const st = entityId ? hass?.states[entityId] : undefined;
-    const raw = parseFloat(st?.state ?? "");
-    if (!isFinite(raw))
-        return null;
-    const unit = st?.attributes?.unit_of_measurement?.toLowerCase();
-    return unit === "wh" ? raw / 1000 : raw;
-}
-/** Read a power sensor, normalising kW to W. Null when absent or non-numeric. */
-function readPowerW(hass, entityId) {
-    const st = entityId ? hass?.states[entityId] : undefined;
-    const raw = parseFloat(st?.state ?? "");
-    if (!isFinite(raw))
-        return null;
-    const unit = st?.attributes?.unit_of_measurement ?? "W";
-    return unit.toLowerCase() === "kw" ? raw * 1000 : raw;
-}
-/** Per-array actuals from actual_arrays. Null when none are configured. */
-function readArrayActuals(hass, cfg) {
-    if (!cfg.actual_arrays?.length)
-        return null;
-    return cfg.actual_arrays.map((a) => ({
-        label: a.label || "?",
-        kwh: readKwh(hass, a.entity) ?? 0,
-    }));
-}
-/**
- * Today's actual generation.
- *
- * Arrays are an optional visual enhancement layer. When they are producing
- * (sum > 0) their sum is the canonical total, used for bar height, the dotted
- * remainder, isComplete and the header. When they sum to 0 (pre-sunrise, all
- * entities unavailable, incomplete config, etc.) this falls back to
- * today_actual_entity. The bars and the header both use this function, so
- * they always agree.
- */
-function resolveActualKwh(hass, cfg, arrays) {
-    const sumKwh = arrays?.reduce((s, a) => s + a.kwh, 0) ?? 0;
-    return sumKwh > 0 ? sumKwh : readKwh(hass, cfg.today_actual_entity);
-}
-
-const KEY_PREFIX = "solar_forecast_card_history:";
-/** The 7 full days shown, plus today while it is being recorded. */
-const KEEP_DAYS = 8;
-/** Before this local hour, daily sensors may still hold yesterday's values. */
-const FIRST_RELIABLE_HOUR = 1;
-/** Used as the end of the generating day when sun.sun isn't available. */
-const FALLBACK_EVENING_HOUR = 20;
-function dayKey(date) {
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${date.getFullYear()}-${month}-${day}`;
-}
-function generationFinished(hass, now) {
-    const sun = hass.states["sun.sun"];
-    if (!sun)
-        return now.getHours() >= FALLBACK_EVENING_HOUR;
-    return now.getHours() >= 12 && sun.state === "below_horizon";
-}
-/**
- * Add today's readings to the log. The earliest forecast is kept, matching
- * what recorder history uses, and the highest actual, because daily sensors
- * only count up. Entries older than KEEP_DAYS are dropped.
- */
-function addToLog(log, now, forecastKwh, actualKwh, finished) {
-    const key = dayKey(now);
-    const previous = log[key];
-    const oldest = dayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - KEEP_DAYS));
-    const kept = Object.fromEntries(Object.entries(log).filter(([date]) => date >= oldest));
-    const actuals = [previous?.actualKwh ?? null, actualKwh].filter((v) => v !== null);
-    return {
-        ...kept,
-        [key]: {
-            forecastKwh: previous?.forecastKwh ?? forecastKwh,
-            actualKwh: actuals.length > 0 ? Math.max(...actuals) : null,
-            complete: (previous?.complete ?? false) || finished,
-        },
-    };
-}
-/** Read the saved log. Returns null if Home Assistant's user storage can't be read. */
-async function loadHistoryLog(hass, forecastId) {
-    if (!hass.callWS)
-        return null;
-    try {
-        const result = await hass.callWS({
-            type: "frontend/get_user_data",
-            key: KEY_PREFIX + forecastId,
-        });
-        return result?.value ?? {};
-    }
-    catch (err) {
-        console.debug("[solar-forecast-card] history log read failed:", err);
-        return null;
-    }
-}
-/** Save today's forecast and actual to Home Assistant's per-user storage. */
-async function recordToday(hass, cfg) {
-    const forecastId = cfg.forecast_entities[0];
-    const now = new Date();
-    if (!forecastId || !hass.callWS || now.getHours() < FIRST_RELIABLE_HOUR)
-        return;
-    const forecastKwh = readKwh(hass, forecastId);
-    const actualKwh = resolveActualKwh(hass, cfg, readArrayActuals(hass, cfg));
-    if (forecastKwh === null && actualKwh === null)
-        return;
-    const log = await loadHistoryLog(hass, forecastId);
-    if (!log)
-        return;
-    const updated = addToLog(log, now, forecastKwh, actualKwh, generationFinished(hass, now));
-    if (JSON.stringify(updated) === JSON.stringify(log))
-        return;
-    try {
-        await hass.callWS({
-            type: "frontend/set_user_data",
-            key: KEY_PREFIX + forecastId,
-            value: updated,
-        });
-    }
-    catch (err) {
-        console.debug("[solar-forecast-card] history log write failed:", err);
-    }
-}
-
-/**
- * Read recorder history for the given entities, keyed by entity_id.
- * Returns null when the history API is unavailable or the request fails.
- */
-async function queryHistory(hass, entityIds, start, end) {
-    if (!hass.callApi)
-        return null;
-    try {
-        // significant_changes_only=false: return every recorded state change,
-        // not just those that cross a threshold — essential for cumulative sensors.
-        const path = `history/period/${start.toISOString()}` +
-            `?filter_entity_id=${encodeURIComponent(entityIds.join(","))}` +
-            `&end_time=${encodeURIComponent(end.toISOString())}` +
-            `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
-        // HA history API returns: Array<Array<{state, last_changed}>>
-        // Outer array is per-entity; inner array is chronological state entries.
-        // Only the first entry of each inner array carries the entity_id, and
-        // entities with no history are left out, so position can't be relied on.
-        const result = await hass.callApi("GET", path);
-        if (!Array.isArray(result))
-            return null;
-        const history = new Map();
-        for (const entries of result) {
-            if (!Array.isArray(entries) || entries.length === 0)
-                continue;
-            const entityId = entries[0]?.entity_id ?? (entityIds.length === 1 ? entityIds[0] : undefined);
-            if (entityId)
-                history.set(entityId, entries);
-        }
-        return history;
-    }
-    catch (err) {
-        console.debug("[solar-forecast-card] history fetch failed:", err);
-        return null;
-    }
-}
-/**
- * Fetch hourly actual-generation values for today from the HA history API.
- *
- * today_actual_entity is a cumulative energy sensor (kWh or Wh) whose value
- * rises monotonically through the day. Per-hour generation is the difference
- * between the sensor's value at the end and start of each hour boundary.
- *
- * Returns a Map<localHour (0–23), kWh> containing only hours with positive
- * generation (> 0).  Pre-sunrise and future hours are not included so the
- * popup table stays clean — a missing key means "no data / future", not zero.
- *
- * Returns an empty Map (never rejects) if the history API is unavailable,
- * the entity has no recorded history for today, or any other error occurs.
- */
-async function fetchActualHourly(hass, entityId) {
-    if (!hass?.callApi)
-        return new Map();
-    const now = new Date();
-    const startOfDay = new Date(now);
-    startOfDay.setHours(0, 0, 0, 0);
-    // Detect Wh vs kWh from the live entity state so history values are
-    // normalised to kWh consistently with the rest of the card.
-    const unit = hass.states[entityId]?.attributes?.unit_of_measurement?.toLowerCase();
-    const isWh = unit === "wh";
-    const history = await queryHistory(hass, [entityId], startOfDay, now);
-    const recorded = history?.get(entityId);
-    if (!recorded)
-        return new Map();
-    try {
-        // Normalise: keep only entries with finite numeric state, sorted ascending.
-        const entries = recorded
-            .filter((e) => e && typeof e.last_changed === "string" && isFinite(parseFloat(e.state)))
-            .sort((a, b) => (a.last_changed < b.last_changed ? -1 : a.last_changed > b.last_changed ? 1 : 0));
-        if (entries.length === 0)
-            return new Map();
-        /**
-         * Returns the most-recent finite numeric state value recorded at or
-         * before the given UTC ISO timestamp.  Entries are sorted ascending so
-         * iteration stops as soon as we pass the target timestamp.
-         */
-        const valueAt = (isoTs) => {
-            let val = null;
-            for (const e of entries) {
-                if (e.last_changed <= isoTs) {
-                    const v = parseFloat(e.state);
-                    if (isFinite(v))
-                        val = v;
-                }
-                else {
-                    break;
-                }
-            }
-            return val;
-        };
-        const map = new Map();
-        const currentHour = now.getHours();
-        for (let h = 0; h <= currentHour; h++) {
-            const hourStart = new Date(now);
-            hourStart.setHours(h, 0, 0, 0);
-            const hourEnd = new Date(now);
-            hourEnd.setHours(h + 1, 0, 0, 0);
-            const startVal = valueAt(hourStart.toISOString());
-            const endVal = valueAt(hourEnd.toISOString());
-            if (startVal === null || endVal === null)
-                continue;
-            let delta = endVal - startVal;
-            if (delta < 0)
-                continue; // sensor reset or stale data — skip
-            if (isWh)
-                delta /= 1000; // Wh → kWh
-            // Only record hours that actually generated something.
-            // This keeps the popup table free of zero rows for pre-sunrise hours.
-            if (delta > 0)
-                map.set(h, delta);
-        }
-        console.debug(`[solar-forecast-card] actual history: ${map.size} generating hour(s) found for ${entityId}`);
-        return map;
-    }
-    catch (err) {
-        console.debug("[solar-forecast-card] actual history fetch failed:", err);
-        return new Map();
-    }
-}
-
-const HISTORY_DAYS = 7;
-/** A day's forecast is the reading in place at this local hour. */
-const FORECAST_READ_HOUR = 6;
-function toReadings(entries, isWh) {
-    return (entries ?? [])
-        .map((e) => ({ time: Date.parse(e.last_changed), value: parseFloat(e.state) }))
-        .filter((r) => isFinite(r.time) && isFinite(r.value))
-        .map((r) => ({ time: r.time, value: isWh ? r.value / 1000 : r.value }))
-        .sort((a, b) => a.time - b.time);
-}
-function localDay(now, daysAgo, hour = 0) {
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysAgo, hour).getTime();
-}
-/** The reading in place at FORECAST_READ_HOUR, or else the day's first reading. */
-function forecastForDay(readings, now, daysAgo) {
-    const start = localDay(now, daysAgo);
-    const cutoff = localDay(now, daysAgo, FORECAST_READ_HOUR);
-    const end = localDay(now, daysAgo - 1);
-    const day = readings.filter((r) => r.time >= start && r.time < end);
-    const morning = day.filter((r) => r.time <= cutoff);
-    const reading = morning.length > 0 ? morning[morning.length - 1] : day[0];
-    return reading?.value ?? null;
-}
-/** today_actual_entity and array sensors reset daily, so a day's total is its peak. */
-function actualForDay(readings, now, daysAgo) {
-    const start = localDay(now, daysAgo, FIRST_RELIABLE_HOUR);
-    const end = localDay(now, daysAgo - 1);
-    const day = readings.filter((r) => r.time >= start && r.time < end);
-    return day.length > 0 ? Math.max(...day.map((r) => r.value)) : null;
-}
-/** The last HISTORY_DAYS full days, oldest first. Today is left out because it isn't finished. */
-function buildHistoryDays(forecast, actuals, now) {
-    const days = [];
-    for (let daysAgo = HISTORY_DAYS; daysAgo >= 1; daysAgo--) {
-        const totals = actuals
-            .map((readings) => actualForDay(readings, now, daysAgo))
-            .filter((v) => v !== null);
-        days.push({
-            date: new Date(localDay(now, daysAgo)),
-            forecastKwh: forecastForDay(forecast, now, daysAgo),
-            actualKwh: totals.length > 0 ? totals.reduce((s, v) => s + v, 0) : null,
-        });
-    }
-    return days;
-}
-/**
- * Fill gaps in recorder data from the card's own log. Logged actuals only count
- * once they were seen after sunset, because an earlier one is a partial day.
- */
-function fillFromLog(days, log) {
-    return days.map((day) => {
-        const logged = log[dayKey(day.date)];
-        return {
-            ...day,
-            forecastKwh: day.forecastKwh ?? logged?.forecastKwh ?? null,
-            actualKwh: day.actualKwh ?? (logged?.complete ? logged.actualKwh : null),
-        };
-    });
-}
-/** Array sensors take precedence over today_actual_entity, as they do for the live total. */
-function actualEntities(cfg) {
-    const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
-    if (arrays.length > 0)
-        return arrays;
-    return cfg.today_actual_entity ? [cfg.today_actual_entity] : [];
-}
-function reportsWh(hass, entityId) {
-    const unit = hass.states[entityId]?.attributes?.unit_of_measurement;
-    return unit?.toLowerCase() === "wh";
-}
-/**
- * Load the last week of forecast and actual totals from recorder history,
- * filling any gaps from the card's own log.
- * Returns null if neither source is readable, so the caller can retry.
- */
-async function fetchForecastHistory(hass, cfg) {
-    const forecastId = cfg.forecast_entities[0];
-    if (!hass || !forecastId)
-        return [];
-    const now = new Date();
-    const actualIds = actualEntities(cfg);
-    const [history, log] = await Promise.all([
-        queryHistory(hass, [forecastId, ...actualIds], new Date(localDay(now, HISTORY_DAYS)), new Date(localDay(now, 0))),
-        loadHistoryLog(hass, forecastId),
-    ]);
-    if (!history && !log)
-        return null;
-    const days = buildHistoryDays(toReadings(history?.get(forecastId), reportsWh(hass, forecastId)), actualIds.map((id) => toReadings(history?.get(id), reportsWh(hass, id))), now);
-    return log ? fillFromLog(days, log) : days;
-}
-function scoreHistory(days) {
-    const paired = days.flatMap((d) => d.forecastKwh !== null && d.forecastKwh > 0 && d.actualKwh !== null
-        ? [{ forecast: d.forecastKwh, actual: d.actualKwh }]
-        : []);
-    if (paired.length === 0)
-        return null;
-    const average = (values) => values.reduce((s, v) => s + v, 0) / values.length;
-    const averagePctMiss = average(paired.map((d) => (Math.abs(d.actual - d.forecast) / d.forecast) * 100));
-    return {
-        accuracyPct: Math.max(100 - averagePctMiss, 0),
-        averageMissKwh: average(paired.map((d) => Math.abs(d.actual - d.forecast))),
-        biasKwh: average(paired.map((d) => d.actual - d.forecast)),
-    };
-}
-/** A round axis with at most four intervals that fits maxKwh. */
-function historyScale(maxKwh) {
-    for (let magnitude = 1;; magnitude *= 10) {
-        for (const base of [1, 2, 5]) {
-            const step = base * magnitude;
-            const intervals = Math.max(Math.ceil(maxKwh / step), 1);
-            if (intervals <= 4)
-                return { step, top: intervals * step };
-        }
-    }
-}
-
 const SLOT_NAMES = ["Today", "Tomorrow", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
 function emptySlots() {
     return ["", "", "", "", "", "", ""];
@@ -10701,6 +10341,38 @@ function detect$1(sensors, hass) {
         integration_type: "solcast",
     };
 }
+/**
+ * Solcast keeps past forecasts in its own cache, up to 730 days by default, and
+ * returns them from the query_forecast_data action. For past periods this is
+ * the last forecast made, so it can be closer to reality than a morning one.
+ */
+async function forecastHistory(hass, start, end) {
+    if (!hass.callWS)
+        return null;
+    try {
+        const result = await hass.callWS({
+            type: "call_service",
+            domain: "solcast_solar",
+            service: "query_forecast_data",
+            service_data: {
+                start_date_time: start.toISOString(),
+                end_date_time: end.toISOString(),
+            },
+            return_response: true,
+        });
+        return (result?.response?.data ?? []).flatMap((entry) => {
+            const time = Date.parse(String(entry.period_start));
+            const estimate = entry.pv_estimate;
+            return isFinite(time) && typeof estimate === "number"
+                ? [{ time, kwh: estimate * 0.5 }] // 30-min period in kW → kWh
+                : [];
+        });
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] Solcast forecast history failed:", err);
+        return null;
+    }
+}
 const solcast = {
     // Prefer detailedForecast (standard Solcast attribute); fall back to
     // hours so manually-configured cards work with alternate attribute names.
@@ -10709,6 +10381,7 @@ const solcast = {
         ? parseSolcastPeriods(raw)
         : parseKeyedHours(raw),
     detect: detect$1,
+    forecastHistory,
 };
 
 function isSolcastPeriods(raw) {
@@ -11070,6 +10743,16 @@ function parseHours(type, raw) {
         return [];
     }
 }
+/**
+ * Past forecasts from the integration behind forecastId, if it keeps any. The
+ * sensor's platform is checked too, because cards set up by hand stay "manual".
+ */
+async function readForecastHistory(hass, type, forecastId, start, end) {
+    const adapter = hass.entities?.[forecastId]?.platform === "solcast_solar"
+        ? solcast
+        : adapterFor(type);
+    return adapter.forecastHistory?.(hass, start, end) ?? null;
+}
 function autoDetect(sensors, hass) {
     for (const adapter of PLATFORM_ADAPTERS) {
         const result = adapter.detect?.(sensors, hass);
@@ -11077,6 +10760,382 @@ function autoDetect(sensors, hass) {
             return result;
     }
     return detectVolcast(sensors, hass);
+}
+
+/** Read an energy sensor, normalising Wh to kWh. Null when absent or non-numeric. */
+function readKwh(hass, entityId) {
+    const st = entityId ? hass?.states[entityId] : undefined;
+    const raw = parseFloat(st?.state ?? "");
+    if (!isFinite(raw))
+        return null;
+    const unit = st?.attributes?.unit_of_measurement?.toLowerCase();
+    return unit === "wh" ? raw / 1000 : raw;
+}
+/** Read a power sensor, normalising kW to W. Null when absent or non-numeric. */
+function readPowerW(hass, entityId) {
+    const st = entityId ? hass?.states[entityId] : undefined;
+    const raw = parseFloat(st?.state ?? "");
+    if (!isFinite(raw))
+        return null;
+    const unit = st?.attributes?.unit_of_measurement ?? "W";
+    return unit.toLowerCase() === "kw" ? raw * 1000 : raw;
+}
+/** Per-array actuals from actual_arrays. Null when none are configured. */
+function readArrayActuals(hass, cfg) {
+    if (!cfg.actual_arrays?.length)
+        return null;
+    return cfg.actual_arrays.map((a) => ({
+        label: a.label || "?",
+        kwh: readKwh(hass, a.entity) ?? 0,
+    }));
+}
+/**
+ * Today's actual generation.
+ *
+ * Arrays are an optional visual enhancement layer. When they are producing
+ * (sum > 0) their sum is the canonical total, used for bar height, the dotted
+ * remainder, isComplete and the header. When they sum to 0 (pre-sunrise, all
+ * entities unavailable, incomplete config, etc.) this falls back to
+ * today_actual_entity. The bars and the header both use this function, so
+ * they always agree.
+ */
+function resolveActualKwh(hass, cfg, arrays) {
+    const sumKwh = arrays?.reduce((s, a) => s + a.kwh, 0) ?? 0;
+    return sumKwh > 0 ? sumKwh : readKwh(hass, cfg.today_actual_entity);
+}
+
+const KEY_PREFIX = "solar_forecast_card_history:";
+/** The 7 full days shown, plus today while it is being recorded. */
+const KEEP_DAYS = 8;
+/** Before this local hour, daily sensors may still hold yesterday's values. */
+const FIRST_RELIABLE_HOUR = 1;
+/** Used as the end of the generating day when sun.sun isn't available. */
+const FALLBACK_EVENING_HOUR = 20;
+function dayKey(date) {
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${date.getFullYear()}-${month}-${day}`;
+}
+function generationFinished(hass, now) {
+    const sun = hass.states["sun.sun"];
+    if (!sun)
+        return now.getHours() >= FALLBACK_EVENING_HOUR;
+    return now.getHours() >= 12 && sun.state === "below_horizon";
+}
+/**
+ * Add today's readings to the log. The earliest forecast is kept, matching
+ * what recorder history uses, and the highest actual, because daily sensors
+ * only count up. Entries older than KEEP_DAYS are dropped.
+ */
+function addToLog(log, now, forecastKwh, actualKwh, finished) {
+    const key = dayKey(now);
+    const previous = log[key];
+    const oldest = dayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - KEEP_DAYS));
+    const kept = Object.fromEntries(Object.entries(log).filter(([date]) => date >= oldest));
+    const actuals = [previous?.actualKwh ?? null, actualKwh].filter((v) => v !== null);
+    return {
+        ...kept,
+        [key]: {
+            forecastKwh: previous?.forecastKwh ?? forecastKwh,
+            actualKwh: actuals.length > 0 ? Math.max(...actuals) : null,
+            complete: (previous?.complete ?? false) || finished,
+        },
+    };
+}
+/** Read the saved log. Returns null if Home Assistant's user storage can't be read. */
+async function loadHistoryLog(hass, forecastId) {
+    if (!hass.callWS)
+        return null;
+    try {
+        const result = await hass.callWS({
+            type: "frontend/get_user_data",
+            key: KEY_PREFIX + forecastId,
+        });
+        return result?.value ?? {};
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] history log read failed:", err);
+        return null;
+    }
+}
+/** Save today's forecast and actual to Home Assistant's per-user storage. */
+async function recordToday(hass, cfg) {
+    const forecastId = cfg.forecast_entities[0];
+    const now = new Date();
+    if (!forecastId || !hass.callWS || now.getHours() < FIRST_RELIABLE_HOUR)
+        return;
+    const forecastKwh = readKwh(hass, forecastId);
+    const actualKwh = resolveActualKwh(hass, cfg, readArrayActuals(hass, cfg));
+    if (forecastKwh === null && actualKwh === null)
+        return;
+    const log = await loadHistoryLog(hass, forecastId);
+    if (!log)
+        return;
+    const updated = addToLog(log, now, forecastKwh, actualKwh, generationFinished(hass, now));
+    if (JSON.stringify(updated) === JSON.stringify(log))
+        return;
+    try {
+        await hass.callWS({
+            type: "frontend/set_user_data",
+            key: KEY_PREFIX + forecastId,
+            value: updated,
+        });
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] history log write failed:", err);
+    }
+}
+
+/**
+ * Read recorder history for the given entities, keyed by entity_id.
+ * Returns null when the history API is unavailable or the request fails.
+ */
+async function queryHistory(hass, entityIds, start, end) {
+    if (!hass.callApi)
+        return null;
+    try {
+        // significant_changes_only=false: return every recorded state change,
+        // not just those that cross a threshold — essential for cumulative sensors.
+        const path = `history/period/${start.toISOString()}` +
+            `?filter_entity_id=${encodeURIComponent(entityIds.join(","))}` +
+            `&end_time=${encodeURIComponent(end.toISOString())}` +
+            `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
+        // HA history API returns: Array<Array<{state, last_changed}>>
+        // Outer array is per-entity; inner array is chronological state entries.
+        // Only the first entry of each inner array carries the entity_id, and
+        // entities with no history are left out, so position can't be relied on.
+        const result = await hass.callApi("GET", path);
+        if (!Array.isArray(result))
+            return null;
+        const history = new Map();
+        for (const entries of result) {
+            if (!Array.isArray(entries) || entries.length === 0)
+                continue;
+            const entityId = entries[0]?.entity_id ?? (entityIds.length === 1 ? entityIds[0] : undefined);
+            if (entityId)
+                history.set(entityId, entries);
+        }
+        return history;
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] history fetch failed:", err);
+        return null;
+    }
+}
+/**
+ * Fetch hourly actual-generation values for today from the HA history API.
+ *
+ * today_actual_entity is a cumulative energy sensor (kWh or Wh) whose value
+ * rises monotonically through the day. Per-hour generation is the difference
+ * between the sensor's value at the end and start of each hour boundary.
+ *
+ * Returns a Map<localHour (0–23), kWh> containing only hours with positive
+ * generation (> 0).  Pre-sunrise and future hours are not included so the
+ * popup table stays clean — a missing key means "no data / future", not zero.
+ *
+ * Returns an empty Map (never rejects) if the history API is unavailable,
+ * the entity has no recorded history for today, or any other error occurs.
+ */
+async function fetchActualHourly(hass, entityId) {
+    if (!hass?.callApi)
+        return new Map();
+    const now = new Date();
+    const startOfDay = new Date(now);
+    startOfDay.setHours(0, 0, 0, 0);
+    // Detect Wh vs kWh from the live entity state so history values are
+    // normalised to kWh consistently with the rest of the card.
+    const unit = hass.states[entityId]?.attributes?.unit_of_measurement?.toLowerCase();
+    const isWh = unit === "wh";
+    const history = await queryHistory(hass, [entityId], startOfDay, now);
+    const recorded = history?.get(entityId);
+    if (!recorded)
+        return new Map();
+    try {
+        // Normalise: keep only entries with finite numeric state, sorted ascending.
+        const entries = recorded
+            .filter((e) => e && typeof e.last_changed === "string" && isFinite(parseFloat(e.state)))
+            .sort((a, b) => (a.last_changed < b.last_changed ? -1 : a.last_changed > b.last_changed ? 1 : 0));
+        if (entries.length === 0)
+            return new Map();
+        /**
+         * Returns the most-recent finite numeric state value recorded at or
+         * before the given UTC ISO timestamp.  Entries are sorted ascending so
+         * iteration stops as soon as we pass the target timestamp.
+         */
+        const valueAt = (isoTs) => {
+            let val = null;
+            for (const e of entries) {
+                if (e.last_changed <= isoTs) {
+                    const v = parseFloat(e.state);
+                    if (isFinite(v))
+                        val = v;
+                }
+                else {
+                    break;
+                }
+            }
+            return val;
+        };
+        const map = new Map();
+        const currentHour = now.getHours();
+        for (let h = 0; h <= currentHour; h++) {
+            const hourStart = new Date(now);
+            hourStart.setHours(h, 0, 0, 0);
+            const hourEnd = new Date(now);
+            hourEnd.setHours(h + 1, 0, 0, 0);
+            const startVal = valueAt(hourStart.toISOString());
+            const endVal = valueAt(hourEnd.toISOString());
+            if (startVal === null || endVal === null)
+                continue;
+            let delta = endVal - startVal;
+            if (delta < 0)
+                continue; // sensor reset or stale data — skip
+            if (isWh)
+                delta /= 1000; // Wh → kWh
+            // Only record hours that actually generated something.
+            // This keeps the popup table free of zero rows for pre-sunrise hours.
+            if (delta > 0)
+                map.set(h, delta);
+        }
+        console.debug(`[solar-forecast-card] actual history: ${map.size} generating hour(s) found for ${entityId}`);
+        return map;
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] actual history fetch failed:", err);
+        return new Map();
+    }
+}
+
+const HISTORY_DAYS = 7;
+/** A day's forecast is the reading in place at this local hour. */
+const FORECAST_READ_HOUR = 6;
+function toReadings(entries, isWh) {
+    return (entries ?? [])
+        .map((e) => ({ time: Date.parse(e.last_changed), value: parseFloat(e.state) }))
+        .filter((r) => isFinite(r.time) && isFinite(r.value))
+        .map((r) => ({ time: r.time, value: isWh ? r.value / 1000 : r.value }))
+        .sort((a, b) => a.time - b.time);
+}
+function localDay(now, daysAgo, hour = 0) {
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysAgo, hour).getTime();
+}
+/** The reading in place at FORECAST_READ_HOUR, or else the day's first reading. */
+function forecastForDay(readings, now, daysAgo) {
+    const start = localDay(now, daysAgo);
+    const cutoff = localDay(now, daysAgo, FORECAST_READ_HOUR);
+    const end = localDay(now, daysAgo - 1);
+    const day = readings.filter((r) => r.time >= start && r.time < end);
+    const morning = day.filter((r) => r.time <= cutoff);
+    const reading = morning.length > 0 ? morning[morning.length - 1] : day[0];
+    return reading?.value ?? null;
+}
+/** today_actual_entity and array sensors reset daily, so a day's total is its peak. */
+function actualForDay(readings, now, daysAgo) {
+    const start = localDay(now, daysAgo, FIRST_RELIABLE_HOUR);
+    const end = localDay(now, daysAgo - 1);
+    const day = readings.filter((r) => r.time >= start && r.time < end);
+    return day.length > 0 ? Math.max(...day.map((r) => r.value)) : null;
+}
+/** The last HISTORY_DAYS full days, oldest first. Today is left out because it isn't finished. */
+function buildHistoryDays(forecast, actuals, now) {
+    const days = [];
+    for (let daysAgo = HISTORY_DAYS; daysAgo >= 1; daysAgo--) {
+        const totals = actuals
+            .map((readings) => actualForDay(readings, now, daysAgo))
+            .filter((v) => v !== null);
+        days.push({
+            date: new Date(localDay(now, daysAgo)),
+            forecastKwh: forecastForDay(forecast, now, daysAgo),
+            actualKwh: totals.length > 0 ? totals.reduce((s, v) => s + v, 0) : null,
+        });
+    }
+    return days;
+}
+/**
+ * Fill gaps in recorder data from the card's own log. Logged actuals only count
+ * once they were seen after sunset, because an earlier one is a partial day.
+ */
+function fillFromLog(days, log) {
+    return days.map((day) => {
+        const logged = log[dayKey(day.date)];
+        return {
+            ...day,
+            forecastKwh: day.forecastKwh ?? logged?.forecastKwh ?? null,
+            actualKwh: day.actualKwh ?? (logged?.complete ? logged.actualKwh : null),
+        };
+    });
+}
+/** Fill remaining forecast gaps from the integration's own past forecasts. */
+function fillFromIntegration(days, periods) {
+    const totals = new Map();
+    for (const period of periods) {
+        const key = dayKey(new Date(period.time));
+        totals.set(key, (totals.get(key) ?? 0) + period.kwh);
+    }
+    return days.map((day) => ({
+        ...day,
+        forecastKwh: day.forecastKwh ?? totals.get(dayKey(day.date)) ?? null,
+    }));
+}
+/** Array sensors take precedence over today_actual_entity, as they do for the live total. */
+function actualEntities(cfg) {
+    const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
+    if (arrays.length > 0)
+        return arrays;
+    return cfg.today_actual_entity ? [cfg.today_actual_entity] : [];
+}
+function reportsWh(hass, entityId) {
+    const unit = hass.states[entityId]?.attributes?.unit_of_measurement;
+    return unit?.toLowerCase() === "wh";
+}
+/**
+ * Load the last week of forecast and actual totals. Recorder history comes
+ * first, then the card's own log, then the integration's past forecasts.
+ * Returns null if no source is readable, so the caller can retry.
+ */
+async function fetchForecastHistory(hass, cfg) {
+    const forecastId = cfg.forecast_entities[0];
+    if (!hass || !forecastId)
+        return [];
+    const now = new Date();
+    const actualIds = actualEntities(cfg);
+    const start = new Date(localDay(now, HISTORY_DAYS));
+    const end = new Date(localDay(now, 0));
+    const [history, log, periods] = await Promise.all([
+        queryHistory(hass, [forecastId, ...actualIds], start, end),
+        loadHistoryLog(hass, forecastId),
+        readForecastHistory(hass, cfg.integration_type, forecastId, start, end),
+    ]);
+    if (!history && !log && !periods)
+        return null;
+    const days = buildHistoryDays(toReadings(history?.get(forecastId), reportsWh(hass, forecastId)), actualIds.map((id) => toReadings(history?.get(id), reportsWh(hass, id))), now);
+    const logged = log ? fillFromLog(days, log) : days;
+    return periods ? fillFromIntegration(logged, periods) : logged;
+}
+function scoreHistory(days) {
+    const paired = days.flatMap((d) => d.forecastKwh !== null && d.forecastKwh > 0 && d.actualKwh !== null
+        ? [{ forecast: d.forecastKwh, actual: d.actualKwh }]
+        : []);
+    if (paired.length === 0)
+        return null;
+    const average = (values) => values.reduce((s, v) => s + v, 0) / values.length;
+    const averagePctMiss = average(paired.map((d) => (Math.abs(d.actual - d.forecast) / d.forecast) * 100));
+    return {
+        accuracyPct: Math.max(100 - averagePctMiss, 0),
+        averageMissKwh: average(paired.map((d) => Math.abs(d.actual - d.forecast))),
+        biasKwh: average(paired.map((d) => d.actual - d.forecast)),
+    };
+}
+/** A round axis with at most four intervals that fits maxKwh. */
+function historyScale(maxKwh) {
+    for (let magnitude = 1;; magnitude *= 10) {
+        for (const base of [1, 2, 5]) {
+            const step = base * magnitude;
+            const intervals = Math.max(Math.ceil(maxKwh / step), 1);
+            if (intervals <= 4)
+                return { step, top: intervals * step };
+        }
+    }
 }
 
 const COMPLETE_THRESHOLD = 1.0;
