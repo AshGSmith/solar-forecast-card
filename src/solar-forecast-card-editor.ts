@@ -156,6 +156,9 @@ export function normalizeConfig(
   while (incoming.length < 7) incoming.push("");
 
   return {
+    // Keep keys the card doesn't know (e.g. card_mod, view_layout) so other
+    // tools that read them from the card config keep working.
+    ...raw,
     type:               raw.type ?? "custom:solar-forecast-card",
     title:              raw.title,
     icon:               raw.icon,
@@ -287,6 +290,8 @@ export class SolarForecastCardEditor extends LitElement {
 
   private _fromFormData(data: FormData): SolarForecastCardConfig {
     return {
+      // Unknown keys such as card_mod survive an edit in the visual editor.
+      ...this._config,
       type:             this._config?.type ?? "custom:solar-forecast-card",
       title:            data.title || undefined,
       icon:             data.icon  || undefined,

@@ -203,7 +203,7 @@ The card exposes CSS custom properties for card-mod and theme-level styling whil
 ```yaml
 card_mod:
   style: |
-    solar-forecast-card {
+    ha-card {
       --sfc-card-background: rgba(20, 20, 30, 0.8);
       --sfc-font-size: 14px;
       --sfc-bar-width: 18px;
