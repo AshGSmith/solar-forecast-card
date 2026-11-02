@@ -22,6 +22,8 @@
       "left": "남음:",
       "week": "주:",
       "avg": "평균:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "합계",
       "p10": "P10",
       "forecast": "예보",

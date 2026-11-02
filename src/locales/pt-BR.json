@@ -22,6 +22,8 @@
       "left": "RESTANTE:",
       "week": "SEMANA:",
       "avg": "MÉDIA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsão",

@@ -22,6 +22,8 @@
       "left": "IGJEN:",
       "week": "UKE:",
       "avg": "SNITT:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognose",

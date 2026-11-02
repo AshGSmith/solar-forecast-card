@@ -1,6 +1,7 @@
 import { parseHours, readHoursAttr } from "../integrations/index.js";
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
 import { readArrayActuals, readKwh, readPowerW, resolveActualKwh } from "./entities.js";
+import { resolveThresholds } from "./rows.js";
 
 export interface HeaderStats {
   powerW: number | null;
@@ -9,6 +10,9 @@ export interface HeaderStats {
   forecastLeftKwh: number | null;
   /** Null when no forecast entity has a numeric state. */
   week: { totalKwh: number; avgKwh: number } | null;
+  /** The thresholds in effect, whether from a sensor or a static value. */
+  lowThresholdKwh: number | undefined;
+  highThresholdKwh: number | undefined;
 }
 
 /**
@@ -60,6 +64,7 @@ export function computeHeaderStats(
     .map((id) => readKwh(hass, id))
     .filter((v): v is number => v !== null);
   const totalKwh = validForecasts.reduce((s, v) => s + v, 0);
+  const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
 
   return {
     powerW: readPowerW(hass, cfg.live_power_entity),
@@ -72,5 +77,7 @@ export function computeHeaderStats(
     week: validForecasts.length > 0
       ? { totalKwh, avgKwh: totalKwh / validForecasts.length }
       : null,
+    lowThresholdKwh: lowKwh,
+    highThresholdKwh: highKwh,
   };
 }

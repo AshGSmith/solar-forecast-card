@@ -22,6 +22,8 @@
       "left": "REST:",
       "week": "WOCHE:",
       "avg": "Ø:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Gesamt",
       "p10": "P10",
       "forecast": "Prognose",

@@ -22,6 +22,8 @@
       "left": "KALAN:",
       "week": "HAFTA:",
       "avg": "ORT.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Toplam",
       "p10": "P10",
       "forecast": "tahmin",

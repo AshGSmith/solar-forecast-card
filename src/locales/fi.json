@@ -22,6 +22,8 @@
       "left": "JÄLJELLÄ:",
       "week": "VIIKKO:",
       "avg": "KA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Yhteensä",
       "p10": "P10",
       "forecast": "ennuste",

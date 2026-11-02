@@ -231,6 +231,17 @@ describe("computeHeaderStats", () => {
       .toEqual({ totalKwh: 4, avgKwh: 4 });
   });
 
+  it("reports the thresholds in effect, preferring sensors", () => {
+    const hass = makeHass({ "sensor.hi": entity(30000, WH) });
+    const stats = computeHeaderStats(hass, makeConfig({
+      low_threshold: 10,
+      high_threshold: 25,
+      high_threshold_entity: "sensor.hi",
+    }));
+    expect(stats.lowThresholdKwh).toBe(10);
+    expect(stats.highThresholdKwh).toBe(30);
+  });
+
   it("reports nothing when no sensors have data", () => {
     expect(computeHeaderStats(makeHass({}), makeConfig())).toEqual({
       powerW: null,

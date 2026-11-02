@@ -22,6 +22,8 @@
       "left": "RESTAS:",
       "week": "SEMAJNO:",
       "avg": "MEZ.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Entute",
       "p10": "P10",
       "forecast": "prognozo",

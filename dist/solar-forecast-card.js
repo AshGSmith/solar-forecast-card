@@ -22,6 +22,8 @@ var af = {
       "left": "OOR:",
       "week": "WEEK:",
       "avg": "GEM:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totaal",
       "p10": "P10",
       "forecast": "voorspelling",
@@ -178,6 +180,8 @@ var ar = {
       "left": "المتبقي:",
       "week": "الأسبوع:",
       "avg": "متوسط:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "الإجمالي",
       "p10": "P10",
       "forecast": "توقع",
@@ -334,6 +338,8 @@ var bg = {
       "left": "ОСТАВА:",
       "week": "СЕДМИЦА:",
       "avg": "СРЕДНО:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Общо",
       "p10": "P10",
       "forecast": "прогноза",
@@ -490,6 +496,8 @@ var bn = {
       "left": "বাকি:",
       "week": "সপ্তাহ:",
       "avg": "গড়:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "মোট",
       "p10": "P10",
       "forecast": "পূর্বাভাস",
@@ -646,6 +654,8 @@ var bs = {
       "left": "OSTALO:",
       "week": "SEDMICA:",
       "avg": "PROSJEK:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",
@@ -802,6 +812,8 @@ var ca = {
       "left": "RESTANT:",
       "week": "SETMANA:",
       "avg": "MITJANA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsió",
@@ -958,6 +970,8 @@ var cs = {
       "left": "ZBÝVÁ:",
       "week": "TÝDEN:",
       "avg": "PRŮM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Celkem",
       "p10": "P10",
       "forecast": "předpověď",
@@ -1114,6 +1128,8 @@ var cy = {
       "left": "AR ÔL:",
       "week": "WYTHNOS:",
       "avg": "CYF:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Cyfanswm",
       "p10": "P10",
       "forecast": "rhagolwg",
@@ -1270,6 +1286,8 @@ var da = {
       "left": "TILBAGE:",
       "week": "UGE:",
       "avg": "GENNEM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "prognose",
@@ -1426,6 +1444,8 @@ var de = {
       "left": "REST:",
       "week": "WOCHE:",
       "avg": "Ø:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Gesamt",
       "p10": "P10",
       "forecast": "Prognose",
@@ -1582,6 +1602,8 @@ var el = {
       "left": "ΥΠΟΛ.:",
       "week": "ΕΒΔΟΜΑΔΑ:",
       "avg": "Μ.Ο.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Σύνολο",
       "p10": "P10",
       "forecast": "πρόγνωση",
@@ -1738,6 +1760,8 @@ var en = {
       "left": "LEFT:",
       "week": "WEEK:",
       "avg": "AVG:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "forecast",
@@ -1894,6 +1918,8 @@ var en_GB = {
       "left": "LEFT:",
       "week": "WEEK:",
       "avg": "AVG:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "forecast",
@@ -2050,6 +2076,8 @@ var eo = {
       "left": "RESTAS:",
       "week": "SEMAJNO:",
       "avg": "MEZ.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Entute",
       "p10": "P10",
       "forecast": "prognozo",
@@ -2206,6 +2234,8 @@ var es = {
       "left": "RESTANTE:",
       "week": "SEMANA:",
       "avg": "PROM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsión",
@@ -2362,6 +2392,8 @@ var es_419 = {
       "left": "RESTANTE:",
       "week": "SEMANA:",
       "avg": "PROM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "pronóstico",
@@ -2518,6 +2550,8 @@ var et = {
       "left": "JÄÄNUD:",
       "week": "NÄDAL:",
       "avg": "KESKM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Kokku",
       "p10": "P10",
       "forecast": "prognoos",
@@ -2674,6 +2708,8 @@ var eu = {
       "left": "GERATZEN:",
       "week": "ASTEA:",
       "avg": "BB:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Guztira",
       "p10": "P10",
       "forecast": "iragarpena",
@@ -2830,6 +2866,8 @@ var fa = {
       "left": "باقی‌مانده:",
       "week": "هفته:",
       "avg": "میانگین:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "مجموع",
       "p10": "P10",
       "forecast": "پیش‌بینی",
@@ -2986,6 +3024,8 @@ var fi = {
       "left": "JÄLJELLÄ:",
       "week": "VIIKKO:",
       "avg": "KA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Yhteensä",
       "p10": "P10",
       "forecast": "ennuste",
@@ -3142,6 +3182,8 @@ var fy = {
       "left": "OER:",
       "week": "WIKE:",
       "avg": "GEM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totaal",
       "p10": "P10",
       "forecast": "foarsizzing",
@@ -3298,6 +3340,8 @@ var fr = {
       "left": "RESTE :",
       "week": "SEMAINE :",
       "avg": "MOY :",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "prévu",
@@ -3454,6 +3498,8 @@ var ga = {
       "left": "FÁGTHA:",
       "week": "SEACHTAIN:",
       "avg": "MEÁN:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Iomlán",
       "p10": "P10",
       "forecast": "réamhaisnéis",
@@ -3610,6 +3656,8 @@ var gl = {
       "left": "RESTANTE:",
       "week": "SEMANA:",
       "avg": "MEDIA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsión",
@@ -3766,6 +3814,8 @@ var gsw = {
       "left": "REST:",
       "week": "WUCHE:",
       "avg": "Ø:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "Prognose",
@@ -3922,6 +3972,8 @@ var he = {
       "left": "נותר:",
       "week": "שבוע:",
       "avg": "ממוצע:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "סה״כ",
       "p10": "P10",
       "forecast": "תחזית",
@@ -4078,6 +4130,8 @@ var hi = {
       "left": "शेष:",
       "week": "सप्ताह:",
       "avg": "औसत:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "कुल",
       "p10": "P10",
       "forecast": "पूर्वानुमान",
@@ -4234,6 +4288,8 @@ var hr = {
       "left": "PREOSTALO:",
       "week": "TJEDAN:",
       "avg": "PROSJEK:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",
@@ -4390,6 +4446,8 @@ var hu = {
       "left": "MARAD:",
       "week": "HÉT:",
       "avg": "ÁTL.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Összesen",
       "p10": "P10",
       "forecast": "előrejelzés",
@@ -4546,6 +4604,8 @@ var hy = {
       "left": "ՄՆԱՑԵԼ Է:",
       "week": "ՇԱԲԱԹ:",
       "avg": "ՄԻՋ.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Ընդամենը",
       "p10": "P10",
       "forecast": "կանխատեսում",
@@ -4702,6 +4762,8 @@ var id = {
       "left": "SISA:",
       "week": "MINGGU:",
       "avg": "RATA2:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "prakiraan",
@@ -4858,6 +4920,8 @@ var it = {
       "left": "RESTANTE:",
       "week": "SETTIMANA:",
       "avg": "MEDIA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totale",
       "p10": "P10",
       "forecast": "previsione",
@@ -5014,6 +5078,8 @@ var is = {
       "left": "EFTIR:",
       "week": "VIKA:",
       "avg": "MEÐALT.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Samtals",
       "p10": "P10",
       "forecast": "spá",
@@ -5170,6 +5236,8 @@ var ja = {
       "left": "残り:",
       "week": "週:",
       "avg": "平均:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "合計",
       "p10": "P10",
       "forecast": "予測",
@@ -5326,6 +5394,8 @@ var ka = {
       "left": "დარჩა:",
       "week": "კვირა:",
       "avg": "საშ.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "სულ",
       "p10": "P10",
       "forecast": "პროგნოზი",
@@ -5482,6 +5552,8 @@ var ko = {
       "left": "남음:",
       "week": "주:",
       "avg": "평균:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "합계",
       "p10": "P10",
       "forecast": "예보",
@@ -5638,6 +5710,8 @@ var lb = {
       "left": "IWWREG:",
       "week": "WOCH:",
       "avg": "DUERCH.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "Prognos",
@@ -5794,6 +5868,8 @@ var lt = {
       "left": "LIKO:",
       "week": "SAVAITĖ:",
       "avg": "VID.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Iš viso",
       "p10": "P10",
       "forecast": "prognozė",
@@ -5950,6 +6026,8 @@ var lv = {
       "left": "ATLICIS:",
       "week": "NEDĒĻA:",
       "avg": "VID.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Kopā",
       "p10": "P10",
       "forecast": "prognoze",
@@ -6106,6 +6184,8 @@ var mk = {
       "left": "ОСТАНАТО:",
       "week": "НЕДЕЛА:",
       "avg": "ПРОСЕК:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Вкупно",
       "p10": "P10",
       "forecast": "прогноза",
@@ -6262,6 +6342,8 @@ var ml = {
       "left": "ബാക്കി:",
       "week": "ആഴ്ച:",
       "avg": "ശരാശരി:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "ആകെ",
       "p10": "P10",
       "forecast": "പ്രവചനം",
@@ -6418,6 +6500,8 @@ var nl = {
       "left": "REST:",
       "week": "WEEK:",
       "avg": "GEM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totaal",
       "p10": "P10",
       "forecast": "prognose",
@@ -6574,6 +6658,8 @@ var nb = {
       "left": "IGJEN:",
       "week": "UKE:",
       "avg": "SNITT:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognose",
@@ -6730,6 +6816,8 @@ var nn = {
       "left": "IGJEN:",
       "week": "VEKE:",
       "avg": "SNITT:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognose",
@@ -6886,6 +6974,8 @@ var pl = {
       "left": "POZOSTAŁO:",
       "week": "TYDZIEŃ:",
       "avg": "ŚR.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Razem",
       "p10": "P10",
       "forecast": "prognoza",
@@ -7042,6 +7132,8 @@ var pt = {
       "left": "RESTANTE:",
       "week": "SEMANA:",
       "avg": "MÉDIA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsão",
@@ -7198,6 +7290,8 @@ var pt_BR = {
       "left": "RESTANTE:",
       "week": "SEMANA:",
       "avg": "MÉDIA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsão",
@@ -7354,6 +7448,8 @@ var ro = {
       "left": "RĂMAS:",
       "week": "SĂPT.:",
       "avg": "MEDIE:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "prognoză",
@@ -7510,6 +7606,8 @@ var ru = {
       "left": "ОСТАЛОСЬ:",
       "week": "НЕДЕЛЯ:",
       "avg": "СРЕД.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Итого",
       "p10": "P10",
       "forecast": "прогноз",
@@ -7666,6 +7764,8 @@ var sk = {
       "left": "ZOSTÁVA:",
       "week": "TÝŽDEŇ:",
       "avg": "PRIEM.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Celkom",
       "p10": "P10",
       "forecast": "predpoveď",
@@ -7822,6 +7922,8 @@ var sl = {
       "left": "OSTALO:",
       "week": "TEDEN:",
       "avg": "POVP.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Skupaj",
       "p10": "P10",
       "forecast": "napoved",
@@ -7978,6 +8080,8 @@ var sr = {
       "left": "ПРЕОСТАЛО:",
       "week": "НЕДЕЉА:",
       "avg": "ПРОСЕК:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Укупно",
       "p10": "P10",
       "forecast": "прогноза",
@@ -8134,6 +8238,8 @@ var sr_Latn = {
       "left": "PREOSTALO:",
       "week": "NEDELJA:",
       "avg": "PROSEK:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",
@@ -8290,6 +8396,8 @@ var sv = {
       "left": "KVAR:",
       "week": "VECKA:",
       "avg": "SNITT:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognos",
@@ -8446,6 +8554,8 @@ var sq = {
       "left": "MBETUR:",
       "week": "JAVË:",
       "avg": "MES.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totali",
       "p10": "P10",
       "forecast": "parashikim",
@@ -8602,6 +8712,8 @@ var ta = {
       "left": "மீதம்:",
       "week": "வாரம்:",
       "avg": "சராசரி:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "மொத்தம்",
       "p10": "P10",
       "forecast": "முன்னறிவிப்பு",
@@ -8758,6 +8870,8 @@ var te = {
       "left": "మిగిలింది:",
       "week": "వారం:",
       "avg": "సగటు:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "మొత్తం",
       "p10": "P10",
       "forecast": "అంచనా",
@@ -8914,6 +9028,8 @@ var th = {
       "left": "เหลือ:",
       "week": "สัปดาห์:",
       "avg": "เฉลี่ย:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "รวม",
       "p10": "P10",
       "forecast": "พยากรณ์",
@@ -9070,6 +9186,8 @@ var tr = {
       "left": "KALAN:",
       "week": "HAFTA:",
       "avg": "ORT.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Toplam",
       "p10": "P10",
       "forecast": "tahmin",
@@ -9226,6 +9344,8 @@ var uk = {
       "left": "ЗАЛИШОК:",
       "week": "ТИЖДЕНЬ:",
       "avg": "СЕР.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Разом",
       "p10": "P10",
       "forecast": "прогноз",
@@ -9382,6 +9502,8 @@ var ur = {
       "left": "باقی:",
       "week": "ہفتہ:",
       "avg": "اوسط:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "کل",
       "p10": "P10",
       "forecast": "پیش گوئی",
@@ -9538,6 +9660,8 @@ var vi = {
       "left": "CÒN LẠI:",
       "week": "TUẦN:",
       "avg": "TB:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Tổng",
       "p10": "P10",
       "forecast": "dự báo",
@@ -9694,6 +9818,8 @@ var zh_Hans = {
       "left": "剩余:",
       "week": "本周:",
       "avg": "平均:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "总计",
       "p10": "P10",
       "forecast": "预测",
@@ -9850,6 +9976,8 @@ var zh_Hant = {
       "left": "剩餘:",
       "week": "本週:",
       "avg": "平均:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "總計",
       "p10": "P10",
       "forecast": "預測",
@@ -11632,6 +11760,7 @@ function computeHeaderStats(hass, cfg) {
         .map((id) => readKwh(hass, id))
         .filter((v) => v !== null);
     const totalKwh = validForecasts.reduce((s, v) => s + v, 0);
+    const { lowKwh, highKwh } = resolveThresholds(hass, cfg);
     return {
         powerW: readPowerW(hass, cfg.live_power_entity),
         actualKwh: resolveActualKwh(hass, cfg, readArrayActuals(hass, cfg)),
@@ -11643,6 +11772,8 @@ function computeHeaderStats(hass, cfg) {
         week: validForecasts.length > 0
             ? { totalKwh, avgKwh: totalKwh / validForecasts.length }
             : null,
+        lowThresholdKwh: lowKwh,
+        highThresholdKwh: highKwh,
     };
 }
 
@@ -11664,12 +11795,31 @@ function renderExportRate(hass, cfg, fmt) {
     </div>
   `;
 }
+function renderThresholds(low, high, fmt) {
+    const unit = fmt.t("card.units.kilowattHours");
+    return b `
+    <div class="live-week">
+      ${low !== undefined ? b `
+        <span class="week-label">${fmt.t("card.labels.low")}</span>
+        ${fmt.number(low, 1)} ${unit}
+      ` : A}
+      ${low !== undefined && high !== undefined ? " | " : A}
+      ${high !== undefined ? b `
+        <span class="week-label">${fmt.t("card.labels.high")}</span>
+        ${fmt.number(high, 1)} ${unit}
+      ` : A}
+    </div>
+  `;
+}
 function renderLive(hass, cfg, fmt) {
-    const { powerW, actualKwh, nextHourKwh, forecastLeftKwh, week } = computeHeaderStats(hass, cfg);
+    const { powerW, actualKwh, nextHourKwh, forecastLeftKwh, week, lowThresholdKwh, highThresholdKwh, } = computeHeaderStats(hass, cfg);
     const hasPower = powerW !== null;
     const hasActual = actualKwh !== null;
     const hasForecastSummary = nextHourKwh !== null || forecastLeftKwh !== null;
-    if (!hasPower && !hasActual && !week && !hasForecastSummary)
+    // Thresholds only mean something next to the daily bars they colour.
+    const hasThresholds = cfg.main_view === "daily"
+        && (lowThresholdKwh !== undefined || highThresholdKwh !== undefined);
+    if (!hasPower && !hasActual && !week && !hasForecastSummary && !hasThresholds)
         return A;
     const liveParts = [];
     if (hasPower)
@@ -11705,6 +11855,7 @@ function renderLive(hass, cfg, fmt) {
           ${fmt.number(week.totalKwh, 1)} ${fmt.t("card.units.kilowattHours")} | <span class="week-label">${fmt.t("card.labels.avg")}</span> ${fmt.number(week.avgKwh, 1)} ${fmt.t("card.units.kilowattHoursPerDay")}
         </div>
       ` : A}
+      ${hasThresholds ? renderThresholds(lowThresholdKwh, highThresholdKwh, fmt) : A}
     </div>
   `;
 }
@@ -11727,7 +11878,7 @@ function renderHeader(hass, cfg, fmt) {
 
 // Chart geometry, in viewBox units.
 const WIDTH = 340;
-const HEIGHT = 176;
+const HEIGHT = 158;
 const LEFT = 26;
 const RIGHT = 332;
 const TOP = 8;
@@ -11787,29 +11938,39 @@ function renderChart(days, selected, fmt, onSelect) {
     const yOf = (value) => BOTTOM - (value / top) * (BOTTOM - TOP);
     const ticks = Array.from({ length: top / step + 1 }, (_, i) => i * step);
     return b `
-    <svg class="history-chart" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img"
-         aria-label=${fmt.t("card.history.title")}>
-      ${ticks.map((value) => w `
-        <line class="history-grid" x1=${LEFT} x2=${RIGHT} y1=${yOf(value)} y2=${yOf(value)}></line>
-        <text class="history-axis" x=${LEFT - 6} y=${yOf(value) + 3.5} text-anchor="end">${fmt.number(value, 0)}</text>
-      `)}
-      ${gapShading(days, xOf, yOf)}
-      <path class="history-forecast" d=${linePath(days.map((d) => d.forecastKwh), xOf, yOf)}></path>
-      <path class="history-actual" d=${linePath(days.map((d) => d.actualKwh), xOf, yOf)}></path>
-      ${days.map((day, i) => w `
-        ${day.forecastKwh === null ? A : w `<circle class="history-dot-forecast" cx=${xOf(i)} cy=${yOf(day.forecastKwh)} r="2.8"></circle>`}
-        ${day.actualKwh === null ? A : w `<circle class="history-dot-actual" cx=${xOf(i)} cy=${yOf(day.actualKwh)} r="3.4"></circle>`}
-        <text class="history-axis ${i === selected ? "selected" : ""}" x=${xOf(i)} y=${HEIGHT - 8} text-anchor="middle">${fmt.dayLabel({ dayIndex: 3, date: day.date })}</text>
-        <rect
-          class="history-hit ${i === selected ? "selected" : ""}"
-          x=${xOf(i) - spacing / 2} y="0" width=${spacing} height=${HEIGHT - 4} rx="6"
-          tabindex="0" role="button"
-          aria-label=${fmt.dayLabel({ dayIndex: 3, date: day.date })}
-          @click=${() => onSelect(i)}
-          @keydown=${(e) => (e.key === "Enter" || e.key === " ") && onSelect(i)}
-        ></rect>
-      `)}
-    </svg>
+    <div class="history-plot">
+      <svg class="history-chart" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img"
+           aria-label=${fmt.t("card.history.title")}>
+        ${ticks.map((value) => w `
+          <line class="history-grid" x1=${LEFT} x2=${RIGHT} y1=${yOf(value)} y2=${yOf(value)}></line>
+          <text class="history-axis" x=${LEFT - 6} y=${yOf(value) + 3.5} text-anchor="end">${fmt.number(value, 0)}</text>
+        `)}
+        ${gapShading(days, xOf, yOf)}
+        <path class="history-forecast" d=${linePath(days.map((d) => d.forecastKwh), xOf, yOf)}></path>
+        <path class="history-actual" d=${linePath(days.map((d) => d.actualKwh), xOf, yOf)}></path>
+        ${days.map((day, i) => w `
+          ${day.forecastKwh === null ? A : w `<circle class="history-dot-forecast" cx=${xOf(i)} cy=${yOf(day.forecastKwh)} r="2.8"></circle>`}
+          ${day.actualKwh === null ? A : w `<circle class="history-dot-actual" cx=${xOf(i)} cy=${yOf(day.actualKwh)} r="3.4"></circle>`}
+          <rect
+            class="history-hit ${i === selected ? "selected" : ""}"
+            x=${xOf(i) - spacing / 2} y="0" width=${spacing} height=${HEIGHT} rx="6"
+            tabindex="0" role="button"
+            aria-label=${fmt.dayLabel({ dayIndex: 3, date: day.date })}
+            @click=${() => onSelect(i)}
+            @keydown=${(e) => (e.key === "Enter" || e.key === " ") && onSelect(i)}
+          ></rect>
+        `)}
+      </svg>
+      <div class="history-days">
+        ${days.map((day, i) => b `
+          <span
+            class="day-name ${i === selected ? "selected" : ""}"
+            style="left:${((xOf(i) / WIDTH) * 100).toFixed(2)}%"
+            @click=${() => onSelect(i)}
+          >${fmt.dayLabel({ dayIndex: 3, date: day.date })}</span>
+        `)}
+      </div>
+    </div>
   `;
 }
 function renderScore(score, fmt) {
@@ -12764,12 +12925,34 @@ const historyStyles = i$3 `
     color: var(--secondary-text-color);
   }
 
+  .history-plot {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
   .history-chart {
     display: block;
     width: 100%;
-    max-width: 520px;
     height: auto;
-    margin: 0 auto;
+  }
+
+  /* Day labels are HTML rather than SVG text so they reuse .day-name from the
+     daily view, and share its size, scaling and font_size setting. */
+  .history-days {
+    position: relative;
+    height: calc(var(--sfc-font-size, var(--sfc-day-name-font-size-default)) * 1.4);
+  }
+
+  .history-days .day-name {
+    position: absolute;
+    top: 0;
+    translate: -50% 0;
+    cursor: pointer;
+  }
+
+  .history-days .day-name.selected {
+    font-weight: 700;
   }
 
   .history-grid {
@@ -12781,11 +12964,6 @@ const historyStyles = i$3 `
     fill: var(--secondary-text-color);
     font-size: 10px;
     font-variant-numeric: tabular-nums;
-  }
-
-  .history-axis.selected {
-    fill: var(--primary-text-color);
-    font-weight: 700;
   }
 
   .history-forecast,

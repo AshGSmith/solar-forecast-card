@@ -22,6 +22,8 @@
       "left": "SISA:",
       "week": "MINGGU:",
       "avg": "RATA2:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "prakiraan",

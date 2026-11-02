@@ -248,6 +248,8 @@ Bar colours change based on each day's forecast total. When neither threshold is
 | `show_high_threshold_zone` | boolean | no | `false` | Tint the bar track green above the current high threshold |
 | `threshold_zone_opacity` | number | no | `15` | Opacity of the threshold tints as a percentage, from 5 to 100. Lower values are more transparent |
 
+When a threshold is set, the daily view shows its current value in the top right of the header, below the weekly total. This is the value in use, so it follows a threshold sensor when one is set. It needs `show_header` to be on.
+
 ##### Threshold sensors
 
 Use a threshold sensor when the value should change over time, such as a helper you adjust or a seasonal template sensor. The bars and tints update as soon as the sensor changes.

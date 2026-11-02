@@ -22,6 +22,8 @@
       "left": "OOR:",
       "week": "WEEK:",
       "avg": "GEM:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totaal",
       "p10": "P10",
       "forecast": "voorspelling",

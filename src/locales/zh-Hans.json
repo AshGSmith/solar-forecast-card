@@ -22,6 +22,8 @@
       "left": "剩余:",
       "week": "本周:",
       "avg": "平均:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "总计",
       "p10": "P10",
       "forecast": "预测",

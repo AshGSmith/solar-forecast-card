@@ -9,7 +9,7 @@ import type { Formatter } from "../format.js";
 
 // Chart geometry, in viewBox units.
 const WIDTH = 340;
-const HEIGHT = 176;
+const HEIGHT = 158;
 const LEFT = 26;
 const RIGHT = 332;
 const TOP = 8;
@@ -83,29 +83,39 @@ function renderChart(
   const ticks = Array.from({ length: top / step + 1 }, (_, i) => i * step);
 
   return html`
-    <svg class="history-chart" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img"
-         aria-label=${fmt.t("card.history.title")}>
-      ${ticks.map((value) => svg`
-        <line class="history-grid" x1=${LEFT} x2=${RIGHT} y1=${yOf(value)} y2=${yOf(value)}></line>
-        <text class="history-axis" x=${LEFT - 6} y=${yOf(value) + 3.5} text-anchor="end">${fmt.number(value, 0)}</text>
-      `)}
-      ${gapShading(days, xOf, yOf)}
-      <path class="history-forecast" d=${linePath(days.map((d) => d.forecastKwh), xOf, yOf)}></path>
-      <path class="history-actual" d=${linePath(days.map((d) => d.actualKwh), xOf, yOf)}></path>
-      ${days.map((day, i) => svg`
-        ${day.forecastKwh === null ? nothing : svg`<circle class="history-dot-forecast" cx=${xOf(i)} cy=${yOf(day.forecastKwh)} r="2.8"></circle>`}
-        ${day.actualKwh === null ? nothing : svg`<circle class="history-dot-actual" cx=${xOf(i)} cy=${yOf(day.actualKwh)} r="3.4"></circle>`}
-        <text class="history-axis ${i === selected ? "selected" : ""}" x=${xOf(i)} y=${HEIGHT - 8} text-anchor="middle">${fmt.dayLabel({ dayIndex: 3, date: day.date })}</text>
-        <rect
-          class="history-hit ${i === selected ? "selected" : ""}"
-          x=${xOf(i) - spacing / 2} y="0" width=${spacing} height=${HEIGHT - 4} rx="6"
-          tabindex="0" role="button"
-          aria-label=${fmt.dayLabel({ dayIndex: 3, date: day.date })}
-          @click=${() => onSelect(i)}
-          @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && onSelect(i)}
-        ></rect>
-      `)}
-    </svg>
+    <div class="history-plot">
+      <svg class="history-chart" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img"
+           aria-label=${fmt.t("card.history.title")}>
+        ${ticks.map((value) => svg`
+          <line class="history-grid" x1=${LEFT} x2=${RIGHT} y1=${yOf(value)} y2=${yOf(value)}></line>
+          <text class="history-axis" x=${LEFT - 6} y=${yOf(value) + 3.5} text-anchor="end">${fmt.number(value, 0)}</text>
+        `)}
+        ${gapShading(days, xOf, yOf)}
+        <path class="history-forecast" d=${linePath(days.map((d) => d.forecastKwh), xOf, yOf)}></path>
+        <path class="history-actual" d=${linePath(days.map((d) => d.actualKwh), xOf, yOf)}></path>
+        ${days.map((day, i) => svg`
+          ${day.forecastKwh === null ? nothing : svg`<circle class="history-dot-forecast" cx=${xOf(i)} cy=${yOf(day.forecastKwh)} r="2.8"></circle>`}
+          ${day.actualKwh === null ? nothing : svg`<circle class="history-dot-actual" cx=${xOf(i)} cy=${yOf(day.actualKwh)} r="3.4"></circle>`}
+          <rect
+            class="history-hit ${i === selected ? "selected" : ""}"
+            x=${xOf(i) - spacing / 2} y="0" width=${spacing} height=${HEIGHT} rx="6"
+            tabindex="0" role="button"
+            aria-label=${fmt.dayLabel({ dayIndex: 3, date: day.date })}
+            @click=${() => onSelect(i)}
+            @keydown=${(e: KeyboardEvent) => (e.key === "Enter" || e.key === " ") && onSelect(i)}
+          ></rect>
+        `)}
+      </svg>
+      <div class="history-days">
+        ${days.map((day, i) => html`
+          <span
+            class="day-name ${i === selected ? "selected" : ""}"
+            style="left:${((xOf(i) / WIDTH) * 100).toFixed(2)}%"
+            @click=${() => onSelect(i)}
+          >${fmt.dayLabel({ dayIndex: 3, date: day.date })}</span>
+        `)}
+      </div>
+    </div>
   `;
 }
 

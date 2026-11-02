@@ -22,6 +22,8 @@
       "left": "ATLICIS:",
       "week": "NEDĒĻA:",
       "avg": "VID.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Kopā",
       "p10": "P10",
       "forecast": "prognoze",
