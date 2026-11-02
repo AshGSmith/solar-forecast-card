@@ -4,6 +4,15 @@ export interface ActualArrayEntry {
   label: string;
 }
 
+export type IntegrationType =
+  | "volcast"
+  | "solcast"
+  | "forecast_solar"
+  | "open_meteo_solar_forecast"
+  | "manual";
+
+export type MainView = "daily" | "hourly" | "history";
+
 export interface SolarForecastCardConfig {
   type: string;
   title?: string;
@@ -13,7 +22,7 @@ export interface SolarForecastCardConfig {
   display_estimate10: boolean;
   device_id?: string;
   /** Set automatically when a device is selected; not exposed in UI. */
-  integration_type: "volcast" | "solcast" | "forecast_solar" | "open_meteo_solar_forecast" | "manual";
+  integration_type: IntegrationType;
   forecast_entities: [string, string, string, string, string, string, string];
   live_power_entity?: string;
   today_actual_entity?: string;
@@ -29,14 +38,22 @@ export interface SolarForecastCardConfig {
   date_format?: "DD/MM" | "MM/DD";
   /** Legacy config key. Time labels now use Home Assistant locale formatting. */
   time_format?: "24h" | "12h";
-  /** When true, today's hourly forecast chart replaces the daily bar grid on the main card. */
-  show_hourly_as_main: boolean;
+  /** What the main card shows: daily bars, today's hourly chart, or the last 7 days of forecast against actual. */
+  main_view: MainView;
+  /** Legacy config key, read by normalizeConfig. true is the same as main_view: "hourly". */
+  show_hourly_as_main?: boolean;
   inverter_max_kw?: number;
   solar_max_kwp?: number;
   low_threshold?: number;
   high_threshold?: number;
   low_threshold_entity?: string,
   high_threshold_entity?: string;
+  /** When true, tints the daily bar track below the low threshold. */
+  show_low_threshold_zone: boolean;
+  /** When true, tints the daily bar track above the high threshold. */
+  show_high_threshold_zone: boolean;
+  /** Opacity of the threshold tints as a percentage (5–100, step 5). Undefined = 15. */
+  threshold_zone_opacity?: number;
   /** Scale factor for card text on desktop/wide viewports (100–150, step 5). Undefined = 100 (no change). Only applied at ≥ 768 px viewport width. */
   desktop_text_scale?: number;
   /** Optional daily forecast value/day label font size in pixels. Undefined = CSS/default styling. */
@@ -74,6 +91,8 @@ export interface HomeAssistant {
     time_format?: string;
     [key: string]: unknown;
   };
+  callApi?<T>(method: string, path: string): Promise<T>;
+  callWS?<T>(message: Record<string, unknown>): Promise<T>;
 }
 
 export interface HassEntity {

@@ -63,10 +63,9 @@ import vi from "./vi.json";
 import zh_Hans from "./zh-Hans.json";
 import zh_Hant from "./zh-Hant.json";
 
-export type LocaleKey = "af" | "ar" | "bg" | "bn" | "bs" | "ca" | "cs" | "cy" | "da" | "de" | "el" | "en" | "en-GB" | "eo" | "es" | "es-419" | "et" | "eu" | "fa" | "fi" | "fy" | "fr" | "ga" | "gl" | "gsw" | "he" | "hi" | "hr" | "hu" | "hy" | "id" | "it" | "is" | "ja" | "ka" | "ko" | "lb" | "lt" | "lv" | "mk" | "ml" | "nl" | "nb" | "nn" | "pl" | "pt" | "pt-BR" | "ro" | "ru" | "sk" | "sl" | "sr" | "sr-Latn" | "sv" | "sq" | "ta" | "te" | "th" | "tr" | "uk" | "ur" | "vi" | "zh-Hans" | "zh-Hant";
 export type LocaleTree = Record<string, unknown>;
 
-export const LOCALES: Record<LocaleKey, LocaleTree> = {
+export const LOCALES = {
   "af": af,
   "ar": ar,
   "bg": bg,
@@ -131,7 +130,8 @@ export const LOCALES: Record<LocaleKey, LocaleTree> = {
   "vi": vi,
   "zh-Hans": zh_Hans,
   "zh-Hant": zh_Hant,
-};
+} satisfies Record<string, LocaleTree>;
 
+export type LocaleKey = keyof typeof LOCALES;
 
-export const LANGUAGE_OPTIONS: LocaleKey[] = ["af", "ar", "bg", "bn", "bs", "ca", "cs", "cy", "da", "de", "el", "en", "en-GB", "eo", "es", "es-419", "et", "eu", "fa", "fi", "fy", "fr", "ga", "gl", "gsw", "he", "hi", "hr", "hu", "hy", "id", "it", "is", "ja", "ka", "ko", "lb", "lt", "lv", "mk", "ml", "nl", "nb", "nn", "pl", "pt", "pt-BR", "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "sq", "ta", "te", "th", "tr", "uk", "ur", "vi", "zh-Hans", "zh-Hant"];
+export const LANGUAGE_OPTIONS = Object.keys(LOCALES) as LocaleKey[];
