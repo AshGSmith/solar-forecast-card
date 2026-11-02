@@ -33,7 +33,7 @@ export function normalizeConfig(
       : undefined,
     date_format:          raw.date_format,
     time_format:          raw.time_format,
-    show_hourly_as_main:  raw.show_hourly_as_main ?? false,
+    main_view:            raw.main_view ?? (raw.show_hourly_as_main ? "hourly" : "daily"),
     inverter_max_kw:      raw.inverter_max_kw,
     solar_max_kwp:        raw.solar_max_kwp,
     low_threshold:        raw.low_threshold,

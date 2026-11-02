@@ -11,6 +11,8 @@ export type IntegrationType =
   | "open_meteo_solar_forecast"
   | "manual";
 
+export type MainView = "daily" | "hourly" | "history";
+
 export interface SolarForecastCardConfig {
   type: string;
   title?: string;
@@ -36,8 +38,10 @@ export interface SolarForecastCardConfig {
   date_format?: "DD/MM" | "MM/DD";
   /** Legacy config key. Time labels now use Home Assistant locale formatting. */
   time_format?: "24h" | "12h";
-  /** When true, today's hourly forecast chart replaces the daily bar grid on the main card. */
-  show_hourly_as_main: boolean;
+  /** What the main card shows: daily bars, today's hourly chart, or the last 7 days of forecast against actual. */
+  main_view: MainView;
+  /** Legacy config key, read by normalizeConfig. true is the same as main_view: "hourly". */
+  show_hourly_as_main?: boolean;
   inverter_max_kw?: number;
   solar_max_kwp?: number;
   low_threshold?: number;

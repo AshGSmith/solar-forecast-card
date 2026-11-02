@@ -1,8 +1,51 @@
 import type { HomeAssistant } from "../types.js";
 
-interface HistEntry {
+export interface HistEntry {
+  entity_id?: string;
   state: string;
   last_changed: string;
+}
+
+/**
+ * Read recorder history for the given entities, keyed by entity_id.
+ * Returns null when the history API is unavailable or the request fails.
+ */
+export async function queryHistory(
+  hass: HomeAssistant,
+  entityIds: string[],
+  start: Date,
+  end: Date
+): Promise<Map<string, HistEntry[]> | null> {
+  if (!hass.callApi) return null;
+
+  try {
+    // significant_changes_only=false: return every recorded state change,
+    // not just those that cross a threshold — essential for cumulative sensors.
+    const path =
+      `history/period/${start.toISOString()}` +
+      `?filter_entity_id=${encodeURIComponent(entityIds.join(","))}` +
+      `&end_time=${encodeURIComponent(end.toISOString())}` +
+      `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
+
+    // HA history API returns: Array<Array<{state, last_changed}>>
+    // Outer array is per-entity; inner array is chronological state entries.
+    // Only the first entry of each inner array carries the entity_id, and
+    // entities with no history are left out, so position can't be relied on.
+    const result = await hass.callApi<HistEntry[][]>("GET", path);
+    if (!Array.isArray(result)) return null;
+
+    const history = new Map<string, HistEntry[]>();
+    for (const entries of result) {
+      if (!Array.isArray(entries) || entries.length === 0) continue;
+      const entityId = entries[0]?.entity_id ?? (entityIds.length === 1 ? entityIds[0] : undefined);
+      if (entityId) history.set(entityId, entries);
+    }
+    return history;
+
+  } catch (err) {
+    console.debug("[solar-forecast-card] history fetch failed:", err);
+    return null;
+  }
 }
 
 /**
@@ -36,26 +79,13 @@ export async function fetchActualHourly(
   )?.toLowerCase();
   const isWh = unit === "wh";
 
+  const history = await queryHistory(hass, [entityId], startOfDay, now);
+  const recorded = history?.get(entityId);
+  if (!recorded) return new Map();
+
   try {
-    // Build the history/period REST path.
-    // significant_changes_only=false: return every recorded state change,
-    // not just those that cross a threshold — essential for cumulative sensors.
-    const path =
-      `history/period/${startOfDay.toISOString()}` +
-      `?filter_entity_id=${encodeURIComponent(entityId)}` +
-      `&end_time=${encodeURIComponent(now.toISOString())}` +
-      `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
-
-    // HA history API returns: Array<Array<{state, last_changed}>>
-    // Outer array is per-entity; inner array is chronological state entries.
-    const result = await hass.callApi<HistEntry[][]>("GET", path);
-
-    if (!Array.isArray(result) || result.length === 0 || !Array.isArray(result[0])) {
-      return new Map();
-    }
-
     // Normalise: keep only entries with finite numeric state, sorted ascending.
-    const entries: HistEntry[] = result[0]
+    const entries: HistEntry[] = recorded
       .filter((e) => e && typeof e.last_changed === "string" && isFinite(parseFloat(e.state)))
       .sort((a, b) => (a.last_changed < b.last_changed ? -1 : a.last_changed > b.last_changed ? 1 : 0));
 

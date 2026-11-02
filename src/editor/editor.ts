@@ -12,10 +12,10 @@ import { localize, resolveLanguage } from "../localize.js";
 import { ENTITY_FIELDS, fromFormData, toFormData, type FormData } from "./form-data.js";
 import {
   integrationSchema,
+  mainViewSchema,
   SCHEMA_DEVICE,
   SCHEMA_DISPLAY_BAR_WIDTH,
   SCHEMA_DISPLAY_FONT_SIZE,
-  SCHEMA_DISPLAY_HOURLY,
   SCHEMA_DISPLAY_TEXT_SCALE,
   SCHEMA_ENERGY_PROVIDER,
   SCHEMA_FORECAST,
@@ -378,13 +378,13 @@ export class SolarForecastCardEditor extends LitElement {
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_DISPLAY_HOURLY}
+          .schema=${mainViewSchema((key) => this._t(key))}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          ${this._t("editor.helpers.hourlyAsMain")}
+          ${this._t("editor.helpers.mainView")}
         </p>
       </ha-expansion-panel>
     `;

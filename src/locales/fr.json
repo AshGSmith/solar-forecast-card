@@ -43,6 +43,19 @@
         "actualShort": "Réel"
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -76,7 +89,7 @@
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -95,7 +108,10 @@
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -114,7 +130,7 @@
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },

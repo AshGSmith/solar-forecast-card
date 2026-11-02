@@ -56,7 +56,7 @@ title: Solar Forecast          # optional — defaults to "Solar Forecast"
 icon: mdi:solar-power          # optional — defaults to mdi:solar-power
 show_header: true              # optional — defaults to true
 display_estimate10: false      # optional — Solcast only, shows P10 forecast values
-show_hourly_as_main: false     # optional — show today's hourly forecast as the main card view
+main_view: daily               # optional — daily, hourly or history
 device_id: <your_device_id>    # optional — auto-detects forecast entities
 forecast_entities:
   - sensor.forecast_today
@@ -106,7 +106,11 @@ For today's forecast, the hourly popup can also compare actual generation agains
 - The Actual value is softly coloured red, amber, or green depending on whether it is below, matching, or above the forecast value.
 - The current hour is highlighted without changing row layout or value alignment.
 
-Set `show_hourly_as_main: true` to display today's hourly forecast directly on the main card instead of the 7-day daily forecast bars.
+Set `main_view: hourly` to display today's hourly forecast directly on the main card instead of the 7-day daily forecast bars. The older `show_hourly_as_main: true` setting still works.
+
+Set `main_view: history` to compare the last 7 full days of forecast and actual generation. It shows an accuracy score, the average daily miss, whether generation ran above or below the forecast, and a chart you can tap for each day's numbers.
+
+History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors must be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00, and a day's actual is that sensor's highest value, so actual sensors need to reset daily.
 
 #### Device & Entities
 
@@ -171,7 +175,7 @@ actual_arrays:
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
-| `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
+| `main_view` | string | no | `daily` | What the main card shows: `daily`, `hourly` or `history` |
 | `desktop_text_scale` | number | no | `100` | Scales card text on wider screens only. Accepts values from 100 to 150 in the visual editor; mobile sizing is unchanged |
 | `font_size` | number | no | — | Optional daily forecast value and day/date label size in pixels. Leave unset to use CSS/default styling |
 | `bar_width` | number | no | — | Optional daily forecast bar width in pixels. Leave unset to use CSS/default styling |
@@ -242,6 +246,10 @@ Available variables:
 | `--sfc-popup-border-radius` | Popup corner radius |
 | `--sfc-popup-text-color` | Popup primary text colour |
 | `--sfc-popup-accent-color` | Popup accent colour |
+| `--sfc-history-forecast-color` | History view forecast line |
+| `--sfc-history-actual-color` | History view actual line |
+| `--sfc-history-over-color` | History view colour when generation beat the forecast |
+| `--sfc-history-under-color` | History view colour when generation fell short |
 
 ## Development
 

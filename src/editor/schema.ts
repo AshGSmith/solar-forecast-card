@@ -76,9 +76,24 @@ export const SCHEMA_DISPLAY_BAR_WIDTH: HaFormSchema[] = [
   },
 ];
 
-export const SCHEMA_DISPLAY_HOURLY: HaFormSchema[] = [
-  { name: "show_hourly_as_main", selector: { boolean: {} } },
-];
+type Translate = (key: string) => string;
+
+export function mainViewSchema(t: Translate): HaFormSchema[] {
+  return [
+    {
+      name: "main_view",
+      selector: {
+        select: {
+          options: [
+            { value: "daily",   label: t("editor.options.mainViewDaily") },
+            { value: "hourly",  label: t("editor.options.mainViewHourly") },
+            { value: "history", label: t("editor.options.mainViewHistory") },
+          ],
+        },
+      },
+    },
+  ];
+}
 
 export const SCHEMA_ENERGY_PROVIDER: HaFormSchema[] = [
   { name: "export_rate_entity", selector: { entity: {} } },
@@ -103,8 +118,6 @@ export const SCHEMA_THRESHOLDS: HaFormSchema[] = [
     },
   },
 ];
-
-type Translate = (key: string) => string;
 
 export function integrationSchema(t: Translate): HaFormSchema[] {
   return [

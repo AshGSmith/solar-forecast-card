@@ -226,6 +226,20 @@ classDiagram
         +kwh number
     }
 
+    class HistoryDay {
+        <<data>>
+        +date Date
+        +forecastKwh number
+        +actualKwh number
+    }
+
+    class HistoryScore {
+        <<data>>
+        +accuracyPct number
+        +averageMissKwh number
+        +biasKwh number
+    }
+
     class HeaderStats {
         <<data>>
         +powerW number
@@ -240,7 +254,7 @@ classDiagram
         +integration_type IntegrationType
         +forecast_entities string[7]
         +actual_arrays ActualArrayEntry[]
-        +show_hourly_as_main boolean
+        +main_view MainView
     }
 
     LitElement <|-- SolarForecastCard
@@ -260,6 +274,8 @@ classDiagram
     SolarForecastCard --> "0..7" ForecastRow : builds each render
     SolarForecastCard ..> Formatter : creates each render
     SolarForecastCard ..> HeaderStats : via renderHeader
+    SolarForecastCard --> "0..7" HistoryDay : history view
+    HistoryDay ..> HistoryScore : scored into
     SolarForecastCard ..> SolarForecastCardEditor : getConfigElement
     SolarForecastCardEditor --> SolarForecastCardConfig
     SolarForecastCardEditor ..> AutoDetectResult : applies
@@ -288,8 +304,8 @@ sequenceDiagram
         Card-->>HA: skip
     else update needed
         Card->>Card: willUpdate()
-        opt show_hourly_as_main
-            Card->>Data: fetchActualHourly() when due
+        opt main_view is hourly or history
+            Card->>Data: fetchActualHourly() or fetchForecastHistory() when due
         end
         Card->>Card: render(), creates Formatter
         Card->>View: renderHeader()
@@ -387,6 +403,7 @@ TZ=Asia/Kolkata npm test                    # a specific timezone
 |------|--------|
 | `tests/integrations.test.ts` | Attribute selection, parsers, device auto-detection |
 | `tests/data.test.ts` | Sensor reads, rows, colour tiers, header stats, history |
+| `tests/history.test.ts` | History day totals, scoring and chart scale |
 | `tests/config.test.ts` | `normalizeConfig` and editor form data |
 | `tests/localize.test.ts` | Language resolution, translation lookup, locale table |
 | `tests/timezone.test.ts` | How each parser resolves the hour |
@@ -417,4 +434,5 @@ Commit the rebuilt `dist/solar-forecast-card.js` with your source changes, or CI
 
 ## Known limitations
 
+- **History can be a large request.** The history view loads a week of every state change for its sensors, once a day per dashboard load. A fast-updating actual sensor makes this slow, especially on phones.
 - **Solcast hours follow the browser's timezone.** Volcast and Open-Meteo use the hour written in the timestamp. Viewing the dashboard from a different timezone than the server shifts the Solcast chart and the `+1HR` and `LEFT` values.

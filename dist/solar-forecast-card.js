@@ -43,6 +43,19 @@ var af = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -76,7 +89,7 @@ var af = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -95,7 +108,10 @@ var af = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -114,7 +130,7 @@ var af = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -182,6 +198,19 @@ var ar = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -215,7 +244,7 @@ var ar = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -234,7 +263,10 @@ var ar = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -253,7 +285,7 @@ var ar = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -321,6 +353,19 @@ var bg = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -354,7 +399,7 @@ var bg = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -373,7 +418,10 @@ var bg = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -392,7 +440,7 @@ var bg = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -460,6 +508,19 @@ var bn = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -493,7 +554,7 @@ var bn = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -512,7 +573,10 @@ var bn = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -531,7 +595,7 @@ var bn = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -599,6 +663,19 @@ var bs = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -632,7 +709,7 @@ var bs = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -651,7 +728,10 @@ var bs = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -670,7 +750,7 @@ var bs = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -738,6 +818,19 @@ var ca = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -771,7 +864,7 @@ var ca = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -790,7 +883,10 @@ var ca = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -809,7 +905,7 @@ var ca = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -877,6 +973,19 @@ var cs = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -910,7 +1019,7 @@ var cs = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -929,7 +1038,10 @@ var cs = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -948,7 +1060,7 @@ var cs = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1016,6 +1128,19 @@ var cy = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1049,7 +1174,7 @@ var cy = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1068,7 +1193,10 @@ var cy = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -1087,7 +1215,7 @@ var cy = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1155,6 +1283,19 @@ var da = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1188,7 +1329,7 @@ var da = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1207,7 +1348,10 @@ var da = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -1226,7 +1370,7 @@ var da = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1294,6 +1438,19 @@ var de = {
         "actualShort": "Ist"
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1327,7 +1484,7 @@ var de = {
       "today_actual_entity": "Heutige tatsächliche Erzeugung (optional)",
       "next_hour_entity": "+1 STD Prognose (optional, überschreibt automatisch abgeleiteten Wert)",
       "remaining_today_entity": "REST / verbleibend heute (optional, überschreibt automatisch abgeleiteten Wert)",
-      "show_hourly_as_main": "Stündliche Prognose als Hauptkarte anzeigen",
+      "main_view": "Main View",
       "inverter_max_kw": "Max. Wechselrichterleistung (kW)",
       "solar_max_kwp": "Größe der Solaranlage (kWp)",
       "low_threshold": "Niedriger Schwellenwert (kWh)",
@@ -1346,7 +1503,10 @@ var de = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integrationstyp",
@@ -1365,7 +1525,7 @@ var de = {
       "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
       "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
       "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
-      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1433,6 +1593,19 @@ var el = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1466,7 +1639,7 @@ var el = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1485,7 +1658,10 @@ var el = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -1504,7 +1680,7 @@ var el = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1572,6 +1748,19 @@ var en = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1605,7 +1794,7 @@ var en = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1624,7 +1813,10 @@ var en = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -1643,7 +1835,7 @@ var en = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1711,6 +1903,19 @@ var en_GB = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1744,7 +1949,7 @@ var en_GB = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1763,7 +1968,10 @@ var en_GB = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -1782,7 +1990,7 @@ var en_GB = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1850,6 +2058,19 @@ var eo = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -1883,7 +2104,7 @@ var eo = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -1902,7 +2123,10 @@ var eo = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -1921,7 +2145,7 @@ var eo = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -1989,6 +2213,19 @@ var es = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2022,7 +2259,7 @@ var es = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2041,7 +2278,10 @@ var es = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2060,7 +2300,7 @@ var es = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2128,6 +2368,19 @@ var es_419 = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2161,7 +2414,7 @@ var es_419 = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2180,7 +2433,10 @@ var es_419 = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2199,7 +2455,7 @@ var es_419 = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2267,6 +2523,19 @@ var et = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2300,7 +2569,7 @@ var et = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2319,7 +2588,10 @@ var et = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2338,7 +2610,7 @@ var et = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2406,6 +2678,19 @@ var eu = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2439,7 +2724,7 @@ var eu = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2458,7 +2743,10 @@ var eu = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2477,7 +2765,7 @@ var eu = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2545,6 +2833,19 @@ var fa = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2578,7 +2879,7 @@ var fa = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2597,7 +2898,10 @@ var fa = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2616,7 +2920,7 @@ var fa = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2684,6 +2988,19 @@ var fi = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2717,7 +3034,7 @@ var fi = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2736,7 +3053,10 @@ var fi = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2755,7 +3075,7 @@ var fi = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2823,6 +3143,19 @@ var fy = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2856,7 +3189,7 @@ var fy = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -2875,7 +3208,10 @@ var fy = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -2894,7 +3230,7 @@ var fy = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -2962,6 +3298,19 @@ var fr = {
         "actualShort": "Réel"
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -2995,7 +3344,7 @@ var fr = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Afficher la prévision horaire comme carte principale",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3014,7 +3363,10 @@ var fr = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3033,7 +3385,7 @@ var fr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Affiche la prévision horaire directement sur la carte au lieu des barres de prévision journalière.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3101,6 +3453,19 @@ var ga = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3134,7 +3499,7 @@ var ga = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3153,7 +3518,10 @@ var ga = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3172,7 +3540,7 @@ var ga = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3240,6 +3608,19 @@ var gl = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3273,7 +3654,7 @@ var gl = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3292,7 +3673,10 @@ var gl = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3311,7 +3695,7 @@ var gl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3379,6 +3763,19 @@ var gsw = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3412,7 +3809,7 @@ var gsw = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3431,7 +3828,10 @@ var gsw = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3450,7 +3850,7 @@ var gsw = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3518,6 +3918,19 @@ var he = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3551,7 +3964,7 @@ var he = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3570,7 +3983,10 @@ var he = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3589,7 +4005,7 @@ var he = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3657,6 +4073,19 @@ var hi = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3690,7 +4119,7 @@ var hi = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3709,7 +4138,10 @@ var hi = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3728,7 +4160,7 @@ var hi = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3796,6 +4228,19 @@ var hr = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3829,7 +4274,7 @@ var hr = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3848,7 +4293,10 @@ var hr = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -3867,7 +4315,7 @@ var hr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -3935,6 +4383,19 @@ var hu = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -3968,7 +4429,7 @@ var hu = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -3987,7 +4448,10 @@ var hu = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4006,7 +4470,7 @@ var hu = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4074,6 +4538,19 @@ var hy = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4107,7 +4584,7 @@ var hy = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4126,7 +4603,10 @@ var hy = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4145,7 +4625,7 @@ var hy = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4213,6 +4693,19 @@ var id = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4246,7 +4739,7 @@ var id = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4265,7 +4758,10 @@ var id = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4284,7 +4780,7 @@ var id = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4352,6 +4848,19 @@ var it = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4385,7 +4894,7 @@ var it = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4404,7 +4913,10 @@ var it = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4423,7 +4935,7 @@ var it = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4491,6 +5003,19 @@ var is = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4524,7 +5049,7 @@ var is = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4543,7 +5068,10 @@ var is = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4562,7 +5090,7 @@ var is = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4630,6 +5158,19 @@ var ja = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4663,7 +5204,7 @@ var ja = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4682,7 +5223,10 @@ var ja = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4701,7 +5245,7 @@ var ja = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4769,6 +5313,19 @@ var ka = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4802,7 +5359,7 @@ var ka = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4821,7 +5378,10 @@ var ka = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4840,7 +5400,7 @@ var ka = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -4908,6 +5468,19 @@ var ko = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -4941,7 +5514,7 @@ var ko = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -4960,7 +5533,10 @@ var ko = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -4979,7 +5555,7 @@ var ko = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5047,6 +5623,19 @@ var lb = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5080,7 +5669,7 @@ var lb = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5099,7 +5688,10 @@ var lb = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5118,7 +5710,7 @@ var lb = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5186,6 +5778,19 @@ var lt = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5219,7 +5824,7 @@ var lt = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5238,7 +5843,10 @@ var lt = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5257,7 +5865,7 @@ var lt = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5325,6 +5933,19 @@ var lv = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5358,7 +5979,7 @@ var lv = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5377,7 +5998,10 @@ var lv = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5396,7 +6020,7 @@ var lv = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5464,6 +6088,19 @@ var mk = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5497,7 +6134,7 @@ var mk = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5516,7 +6153,10 @@ var mk = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5535,7 +6175,7 @@ var mk = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5603,6 +6243,19 @@ var ml = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5636,7 +6289,7 @@ var ml = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5655,7 +6308,10 @@ var ml = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5674,7 +6330,7 @@ var ml = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5742,6 +6398,19 @@ var nl = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5775,7 +6444,7 @@ var nl = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5794,7 +6463,10 @@ var nl = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5813,7 +6485,7 @@ var nl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -5881,6 +6553,19 @@ var nb = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -5914,7 +6599,7 @@ var nb = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -5933,7 +6618,10 @@ var nb = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -5952,7 +6640,7 @@ var nb = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6020,6 +6708,19 @@ var nn = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6053,7 +6754,7 @@ var nn = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6072,7 +6773,10 @@ var nn = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6091,7 +6795,7 @@ var nn = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6159,6 +6863,19 @@ var pl = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6192,7 +6909,7 @@ var pl = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6211,7 +6928,10 @@ var pl = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6230,7 +6950,7 @@ var pl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6298,6 +7018,19 @@ var pt = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6331,7 +7064,7 @@ var pt = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6350,7 +7083,10 @@ var pt = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6369,7 +7105,7 @@ var pt = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6437,6 +7173,19 @@ var pt_BR = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6470,7 +7219,7 @@ var pt_BR = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6489,7 +7238,10 @@ var pt_BR = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6508,7 +7260,7 @@ var pt_BR = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6576,6 +7328,19 @@ var ro = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6609,7 +7374,7 @@ var ro = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6628,7 +7393,10 @@ var ro = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6647,7 +7415,7 @@ var ro = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6715,6 +7483,19 @@ var ru = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6748,7 +7529,7 @@ var ru = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6767,7 +7548,10 @@ var ru = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6786,7 +7570,7 @@ var ru = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6854,6 +7638,19 @@ var sk = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -6887,7 +7684,7 @@ var sk = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -6906,7 +7703,10 @@ var sk = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -6925,7 +7725,7 @@ var sk = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -6993,6 +7793,19 @@ var sl = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7026,7 +7839,7 @@ var sl = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7045,7 +7858,10 @@ var sl = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7064,7 +7880,7 @@ var sl = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7132,6 +7948,19 @@ var sr = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7165,7 +7994,7 @@ var sr = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7184,7 +8013,10 @@ var sr = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7203,7 +8035,7 @@ var sr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7271,6 +8103,19 @@ var sr_Latn = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7304,7 +8149,7 @@ var sr_Latn = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7323,7 +8168,10 @@ var sr_Latn = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7342,7 +8190,7 @@ var sr_Latn = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7410,6 +8258,19 @@ var sv = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7443,7 +8304,7 @@ var sv = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7462,7 +8323,10 @@ var sv = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7481,7 +8345,7 @@ var sv = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7549,6 +8413,19 @@ var sq = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7582,7 +8459,7 @@ var sq = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7601,7 +8478,10 @@ var sq = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7620,7 +8500,7 @@ var sq = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7688,6 +8568,19 @@ var ta = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7721,7 +8614,7 @@ var ta = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7740,7 +8633,10 @@ var ta = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7759,7 +8655,7 @@ var ta = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7827,6 +8723,19 @@ var te = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7860,7 +8769,7 @@ var te = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -7879,7 +8788,10 @@ var te = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -7898,7 +8810,7 @@ var te = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -7966,6 +8878,19 @@ var th = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -7999,7 +8924,7 @@ var th = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8018,7 +8943,10 @@ var th = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8037,7 +8965,7 @@ var th = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -8105,6 +9033,19 @@ var tr = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -8138,7 +9079,7 @@ var tr = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8157,7 +9098,10 @@ var tr = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8176,7 +9120,7 @@ var tr = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -8244,6 +9188,19 @@ var uk = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -8277,7 +9234,7 @@ var uk = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8296,7 +9253,10 @@ var uk = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8315,7 +9275,7 @@ var uk = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -8383,6 +9343,19 @@ var ur = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -8416,7 +9389,7 @@ var ur = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8435,7 +9408,10 @@ var ur = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8454,7 +9430,7 @@ var ur = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -8522,6 +9498,19 @@ var vi = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -8555,7 +9544,7 @@ var vi = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8574,7 +9563,10 @@ var vi = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8593,7 +9585,7 @@ var vi = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -8661,6 +9653,19 @@ var zh_Hans = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -8694,7 +9699,7 @@ var zh_Hans = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8713,7 +9718,10 @@ var zh_Hans = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8732,7 +9740,7 @@ var zh_Hans = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -8800,6 +9808,19 @@ var zh_Hant = {
         "actualShort": "Act."
       }
     },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+    },
     "aria": {
       "dayButton": "{day} {date}"
     },
@@ -8833,7 +9854,7 @@ var zh_Hant = {
       "today_actual_entity": "Today's actual generation (optional)",
       "next_hour_entity": "+1HR forecast (optional, overrides auto-derived value)",
       "remaining_today_entity": "LEFT / remaining today (optional, overrides auto-derived value)",
-      "show_hourly_as_main": "Show Hourly Forecast as Main Card",
+      "main_view": "Main View",
       "inverter_max_kw": "Inverter max output (kW)",
       "solar_max_kwp": "Solar array size (kWp)",
       "low_threshold": "Low threshold (kWh)",
@@ -8852,7 +9873,10 @@ var zh_Hant = {
       "solcast": "Solcast",
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
-      "openMeteo": "Open-Meteo Solar Forecast"
+      "openMeteo": "Open-Meteo Solar Forecast",
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integration Type",
@@ -8871,7 +9895,7 @@ var zh_Hant = {
       "liveData": "+1HR and LEFT are auto-detected or auto-derived where possible. Set these manually to override, or to use a custom sensor.",
       "actualArrays": "Optional: configure individual array sensors to display a stacked breakdown on today's bar. Each label is a single character shown inside its segment (e.g. N, S, E).",
       "desktopTextScale": "Desktop Text Scale: only applies on wider screens (≥ 768 px). Mobile sizing is unchanged.",
-      "hourlyAsMain": "Displays the hourly forecast view directly on the card instead of the daily forecast bars.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
@@ -9047,7 +10071,7 @@ const t$2=globalThis,e$2=t$2.ShadowRoot&&(void 0===t$2.ShadyCSS||t$2.ShadyCSS.na
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const t$1=globalThis,i$1=t=>t,s$1=t$1.trustedTypes,e=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$2=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$2,r$2=`<${n$1}>`,l=document,c=()=>l.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m=/>/g,p=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l.createTreeWalker(l,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e?e.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p):void 0!==u[3]&&(c=p):c===p?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p:'"'===u[3]?$:g):c===$||c===g?c=p:c===_||c===m?c=v:(c=p,n=void 0);const x=c===p&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$2:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$2+x):s+o$2+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$2),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$2)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$2),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$2,t+1));)d.push({type:7,index:l}),t+=o$2.length-1;}l++;}}static createElement(t,i){const s=l.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$1(t).nextSibling;i$1(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$1.litHtmlPolyfillSupport;B?.(S,k),(t$1.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
+const t$1=globalThis,i$1=t=>t,s$1=t$1.trustedTypes,e=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$2=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$2,r$2=`<${n$1}>`,l=document,c=()=>l.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m=/>/g,p=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),w=x(2),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l.createTreeWalker(l,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e?e.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p):void 0!==u[3]&&(c=p):c===p?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p:'"'===u[3]?$:g):c===$||c===g?c=p:c===_||c===m?c=v:(c=p,n=void 0);const x=c===p&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$2:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$2+x):s+o$2+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$2),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$2)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$2),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$2,t+1));)d.push({type:7,index:l}),t+=o$2.length-1;}l++;}}static createElement(t,i){const s=l.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$1(t).nextSibling;i$1(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$1.litHtmlPolyfillSupport;B?.(S,k),(t$1.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
 
 /**
  * @license
@@ -9101,7 +10125,7 @@ function normalizeConfig(raw) {
             : undefined,
         date_format: raw.date_format,
         time_format: raw.time_format,
-        show_hourly_as_main: raw.show_hourly_as_main ?? false,
+        main_view: raw.main_view ?? (raw.show_hourly_as_main ? "hourly" : "daily"),
         inverter_max_kw: raw.inverter_max_kw,
         solar_max_kwp: raw.solar_max_kwp,
         low_threshold: raw.low_threshold,
@@ -9117,6 +10141,42 @@ function normalizeConfig(raw) {
     };
 }
 
+/**
+ * Read recorder history for the given entities, keyed by entity_id.
+ * Returns null when the history API is unavailable or the request fails.
+ */
+async function queryHistory(hass, entityIds, start, end) {
+    if (!hass.callApi)
+        return null;
+    try {
+        // significant_changes_only=false: return every recorded state change,
+        // not just those that cross a threshold — essential for cumulative sensors.
+        const path = `history/period/${start.toISOString()}` +
+            `?filter_entity_id=${encodeURIComponent(entityIds.join(","))}` +
+            `&end_time=${encodeURIComponent(end.toISOString())}` +
+            `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
+        // HA history API returns: Array<Array<{state, last_changed}>>
+        // Outer array is per-entity; inner array is chronological state entries.
+        // Only the first entry of each inner array carries the entity_id, and
+        // entities with no history are left out, so position can't be relied on.
+        const result = await hass.callApi("GET", path);
+        if (!Array.isArray(result))
+            return null;
+        const history = new Map();
+        for (const entries of result) {
+            if (!Array.isArray(entries) || entries.length === 0)
+                continue;
+            const entityId = entries[0]?.entity_id ?? (entityIds.length === 1 ? entityIds[0] : undefined);
+            if (entityId)
+                history.set(entityId, entries);
+        }
+        return history;
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] history fetch failed:", err);
+        return null;
+    }
+}
 /**
  * Fetch hourly actual-generation values for today from the HA history API.
  *
@@ -9141,22 +10201,13 @@ async function fetchActualHourly(hass, entityId) {
     // normalised to kWh consistently with the rest of the card.
     const unit = hass.states[entityId]?.attributes?.unit_of_measurement?.toLowerCase();
     const isWh = unit === "wh";
+    const history = await queryHistory(hass, [entityId], startOfDay, now);
+    const recorded = history?.get(entityId);
+    if (!recorded)
+        return new Map();
     try {
-        // Build the history/period REST path.
-        // significant_changes_only=false: return every recorded state change,
-        // not just those that cross a threshold — essential for cumulative sensors.
-        const path = `history/period/${startOfDay.toISOString()}` +
-            `?filter_entity_id=${encodeURIComponent(entityId)}` +
-            `&end_time=${encodeURIComponent(now.toISOString())}` +
-            `&minimal_response=true&no_attributes=true&significant_changes_only=false`;
-        // HA history API returns: Array<Array<{state, last_changed}>>
-        // Outer array is per-entity; inner array is chronological state entries.
-        const result = await hass.callApi("GET", path);
-        if (!Array.isArray(result) || result.length === 0 || !Array.isArray(result[0])) {
-            return new Map();
-        }
         // Normalise: keep only entries with finite numeric state, sorted ascending.
-        const entries = result[0]
+        const entries = recorded
             .filter((e) => e && typeof e.last_changed === "string" && isFinite(parseFloat(e.state)))
             .sort((a, b) => (a.last_changed < b.last_changed ? -1 : a.last_changed > b.last_changed ? 1 : 0));
         if (entries.length === 0)
@@ -9207,6 +10258,105 @@ async function fetchActualHourly(hass, entityId) {
     catch (err) {
         console.debug("[solar-forecast-card] actual history fetch failed:", err);
         return new Map();
+    }
+}
+
+const HISTORY_DAYS = 7;
+/** A day's forecast is the reading in place at this local hour. */
+const FORECAST_READ_HOUR = 6;
+/** Readings before this local hour are ignored, in case yesterday's total hasn't reset yet. */
+const ACTUAL_FIRST_HOUR = 1;
+function toReadings(entries, isWh) {
+    return (entries ?? [])
+        .map((e) => ({ time: Date.parse(e.last_changed), value: parseFloat(e.state) }))
+        .filter((r) => isFinite(r.time) && isFinite(r.value))
+        .map((r) => ({ time: r.time, value: isWh ? r.value / 1000 : r.value }))
+        .sort((a, b) => a.time - b.time);
+}
+function localDay(now, daysAgo, hour = 0) {
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysAgo, hour).getTime();
+}
+/** The reading in place at FORECAST_READ_HOUR, or else the day's first reading. */
+function forecastForDay(readings, now, daysAgo) {
+    const start = localDay(now, daysAgo);
+    const cutoff = localDay(now, daysAgo, FORECAST_READ_HOUR);
+    const end = localDay(now, daysAgo - 1);
+    const day = readings.filter((r) => r.time >= start && r.time < end);
+    const morning = day.filter((r) => r.time <= cutoff);
+    const reading = morning.length > 0 ? morning[morning.length - 1] : day[0];
+    return reading?.value ?? null;
+}
+/** today_actual_entity and array sensors reset daily, so a day's total is its peak. */
+function actualForDay(readings, now, daysAgo) {
+    const start = localDay(now, daysAgo, ACTUAL_FIRST_HOUR);
+    const end = localDay(now, daysAgo - 1);
+    const day = readings.filter((r) => r.time >= start && r.time < end);
+    return day.length > 0 ? Math.max(...day.map((r) => r.value)) : null;
+}
+/** The last HISTORY_DAYS full days, oldest first. Today is left out because it isn't finished. */
+function buildHistoryDays(forecast, actuals, now) {
+    const days = [];
+    for (let daysAgo = HISTORY_DAYS; daysAgo >= 1; daysAgo--) {
+        const totals = actuals
+            .map((readings) => actualForDay(readings, now, daysAgo))
+            .filter((v) => v !== null);
+        days.push({
+            date: new Date(localDay(now, daysAgo)),
+            forecastKwh: forecastForDay(forecast, now, daysAgo),
+            actualKwh: totals.length > 0 ? totals.reduce((s, v) => s + v, 0) : null,
+        });
+    }
+    return days;
+}
+/** Array sensors take precedence over today_actual_entity, as they do for the live total. */
+function actualEntities(cfg) {
+    const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
+    if (arrays.length > 0)
+        return arrays;
+    return cfg.today_actual_entity ? [cfg.today_actual_entity] : [];
+}
+function reportsWh(hass, entityId) {
+    const unit = hass.states[entityId]?.attributes?.unit_of_measurement;
+    return unit?.toLowerCase() === "wh";
+}
+/**
+ * Load the last week of forecast and actual totals from recorder history.
+ * Returns null if the request fails, so the caller can retry.
+ */
+async function fetchForecastHistory(hass, cfg) {
+    const forecastId = cfg.forecast_entities[0];
+    if (!hass || !forecastId)
+        return [];
+    const now = new Date();
+    const actualIds = actualEntities(cfg);
+    const history = await queryHistory(hass, [forecastId, ...actualIds], new Date(localDay(now, HISTORY_DAYS)), new Date(localDay(now, 0)));
+    if (!history)
+        return null;
+    return buildHistoryDays(toReadings(history.get(forecastId), reportsWh(hass, forecastId)), actualIds.map((id) => toReadings(history.get(id), reportsWh(hass, id))), now);
+}
+function scoreHistory(days) {
+    const paired = days.flatMap((d) => d.forecastKwh !== null && d.forecastKwh > 0 && d.actualKwh !== null
+        ? [{ forecast: d.forecastKwh, actual: d.actualKwh }]
+        : []);
+    if (paired.length === 0)
+        return null;
+    const average = (values) => values.reduce((s, v) => s + v, 0) / values.length;
+    const averagePctMiss = average(paired.map((d) => (Math.abs(d.actual - d.forecast) / d.forecast) * 100));
+    return {
+        accuracyPct: Math.max(100 - averagePctMiss, 0),
+        averageMissKwh: average(paired.map((d) => Math.abs(d.actual - d.forecast))),
+        biasKwh: average(paired.map((d) => d.actual - d.forecast)),
+    };
+}
+/** A round axis with at most four intervals that fits maxKwh. */
+function historyScale(maxKwh) {
+    for (let magnitude = 1;; magnitude *= 10) {
+        for (const base of [1, 2, 5]) {
+            const step = base * magnitude;
+            const intervals = Math.max(Math.ceil(maxKwh / step), 1);
+            if (intervals <= 4)
+                return { step, top: intervals * step };
+        }
     }
 }
 
@@ -9916,6 +11066,7 @@ function forecastTier(hass, cfg, kwh) {
 
 const POPUP_CLOSE_MS = 260;
 const MAIN_ACTUAL_REFRESH_MS = 60000;
+const HISTORY_RETRY_MS = 5 * 60000;
 
 const DAY_KEYS = [
     "sunday_short",
@@ -10236,6 +11387,150 @@ function renderHeader(hass, cfg, fmt) {
         ${renderExportRate(hass, cfg, fmt)}
       </div>
       ${renderLive(hass, cfg, fmt)}
+    </div>
+  `;
+}
+
+// Chart geometry, in viewBox units.
+const WIDTH = 340;
+const HEIGHT = 176;
+const LEFT = 26;
+const RIGHT = 332;
+const TOP = 8;
+const BOTTOM = 150;
+const signed = (value, fmt) => `${value >= 0 ? "+" : "−"}${fmt.number(Math.abs(value), 1)}`;
+function linePath(values, xOf, yOf) {
+    let path = "";
+    let drawing = false;
+    values.forEach((value, i) => {
+        if (value === null) {
+            drawing = false;
+            return;
+        }
+        path += `${drawing ? "L" : "M"}${xOf(i).toFixed(1)} ${yOf(value).toFixed(1)} `;
+        drawing = true;
+    });
+    return path;
+}
+function polygon(points, gain) {
+    const list = points.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+    return w `<polygon class=${gain ? "history-gain" : "history-loss"} points=${list}></polygon>`;
+}
+/** Fill the space between the lines, splitting a segment where the lines cross. */
+function gapShading(days, xOf, yOf) {
+    const shapes = [];
+    for (let i = 0; i < days.length - 1; i++) {
+        const { forecastKwh: f0, actualKwh: a0 } = days[i];
+        const { forecastKwh: f1, actualKwh: a1 } = days[i + 1];
+        if (f0 === null || a0 === null || f1 === null || a1 === null)
+            continue;
+        const d0 = a0 - f0;
+        const d1 = a1 - f1;
+        const forecastStart = [xOf(i), yOf(f0)];
+        const forecastEnd = [xOf(i + 1), yOf(f1)];
+        const actualStart = [xOf(i), yOf(a0)];
+        const actualEnd = [xOf(i + 1), yOf(a1)];
+        if (d0 * d1 >= 0) {
+            shapes.push(polygon([forecastStart, forecastEnd, actualEnd, actualStart], d0 + d1 > 0));
+        }
+        else {
+            const t = d0 / (d0 - d1);
+            const cross = [
+                forecastStart[0] + (forecastEnd[0] - forecastStart[0]) * t,
+                forecastStart[1] + (forecastEnd[1] - forecastStart[1]) * t,
+            ];
+            shapes.push(polygon([forecastStart, cross, actualStart], d0 > 0));
+            shapes.push(polygon([cross, forecastEnd, actualEnd], d1 > 0));
+        }
+    }
+    return shapes;
+}
+function renderChart(days, selected, fmt, onSelect) {
+    const peak = Math.max(...days.flatMap((d) => [d.forecastKwh ?? 0, d.actualKwh ?? 0]));
+    const { step, top } = historyScale(peak);
+    const spacing = (RIGHT - LEFT) / (days.length - 1);
+    const xOf = (i) => LEFT + i * spacing;
+    const yOf = (value) => BOTTOM - (value / top) * (BOTTOM - TOP);
+    const ticks = Array.from({ length: top / step + 1 }, (_, i) => i * step);
+    return b `
+    <svg class="history-chart" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img"
+         aria-label=${fmt.t("card.history.title")}>
+      ${ticks.map((value) => w `
+        <line class="history-grid" x1=${LEFT} x2=${RIGHT} y1=${yOf(value)} y2=${yOf(value)}></line>
+        <text class="history-axis" x=${LEFT - 6} y=${yOf(value) + 3.5} text-anchor="end">${fmt.number(value, 0)}</text>
+      `)}
+      ${gapShading(days, xOf, yOf)}
+      <path class="history-forecast" d=${linePath(days.map((d) => d.forecastKwh), xOf, yOf)}></path>
+      <path class="history-actual" d=${linePath(days.map((d) => d.actualKwh), xOf, yOf)}></path>
+      ${days.map((day, i) => w `
+        ${day.forecastKwh === null ? A : w `<circle class="history-dot-forecast" cx=${xOf(i)} cy=${yOf(day.forecastKwh)} r="2.8"></circle>`}
+        ${day.actualKwh === null ? A : w `<circle class="history-dot-actual" cx=${xOf(i)} cy=${yOf(day.actualKwh)} r="3.4"></circle>`}
+        <text class="history-axis ${i === selected ? "selected" : ""}" x=${xOf(i)} y=${HEIGHT - 8} text-anchor="middle">${fmt.dayLabel({ dayIndex: 3, date: day.date })}</text>
+        <rect
+          class="history-hit ${i === selected ? "selected" : ""}"
+          x=${xOf(i) - spacing / 2} y="0" width=${spacing} height=${HEIGHT - 4} rx="6"
+          tabindex="0" role="button"
+          aria-label=${fmt.dayLabel({ dayIndex: 3, date: day.date })}
+          @click=${() => onSelect(i)}
+          @keydown=${(e) => (e.key === "Enter" || e.key === " ") && onSelect(i)}
+        ></rect>
+      `)}
+    </svg>
+  `;
+}
+function renderScore(score, fmt) {
+    const unit = fmt.t("card.units.kilowattHours");
+    return b `
+    <div class="history-stats">
+      <div class="history-stat">
+        <strong>${fmt.number(score.accuracyPct, 0)}%</strong>
+        <span>${fmt.t("card.history.accuracy")}</span>
+      </div>
+      <div class="history-stat">
+        <strong>${fmt.number(score.averageMissKwh, 1)} ${unit}</strong>
+        <span>${fmt.t("card.history.averageMiss")}</span>
+      </div>
+      <div class="history-stat">
+        <strong class=${score.biasKwh >= 0 ? "over" : "under"}>${signed(score.biasKwh, fmt)} ${unit}</strong>
+        <span>${fmt.t("card.history.bias")}</span>
+      </div>
+    </div>
+  `;
+}
+function readout(day, fmt) {
+    const name = fmt.dayLabel({ dayIndex: 3, date: day.date });
+    if (day.forecastKwh === null)
+        return fmt.t("card.history.noForecast", { day: name });
+    const forecast = fmt.number(day.forecastKwh, 1);
+    if (day.actualKwh === null)
+        return fmt.t("card.history.noActual", { day: name, forecast });
+    return fmt.t("card.history.readout", {
+        day: name,
+        forecast,
+        actual: fmt.number(day.actualKwh, 1),
+        difference: signed(day.actualKwh - day.forecastKwh, fmt),
+    });
+}
+function renderHistory(days, selected, fmt, onSelect) {
+    if (days === null) {
+        return b `<div class="chart-no-data"><p>${fmt.t("card.history.loading")}</p></div>`;
+    }
+    if (!days.some((d) => d.forecastKwh !== null || d.actualKwh !== null)) {
+        return b `<div class="chart-no-data"><p>${fmt.t("card.history.noData")}</p></div>`;
+    }
+    const score = scoreHistory(days);
+    return b `
+    <div part="history" class="history">
+      <div class="history-head">
+        <span class="history-title">${fmt.t("card.history.title")}</span>
+        <span class="history-legend">
+          <span class="history-key forecast">${fmt.t("card.history.forecast")}</span>
+          <span class="history-key actual">${fmt.t("card.history.actual")}</span>
+        </span>
+      </div>
+      ${score ? renderScore(score, fmt) : A}
+      ${renderChart(days, selected, fmt, onSelect)}
+      <div class="history-readout">${readout(days[selected], fmt)}</div>
     </div>
   `;
 }
@@ -11043,6 +12338,180 @@ const headerStyles = i$3 `
   }
 `;
 
+const historyStyles = i$3 `
+  /* ── Forecast history view ───────────────────────────── */
+
+  .history {
+    --sfc-history-forecast: var(--sfc-history-forecast-color, var(--warning-color, #f59e0b));
+    --sfc-history-actual: var(--sfc-history-actual-color, #8b5cf6);
+    --sfc-history-over: var(--sfc-history-over-color, var(--success-color, #4caf50));
+    --sfc-history-under: var(--sfc-history-under-color, #dc5050);
+    --sfc-history-surface: var(--ha-card-background, var(--card-background-color, #fff));
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 4px 2px;
+  }
+
+  .history-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 10px;
+  }
+
+  .history-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary-text-color);
+  }
+
+  .history-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 0.7rem;
+    color: var(--secondary-text-color);
+  }
+
+  .history-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .history-key::before {
+    content: "";
+    width: 18px;
+    border-top: 2px solid var(--sfc-history-actual);
+  }
+
+  .history-key.forecast::before {
+    border-top: 2px dashed var(--sfc-history-forecast);
+  }
+
+  .history-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px 0;
+    border-top: 1px solid var(--divider-color, rgba(128, 128, 128, 0.15));
+    border-bottom: 1px solid var(--divider-color, rgba(128, 128, 128, 0.15));
+  }
+
+  .history-stat {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .history-stat strong {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary-text-color);
+  }
+
+  .history-stat strong.over {
+    color: var(--sfc-history-over);
+  }
+
+  .history-stat strong.under {
+    color: var(--sfc-history-under);
+  }
+
+  .history-stat span {
+    font-size: 0.66rem;
+    line-height: 1.25;
+    color: var(--secondary-text-color);
+  }
+
+  .history-chart {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .history-grid {
+    stroke: var(--divider-color, rgba(128, 128, 128, 0.2));
+    stroke-width: 1;
+  }
+
+  .history-axis {
+    fill: var(--secondary-text-color);
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .history-axis.selected {
+    fill: var(--primary-text-color);
+    font-weight: 700;
+  }
+
+  .history-forecast,
+  .history-actual {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .history-forecast {
+    stroke: var(--sfc-history-forecast);
+    stroke-width: 2;
+    stroke-dasharray: 5 4;
+  }
+
+  .history-actual {
+    stroke: var(--sfc-history-actual);
+    stroke-width: 2.5;
+  }
+
+  .history-gain {
+    fill: var(--sfc-history-over);
+    fill-opacity: 0.24;
+  }
+
+  .history-loss {
+    fill: var(--sfc-history-under);
+    fill-opacity: 0.24;
+  }
+
+  .history-dot-forecast {
+    fill: var(--sfc-history-surface);
+    stroke: var(--sfc-history-forecast);
+    stroke-width: 1.5;
+  }
+
+  .history-dot-actual {
+    fill: var(--sfc-history-actual);
+    stroke: var(--sfc-history-surface);
+    stroke-width: 1.5;
+  }
+
+  .history-hit {
+    fill: transparent;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .history-hit:hover,
+  .history-hit:focus-visible,
+  .history-hit.selected {
+    fill: rgba(128, 128, 128, 0.1);
+  }
+
+  .history-readout {
+    min-height: 1.4em;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary-text-color);
+  }
+`;
+
 const hourlyChartStyles = i$3 `
   /* ── Chart ───────────────────────────────────────────── */
 
@@ -11459,6 +12928,7 @@ const cardStyles = [
     dayColumnStyles,
     popupStyles,
     hourlyChartStyles,
+    historyStyles,
     desktopScaleStyles,
 ];
 
@@ -11484,6 +12954,11 @@ let SolarForecastCard = class SolarForecastCard extends i {
         this._mainActualHourly = null;
         this._mainActualRefreshInFlight = false;
         this._mainActualNextRefreshAt = 0;
+        /** Last 7 days for the history view. null = not loaded yet. */
+        this._historyDays = null;
+        /** Index into _historyDays of the day shown in the readout. */
+        this._historySelected = 6;
+        this._historyRetryAt = 0;
         this._onDocKey = (e) => {
             if (e.key === "Escape" && this._popup)
                 this._closePopup();
@@ -11521,6 +12996,9 @@ let SolarForecastCard = class SolarForecastCard extends i {
             this._popupActualHourly = null;
             this._closeTimer = setTimeout(() => { this._popup = null; }, POPUP_CLOSE_MS);
         };
+        this._selectHistoryDay = (index) => {
+            this._historySelected = index;
+        };
     }
     // ── Lovelace lifecycle ────────────────────────────────────────────────────
     static getConfigElement() {
@@ -11537,6 +13015,10 @@ let SolarForecastCard = class SolarForecastCard extends i {
             throw new Error(localize("en", "card.errors.invalidConfig"));
         this._config = normalizeConfig(config);
         this._resetMainActual();
+        this._historyDays = null;
+        this._historySelected = 6;
+        this._historyFetchKey = undefined;
+        this._historyRetryAt = 0;
         // Apply the desktop text scale as a CSS custom property on the host element.
         // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
         // @media (min-width: 768px) block so mobile sizing is never affected.
@@ -11574,7 +13056,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
     }
     // ── Update optimisation ───────────────────────────────────────────────────
     shouldUpdate(changedProps) {
-        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly"))
+        if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly") || changedProps.has("_historyDays") || changedProps.has("_historySelected"))
             return true;
         if (!this._config || !this.hass)
             return false;
@@ -11597,7 +13079,12 @@ let SolarForecastCard = class SolarForecastCard extends i {
         return watchIds.some((id) => oldHass.states[id] !== this.hass.states[id]);
     }
     willUpdate() {
-        if (this.hass && this._config?.show_hourly_as_main && this._config.forecast_entities[0]) {
+        if (!this.hass || !this._config)
+            return;
+        if (this._config.main_view === "history") {
+            this._ensureForecastHistory();
+        }
+        else if (this._config.main_view === "hourly" && this._config.forecast_entities[0]) {
             this._ensureMainActualHourly();
         }
     }
@@ -11633,7 +13120,7 @@ let SolarForecastCard = class SolarForecastCard extends i {
         fetchActualHourly(this.hass, entityId).then((map) => {
             if (this._mainActualFetchKey === refreshKey &&
                 this._mainActualDataScope === scopeKey &&
-                this._config?.show_hourly_as_main) {
+                this._config?.main_view === "hourly") {
                 // Keep the last known non-empty dataset visible if HA briefly returns an
                 // empty history response during a refresh. This prevents the inline
                 // hourly Actual column from disappearing on frequent sensor updates.
@@ -11649,6 +13136,28 @@ let SolarForecastCard = class SolarForecastCard extends i {
             }
         });
     }
+    // ── Forecast history data ─────────────────────────────────────────────────
+    /** Past days don't change, so this loads once a day plus retries after a failure. */
+    _ensureForecastHistory() {
+        const key = new Date().toDateString();
+        if (this._historyFetchKey === key && Date.now() < this._historyRetryAt)
+            return;
+        if (this._historyFetchKey === key && this._historyRetryAt === 0)
+            return;
+        this._historyFetchKey = key;
+        this._historyRetryAt = 0;
+        fetchForecastHistory(this.hass, this._config).then((days) => {
+            if (this._historyFetchKey !== key)
+                return;
+            if (days) {
+                this._historyDays = days;
+            }
+            else {
+                this._historyDays ?? (this._historyDays = []);
+                this._historyRetryAt = Date.now() + HISTORY_RETRY_MS;
+            }
+        });
+    }
     // ── Render ────────────────────────────────────────────────────────────────
     render() {
         if (!this._config)
@@ -11657,7 +13166,15 @@ let SolarForecastCard = class SolarForecastCard extends i {
         const fmt = new Formatter(this.hass);
         const header = cfg.show_header ? renderHeader(this.hass, cfg, fmt) : A;
         const rows = this.hass ? buildRows(this.hass, cfg) : [];
-        if (cfg.show_hourly_as_main) {
+        if (cfg.main_view === "history") {
+            return b `
+        <ha-card part="card">
+          ${header}
+          ${renderHistory(this._historyDays, this._historySelected, fmt, this._selectHistoryDay)}
+        </ha-card>
+      `;
+        }
+        if (cfg.main_view === "hourly") {
             return b `
         <ha-card part="card">
           ${header}
@@ -11715,6 +13232,12 @@ __decorate([
 __decorate([
     r()
 ], SolarForecastCard.prototype, "_mainActualHourly", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_historyDays", void 0);
+__decorate([
+    r()
+], SolarForecastCard.prototype, "_historySelected", void 0);
 SolarForecastCard = __decorate([
     t("solar-forecast-card")
 ], SolarForecastCard);
@@ -11742,7 +13265,7 @@ function toFormData(cfg) {
         today_actual_entity: cfg.today_actual_entity ?? "",
         next_hour_entity: cfg.next_hour_entity ?? "",
         remaining_today_entity: cfg.remaining_today_entity ?? "",
-        show_hourly_as_main: cfg.show_hourly_as_main ?? false,
+        main_view: cfg.main_view ?? "daily",
         inverter_max_kw: cfg.inverter_max_kw,
         solar_max_kwp: cfg.solar_max_kwp,
         low_threshold: cfg.low_threshold,
@@ -11793,7 +13316,7 @@ function fromFormData(data, current) {
         actual_arrays: current?.actual_arrays,
         date_format: current?.date_format,
         time_format: current?.time_format,
-        show_hourly_as_main: data.show_hourly_as_main,
+        main_view: data.main_view || "daily",
         inverter_max_kw: typeof data.inverter_max_kw === "number" ? data.inverter_max_kw : undefined,
         solar_max_kwp: typeof data.solar_max_kwp === "number" ? data.solar_max_kwp : undefined,
         low_threshold: typeof data.low_threshold === "number" ? data.low_threshold : undefined,
@@ -11869,9 +13392,22 @@ const SCHEMA_DISPLAY_BAR_WIDTH = [
         },
     },
 ];
-const SCHEMA_DISPLAY_HOURLY = [
-    { name: "show_hourly_as_main", selector: { boolean: {} } },
-];
+function mainViewSchema(t) {
+    return [
+        {
+            name: "main_view",
+            selector: {
+                select: {
+                    options: [
+                        { value: "daily", label: t("editor.options.mainViewDaily") },
+                        { value: "hourly", label: t("editor.options.mainViewHourly") },
+                        { value: "history", label: t("editor.options.mainViewHistory") },
+                    ],
+                },
+            },
+        },
+    ];
+}
 const SCHEMA_ENERGY_PROVIDER = [
     { name: "export_rate_entity", selector: { entity: {} } },
 ];
@@ -12347,13 +13883,13 @@ let SolarForecastCardEditor = class SolarForecastCardEditor extends i {
         <ha-form
           .hass=${this.hass}
           .data=${data}
-          .schema=${SCHEMA_DISPLAY_HOURLY}
+          .schema=${mainViewSchema((key) => this._t(key))}
           .computeLabel=${label}
           @value-changed=${onChange}
         ></ha-form>
         <p class="device-helper" style="margin:2px 0 6px">
           <ha-icon icon="mdi:information-outline"></ha-icon>
-          ${this._t("editor.helpers.hourlyAsMain")}
+          ${this._t("editor.helpers.mainView")}
         </p>
       </ha-expansion-panel>
     `;

@@ -1,5 +1,5 @@
 import { DEFAULT_THRESHOLD_ZONE_OPACITY } from "../config.js";
-import type { SolarForecastCardConfig } from "../types.js";
+import type { MainView, SolarForecastCardConfig } from "../types.js";
 
 // ── Flat form data (ha-form requires a plain object) ─────────────────────────
 
@@ -22,7 +22,7 @@ export interface FormData {
   next_hour_entity: string;
   remaining_today_entity: string;
   integration_type: string;
-  show_hourly_as_main: boolean;
+  main_view: string;
   inverter_max_kw: number | undefined;
   solar_max_kwp: number | undefined;
   low_threshold: number | undefined;
@@ -62,7 +62,7 @@ export function toFormData(cfg: SolarForecastCardConfig): FormData {
     today_actual_entity:    cfg.today_actual_entity    ?? "",
     next_hour_entity:       cfg.next_hour_entity       ?? "",
     remaining_today_entity: cfg.remaining_today_entity ?? "",
-    show_hourly_as_main: cfg.show_hourly_as_main ?? false,
+    main_view:           cfg.main_view ?? "daily",
     inverter_max_kw:     cfg.inverter_max_kw,
     solar_max_kwp:       cfg.solar_max_kwp,
     low_threshold:       cfg.low_threshold,
@@ -117,7 +117,7 @@ export function fromFormData(
     actual_arrays:          current?.actual_arrays,
     date_format:            current?.date_format,
     time_format:            current?.time_format,
-    show_hourly_as_main: data.show_hourly_as_main,
+    main_view: (data.main_view as MainView) || "daily",
     inverter_max_kw:    typeof data.inverter_max_kw    === "number" ? data.inverter_max_kw    : undefined,
     solar_max_kwp:      typeof data.solar_max_kwp      === "number" ? data.solar_max_kwp      : undefined,
     low_threshold:      typeof data.low_threshold      === "number" ? data.low_threshold      : undefined,

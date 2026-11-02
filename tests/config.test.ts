@@ -9,12 +9,19 @@ describe("normalizeConfig", () => {
       type: "custom:solar-forecast-card",
       show_header: true,
       display_estimate10: false,
-      show_hourly_as_main: false,
+      main_view: "daily",
       show_low_threshold_zone: false,
       show_high_threshold_zone: false,
       integration_type: "manual",
       forecast_entities: ["", "", "", "", "", "", ""],
     });
+  });
+
+  it("reads the legacy hourly setting, with main_view taking precedence", () => {
+    expect(normalizeConfig({ show_hourly_as_main: true }).main_view).toBe("hourly");
+    expect(normalizeConfig({ show_hourly_as_main: false }).main_view).toBe("daily");
+    expect(normalizeConfig({ show_hourly_as_main: true, main_view: "history" }).main_view).toBe("history");
+    expect(normalizeConfig({ show_hourly_as_main: true })).not.toHaveProperty("show_hourly_as_main");
   });
 
   it("pads and truncates forecast entities to seven", () => {

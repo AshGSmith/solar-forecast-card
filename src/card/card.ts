@@ -1,15 +1,17 @@
 import { LitElement, html, PropertyValues, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { normalizeConfig } from "../config.js";
+import { fetchForecastHistory, type HistoryDay } from "../data/forecast-history.js";
 import { fetchActualHourly } from "../data/history.js";
 import { buildRows, forecastTier, type ForecastRow } from "../data/rows.js";
 import { readHoursAttr } from "../integrations/index.js";
 import { localize, resolveLanguage } from "../localize.js";
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
-import { MAIN_ACTUAL_REFRESH_MS, POPUP_CLOSE_MS } from "./const.js";
+import { HISTORY_RETRY_MS, MAIN_ACTUAL_REFRESH_MS, POPUP_CLOSE_MS } from "./const.js";
 import { Formatter } from "./format.js";
 import { renderDayColumn } from "./render/day-column.js";
 import { renderHeader } from "./render/header.js";
+import { renderHistory } from "./render/history.js";
 import { renderMainHourly } from "./render/hourly-chart.js";
 import { renderPopup } from "./render/popup.js";
 import { cardStyles } from "./styles/index.js";
@@ -45,6 +47,13 @@ export class SolarForecastCard extends LitElement {
   private _mainActualRefreshInFlight = false;
   private _mainActualNextRefreshAt = 0;
 
+  /** Last 7 days for the history view. null = not loaded yet. */
+  @state() private _historyDays: HistoryDay[] | null = null;
+  /** Index into _historyDays of the day shown in the readout. */
+  @state() private _historySelected = 6;
+  private _historyFetchKey?: string;
+  private _historyRetryAt = 0;
+
   private _closeTimer?: ReturnType<typeof setTimeout>;
   private readonly _onDocKey = (e: KeyboardEvent) => {
     if (e.key === "Escape" && this._popup) this._closePopup();
@@ -67,6 +76,10 @@ export class SolarForecastCard extends LitElement {
     if (!config) throw new Error(localize("en", "card.errors.invalidConfig"));
     this._config = normalizeConfig(config);
     this._resetMainActual();
+    this._historyDays = null;
+    this._historySelected = 6;
+    this._historyFetchKey = undefined;
+    this._historyRetryAt = 0;
     // Apply the desktop text scale as a CSS custom property on the host element.
     // The static stylesheet uses calc(base * var(--dts-factor, 1)) inside a
     // @media (min-width: 768px) block so mobile sizing is never affected.
@@ -108,7 +121,7 @@ export class SolarForecastCard extends LitElement {
   // ── Update optimisation ───────────────────────────────────────────────────
 
   protected override shouldUpdate(changedProps: PropertyValues): boolean {
-    if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly")) return true;
+    if (changedProps.has("_config") || changedProps.has("_popup") || changedProps.has("_popupVisible") || changedProps.has("_popupActualHourly") || changedProps.has("_mainActualHourly") || changedProps.has("_historyDays") || changedProps.has("_historySelected")) return true;
     if (!this._config || !this.hass) return false;
 
     const oldHass = changedProps.get("hass") as HomeAssistant | undefined;
@@ -131,7 +144,11 @@ export class SolarForecastCard extends LitElement {
   }
 
   protected override willUpdate(): void {
-    if (this.hass && this._config?.show_hourly_as_main && this._config.forecast_entities[0]) {
+    if (!this.hass || !this._config) return;
+
+    if (this._config.main_view === "history") {
+      this._ensureForecastHistory();
+    } else if (this._config.main_view === "hourly" && this._config.forecast_entities[0]) {
       this._ensureMainActualHourly();
     }
   }
@@ -221,7 +238,7 @@ export class SolarForecastCard extends LitElement {
       if (
         this._mainActualFetchKey === refreshKey &&
         this._mainActualDataScope === scopeKey &&
-        this._config?.show_hourly_as_main
+        this._config?.main_view === "hourly"
       ) {
         // Keep the last known non-empty dataset visible if HA briefly returns an
         // empty history response during a refresh. This prevents the inline
@@ -239,6 +256,31 @@ export class SolarForecastCard extends LitElement {
     });
   }
 
+  // ── Forecast history data ─────────────────────────────────────────────────
+
+  /** Past days don't change, so this loads once a day plus retries after a failure. */
+  private _ensureForecastHistory(): void {
+    const key = new Date().toDateString();
+    if (this._historyFetchKey === key && Date.now() < this._historyRetryAt) return;
+    if (this._historyFetchKey === key && this._historyRetryAt === 0) return;
+
+    this._historyFetchKey = key;
+    this._historyRetryAt = 0;
+    fetchForecastHistory(this.hass, this._config!).then((days) => {
+      if (this._historyFetchKey !== key) return;
+      if (days) {
+        this._historyDays = days;
+      } else {
+        this._historyDays ??= [];
+        this._historyRetryAt = Date.now() + HISTORY_RETRY_MS;
+      }
+    });
+  }
+
+  private readonly _selectHistoryDay = (index: number): void => {
+    this._historySelected = index;
+  };
+
   // ── Render ────────────────────────────────────────────────────────────────
 
   protected override render() {
@@ -249,7 +291,16 @@ export class SolarForecastCard extends LitElement {
     const header = cfg.show_header ? renderHeader(this.hass, cfg, fmt) : nothing;
     const rows = this.hass ? buildRows(this.hass, cfg) : [];
 
-    if (cfg.show_hourly_as_main) {
+    if (cfg.main_view === "history") {
+      return html`
+        <ha-card part="card">
+          ${header}
+          ${renderHistory(this._historyDays, this._historySelected, fmt, this._selectHistoryDay)}
+        </ha-card>
+      `;
+    }
+
+    if (cfg.main_view === "hourly") {
       return html`
         <ha-card part="card">
           ${header}
