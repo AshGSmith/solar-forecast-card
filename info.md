@@ -4,8 +4,10 @@ A Home Assistant Lovelace custom card for displaying solar energy forecast data,
 
 ### Features
 
-- **7-day forecast bar chart** with colour-coded low/average/high thresholds
+- **7-day forecast bar chart** with colour-coded low/average/high thresholds, set by a number or a sensor
+- **Threshold tints** — optional shading on the bar tracks showing where your thresholds sit
 - **Hourly popup** — click any day for a detailed hour-by-hour breakdown
+- **Forecast history** — compare the last 7 days of forecast and actual generation, with an accuracy score
 - **Live header** — current power output, today's actual generation, next-hour forecast, remaining today
 - **Auto-mapping** — select your forecast device and entities are configured automatically
 - **Actual generation overlay** — shows today's generation against the forecast bar, with optional multi-array stacked breakdown

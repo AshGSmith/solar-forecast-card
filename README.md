@@ -81,6 +81,11 @@ solar_max_kwp: 4.2
 desktop_text_scale: 100
 low_threshold: 10
 high_threshold: 30
+low_threshold_entity: sensor.solar_low_threshold    # optional — overrides low_threshold
+high_threshold_entity: sensor.solar_high_threshold  # optional — overrides high_threshold
+show_low_threshold_zone: true                       # optional — tints the bar track below low
+show_high_threshold_zone: true                      # optional — tints the bar track above high
+threshold_zone_opacity: 15                          # optional — tint strength, 5 to 100
 ```
 
 ### Options
@@ -108,23 +113,47 @@ For today's forecast, the hourly popup can also compare actual generation agains
 
 Set `main_view: hourly` to display today's hourly forecast directly on the main card instead of the 7-day daily forecast bars. The older `show_hourly_as_main: true` setting still works.
 
-Set `main_view: history` to compare the last 7 full days of forecast and actual generation. It shows an accuracy score, the average daily miss, whether generation ran above or below the forecast, and a chart you can tap for each day's numbers.
+#### Forecast History
 
-History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors should be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00.
+Set `main_view: history`, or choose **History** under **Main View** in the card editor's **Display** section, to see how close the forecast was to what you generated over the last 7 full days. Today isn't included because it isn't finished.
 
-Actual generation comes from Home Assistant's long-term statistics when your sensor has them, which is the same data the Energy dashboard uses. This works whether the sensor resets daily or is a lifetime total, and isn't limited to recorder's 10 days. A sensor has statistics when it has a `state_class`, such as `total_increasing`.
+The view shows:
 
-The card looks for actuals in this order:
+- **Accuracy:** 100% minus the average percentage miss across the days compared.
+- **Average miss per day:** the typical size of the miss in kWh, whichever direction it went.
+- **Actual vs forecast per day:** the average difference. A positive number means you generated more than forecast.
+- **Chart:** a dashed forecast line and a solid actual line. The space between them is green where you beat the forecast and red where you fell short. Tap a day to see its numbers.
 
-1. Statistics for `actual_arrays` or `today_actual_entity`. If neither is set and `live_power_entity` is an energy sensor in kWh or Wh, that sensor is used.
-2. Statistics for the solar sources in your Energy dashboard, so `today_actual_entity` can be left empty.
-3. An estimate from hourly power statistics, using `live_power_entity`.
+The score only uses days with both a forecast and an actual, so it can cover fewer than 7 days.
+
+**Forecast data** is read from these sources in order, and each one fills days the previous source didn't have:
+
+1. Home Assistant's recorder history for the first forecast entity, using the value in place at 06:00. If there's no reading by then, the day's first reading is used.
+2. The card's own log (see below).
+3. Solcast only: past forecasts from the integration's own storage, so the line appears right away. These are Solcast's last forecast for each period, so they can look more accurate than a morning forecast. This needs a version of the Solcast integration with the `query_forecast_data` action.
+
+Other integrations need the first forecast entity to be recorded, which Home Assistant does by default for 10 days.
+
+**Actual generation** is read from these sources in order:
+
+1. Long-term statistics for `actual_arrays` or `today_actual_entity`. This is the same data the Energy dashboard uses. It works whether the sensor resets daily or is a lifetime total, and isn't limited to the recorder's 10 days. If neither option is set and `live_power_entity` is an energy sensor in kWh or Wh, that sensor is used.
+2. Long-term statistics for the solar sources in your Energy dashboard, so `today_actual_entity` can be left empty.
+3. An estimate from `live_power_entity`, adding up its hourly averages.
 4. The sensor's highest value that day from recorder history, which needs a sensor that resets daily.
 5. The card's own log.
 
-With Solcast, past forecasts also come from the integration's own storage, so the forecast line appears right away even if the recorder has nothing. These are Solcast's last forecast for each period, so they can be closer to reality than a morning forecast. Recorder and logged forecasts are used first when they exist. This needs a version of the Solcast integration with the `query_forecast_data` action.
+A sensor has long-term statistics when it has a `state_class`, such as `total_increasing`. To check, open **Developer Tools → Statistics** and search for it.
 
-The card also keeps its own 8-day log in Home Assistant's per-user storage, which fills any days the recorder doesn't have. It can only save while a dashboard containing the card is open, so open it at least once each day after sunset. A logged day counts only if the card was open after sunset, because an earlier reading would be a partial day. Each Home Assistant user has a separate log.
+**The card's own log** is saved automatically in Home Assistant's per-user storage on every view, keeping 8 days. It stores the first forecast seen each day and the highest actual seen. It can only save while a dashboard containing the card is open, so it can't fill days nobody opened. A logged actual counts only if the card was open after sunset, because an earlier reading would be a partial day. Each Home Assistant user has a separate log.
+
+**Troubleshooting:**
+
+| What you see | What to check |
+|--------------|---------------|
+| *No forecast history found* | Make sure the first forecast entity is set and recorded. Open **History** in the Home Assistant sidebar and look at that sensor. It may be listed under `exclude` in your `recorder:` configuration, or missing from an `include` list. |
+| Forecast line but no actual line | Set `today_actual_entity` to an energy sensor, or add solar to the Energy dashboard. Check the sensor appears in **Developer Tools → Statistics**. |
+| Actuals look too high or too low | Check the sensor reports energy (kWh or Wh), not power. Power-based estimates are approximate, and a lifetime total needs long-term statistics. |
+| Values appear a day out | Days follow the timezone of the device viewing the card. Compare with a device in the same timezone as Home Assistant. |
 
 #### Device & Entities
 
@@ -207,17 +236,36 @@ To change how dates and times are shown in the card, update your Home Assistant 
 
 #### Colour Thresholds
 
-Bar colours change based on each day's forecast total. When neither threshold is set all bars use the default amber colour.
+Bar colours change based on each day's forecast total. When neither threshold is set all bars use the default amber colour. A day exactly on a threshold stays amber.
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
 | `low_threshold` | number | no | — | Days forecast below this value (kWh) are shown in a soft red/coral colour |
 | `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
+| `low_threshold_entity` | string | no | — | Sensor that supplies the low threshold. Overrides `low_threshold` while it has a usable value |
+| `high_threshold_entity` | string | no | — | Sensor that supplies the high threshold. Overrides `high_threshold` while it has a usable value |
 | `show_low_threshold_zone` | boolean | no | `false` | Tint the bar track red below the current low threshold |
 | `show_high_threshold_zone` | boolean | no | `false` | Tint the bar track green above the current high threshold |
 | `threshold_zone_opacity` | number | no | `15` | Opacity of the threshold tints as a percentage, from 5 to 100. Lower values are more transparent |
 
-Threshold zones use the same scale as the bars, which is set by the week's highest forecast. A zone is hidden while its threshold is above that value.
+##### Threshold sensors
+
+Use a threshold sensor when the value should change over time, such as a helper you adjust or a seasonal template sensor. The bars and tints update as soon as the sensor changes.
+
+- The entity must be a `sensor.`, such as a template sensor. An `input_number` helper needs a template sensor in front of it.
+- Its state must be a number of 0 or more. Sensors reporting Wh are converted to kWh.
+- If the sensor is `unavailable`, `unknown`, not a number or negative, the card uses `low_threshold` or `high_threshold` instead. Setting both gives you a fallback.
+
+##### Threshold tints
+
+The tints show where your thresholds sit on the chart, without adding lines over the bars. Each one can be turned on separately under **Colour Thresholds** in the card editor.
+
+- The red tint fills the bar track from the bottom up to the low threshold.
+- The green tint fills the bar track from the high threshold up to the top.
+- Bars are drawn over the tints, so a tall bar covers the low tint. On a short bar, the tint shows how far the day is from the next threshold.
+- Tints use the same scale as the bars, which is set by the week's highest forecast. They move as the forecast changes, and a tint is hidden while its threshold is above the highest forecast.
+- Tints only appear on the daily view.
+- `threshold_zone_opacity` sets the strength of both tints. To set each colour yourself, use `--sfc-low-threshold-zone-color` and `--sfc-high-threshold-zone-color`. The opacity setting doesn't apply to custom colours, so include any transparency in the colour.
 
 ## Card-mod / CSS Customisation
 

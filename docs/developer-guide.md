@@ -437,9 +437,23 @@ npm run build
 
 Commit the rebuilt `dist/solar-forecast-card.js` with your source changes, or CI will fail.
 
-## Forecast history sources
+## Thresholds
 
-The history view combines several sources in `data/forecast-history.ts`.
+`resolveThresholds` in `data/rows.ts` is the single place thresholds are read. A sensor wins over the static value while it has a usable reading. `forecastTier` (bar colours) and `buildRows` (tints) both use it, so they can't disagree.
+
+Threshold sensors are in `watchIds` in `shouldUpdate`, so a change re-renders the card without another watched entity changing.
+
+Tints are a gradient on the existing `.bar-bg` track rather than extra elements. `renderDayColumn` sets `--sfc-low-zone-top` and `--sfc-high-zone-bottom` inline from `lowThresholdPct` and `highThresholdPct`. With them unset, both tints have zero height.
+
+The default opacity lives in two places that must match: `DEFAULT_THRESHOLD_ZONE_OPACITY` in `config.ts`, and the fallback alpha on `.bar-bg` in `card/styles/day-column.ts`.
+
+## Forecast history
+
+`SolarForecastCard` loads history from `willUpdate` once per local day, and retries after five minutes if every source fails. Past days don't change, so a sensor update doesn't trigger another request. Today is left out because it isn't finished.
+
+`scoreHistory` only compares days with both values and a forecast above zero. `historyScale` picks a round axis with at most four intervals.
+
+The view combines several sources in `data/forecast-history.ts`.
 
 Forecasts, in order:
 
@@ -449,7 +463,7 @@ Forecasts, in order:
 
 Actuals, in order:
 
-1. Long-term statistics for the configured sensors, through `queryDailyEnergy` in `data/history.ts`. The daily `change` handles daily-reset sensors and lifetime totals.
+1. Long-term statistics for the configured sensors, through `queryDailyEnergy` in `data/history.ts`. The daily `change` handles daily-reset sensors and lifetime totals. `actualEntities` also accepts an energy sensor set as `live_power_entity`.
 2. Long-term statistics for the Energy dashboard's solar sources, from `energy/get_prefs`.
 3. An estimate from power sensors, adding hourly `mean` values. Hours are added because a daily mean ignores overnight hours when an inverter is unavailable.
 4. Recorder history, using the day's peak.
@@ -459,6 +473,9 @@ The log is saved through `frontend/set_user_data`, keyed by forecast entity, at 
 
 ## Known limitations
 
+- **History days follow the browser's timezone.** Statistics are grouped by Home Assistant's timezone, so viewing from a different one can shift values by a day.
+- **Scores aren't comparable across forecast sources.** Recorder and logged forecasts are morning values, while Solcast's stored forecasts are its last for each period.
+- **Dated forecast sensors have no history.** History reads one entity for all 7 days, so sensors whose entity ID changes daily, as Volcast's can, won't line up.
 - **The card can't record in the background.** Its log only updates while a dashboard containing the card is open, and each Home Assistant user has a separate log.
 - **History can be a large request.** The history view loads a week of every state change for its sensors, once a day per dashboard load. A fast-updating actual sensor makes this slow, especially on phones.
 - **Solcast hours follow the browser's timezone.** Volcast and Open-Meteo use the hour written in the timestamp. Viewing the dashboard from a different timezone than the server shifts the Solcast chart and the `+1HR` and `LEFT` values.
