@@ -89,12 +89,45 @@ export const historyStyles = css`
     color: var(--secondary-text-color);
   }
 
+  .history-plot {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
   .history-chart {
     display: block;
     width: 100%;
-    max-width: 520px;
     height: auto;
-    margin: 0 auto;
+  }
+
+  /* Day labels are HTML rather than SVG text so they reuse .day-name and
+     .day-date from the daily view, and share their size, scaling and
+     font_size setting. Line heights and the 1px gap match .col-label. */
+  .history-days {
+    position: relative;
+    height: calc(
+      (
+        var(--sfc-font-size, var(--sfc-day-name-font-size-default)) +
+        var(--sfc-font-size, var(--sfc-day-date-font-size-default))
+      ) * 1.25 + 1px
+    );
+  }
+
+  .history-day {
+    position: absolute;
+    top: 0;
+    translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .history-day.selected .day-name {
+    font-weight: 700;
   }
 
   .history-grid {
@@ -106,11 +139,6 @@ export const historyStyles = css`
     fill: var(--secondary-text-color);
     font-size: 10px;
     font-variant-numeric: tabular-nums;
-  }
-
-  .history-axis.selected {
-    fill: var(--primary-text-color);
-    font-weight: 700;
   }
 
   .history-forecast,

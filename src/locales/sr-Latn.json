@@ -22,6 +22,8 @@
       "left": "PREOSTALO:",
       "week": "NEDELJA:",
       "avg": "PROSEK:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Ukupno",
       "p10": "P10",
       "forecast": "prognoza",

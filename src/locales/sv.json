@@ -22,6 +22,8 @@
       "left": "KVAR:",
       "week": "VECKA:",
       "avg": "SNITT:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Totalt",
       "p10": "P10",
       "forecast": "prognos",

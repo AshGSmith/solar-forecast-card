@@ -22,6 +22,8 @@
       "left": "IWWREG:",
       "week": "WOCH:",
       "avg": "DUERCH.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "Prognos",

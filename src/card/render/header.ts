@@ -27,18 +27,47 @@ function renderExportRate(
   `;
 }
 
+function renderThresholds(low: number | undefined, high: number | undefined, fmt: Formatter) {
+  const unit = fmt.t("card.units.kilowattHours");
+  return html`
+    <div class="live-week">
+      ${low !== undefined ? html`
+        <span class="week-label">${fmt.t("card.labels.low")}</span>
+        ${fmt.number(low, 1)} ${unit}
+      ` : nothing}
+      ${low !== undefined && high !== undefined ? " | " : nothing}
+      ${high !== undefined ? html`
+        <span class="week-label">${fmt.t("card.labels.high")}</span>
+        ${fmt.number(high, 1)} ${unit}
+      ` : nothing}
+    </div>
+  `;
+}
+
 function renderLive(
   hass: HomeAssistant | undefined,
   cfg: SolarForecastCardConfig,
   fmt: Formatter
 ) {
-  const { powerW, actualKwh, nextHourKwh, forecastLeftKwh, week } = computeHeaderStats(hass, cfg);
+  const {
+    powerW,
+    actualKwh,
+    nextHourKwh,
+    forecastLeftKwh,
+    week,
+    lowThresholdKwh,
+    highThresholdKwh,
+  } = computeHeaderStats(hass, cfg);
 
   const hasPower  = powerW !== null;
   const hasActual = actualKwh !== null;
   const hasForecastSummary = nextHourKwh !== null || forecastLeftKwh !== null;
 
-  if (!hasPower && !hasActual && !week && !hasForecastSummary) return nothing;
+  // Thresholds only mean something next to the daily bars they colour.
+  const hasThresholds = cfg.main_view === "daily"
+    && (lowThresholdKwh !== undefined || highThresholdKwh !== undefined);
+
+  if (!hasPower && !hasActual && !week && !hasForecastSummary && !hasThresholds) return nothing;
 
   const liveParts: string[] = [];
   if (hasPower)  liveParts.push(fmt.power(powerW));
@@ -73,6 +102,7 @@ function renderLive(
           ${fmt.number(week.totalKwh, 1)} ${fmt.t("card.units.kilowattHours")} | <span class="week-label">${fmt.t("card.labels.avg")}</span> ${fmt.number(week.avgKwh, 1)} ${fmt.t("card.units.kilowattHoursPerDay")}
         </div>
       ` : nothing}
+      ${hasThresholds ? renderThresholds(lowThresholdKwh, highThresholdKwh, fmt) : nothing}
     </div>
   `;
 }

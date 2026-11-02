@@ -22,6 +22,8 @@
       "left": "RESTANT:",
       "week": "SETMANA:",
       "avg": "MITJANA:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "previsió",

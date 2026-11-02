@@ -22,6 +22,8 @@
       "left": "LEFT:",
       "week": "WEEK:",
       "avg": "AVG:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Total",
       "p10": "P10",
       "forecast": "forecast",

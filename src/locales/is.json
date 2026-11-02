@@ -22,6 +22,8 @@
       "left": "EFTIR:",
       "week": "VIKA:",
       "avg": "MEÐALT.:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Samtals",
       "p10": "P10",
       "forecast": "spá",

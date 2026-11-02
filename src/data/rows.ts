@@ -110,7 +110,7 @@ function resolveThreshold(
     : undefined;
 }
 
-function resolveThresholds(
+export function resolveThresholds(
   hass: HomeAssistant | undefined,
   cfg: SolarForecastCardConfig
 ): { lowKwh: number | undefined; highKwh: number | undefined } {
