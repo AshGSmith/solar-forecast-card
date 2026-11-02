@@ -2,12 +2,18 @@ import { LitElement, html, PropertyValues, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { normalizeConfig } from "../config.js";
 import { fetchForecastHistory, type HistoryDay } from "../data/forecast-history.js";
+import { recordToday } from "../data/history-log.js";
 import { fetchActualHourly } from "../data/history.js";
 import { buildRows, forecastTier, type ForecastRow } from "../data/rows.js";
 import { readHoursAttr } from "../integrations/index.js";
 import { localize, resolveLanguage } from "../localize.js";
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
-import { HISTORY_RETRY_MS, MAIN_ACTUAL_REFRESH_MS, POPUP_CLOSE_MS } from "./const.js";
+import {
+  HISTORY_RECORD_INTERVAL_MS,
+  HISTORY_RETRY_MS,
+  MAIN_ACTUAL_REFRESH_MS,
+  POPUP_CLOSE_MS,
+} from "./const.js";
 import { Formatter } from "./format.js";
 import { renderDayColumn } from "./render/day-column.js";
 import { renderHeader } from "./render/header.js";
@@ -53,6 +59,7 @@ export class SolarForecastCard extends LitElement {
   @state() private _historySelected = 6;
   private _historyFetchKey?: string;
   private _historyRetryAt = 0;
+  private _historyRecordAt = 0;
 
   private _closeTimer?: ReturnType<typeof setTimeout>;
   private readonly _onDocKey = (e: KeyboardEvent) => {
@@ -137,6 +144,7 @@ export class SolarForecastCard extends LitElement {
       this._config.export_rate_entity,
       this._config.low_threshold_entity,
       this._config.high_threshold_entity,
+      "sun.sun", // A day's recorded actual counts once the sun has set
       ...(this._config.actual_arrays?.map((a) => a.entity) ?? []),
     ].filter(Boolean) as string[];
 
@@ -145,6 +153,11 @@ export class SolarForecastCard extends LitElement {
 
   protected override willUpdate(): void {
     if (!this.hass || !this._config) return;
+
+    if (Date.now() >= this._historyRecordAt) {
+      this._historyRecordAt = Date.now() + HISTORY_RECORD_INTERVAL_MS;
+      recordToday(this.hass, this._config);
+    }
 
     if (this._config.main_view === "history") {
       this._ensureForecastHistory();

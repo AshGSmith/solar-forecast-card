@@ -110,7 +110,9 @@ Set `main_view: hourly` to display today's hourly forecast directly on the main 
 
 Set `main_view: history` to compare the last 7 full days of forecast and actual generation. It shows an accuracy score, the average daily miss, whether generation ran above or below the forecast, and a chart you can tap for each day's numbers.
 
-History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors must be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00, and a day's actual is that sensor's highest value, so actual sensors need to reset daily.
+History is read from Home Assistant's recorder, so the forecast sensor for today (the first forecast entity) and your actual sensors should be recorded. Recorder keeps 10 days by default. A day's forecast is the value at 06:00, and a day's actual is that sensor's highest value, so actual sensors need to reset daily.
+
+The card also keeps its own 8-day log in Home Assistant's per-user storage, which fills any days the recorder doesn't have. It can only save while a dashboard containing the card is open, so open it at least once each day after sunset. A logged day counts only if the card was open after sunset, because an earlier reading would be a partial day. Each Home Assistant user has a separate log.
 
 #### Device & Entities
 

@@ -404,6 +404,7 @@ TZ=Asia/Kolkata npm test                    # a specific timezone
 | `tests/integrations.test.ts` | Attribute selection, parsers, device auto-detection |
 | `tests/data.test.ts` | Sensor reads, rows, colour tiers, header stats, history |
 | `tests/history.test.ts` | History day totals, scoring and chart scale |
+| `tests/history-log.test.ts` | The card's own log: recording, sunset rule and gap filling |
 | `tests/config.test.ts` | `normalizeConfig` and editor form data |
 | `tests/localize.test.ts` | Language resolution, translation lookup, locale table |
 | `tests/timezone.test.ts` | How each parser resolves the hour |
@@ -432,7 +433,14 @@ npm run build
 
 Commit the rebuilt `dist/solar-forecast-card.js` with your source changes, or CI will fail.
 
+## Forecast history sources
+
+The history view combines two sources in `data/forecast-history.ts`. Recorder history comes first. The card's own log in `data/history-log.ts` fills any gaps.
+
+The log is saved through `frontend/set_user_data`, keyed by forecast entity, at most every 15 minutes from `willUpdate`. It stores the earliest forecast, the highest actual, and whether the actual was seen after sunset.
+
 ## Known limitations
 
+- **The card can't record in the background.** Its log only updates while a dashboard containing the card is open, and each Home Assistant user has a separate log.
 - **History can be a large request.** The history view loads a week of every state change for its sensors, once a day per dashboard load. A fast-updating actual sensor makes this slow, especially on phones.
 - **Solcast hours follow the browser's timezone.** Volcast and Open-Meteo use the hour written in the timestamp. Viewing the dashboard from a different timezone than the server shifts the Solcast chart and the `+1HR` and `LEFT` values.

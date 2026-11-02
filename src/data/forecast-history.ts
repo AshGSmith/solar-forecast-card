@@ -1,11 +1,10 @@
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
+import { dayKey, FIRST_RELIABLE_HOUR, loadHistoryLog, type HistoryLog } from "./history-log.js";
 import { queryHistory, type HistEntry } from "./history.js";
 
 const HISTORY_DAYS = 7;
 /** A day's forecast is the reading in place at this local hour. */
 const FORECAST_READ_HOUR = 6;
-/** Readings before this local hour are ignored, in case yesterday's total hasn't reset yet. */
-const ACTUAL_FIRST_HOUR = 1;
 
 export interface HistoryDay {
   date: Date;
@@ -53,7 +52,7 @@ function forecastForDay(readings: Reading[], now: Date, daysAgo: number): number
 
 /** today_actual_entity and array sensors reset daily, so a day's total is its peak. */
 function actualForDay(readings: Reading[], now: Date, daysAgo: number): number | null {
-  const start = localDay(now, daysAgo, ACTUAL_FIRST_HOUR);
+  const start = localDay(now, daysAgo, FIRST_RELIABLE_HOUR);
   const end = localDay(now, daysAgo - 1);
 
   const day = readings.filter((r) => r.time >= start && r.time < end);
@@ -83,6 +82,21 @@ function buildHistoryDays(
   return days;
 }
 
+/**
+ * Fill gaps in recorder data from the card's own log. Logged actuals only count
+ * once they were seen after sunset, because an earlier one is a partial day.
+ */
+function fillFromLog(days: HistoryDay[], log: HistoryLog): HistoryDay[] {
+  return days.map((day) => {
+    const logged = log[dayKey(day.date)];
+    return {
+      ...day,
+      forecastKwh: day.forecastKwh ?? logged?.forecastKwh ?? null,
+      actualKwh: day.actualKwh ?? (logged?.complete ? logged.actualKwh : null),
+    };
+  });
+}
+
 /** Array sensors take precedence over today_actual_entity, as they do for the live total. */
 function actualEntities(cfg: SolarForecastCardConfig): string[] {
   const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
@@ -96,8 +110,9 @@ function reportsWh(hass: HomeAssistant, entityId: string): boolean {
 }
 
 /**
- * Load the last week of forecast and actual totals from recorder history.
- * Returns null if the request fails, so the caller can retry.
+ * Load the last week of forecast and actual totals from recorder history,
+ * filling any gaps from the card's own log.
+ * Returns null if neither source is readable, so the caller can retry.
  */
 export async function fetchForecastHistory(
   hass: HomeAssistant | undefined,
@@ -108,19 +123,23 @@ export async function fetchForecastHistory(
 
   const now = new Date();
   const actualIds = actualEntities(cfg);
-  const history = await queryHistory(
-    hass,
-    [forecastId, ...actualIds],
-    new Date(localDay(now, HISTORY_DAYS)),
-    new Date(localDay(now, 0))
-  );
-  if (!history) return null;
+  const [history, log] = await Promise.all([
+    queryHistory(
+      hass,
+      [forecastId, ...actualIds],
+      new Date(localDay(now, HISTORY_DAYS)),
+      new Date(localDay(now, 0))
+    ),
+    loadHistoryLog(hass, forecastId),
+  ]);
+  if (!history && !log) return null;
 
-  return buildHistoryDays(
-    toReadings(history.get(forecastId), reportsWh(hass, forecastId)),
-    actualIds.map((id) => toReadings(history.get(id), reportsWh(hass, id))),
+  const days = buildHistoryDays(
+    toReadings(history?.get(forecastId), reportsWh(hass, forecastId)),
+    actualIds.map((id) => toReadings(history?.get(id), reportsWh(hass, id))),
     now
   );
+  return log ? fillFromLog(days, log) : days;
 }
 
 export function scoreHistory(days: HistoryDay[]): HistoryScore | null {

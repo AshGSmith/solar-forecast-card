@@ -92,6 +92,7 @@ export interface HomeAssistant {
     [key: string]: unknown;
   };
   callApi?<T>(method: string, path: string): Promise<T>;
+  callWS?<T>(message: Record<string, unknown>): Promise<T>;
 }
 
 export interface HassEntity {
