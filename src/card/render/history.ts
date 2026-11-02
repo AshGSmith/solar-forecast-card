@@ -108,11 +108,14 @@ function renderChart(
       </svg>
       <div class="history-days">
         ${days.map((day, i) => html`
-          <span
-            class="day-name ${i === selected ? "selected" : ""}"
+          <div
+            class="history-day ${i === selected ? "selected" : ""}"
             style="left:${((xOf(i) / WIDTH) * 100).toFixed(2)}%"
             @click=${() => onSelect(i)}
-          >${fmt.dayLabel({ dayIndex: 3, date: day.date })}</span>
+          >
+            <span class="day-name">${fmt.dayLabel({ dayIndex: 3, date: day.date })}</span>
+            <span class="day-date">${fmt.dateLabel(day.date)}</span>
+          </div>
         `)}
       </div>
     </div>

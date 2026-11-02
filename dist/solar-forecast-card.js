@@ -11963,11 +11963,14 @@ function renderChart(days, selected, fmt, onSelect) {
       </svg>
       <div class="history-days">
         ${days.map((day, i) => b `
-          <span
-            class="day-name ${i === selected ? "selected" : ""}"
+          <div
+            class="history-day ${i === selected ? "selected" : ""}"
             style="left:${((xOf(i) / WIDTH) * 100).toFixed(2)}%"
             @click=${() => onSelect(i)}
-          >${fmt.dayLabel({ dayIndex: 3, date: day.date })}</span>
+          >
+            <span class="day-name">${fmt.dayLabel({ dayIndex: 3, date: day.date })}</span>
+            <span class="day-date">${fmt.dateLabel(day.date)}</span>
+          </div>
         `)}
       </div>
     </div>
@@ -12937,21 +12940,32 @@ const historyStyles = i$3 `
     height: auto;
   }
 
-  /* Day labels are HTML rather than SVG text so they reuse .day-name from the
-     daily view, and share its size, scaling and font_size setting. */
+  /* Day labels are HTML rather than SVG text so they reuse .day-name and
+     .day-date from the daily view, and share their size, scaling and
+     font_size setting. Line heights and the 1px gap match .col-label. */
   .history-days {
     position: relative;
-    height: calc(var(--sfc-font-size, var(--sfc-day-name-font-size-default)) * 1.4);
+    height: calc(
+      (
+        var(--sfc-font-size, var(--sfc-day-name-font-size-default)) +
+        var(--sfc-font-size, var(--sfc-day-date-font-size-default))
+      ) * 1.25 + 1px
+    );
   }
 
-  .history-days .day-name {
+  .history-day {
     position: absolute;
     top: 0;
     translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .history-days .day-name.selected {
+  .history-day.selected .day-name {
     font-weight: 700;
   }
 
