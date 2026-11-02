@@ -1,16 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 
-const supportedLocales = [
-  "af", "ar", "bg", "bn", "bs", "ca", "cs", "cy", "da", "de", "el", "en",
-  "en-GB", "eo", "es", "es-419", "et", "eu", "fa", "fi", "fy", "fr", "ga",
-  "gl", "gsw", "he", "hi", "hr", "hu", "hy", "id", "it", "is", "ja", "ka",
-  "ko", "lb", "lt", "lv", "mk", "ml", "nl", "nb", "nn", "pl", "pt", "pt-BR",
-  "ro", "ru", "sk", "sl", "sr", "sr-Latn", "sv", "sq", "ta", "te", "th",
-  "tr", "uk", "ur", "vi", "zh-Hans", "zh-Hant",
-];
-
 const localeDir = path.join(__dirname, "..", "src", "locales");
+
+// locales/index.ts is the single list of supported languages.
+const localeIndex = fs.readFileSync(path.join(localeDir, "index.ts"), "utf8");
+const supportedLocales = [...localeIndex.matchAll(/^\s+"([\w-]+)": \w+,$/gm)].map((m) => m[1]);
 
 function readJson(filePath) {
   try {

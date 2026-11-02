@@ -1,8 +1,6 @@
-import { LANGUAGE_OPTIONS, LOCALES, type LocaleKey } from "./locales/index.js";
+import { LANGUAGE_OPTIONS, LOCALES, type LocaleKey, type LocaleTree } from "./locales/index.js";
 import en from "./locales/en.json";
 import type { HomeAssistant } from "./types.js";
-
-type LocaleTree = Record<string, unknown>;
 
 export { LANGUAGE_OPTIONS, type LocaleKey } from "./locales/index.js";
 
@@ -38,7 +36,8 @@ export function localize(
   key: string,
   vars?: Record<string, string | number>
 ): string {
-  const translated = readPath(LOCALES[language] ?? en, key);
+  const tree: LocaleTree = LOCALES[language] ?? en;
+  const translated = readPath(tree, key);
   const fallback = readPath(en, key);
   const raw = typeof translated === "string"
     ? translated

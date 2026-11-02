@@ -56,7 +56,7 @@ title: Solar Forecast          # optional — defaults to "Solar Forecast"
 icon: mdi:solar-power          # optional — defaults to mdi:solar-power
 show_header: true              # optional — defaults to true
 display_estimate10: false      # optional — Solcast only, shows P10 forecast values
-show_hourly_as_main: false     # optional — show today's hourly forecast as the main card view
+main_view: daily               # optional — daily, hourly or history
 device_id: <your_device_id>    # optional — auto-detects forecast entities
 forecast_entities:
   - sensor.forecast_today
@@ -81,6 +81,11 @@ solar_max_kwp: 4.2
 desktop_text_scale: 100
 low_threshold: 10
 high_threshold: 30
+low_threshold_entity: sensor.solar_low_threshold    # optional — overrides low_threshold
+high_threshold_entity: sensor.solar_high_threshold  # optional — overrides high_threshold
+show_low_threshold_zone: true                       # optional — tints the bar track below low
+show_high_threshold_zone: true                      # optional — tints the bar track above high
+threshold_zone_opacity: 15                          # optional — tint strength, 5 to 100
 ```
 
 ### Options
@@ -106,7 +111,49 @@ For today's forecast, the hourly popup can also compare actual generation agains
 - The Actual value is softly coloured red, amber, or green depending on whether it is below, matching, or above the forecast value.
 - The current hour is highlighted without changing row layout or value alignment.
 
-Set `show_hourly_as_main: true` to display today's hourly forecast directly on the main card instead of the 7-day daily forecast bars.
+Set `main_view: hourly` to display today's hourly forecast directly on the main card instead of the 7-day daily forecast bars. The older `show_hourly_as_main: true` setting still works.
+
+#### Forecast History
+
+Set `main_view: history`, or choose **History** under **Main View** in the card editor's **Display** section, to see how close the forecast was to what you generated over the last 7 full days. Today isn't included because it isn't finished.
+
+The view shows:
+
+- **Accuracy:** 100% minus the average percentage miss across the days compared.
+- **Average miss per day:** the typical size of the miss in kWh, whichever direction it went.
+- **Actual vs forecast per day:** the average difference. A positive number means you generated more than forecast.
+- **Chart:** a dashed forecast line and a solid actual line. The space between them is green where you beat the forecast and red where you fell short. Tap a day to see its numbers.
+
+The score only uses days with both a forecast and an actual, so it can cover fewer than 7 days.
+
+**Forecast data** is read from these sources in order, and each one fills days the previous source didn't have:
+
+1. Home Assistant's recorder history for the first forecast entity, using the value in place at 06:00. If there's no reading by then, the day's first reading is used.
+2. The card's own log (see below).
+3. Solcast only: past forecasts from the integration's own storage, so the line appears right away. These are Solcast's last forecast for each period, so they can look more accurate than a morning forecast. This needs a version of the Solcast integration with the `query_forecast_data` action.
+
+Other integrations need the first forecast entity to be recorded, which Home Assistant does by default for 10 days.
+
+**Actual generation** is read from these sources in order:
+
+1. Long-term statistics for `actual_arrays` or `today_actual_entity`. This is the same data the Energy dashboard uses. It works whether the sensor resets daily or is a lifetime total, and isn't limited to the recorder's 10 days. If neither option is set and `live_power_entity` is an energy sensor in kWh or Wh, that sensor is used.
+2. Long-term statistics for the solar sources in your Energy dashboard, so `today_actual_entity` can be left empty.
+3. An estimate from `live_power_entity`, adding up its hourly averages.
+4. The sensor's highest value that day from recorder history, which needs a sensor that resets daily.
+5. The card's own log.
+
+A sensor has long-term statistics when it has a `state_class`, such as `total_increasing`. To check, open **Developer Tools → Statistics** and search for it.
+
+**The card's own log** is saved automatically in Home Assistant's per-user storage on every view, keeping 8 days. It stores the first forecast seen each day and the highest actual seen. It can only save while a dashboard containing the card is open, so it can't fill days nobody opened. A logged actual counts only if the card was open after sunset, because an earlier reading would be a partial day. Each Home Assistant user has a separate log.
+
+**Troubleshooting:**
+
+| What you see | What to check |
+|--------------|---------------|
+| *No forecast history found* | Make sure the first forecast entity is set and recorded. Open **History** in the Home Assistant sidebar and look at that sensor. It may be listed under `exclude` in your `recorder:` configuration, or missing from an `include` list. |
+| Forecast line but no actual line | Set `today_actual_entity` to an energy sensor, or add solar to the Energy dashboard. Check the sensor appears in **Developer Tools → Statistics**. |
+| Actuals look too high or too low | Check the sensor reports energy (kWh or Wh), not power. Power-based estimates are approximate, and a lifetime total needs long-term statistics. |
+| Values appear a day out | Days follow the timezone of the device viewing the card. Compare with a device in the same timezone as Home Assistant. |
 
 #### Device & Entities
 
@@ -171,7 +218,7 @@ actual_arrays:
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
-| `show_hourly_as_main` | boolean | no | `false` | Display today's hourly forecast view directly on the main card instead of the daily forecast bars |
+| `main_view` | string | no | `daily` | What the main card shows: `daily`, `hourly` or `history` |
 | `desktop_text_scale` | number | no | `100` | Scales card text on wider screens only. Accepts values from 100 to 150 in the visual editor; mobile sizing is unchanged |
 | `font_size` | number | no | — | Optional daily forecast value and day/date label size in pixels. Leave unset to use CSS/default styling |
 | `bar_width` | number | no | — | Optional daily forecast bar width in pixels. Leave unset to use CSS/default styling |
@@ -189,12 +236,38 @@ To change how dates and times are shown in the card, update your Home Assistant 
 
 #### Colour Thresholds
 
-Bar colours change based on each day's forecast total. When neither threshold is set all bars use the default amber colour.
+Bar colours change based on each day's forecast total. When neither threshold is set all bars use the default amber colour. A day exactly on a threshold stays amber.
 
 | Option | Type | Required | Default | Description |
 |--------|------|----------|---------|-------------|
 | `low_threshold` | number | no | — | Days forecast below this value (kWh) are shown in a soft red/coral colour |
 | `high_threshold` | number | no | — | Days forecast above this value (kWh) are shown in green |
+| `low_threshold_entity` | string | no | — | Sensor that supplies the low threshold. Overrides `low_threshold` while it has a usable value |
+| `high_threshold_entity` | string | no | — | Sensor that supplies the high threshold. Overrides `high_threshold` while it has a usable value |
+| `show_low_threshold_zone` | boolean | no | `false` | Tint the bar track red below the current low threshold |
+| `show_high_threshold_zone` | boolean | no | `false` | Tint the bar track green above the current high threshold |
+| `threshold_zone_opacity` | number | no | `15` | Opacity of the threshold tints as a percentage, from 5 to 100. Lower values are more transparent |
+
+When a threshold is set, the daily view shows its current value in the top right of the header, below the weekly total. This is the value in use, so it follows a threshold sensor when one is set. It needs `show_header` to be on.
+
+##### Threshold sensors
+
+Use a threshold sensor when the value should change over time, such as a helper you adjust or a seasonal template sensor. The bars and tints update as soon as the sensor changes.
+
+- The entity must be a `sensor.`, such as a template sensor. An `input_number` helper needs a template sensor in front of it.
+- Its state must be a number of 0 or more. Sensors reporting Wh are converted to kWh.
+- If the sensor is `unavailable`, `unknown`, not a number or negative, the card uses `low_threshold` or `high_threshold` instead. Setting both gives you a fallback.
+
+##### Threshold tints
+
+The tints show where your thresholds sit on the chart, without adding lines over the bars. Each one can be turned on separately under **Colour Thresholds** in the card editor.
+
+- The red tint fills the bar track from the bottom up to the low threshold.
+- The green tint fills the bar track from the high threshold up to the top.
+- Bars are drawn over the tints, so a tall bar covers the low tint. On a short bar, the tint shows how far the day is from the next threshold.
+- Tints use the same scale as the bars, which is set by the week's highest forecast. They move as the forecast changes, and a tint is hidden while its threshold is above the highest forecast.
+- Tints only appear on the daily view.
+- `threshold_zone_opacity` sets the strength of both tints. To set each colour yourself, use `--sfc-low-threshold-zone-color` and `--sfc-high-threshold-zone-color`. The opacity setting doesn't apply to custom colours, so include any transparency in the colour.
 
 ## Card-mod / CSS Customisation
 
@@ -230,10 +303,21 @@ Available variables:
 | `--sfc-average-color` | Average forecast bar background |
 | `--sfc-high-color` | High forecast bar background |
 | `--sfc-actual-color` | Actual generation bar background |
+| `--sfc-low-threshold-zone-color` | Low threshold zone colour |
+| `--sfc-high-threshold-zone-color` | High threshold zone colour |
+| `--sfc-threshold-zone-opacity` | Threshold tint opacity, from 0 to 1. Not used when a zone colour variable is set |
 | `--sfc-popup-background` | Popup background |
 | `--sfc-popup-border-radius` | Popup corner radius |
 | `--sfc-popup-text-color` | Popup primary text colour |
 | `--sfc-popup-accent-color` | Popup accent colour |
+| `--sfc-history-forecast-color` | History view forecast line |
+| `--sfc-history-actual-color` | History view actual line |
+| `--sfc-history-over-color` | History view colour when generation beat the forecast |
+| `--sfc-history-under-color` | History view colour when generation fell short |
+
+## Development
+
+See the [Developer Guide](docs/developer-guide.md) for the architecture, build and test commands, and how to add integrations and config options.
 
 ## License
 

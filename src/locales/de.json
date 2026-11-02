@@ -22,26 +22,15 @@
       "left": "REST:",
       "week": "WOCHE:",
       "avg": "Ø:",
+      "low": "LOW:",
+      "high": "HIGH:",
       "total": "Gesamt",
       "p10": "P10",
       "forecast": "Prognose",
       "generated": "erzeugt"
     },
     "days": {
-      "sun": "So",
-      "mon": "Mo",
-      "tue": "Di",
-      "wed": "Mi",
-      "thu": "Do",
-      "fri": "Fr",
-      "sat": "Sa",
-      "today": "Heute",
-      "tomorrow": "Morgen",
-      "day3": "Tag 3",
-      "day4": "Tag 4",
-      "day5": "Tag 5",
-      "day6": "Tag 6",
-      "day7": "Tag 7"
+      "today": "Heute"
     },
     "popup": {
       "close": "Schließen",
@@ -55,6 +44,20 @@
         "forecastShort": "Prog.",
         "actualShort": "Ist"
       }
+    },
+    "history": {
+      "title": "Last 7 days",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "accuracy": "Accuracy",
+      "averageMiss": "Average miss per day",
+      "bias": "Actual vs forecast per day",
+      "readout": "{day}: forecast {forecast}, actual {actual} kWh ({difference})",
+      "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
+      "noForecast": "{day}: no recorded forecast",
+      "loading": "Loading forecast history…",
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -89,13 +92,16 @@
       "today_actual_entity": "Heutige tatsächliche Erzeugung (optional)",
       "next_hour_entity": "+1 STD Prognose (optional, überschreibt automatisch abgeleiteten Wert)",
       "remaining_today_entity": "REST / verbleibend heute (optional, überschreibt automatisch abgeleiteten Wert)",
-      "date_format": "Datumsformat",
-      "time_format": "Zeitformat (stündliches Popup)",
-      "show_hourly_as_main": "Stündliche Prognose als Hauptkarte anzeigen",
+      "main_view": "Main View",
       "inverter_max_kw": "Max. Wechselrichterleistung (kW)",
       "solar_max_kwp": "Größe der Solaranlage (kWp)",
       "low_threshold": "Niedriger Schwellenwert (kWh)",
       "high_threshold": "Hoher Schwellenwert (kWh)",
+      "low_threshold_entity": "Niedriger Schwellenwert Sensor (kWh)",
+      "high_threshold_entity": "Hoher Schwellenwert Sensor (kWh)",
+      "show_low_threshold_zone": "Tint bar track below low threshold",
+      "show_high_threshold_zone": "Tint bar track above high threshold",
+      "threshold_zone_opacity": "Threshold tint opacity (lower is more transparent)",
       "desktop_text_scale": "Desktop-Textskalierung",
       "font_size": "Font Size",
       "bar_width": "Bar Width"
@@ -106,10 +112,9 @@
       "volcast": "Volcast",
       "forecastSolar": "Forecast.Solar",
       "openMeteo": "Open-Meteo Solar Forecast",
-      "dateDdMm": "TT/MM  (z. B. 15/04)",
-      "dateMmDd": "MM/TT  (z. B. 04/15)",
-      "time24h": "24 h  (z. B. 17:00)",
-      "time12h": "12 h  (z. B. 5pm)"
+      "mainViewDaily": "Daily",
+      "mainViewHourly": "Hourly",
+      "mainViewHistory": "History"
     },
     "sections": {
       "integrationType": "Integrationstyp",
@@ -128,7 +133,7 @@
       "liveData": "+1 STD und REST werden, wenn möglich, automatisch erkannt oder abgeleitet. Setze diese Werte manuell, um sie zu überschreiben oder einen eigenen Sensor zu verwenden.",
       "actualArrays": "Optional: Konfiguriere einzelne Array-Sensoren, um eine gestapelte Aufschlüsselung auf dem heutigen Balken anzuzeigen. Jedes Label ist ein einzelnes Zeichen im Segment (z. B. N, S, O).",
       "desktopTextScale": "Desktop-Textskalierung: gilt nur auf breiteren Bildschirmen (≥ 768 px). Die mobile Größe bleibt unverändert.",
-      "hourlyAsMain": "Zeigt die stündliche Prognose direkt auf der Karte statt der täglichen Prognosebalken an.",
+      "mainView": "Choose what the card shows. Hourly shows today's hourly forecast. History compares the last 7 days of forecast and actual generation.",
       "fontSize": "Optional daily bar text size in pixels. Leave blank to use CSS/default styling.",
       "barWidth": "Optional forecast bar width in pixels. Leave blank to use CSS/default styling."
     },
