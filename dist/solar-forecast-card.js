@@ -54,7 +54,8 @@ var af = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -209,7 +210,8 @@ var ar = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -364,7 +366,8 @@ var bg = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -519,7 +522,8 @@ var bn = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -674,7 +678,8 @@ var bs = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -829,7 +834,8 @@ var ca = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -984,7 +990,8 @@ var cs = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1139,7 +1146,8 @@ var cy = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1294,7 +1302,8 @@ var da = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1449,7 +1458,8 @@ var de = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1604,7 +1614,8 @@ var el = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1759,7 +1770,8 @@ var en = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -1914,7 +1926,8 @@ var en_GB = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2069,7 +2082,8 @@ var eo = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2224,7 +2238,8 @@ var es = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2379,7 +2394,8 @@ var es_419 = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2534,7 +2550,8 @@ var et = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2689,7 +2706,8 @@ var eu = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2844,7 +2862,8 @@ var fa = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -2999,7 +3018,8 @@ var fi = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3154,7 +3174,8 @@ var fy = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3309,7 +3330,8 @@ var fr = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3464,7 +3486,8 @@ var ga = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3619,7 +3642,8 @@ var gl = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3774,7 +3798,8 @@ var gsw = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -3929,7 +3954,8 @@ var he = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4084,7 +4110,8 @@ var hi = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4239,7 +4266,8 @@ var hr = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4394,7 +4422,8 @@ var hu = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4549,7 +4578,8 @@ var hy = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4704,7 +4734,8 @@ var id = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -4859,7 +4890,8 @@ var it = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5014,7 +5046,8 @@ var is = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5169,7 +5202,8 @@ var ja = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5324,7 +5358,8 @@ var ka = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5479,7 +5514,8 @@ var ko = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5634,7 +5670,8 @@ var lb = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5789,7 +5826,8 @@ var lt = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -5944,7 +5982,8 @@ var lv = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6099,7 +6138,8 @@ var mk = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6254,7 +6294,8 @@ var ml = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6409,7 +6450,8 @@ var nl = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6564,7 +6606,8 @@ var nb = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6719,7 +6762,8 @@ var nn = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -6874,7 +6918,8 @@ var pl = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7029,7 +7074,8 @@ var pt = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7184,7 +7230,8 @@ var pt_BR = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7339,7 +7386,8 @@ var ro = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7494,7 +7542,8 @@ var ru = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7649,7 +7698,8 @@ var sk = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7804,7 +7854,8 @@ var sl = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -7959,7 +8010,8 @@ var sr = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8114,7 +8166,8 @@ var sr_Latn = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8269,7 +8322,8 @@ var sv = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8424,7 +8478,8 @@ var sq = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8579,7 +8634,8 @@ var ta = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8734,7 +8790,8 @@ var te = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -8889,7 +8946,8 @@ var th = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9044,7 +9102,8 @@ var tr = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9199,7 +9258,8 @@ var uk = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9354,7 +9414,8 @@ var ur = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9509,7 +9570,8 @@ var vi = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9664,7 +9726,8 @@ var zh_Hans = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -9819,7 +9882,8 @@ var zh_Hant = {
       "noActual": "{day}: forecast {forecast} kWh, no recorded generation",
       "noForecast": "{day}: no recorded forecast",
       "loading": "Loading forecast history…",
-      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day."
+      "noData": "No forecast history found. Home Assistant needs to have recorded the forecast sensor for at least one full day.",
+      "noActualData": "No actual generation found. Set Today's actual generation in the card's Live Data section, or add solar to the Energy dashboard."
     },
     "aria": {
       "dayButton": "{day} {date}"
@@ -10922,6 +10986,34 @@ async function queryHistory(hass, entityIds, start, end) {
         return null;
     }
 }
+/** Add up statistics rows into a kWh total per local day. */
+async function queryStatistics(hass, message, toKwh) {
+    if (!hass.callWS)
+        return null;
+    try {
+        const result = await hass.callWS({
+            type: "recorder/statistics_during_period",
+            ...message,
+        });
+        const totals = new Map();
+        for (const rows of Object.values(result ?? {})) {
+            for (const row of rows) {
+                const time = typeof row.start === "number" ? row.start : Date.parse(row.start);
+                const kwh = toKwh(row);
+                // No energy means the sensor was offline, not that nothing was generated.
+                if (!isFinite(time) || typeof kwh !== "number" || kwh <= 0)
+                    continue;
+                const key = dayKey(new Date(time));
+                totals.set(key, (totals.get(key) ?? 0) + kwh);
+            }
+        }
+        return totals;
+    }
+    catch (err) {
+        console.debug("[solar-forecast-card] statistics fetch failed:", err);
+        return null;
+    }
+}
 /**
  * Read each day's energy from long-term statistics, the data behind the Energy
  * dashboard, as a total per local day across the given sensors.
@@ -10931,34 +11023,45 @@ async function queryHistory(hass, entityIds, start, end) {
  * statistics. Returns null when they can't be read.
  */
 async function queryDailyEnergy(hass, entityIds, start, end) {
-    if (!hass.callWS || entityIds.length === 0)
+    if (entityIds.length === 0)
         return null;
+    return queryStatistics(hass, {
+        start_time: start.toISOString(),
+        end_time: end.toISOString(),
+        statistic_ids: entityIds,
+        period: "day",
+        types: ["change"],
+        units: { energy: "kWh" },
+    }, (row) => row.change);
+}
+/**
+ * Estimate each day's energy from a power sensor's hourly averages. Hours are
+ * added rather than averaging the day, because inverters that go unavailable
+ * overnight would otherwise inflate the daily mean.
+ */
+async function queryDailyEnergyFromPower(hass, entityIds, start, end) {
+    if (entityIds.length === 0)
+        return null;
+    return queryStatistics(hass, {
+        start_time: start.toISOString(),
+        end_time: end.toISOString(),
+        statistic_ids: entityIds,
+        period: "hour",
+        types: ["mean"],
+        units: { power: "W" },
+    }, (row) => (typeof row.mean === "number" ? row.mean / 1000 : null));
+}
+/** The solar sensors chosen in the Energy dashboard. Empty if there are none. */
+async function readEnergySolarSensors(hass) {
+    if (!hass.callWS)
+        return [];
     try {
-        const result = await hass.callWS({
-            type: "recorder/statistics_during_period",
-            start_time: start.toISOString(),
-            end_time: end.toISOString(),
-            statistic_ids: entityIds,
-            period: "day",
-            types: ["change"],
-            units: { energy: "kWh" },
-        });
-        const totals = new Map();
-        for (const rows of Object.values(result ?? {})) {
-            for (const row of rows) {
-                const time = typeof row.start === "number" ? row.start : Date.parse(row.start);
-                // No change means the sensor was offline, not that nothing was generated.
-                if (!isFinite(time) || typeof row.change !== "number" || row.change <= 0)
-                    continue;
-                const key = dayKey(new Date(time));
-                totals.set(key, (totals.get(key) ?? 0) + row.change);
-            }
-        }
-        return totals;
+        const prefs = await hass.callWS({ type: "energy/get_prefs" });
+        return (prefs?.energy_sources ?? []).flatMap((source) => source.type === "solar" && source.stat_energy_from ? [source.stat_energy_from] : []);
     }
     catch (err) {
-        console.debug("[solar-forecast-card] statistics fetch failed:", err);
-        return null;
+        console.debug("[solar-forecast-card] Energy dashboard preferences unavailable:", err);
+        return [];
     }
 }
 /**
@@ -11116,12 +11219,37 @@ function fillFromIntegration(days, periods) {
         forecastKwh: day.forecastKwh ?? totals.get(dayKey(day.date)) ?? null,
     }));
 }
-/** Array sensors take precedence over today_actual_entity, as they do for the live total. */
-function actualEntities(cfg) {
+/**
+ * The sensors holding actual generation. Array sensors take precedence over
+ * today_actual_entity, as they do for the live total. A daily energy sensor
+ * chosen as the live sensor counts too, identified by its unit.
+ */
+function actualEntities(hass, cfg) {
     const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
     if (arrays.length > 0)
         return arrays;
-    return cfg.today_actual_entity ? [cfg.today_actual_entity] : [];
+    if (cfg.today_actual_entity)
+        return [cfg.today_actual_entity];
+    const live = cfg.live_power_entity;
+    const unit = live ? hass.states[live]?.attributes?.unit_of_measurement : undefined;
+    return live && typeof unit === "string" && /wh$/i.test(unit) ? [live] : [];
+}
+/**
+ * Daily actuals from statistics, trying each source until one has data: the
+ * card's energy sensors, the Energy dashboard's solar sensors, then an estimate
+ * from power sensors.
+ */
+async function readDailyActuals(hass, cfg, actualIds, start, end) {
+    const configured = await queryDailyEnergy(hass, actualIds, start, end);
+    if (configured?.size)
+        return configured;
+    const solar = await readEnergySolarSensors(hass);
+    const dashboard = await queryDailyEnergy(hass, solar, start, end);
+    if (dashboard?.size)
+        return dashboard;
+    const powerIds = [...actualIds, cfg.live_power_entity].filter((id) => !!id);
+    const estimated = await queryDailyEnergyFromPower(hass, powerIds, start, end);
+    return estimated ?? configured ?? dashboard;
 }
 function reportsWh(hass, entityId) {
     const unit = hass.states[entityId]?.attributes?.unit_of_measurement;
@@ -11131,7 +11259,7 @@ function reportsWh(hass, entityId) {
  * Load the last week of forecast and actual totals.
  *
  * Forecasts: recorder history, the card's log, then the integration's past forecasts.
- * Actuals: long-term statistics, recorder history, then the card's log.
+ * Actuals: long-term statistics, recorder history, then the card's log. See readDailyActuals.
  *
  * Returns null if no source is readable, so the caller can retry.
  */
@@ -11140,14 +11268,14 @@ async function fetchForecastHistory(hass, cfg) {
     if (!hass || !forecastId)
         return [];
     const now = new Date();
-    const actualIds = actualEntities(cfg);
+    const actualIds = actualEntities(hass, cfg);
     const start = new Date(localDay(now, HISTORY_DAYS));
     const end = new Date(localDay(now, 0));
     const [history, log, periods, dailyEnergy] = await Promise.all([
         queryHistory(hass, [forecastId, ...actualIds], start, end),
         loadHistoryLog(hass, forecastId),
         readForecastHistory(hass, cfg.integration_type, forecastId, start, end),
-        queryDailyEnergy(hass, actualIds, start, end),
+        readDailyActuals(hass, cfg, actualIds, start, end),
     ]);
     if (!history && !log && !periods && !dailyEnergy)
         return null;
@@ -11737,6 +11865,9 @@ function renderHistory(days, selected, fmt, onSelect) {
       ${score ? renderScore(score, fmt) : A}
       ${renderChart(days, selected, fmt, onSelect)}
       <div class="history-readout">${readout(days[selected], fmt)}</div>
+      ${days.some((d) => d.actualKwh !== null)
+        ? A
+        : b `<div class="history-note">${fmt.t("card.history.noActualData")}</div>`}
     </div>
   `;
 }
@@ -12708,6 +12839,12 @@ const historyStyles = i$3 `
   .history-hit:focus-visible,
   .history-hit.selected {
     fill: rgba(128, 128, 128, 0.1);
+  }
+
+  .history-note {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: var(--secondary-text-color);
   }
 
   .history-readout {

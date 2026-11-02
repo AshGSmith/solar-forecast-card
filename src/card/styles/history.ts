@@ -166,6 +166,12 @@ export const historyStyles = css`
     fill: rgba(128, 128, 128, 0.1);
   }
 
+  .history-note {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: var(--secondary-text-color);
+  }
+
   .history-readout {
     min-height: 1.4em;
     font-size: 0.78rem;

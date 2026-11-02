@@ -449,9 +449,11 @@ Forecasts, in order:
 
 Actuals, in order:
 
-1. Long-term statistics, through `queryDailyEnergy` in `data/history.ts`. The daily `change` handles daily-reset sensors and lifetime totals.
-2. Recorder history, using the day's peak.
-3. The card's own log, for days seen after sunset.
+1. Long-term statistics for the configured sensors, through `queryDailyEnergy` in `data/history.ts`. The daily `change` handles daily-reset sensors and lifetime totals.
+2. Long-term statistics for the Energy dashboard's solar sources, from `energy/get_prefs`.
+3. An estimate from power sensors, adding hourly `mean` values. Hours are added because a daily mean ignores overnight hours when an inverter is unavailable.
+4. Recorder history, using the day's peak.
+5. The card's own log, for days seen after sunset.
 
 The log is saved through `frontend/set_user_data`, keyed by forecast entity, at most every 15 minutes from `willUpdate`. It stores the earliest forecast, the highest actual, and whether the actual was seen after sunset.
 

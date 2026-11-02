@@ -172,6 +172,9 @@ export function renderHistory(
       ${score ? renderScore(score, fmt) : nothing}
       ${renderChart(days, selected, fmt, onSelect)}
       <div class="history-readout">${readout(days[selected], fmt)}</div>
+      ${days.some((d) => d.actualKwh !== null)
+        ? nothing
+        : html`<div class="history-note">${fmt.t("card.history.noActualData")}</div>`}
     </div>
   `;
 }

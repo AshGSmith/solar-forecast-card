@@ -2,7 +2,13 @@ import { readForecastHistory } from "../integrations/index.js";
 import type { ForecastPeriod } from "../integrations/types.js";
 import type { HomeAssistant, SolarForecastCardConfig } from "../types.js";
 import { dayKey, FIRST_RELIABLE_HOUR, loadHistoryLog, type HistoryLog } from "./history-log.js";
-import { queryDailyEnergy, queryHistory, type HistEntry } from "./history.js";
+import {
+  queryDailyEnergy,
+  queryDailyEnergyFromPower,
+  queryHistory,
+  readEnergySolarSensors,
+  type HistEntry,
+} from "./history.js";
 
 const HISTORY_DAYS = 7;
 /** A day's forecast is the reading in place at this local hour. */
@@ -113,11 +119,43 @@ function fillFromIntegration(days: HistoryDay[], periods: ForecastPeriod[]): His
   }));
 }
 
-/** Array sensors take precedence over today_actual_entity, as they do for the live total. */
-function actualEntities(cfg: SolarForecastCardConfig): string[] {
+/**
+ * The sensors holding actual generation. Array sensors take precedence over
+ * today_actual_entity, as they do for the live total. A daily energy sensor
+ * chosen as the live sensor counts too, identified by its unit.
+ */
+function actualEntities(hass: HomeAssistant, cfg: SolarForecastCardConfig): string[] {
   const arrays = cfg.actual_arrays?.map((a) => a.entity).filter(Boolean) ?? [];
   if (arrays.length > 0) return arrays;
-  return cfg.today_actual_entity ? [cfg.today_actual_entity] : [];
+  if (cfg.today_actual_entity) return [cfg.today_actual_entity];
+
+  const live = cfg.live_power_entity;
+  const unit = live ? hass.states[live]?.attributes?.unit_of_measurement : undefined;
+  return live && typeof unit === "string" && /wh$/i.test(unit) ? [live] : [];
+}
+
+/**
+ * Daily actuals from statistics, trying each source until one has data: the
+ * card's energy sensors, the Energy dashboard's solar sensors, then an estimate
+ * from power sensors.
+ */
+async function readDailyActuals(
+  hass: HomeAssistant,
+  cfg: SolarForecastCardConfig,
+  actualIds: string[],
+  start: Date,
+  end: Date
+): Promise<Map<string, number> | null> {
+  const configured = await queryDailyEnergy(hass, actualIds, start, end);
+  if (configured?.size) return configured;
+
+  const solar = await readEnergySolarSensors(hass);
+  const dashboard = await queryDailyEnergy(hass, solar, start, end);
+  if (dashboard?.size) return dashboard;
+
+  const powerIds = [...actualIds, cfg.live_power_entity].filter((id): id is string => !!id);
+  const estimated = await queryDailyEnergyFromPower(hass, powerIds, start, end);
+  return estimated ?? configured ?? dashboard;
 }
 
 function reportsWh(hass: HomeAssistant, entityId: string): boolean {
@@ -129,7 +167,7 @@ function reportsWh(hass: HomeAssistant, entityId: string): boolean {
  * Load the last week of forecast and actual totals.
  *
  * Forecasts: recorder history, the card's log, then the integration's past forecasts.
- * Actuals: long-term statistics, recorder history, then the card's log.
+ * Actuals: long-term statistics, recorder history, then the card's log. See readDailyActuals.
  *
  * Returns null if no source is readable, so the caller can retry.
  */
@@ -141,14 +179,14 @@ export async function fetchForecastHistory(
   if (!hass || !forecastId) return [];
 
   const now = new Date();
-  const actualIds = actualEntities(cfg);
+  const actualIds = actualEntities(hass, cfg);
   const start = new Date(localDay(now, HISTORY_DAYS));
   const end = new Date(localDay(now, 0));
   const [history, log, periods, dailyEnergy] = await Promise.all([
     queryHistory(hass, [forecastId, ...actualIds], start, end),
     loadHistoryLog(hass, forecastId),
     readForecastHistory(hass, cfg.integration_type, forecastId, start, end),
-    queryDailyEnergy(hass, actualIds, start, end),
+    readDailyActuals(hass, cfg, actualIds, start, end),
   ]);
   if (!history && !log && !periods && !dailyEnergy) return null;
 

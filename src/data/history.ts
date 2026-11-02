@@ -53,6 +53,40 @@ interface StatisticRow {
   /** Epoch milliseconds, or an ISO string on older Home Assistant versions. */
   start: number | string;
   change?: number | null;
+  mean?: number | null;
+}
+
+/** Add up statistics rows into a kWh total per local day. */
+async function queryStatistics(
+  hass: HomeAssistant,
+  message: Record<string, unknown>,
+  toKwh: (row: StatisticRow) => number | null | undefined
+): Promise<Map<string, number> | null> {
+  if (!hass.callWS) return null;
+
+  try {
+    const result = await hass.callWS<Record<string, StatisticRow[]>>({
+      type: "recorder/statistics_during_period",
+      ...message,
+    });
+
+    const totals = new Map<string, number>();
+    for (const rows of Object.values(result ?? {})) {
+      for (const row of rows) {
+        const time = typeof row.start === "number" ? row.start : Date.parse(row.start);
+        const kwh = toKwh(row);
+        // No energy means the sensor was offline, not that nothing was generated.
+        if (!isFinite(time) || typeof kwh !== "number" || kwh <= 0) continue;
+        const key = dayKey(new Date(time));
+        totals.set(key, (totals.get(key) ?? 0) + kwh);
+      }
+    }
+    return totals;
+
+  } catch (err) {
+    console.debug("[solar-forecast-card] statistics fetch failed:", err);
+    return null;
+  }
 }
 
 /**
@@ -69,34 +103,54 @@ export async function queryDailyEnergy(
   start: Date,
   end: Date
 ): Promise<Map<string, number> | null> {
-  if (!hass.callWS || entityIds.length === 0) return null;
+  if (entityIds.length === 0) return null;
+  return queryStatistics(hass, {
+    start_time: start.toISOString(),
+    end_time: end.toISOString(),
+    statistic_ids: entityIds,
+    period: "day",
+    types: ["change"],
+    units: { energy: "kWh" },
+  }, (row) => row.change);
+}
+
+/**
+ * Estimate each day's energy from a power sensor's hourly averages. Hours are
+ * added rather than averaging the day, because inverters that go unavailable
+ * overnight would otherwise inflate the daily mean.
+ */
+export async function queryDailyEnergyFromPower(
+  hass: HomeAssistant,
+  entityIds: string[],
+  start: Date,
+  end: Date
+): Promise<Map<string, number> | null> {
+  if (entityIds.length === 0) return null;
+  return queryStatistics(hass, {
+    start_time: start.toISOString(),
+    end_time: end.toISOString(),
+    statistic_ids: entityIds,
+    period: "hour",
+    types: ["mean"],
+    units: { power: "W" },
+  }, (row) => (typeof row.mean === "number" ? row.mean / 1000 : null));
+}
+
+/** The solar sensors chosen in the Energy dashboard. Empty if there are none. */
+export async function readEnergySolarSensors(hass: HomeAssistant): Promise<string[]> {
+  if (!hass.callWS) return [];
 
   try {
-    const result = await hass.callWS<Record<string, StatisticRow[]>>({
-      type: "recorder/statistics_during_period",
-      start_time: start.toISOString(),
-      end_time: end.toISOString(),
-      statistic_ids: entityIds,
-      period: "day",
-      types: ["change"],
-      units: { energy: "kWh" },
-    });
+    const prefs = await hass.callWS<{
+      energy_sources?: Array<{ type?: string; stat_energy_from?: string }>;
+    }>({ type: "energy/get_prefs" });
 
-    const totals = new Map<string, number>();
-    for (const rows of Object.values(result ?? {})) {
-      for (const row of rows) {
-        const time = typeof row.start === "number" ? row.start : Date.parse(row.start);
-        // No change means the sensor was offline, not that nothing was generated.
-        if (!isFinite(time) || typeof row.change !== "number" || row.change <= 0) continue;
-        const key = dayKey(new Date(time));
-        totals.set(key, (totals.get(key) ?? 0) + row.change);
-      }
-    }
-    return totals;
-
+    return (prefs?.energy_sources ?? []).flatMap((source) =>
+      source.type === "solar" && source.stat_energy_from ? [source.stat_energy_from] : []
+    );
   } catch (err) {
-    console.debug("[solar-forecast-card] statistics fetch failed:", err);
-    return null;
+    console.debug("[solar-forecast-card] Energy dashboard preferences unavailable:", err);
+    return [];
   }
 }
 
